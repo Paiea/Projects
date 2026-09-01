@@ -31,7 +31,9 @@ The rendered hub may show intentionally public project names, descriptions, rout
 
 ## NEXT_TASK
 
-Build the static root hub from the approved design, with Portable WIN under Classroom Tools and Peg-Leg Greg Reader under Writing & Story Projects. Preserve relative internal links and the external Greg authority boundary. Work on `feature/projects-hub-portable-win` until validation is complete.
+**HOLD / OBSERVE.**
+
+The initial hub is implemented with Portable WIN under Classroom Tools and Peg-Leg Greg Reader under Writing & Story Projects. Add another project only when there is a real project to register. When adding one, update the public card and authority/continuation path together.
 
 ## RE-PROMPT
 
