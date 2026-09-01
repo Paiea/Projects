@@ -1,0 +1,55 @@
+const BIG_RED_LOLLIPOP_QUESTIONS=[
+ {section:'VOCABULARY',number:1,prompt:'If you plead with someone, you',choices:[['a','read with someone.'],['b','relax with someone.'],['c','argue with someone.'],['d','agree with someone.']],correct:'c'},
+ {section:'VOCABULARY',number:2,prompt:'What does the word share mean?',choices:[['f','take something away from others'],['g','divide something with others'],['h','keep something from others'],['i','lend something to others']],correct:'g'},
+ {section:'VOCABULARY',number:3,prompt:'Read the dictionary entry below.\n• Adjective: honest and just\n• Adjective: pretty good\nWhich of the following words is defined in the entry above?',choices:[['a','fair'],['b','false'],['c','generous'],['d','lovable']],correct:'a'},
+ {section:'VOCABULARY',number:4,prompt:'What does the word invited mean?',choices:[['f','told to go'],['g','told to help'],['h','asked to leave'],['i','asked to come']],correct:'i'},
+ {section:'VOCABULARY',number:5,prompt:'If you put something aside, you',choices:[['a','put it inside.'],['b','put it outside.'],['c','put it on a shelf.'],['d','put it to one side.']],correct:'d'},
+ {section:'VOCABULARY',number:6,prompt:'If an animal scurries, it',choices:[['f','crawls slowly.'],['g','sleeps soundly.'],['h','runs quickly.'],['i','flies swiftly.']],correct:'h'},
+ {section:'VOCABULARY',number:7,prompt:'What does the word culture mean?',choices:[['a','the colors of the changing seasons'],['b','the customs of a nation or people'],['c','the campus of a college'],['d','the capital of a country']],correct:'b'},
+ {section:'VOCABULARY',number:8,prompt:'The word language means',choices:[['f','speech or words.'],['g','sights or sounds.'],['h','songs or poems.'],['i','schools or books.']],correct:'f'},
+ {section:'COMPREHENSION',number:9,prompt:'How does Rubina feel about taking her sister to a friend’s birthday party?',choices:[['a','She is not happy about it.'],['b','She is happy to take her sister.'],['c','She is only happy about it if her sister does not bother her.'],['d','She is only happy about it if her sister takes her to a party someday.']],correct:'a'},
+ {section:'COMPREHENSION',number:10,prompt:'What happens to Rubina’s big red lollipop?',choices:[['f','She loses it.'],['g','Sana eats it.'],['h','She gives it to Sana.'],['i','She cannot remember where she put it.']],correct:'g'},
+ {section:'COMPREHENSION',number:11,prompt:'Rubina thinks she is not invited to another party for a long time because',choices:[['a','there are no parties.'],['b','her friends do not like her.'],['c','she does not play fair at parties.'],['d','her friends do not want her to bring her little sister.']],correct:'d'},
+ {section:'COMPREHENSION',number:12,prompt:'Why does Rubina tell Ami not to make Sana take Maryam to the party?',choices:[['f','She knows how it feels to take a little sister to a party.'],['g','She knows Maryam would not want to go.'],['h','Rubina wants to go to the party.'],['i','She has her own party to go to.']],correct:'f'},
+ {section:'COMPREHENSION',number:13,prompt:'What do you think Sana will do the next time Rubina is invited to a party?',choices:[['a','She will cry.'],['b','She will not complain.'],['c','She will demand to go with her.'],['d','She will ask Rubina for her lollipop.']],correct:'b'}
+];
+let classTestState={student:'',index:0,selected:null,responses:[],startedAt:null,endedAt:null,score:null,savedRecord:null};
+function classTestIdentityLabel(student){return profIdentityLabel(student)}
+function classTestChoiceText(q,key){const c=q.choices.find(x=>x[0]===key);return c?`${c[0]}. ${c[1]}`:''}
+function initClassTestSetup(){
+ const options=[...roster().map(n=>({value:n,label:n})),{value:CLASS_TEST_SPECIAL.DEMO,label:'MR. FRANK — DEMO / TEACH'},{value:CLASS_TEST_SPECIAL.CUSTOM,label:'CUSTOM — NO STUDENT'}];
+ $('#classTestStudent').innerHTML='<option value="">Choose…</option>'+options.map(o=>`<option value="${esc(o.value)}">${esc(o.label)}</option>`).join('');
+ const preferred=(state.students[0]&&roster().includes(state.students[0]))?state.students[0]:'';$('#classTestStudent').value=preferred;
+}
+function openClassTestStart(){
+ const label=classTestIdentityLabel(classTestState.student),first=isSpecialProfIdentity(classTestState.student)?label:(label.split(/\s+/)[0]||label);
+ $('#classTestStudentArea').innerHTML=`<div class="class-test-card"><div class="class-test-section">${esc(first.toUpperCase())}</div><h1 style="font-size:clamp(34px,5vw,60px);margin:10px 0">BIG RED LOLLIPOP</h1><div class="lead">13 QUESTIONS</div><p class="small">Selection Vocabulary + Comprehension</p><div class="actions" style="justify-content:center"><button id="classTestStart" class="primary" style="font-size:22px;padding:14px 28px">START</button><button id="classTestStartBack" class="secondary teacher-return">TEACHER BACK</button></div></div>`;
+ $('#classTestStart').onclick=startBigRedLollipop;$('#classTestStartBack').onclick=()=>{initClassTestSetup();setScreen('classTestSetup')};setScreen('classTestStudentScreen');
+}
+function startBigRedLollipop(){classTestState.index=0;classTestState.selected=null;classTestState.responses=[];classTestState.startedAt=new Date().toISOString();classTestState.endedAt=null;classTestState.score=null;classTestState.savedRecord=null;renderBigRedQuestion()}
+function renderBigRedQuestion(){
+ const i=classTestState.index,q=BIG_RED_LOLLIPOP_QUESTIONS[i],progress=Math.round((i/13)*100),comp=q.section==='COMPREHENSION';
+ $('#classTestStudentArea').innerHTML=`<div class="class-test-card"><div class="class-test-section">${q.section==='VOCABULARY'?'SELECTION VOCABULARY':'COMPREHENSION'}</div><div class="small" style="font-weight:900;margin-top:5px">QUESTION ${i+1} OF 13</div><div class="class-test-progress"><div style="width:${progress}%"></div></div>${comp?'<div class="class-test-lookback">YOU MAY LOOK BACK AT THE STORY.</div>':''}<div class="class-test-question">${esc(q.prompt).replace(/\n/g,'<br>')}</div><div class="class-test-choices">${q.choices.map(([k,t])=>`<button class="class-test-choice" data-key="${k}"><b>${k}.</b> ${esc(t)}</button>`).join('')}</div><div class="actions" style="justify-content:flex-end;margin-top:18px"><button id="classTestNext" class="primary" disabled>${i===12?'FINISH':'NEXT'}</button></div></div>`;
+ $$('.class-test-choice').forEach(b=>b.onclick=()=>{classTestState.selected=b.dataset.key;$$('.class-test-choice').forEach(x=>x.classList.toggle('selected',x===b));$('#classTestNext').disabled=false});
+ $('#classTestNext').onclick=submitBigRedAnswer;
+}
+function submitBigRedAnswer(){
+ if(!classTestState.selected)return;const i=classTestState.index,q=BIG_RED_LOLLIPOP_QUESTIONS[i],key=classTestState.selected;
+ classTestState.responses.push({questionNumber:i+1,sourceNumber:q.number,section:q.section,prompt:q.prompt,studentAnswer:classTestChoiceText(q,key),expectedAnswer:classTestChoiceText(q,q.correct),selectedKey:key,expectedKey:q.correct,correct:key===q.correct});
+ classTestState.selected=null;if(i>=12){finishBigRedLollipop();return}classTestState.index++;renderBigRedQuestion();
+}
+function finishBigRedLollipop(){
+ classTestState.endedAt=new Date().toISOString();const r=classTestState.responses,vocab=r.filter(x=>x.section==='VOCABULARY'),comp=r.filter(x=>x.section==='COMPREHENSION');const vc=vocab.filter(x=>x.correct).length,cc=comp.filter(x=>x.correct).length,total=vc+cc,percent=Math.round(total/13*100);
+ classTestState.score={vocabularyCorrect:vc,vocabularyTotal:8,comprehensionCorrect:cc,comprehensionTotal:5,totalCorrect:total,totalItems:13,percent};
+ if(isRealRosterStudent(classTestState.student))classTestState.savedRecord=Room22CurriculumAssessmentResults.save({studentId:classTestState.student,studentName:classTestState.student,assessmentId:'big-red-lollipop',assessmentName:'BIG RED LOLLIPOP',date:classTestState.endedAt,vocabularyCorrect:vc,vocabularyTotal:8,comprehensionCorrect:cc,comprehensionTotal:5,responses:r});
+ const label=classTestIdentityLabel(classTestState.student);$('#classTestStudentArea').innerHTML=`<div class="class-test-card"><h1 style="font-size:clamp(42px,7vw,76px);margin:8px 0">ALL DONE!</h1><p class="lead">Nice work.</p><p>Give the computer back to Mr. Frank.</p><div class="actions" style="justify-content:center;margin-top:24px"><button id="classTestTeacherResultsBtn" class="secondary teacher-return">TEACHER RESULTS</button></div></div>`;
+ $('#classTestTeacherResultsBtn').onclick=renderBigRedTeacherResults;
+}
+function renderBigRedTeacherResults(){
+ const s=classTestState.score,r=classTestState.responses,label=classTestIdentityLabel(classTestState.student),real=isRealRosterStudent(classTestState.student),saved=!!classTestState.savedRecord;
+ $('#classTestTeacherBody').innerHTML=`<div class="class-test-card"><div class="eyebrow">CURRICULUM ASSESSMENT</div><h2 style="margin:6px 0">${esc(label)}</h2><h3 style="margin-top:0">BIG RED LOLLIPOP</h3><div class="small">${esc(new Date(classTestState.endedAt).toLocaleString())}</div><div class="class-test-score-grid"><div class="class-test-score-box"><b>VOCABULARY</b><div class="precheck-score" style="font-size:30px">${s.vocabularyCorrect} / 8</div></div><div class="class-test-score-box"><b>COMPREHENSION</b><div class="precheck-score" style="font-size:30px">${s.comprehensionCorrect} / 5</div></div><div class="class-test-score-box"><b>TOTAL</b><div class="precheck-score" style="font-size:30px">${s.totalCorrect} / 13</div><div><b>${s.percent}%</b></div></div></div><div class="notice">${real?(saved?'Saved to History.':'Result could not be saved.'):'SESSION ONLY · No student History record was written.'}</div><div class="actions"><button id="classTestReviewBtn" class="secondary">REVIEW RESPONSES</button>${real&&saved?'<button id="classTestHistoryBtn" class="primary">OPEN HISTORY</button>':''}<button id="classTestAgainBtn" class="secondary">RUN AGAIN</button><button id="classTestDoneBtn" class="secondary">BACK TO WIN</button></div><div id="classTestReview" class="class-test-review">${r.map((x,i)=>`<div class="class-test-review-item"><b>QUESTION ${i+1}</b> · ${esc(x.section)}<div style="margin-top:5px">${esc(x.prompt).replace(/\n/g,'<br>')}</div><div class="small" style="margin-top:6px">Student answer: <b>${esc(x.studentAnswer)}</b><br>Correct answer: <b>${esc(x.expectedAnswer)}</b></div><div style="margin-top:5px;font-weight:900">${x.correct?'✓':'✗'}</div></div>`).join('')}</div></div>`;
+ $('#classTestReviewBtn').onclick=()=>$('#classTestReview').classList.toggle('open');if($('#classTestHistoryBtn'))$('#classTestHistoryBtn').onclick=()=>setScreen('history');$('#classTestAgainBtn').onclick=openClassTestStart;$('#classTestDoneBtn').onclick=()=>setScreen('win');setScreen('classTestTeacherResults');
+}
+$('#classTestBtn').onclick=()=>{initClassTestSetup();setScreen('classTestSetup')};
+$('#classTestContinue').onclick=()=>{classTestState.student=$('#classTestStudent').value;if(!classTestState.student)return alert('Choose a student or session mode.');openClassTestStart()};
+$('#classTestCancel').onclick=()=>setScreen('win');
