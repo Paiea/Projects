@@ -1,0 +1,18 @@
+/* CLASS TEST — Big Red Lollipop fixed curriculum assessment */
+.class-test-shell{max-width:880px;margin:0 auto}
+.class-test-student{min-height:calc(100vh - 150px);display:flex;align-items:center;justify-content:center;text-align:center}
+.class-test-card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:clamp(18px,3vw,30px);box-shadow:var(--shadow)}
+.class-test-question{font-size:clamp(24px,3vw,40px);line-height:1.2;font-weight:900;margin:18px 0 22px}
+.class-test-choices{display:grid;grid-template-columns:1fr 1fr;gap:12px;text-align:left}
+.class-test-choice{min-height:74px;padding:14px 16px;border:2px solid var(--line);border-radius:14px;background:#fff;font-size:clamp(18px,2vw,25px);font-weight:800;cursor:pointer}
+.class-test-choice.selected{border-color:var(--accent);background:var(--accent2)}
+.class-test-progress{height:10px;background:#e6e2d8;border-radius:999px;overflow:hidden;margin:10px 0 18px}
+.class-test-progress>div{height:100%;background:var(--accent);transition:width .2s ease}
+.class-test-section{font-size:13px;letter-spacing:1px;font-weight:900;color:var(--muted);text-transform:uppercase}
+.class-test-lookback{margin:10px 0 0;padding:9px 12px;border-radius:10px;background:var(--warn);font-weight:900}
+.class-test-score-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}
+.class-test-score-box{border:1px solid var(--line);border-radius:12px;padding:14px;text-align:center;background:#fff}
+.class-test-review{display:none;margin-top:16px}
+.class-test-review.open{display:block}
+.class-test-review-item{border-top:1px solid var(--line);padding:12px 0}
+@media(max-width:720px){.class-test-choices{grid-template-columns:1fr}.class-test-score-grid{grid-template-columns:1fr}}

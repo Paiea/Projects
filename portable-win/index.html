@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<!-- AUTHORITATIVE BUILD: WIN-DEPTH + CONTENT-AMMO + PROFICIENCY-Q1-L3-V2 + MORNING-V2 + TEACH-V1 + BAR-MODELS-TEACH-V1 | 2026-09-01 -->
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Room 22 WIN Lab</title>
+<link rel="stylesheet" href="win.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">ROOM 22 WIN LAB</div>
+  <nav class="nav">
+    <button data-screen="win" class="active">WIN</button>
+    <button data-screen="morning">MORNING</button>
+    <button data-screen="teach">TEACH</button>
+    <button data-screen="history">HISTORY</button>
+    <button data-screen="settings">SETTINGS</button>
+  </nav>
+</header>
+<main>
+<section id="win" class="screen active">
+  <div class="hero"><h1>Room 22 WIN Lab</h1><p>Pick kids. Pick need. Teach. Check. Move on.</p></div>
+  <div id="lastTimeBox"></div>
+  <div class="card">
+    <h2>Today</h2>
+    <div class="grid two">
+      <div>
+        <label>Students · pick 2–4</label>
+        <div id="studentPicker" class="student-grid"></div>
+      </div>
+      <div class="grid">
+        <div><label>Saved Group</label><select id="savedGroupSelect"><option value="">Choose saved group…</option></select></div>
+        <div><label>Subject</label><div class="segment" id="subjectButtons"><button data-value="MATH" class="selected">MATH</button><button data-value="READING">READING</button></div></div>
+        <div><label>Need</label><select id="skillSelect"></select></div>
+        <div><label>Level</label><div class="segment" id="levelButtons"><button data-value="FOUNDATION">FOUNDATION</button><button data-value="BRIDGE" class="selected">BRIDGE</button><button data-value="GRADE 2 TARGET">GRADE 2 TARGET</button></div><div id="levelHint" class="small" style="margin-top:6px"></div></div>
+      </div>
+    </div>
+    <div class="actions"><button id="startBtn" class="primary">START WIN GROUP</button><button id="proficiencyBtn" class="secondary precheck-launch">SHOW WHAT YOU KNOW</button><button id="classTestBtn" class="secondary">CLASS TEST · BIG RED LOLLIPOP</button><button id="barModelTeachBtn" class="secondary">TEACH · BAR MODELS</button><button id="saveGroupFromHome" class="secondary">SAVE THIS GROUP</button><span id="startHint" class="hint"></span></div>
+  </div>
+</section>
+
+<section id="proficiencySetup" class="screen">
+  <div class="hero"><h1>Show What You Know</h1><p>Level 3 proficiency check · teacher setup</p></div>
+  <div class="card precheck-shell">
+    <label>Student</label>
+    <select id="profStudent"></select>
+    <div id="profCurrentStatus" class="small" style="margin-top:10px"></div>
+    <div class="actions"><button id="profContinue" class="primary">CONTINUE</button><button id="profCancel" class="secondary">BACK TO WIN</button></div>
+  </div>
+</section>
+
+<section id="proficiencyStudent" class="screen">
+  <div class="precheck-shell precheck-student">
+    <div id="profStudentArea" style="width:100%"></div>
+  </div>
+</section>
+
+<section id="proficiencyResults" class="screen">
+  <div class="hero"><h1>Show What You Know</h1><p>Teacher results · Level 3 evidence</p></div>
+  <div id="profResultsBody" class="precheck-shell"></div>
+</section>
+
+<section id="classTestSetup" class="screen">
+  <div class="hero"><h1>Class Test</h1><p>Teacher setup · fixed curriculum assessment</p></div>
+  <div class="card class-test-shell">
+    <div class="eyebrow">BIG RED LOLLIPOP</div>
+    <h2 style="margin-top:6px">Selection Vocabulary + Comprehension</h2>
+    <label>Student / Session</label>
+    <select id="classTestStudent"></select>
+    <div class="actions"><button id="classTestContinue" class="primary">CONTINUE</button><button id="classTestCancel" class="secondary">BACK TO WIN</button></div>
+  </div>
+</section>
+
+<section id="classTestStudentScreen" class="screen">
+  <div class="class-test-shell class-test-student"><div id="classTestStudentArea" style="width:100%"></div></div>
+</section>
+
+<section id="classTestTeacherResults" class="screen">
+  <div class="hero"><h1>Big Red Lollipop</h1><p>Teacher results · curriculum assessment</p></div>
+  <div id="classTestTeacherBody" class="class-test-shell"></div>
+</section>
+
+<section id="winSession" class="screen">
+  <div id="sessionCard" class="card"></div>
+  <div class="card no-print">
+    <h3>After the group</h3>
+    <div class="result-buttons">
+      <button data-result="GOT IT">✓ GOT IT</button><button data-result="ALMOST">△ ALMOST</button><button data-result="NOT YET">✗ NOT YET</button>
+    </div>
+    <label>Optional tiny note</label><textarea id="sessionNote" placeholder="Quick note about what happened in the group."></textarea>
+    <div class="actions"><button id="saveResultBtn" class="primary">SAVE RESULT</button><button id="newVariationBtn" class="secondary">NEW VARIATION</button><button id="backWinBtn" class="secondary">BACK TO WIN</button><button onclick="window.print()" class="secondary">PRINT</button></div>
+    <div id="saveFeedback" class="hint"></div>
+  </div>
+</section>
+
+<section id="morning" class="screen">
+  <div class="morning-wrap"><div class="morning-board">
+    <div class="morning-board-head">
+      <div class="morning-tools no-print"><button id="newMorningBtn" class="primary">NEW MORNING</button><button id="morningEditBtn" class="secondary">EDIT</button></div>
+      <h1>GOOD MORNING ROOM 22</h1>
+      <div class="morning-head-spacer"></div>
+    </div>
+    <div id="morningMessageDisplay" class="morning-message hidden"></div>
+    <div class="morning-layout">
+      <div class="morning-zone morning-zone-left">
+        <div class="morning-step"><h2>GET READY</h2><div class="morning-ready">Backpack away<br>Water away<br>Composition notebook out<br>Pencil ready</div><div class="small" style="margin-top:8px">Then begin Math.</div></div>
+      </div>
+      <div class="morning-zone morning-zone-middle">
+        <div class="morning-step"><h2>MATH</h2><div id="morningMath" class="morning-problems"><div class="morning-problem"><div class="problem-text"><b>1.</b> 47 = ___ tens + ___ ones</div></div><div class="morning-problem"><div class="problem-text"><b>2.</b> 36 + 20 = ___</div></div><div class="morning-problem"><div class="problem-text"><b>3.</b> 34 + ___ = 40</div></div></div></div>
+        <div class="morning-step"><h2>QUICK WAKE-UP</h2><div class="movement-box"><span id="morningMovement">Do 5 jumping jacks.</span><button id="rerollMovement" class="reroll no-print" title="New movement">↻</button></div><div class="small" style="margin-top:4px">Then sit down and start ELA.</div></div>
+        <div class="morning-step"><h2>ELA</h2><div id="morningEla" class="morning-problems"><div class="morning-problem"><div class="problem-text"><b>1.</b> Fix the sentence:<br>my dog likes to run</div></div><div class="morning-problem"><div class="problem-text"><b>2.</b> Choose the word that makes sense:<br>The puppy (run / runs) home.</div></div></div></div>
+      </div>
+      <div class="morning-zone morning-zone-right">
+        <div class="morning-step"><h2>WHEN YOU'RE DONE</h2><div class="finish-box">Early Finisher Work<br><span class="small" style="font-size:17px">OR</span><br>Read Quietly</div></div>
+        <div class="reset-note"><b>NEED A RESET?</b><br>If you're off task, you'll be asked to reset at the tables.</div>
+        <div id="morningReminderDisplay"></div>
+        <div class="morning-timer-block">
+          <div class="timer" id="timerDisplay">18:00</div>
+          <div class="timer-controls no-print"><button id="timerStart" class="primary">START TIMER</button><button id="timerReset" class="secondary">RESET TIMER</button></div>
+        </div>
+      </div>
+    </div>
+  </div></div>
+  <div id="morningEdit" class="card hidden no-print" style="max-width:900px;margin:18px auto">
+    <h3>Morning settings</h3>
+    <div class="grid three"><div><label>Today's message</label><input id="morningMessage" type="text" placeholder="Optional"></div><div><label>One reminder</label><input id="morningReminder" type="text" placeholder="Optional"></div><div><label>Timer minutes</label><input id="morningMinutes" type="number" min="1" max="60" value="18"></div></div>
+    <div style="margin-top:14px"><label>Enabled Math families</label><div id="morningMathFamilies" class="family-grid"></div></div>
+    <div style="margin-top:14px"><label>Enabled ELA families</label><div id="morningElaFamilies" class="family-grid"></div></div>
+    <div class="actions"><button id="saveMorning" class="primary">SAVE MORNING</button><button id="cancelMorning" class="secondary">CLOSE</button></div>
+  </div>
+</section>
+
+<section id="teach" class="screen">
+  <div id="teachSetup" class="teach-setup">
+    <div class="hero"><h1>Room 22 Teach</h1><p>Pick a skill. Put up a strong task. Facilitate the thinking.</p></div>
+    <div class="card">
+      <div class="grid two">
+        <div><label>Subject</label><div id="teachSubjectButtons" class="segment"><button data-value="MATH" class="selected">MATH</button><button data-value="ELA">ELA</button></div></div>
+        <div><label>Skill</label><select id="teachSkillSelect"></select></div>
+      </div>
+      <div style="margin-top:16px"><label>Facilitation</label><div id="teachModeButtons" class="teach-mode-grid"><button data-value="FIGURE IT OUT" class="selected">FIGURE IT OUT</button><button data-value="BTC">BTC</button><button data-value="QUICK FIRE">QUICK FIRE</button><button data-value="DISCUSS">DISCUSS</button></div></div>
+      <div class="actions"><button id="teachStartBtn" class="primary">START</button></div>
+    </div>
+  </div>
+  <div id="teachProjector" class="teach-projector teach-hidden">
+    <div class="teach-projector-head no-print">
+      <button id="teachBackSetup" class="secondary">BACK</button>
+      <div class="goal"><b>Teacher Goal:</b> <span id="teachGoal"></span></div>
+      <button id="teachFullscreen" class="secondary">FULLSCREEN</button>
+    </div>
+    <div class="teach-stage">
+      <div><div id="teachPrompt" class="teach-prompt"></div><div id="teachVisual" class="teach-visual teach-hidden"></div><div id="teachSubprompt" class="teach-subprompt"></div></div>
+    </div>
+    <div class="teach-controls no-print">
+      <button id="teachPrev" class="secondary">BACK</button>
+      <div id="teachProgress" class="teach-progress"></div>
+      <button id="teachNext" class="primary">NEXT</button>
+      <button id="teachNew" class="secondary">NEW SET</button>
+      <div class="teach-quick-times"><button data-t="60">1 MIN</button><button data-t="120">2 MIN</button><button data-t="180">3 MIN</button><button data-t="300">5 MIN</button></div>
+      <div id="teachTimerDisplay" class="teach-timer">02:00</div>
+      <button id="teachTimerStart" class="secondary">START</button>
+      <button id="teachTimerReset" class="secondary">RESET</button>
+    </div>
+  </div>
+</section>
+
+<section id="history" class="screen">
+  <div class="hero"><h1>History</h1><p>Teacher working memory, not a data warehouse.</p></div>
+  <div class="card"><div class="actions" style="margin-top:0"><select id="historyFilter" style="max-width:280px"><option value="ALL">All results</option><option value="GOT IT">Got it</option><option value="ALMOST">Almost</option><option value="NOT YET">Not yet</option><option value="PROFICIENCY">Proficiency</option><option value="CURRICULUM">Curriculum assessment</option></select><button id="clearHistory" class="danger">CLEAR HISTORY</button></div><div id="historyList"></div></div>
+</section>
+
+<section id="settings" class="screen">
+  <div class="hero"><h1>Settings</h1><p>Only the pieces this tiny tool actually needs.</p></div>
+  <div class="grid two">
+    <div class="card"><h3>Roster</h3><p class="small">One student per line. Names are only used for selection and neutral group labels.</p><textarea id="rosterText" style="min-height:300px"></textarea><div class="actions"><button id="saveRoster" class="primary">SAVE ROSTER</button><button id="resetRoster" class="secondary">RESET DEFAULT</button></div></div>
+    <div class="card"><h3>Saved groups</h3><div id="savedGroupsList"></div></div>
+  </div>
+  <div class="card"><h3>Portability</h3><div class="notice">This build uses only these local files plus browser storage. No Node, npm, Python, server, API, account, Ollama, or internet connection is used during normal operation.</div></div>
+</section>
+</main>
+<script src="win-1.js"></script>
+<script src="win-2a.js"></script>
+<script src="win-2b.js"></script>
+<script src="win-3.js"></script>
+<script src="win-4.js"></script>
+</body>
+</html>
