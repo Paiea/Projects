@@ -1,6 +1,6 @@
 # PROJECTS — WORKER ROUTER
 
-This repository is both a public project launchpad and a durable project brain.
+This repository is both a public project launchpad and a durable project brain for projects intentionally hosted or surfaced here.
 
 ## Startup
 
@@ -14,6 +14,8 @@ Before substantial work:
 6. inspect the exact current source/build before changing anything
 7. preserve newer GitHub-authoritative work
 8. validate changes, update durable state, and leave the next handshake
+
+When creating or restructuring a project brain, also read `docs/PROJECT_BRAIN_STANDARD.md`.
 
 ## Authority
 
@@ -31,15 +33,23 @@ Do not leave important finished work only in chat or in a mystery local file.
 
 ## Project routing
 
-`state/PROJECT_REGISTRY.md` is the master project map. It tells you whether a project is hosted here or has a separate authoritative repository.
+`state/PROJECT_REGISTRY.md` is the master public/live project map. It tells you whether a project is hosted here or has a separate authoritative repository.
 
 For internally hosted projects, read the project's `PROJECT_STATE.md` before substantial work.
 
 For external projects, do not duplicate their state here. Follow the registry pointer to the authoritative repository and its worker/state entry points.
 
+The reusable default is documented in `docs/PROJECT_BRAIN_STANDARD.md` and `templates/project-brain/`. Start small: one compact project state is enough for many projects. Add specialist brains only when recurring lanes or domain knowledge justify them.
+
+## Private recovery layer
+
+Cross-project recovery, private historical synthesis, raw ChatGPT-export indexing, and private project routing belong in the separate private repository `Paiea/chatgpt-project-brain`.
+
+Do not copy private recovery material into this public repository merely to make it easier for a worker to see.
+
 ## Public repository boundary
 
-This repository is public. Never commit student records, browser localStorage exports, passwords, tokens, secrets, private relationship information, or other sensitive personal material.
+This repository is public. Never commit student records, browser localStorage exports, passwords, tokens, secrets, private relationship information, raw ChatGPT export data, private recovery notes, or other sensitive personal material.
 
 ## Handoff
 
