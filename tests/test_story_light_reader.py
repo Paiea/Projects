@@ -16,7 +16,7 @@ SLUGS = [
 def test_all_story_projects_have_required_files():
     for slug in SLUGS:
         base = ROOT / 'stories' / slug
-        for rel in ['README.md', 'PROJECT_STATE.md', 'STORY_SEED.md', 'reader-data.js', 'manuscript/README.md']:
+        for rel in ['index.html', 'README.md', 'PROJECT_STATE.md', 'STORY_SEED.md', 'reader-data.js', 'manuscript/README.md']:
             assert (base / rel).is_file(), f'{slug} missing {rel}'
 
 
