@@ -62,6 +62,34 @@ Do not create a new authoritative copy merely to make a fact easier to find.
 
 Prefer one fact owner plus pointers/derived summaries. If a registry, README, or cross-project page repeats a fact, it should remain a view of the owning source rather than an independently maintained truth.
 
+For rapidly changing facts with a clear owner, prefer routing to the owner instead of caching the current value in several hot files.
+
+## Durable promotion gate
+
+When work turns messy evidence, archaeology, research, or exploratory reasoning into persistent state, do not silently treat a plausible interpretation as accepted truth.
+
+Use the lightweight flow:
+
+**OBSERVE / EXPLORE -> DERIVE / PROPOSE -> REVIEW AGAINST OWNING SOURCE -> ACCEPT DURABLE RESIDUE**
+
+A worker may promote a derived claim without explicit user approval when the exact evidence is known, the synthesis is faithful and evidence-bounded, the destination file owns that synthesis, and no stronger authority conflicts.
+
+Keep the claim proposed/possible or route it through the project's decision authority when it would choose among plausible interpretations, establish new direction/canon/policy, resolve meaningful ambiguity, retcon accepted authority, or generalize beyond the evidence.
+
+Use a compact `Claim / Status / Evidence / Limit` shape only when it materially helps future workers. Do not turn ordinary state maintenance into a form-filling ritual.
+
+## Reasoning -> execution -> review loop
+
+GitHub is the normal bridge between reasoning/planning workers and execution workers.
+
+Preferred default:
+
+**DISCUSS / DIAGNOSE -> WRITE DURABLE INTENT OR EXECUTABLE EDGE -> EXECUTION WORKER INSPECTS REAL WORKSPACE -> IMPLEMENT / TEST -> COMMIT OR CHECKPOINT -> REASONING WORKER REVIEWS ACTUAL RESULT**
+
+This is specialization, not a prohibition. Skip the handoff ceremony for tiny obvious work.
+
+Do not make continuity depend on a shared chat link. Do not have a reasoning worker pretend it knows local/uncommitted runtime state it cannot inspect.
+
 ## NEXT_TASK convention
 
 Use the living project state file rather than making endless timestamped handoff files.
