@@ -14,7 +14,7 @@ Describe what this project exists to do in 1–3 sentences.
 
 State any project-specific precedence rules here. Exact current source/build should outrank stale chat summaries and old checkpoints.
 
-If this file is a derived view of authority owned elsewhere, name that owner explicitly rather than duplicating it silently.
+If this file is a derived view of authority owned elsewhere, name that owner explicitly rather than duplicating it silently. For rapidly changing facts with a clear owner, prefer pointing to that owner instead of caching a value here that will drift.
 
 ## Current State
 
@@ -33,6 +33,10 @@ Record only decisions that future workers need to preserve. Examples:
 - important naming or workflow decisions
 
 Do not duplicate facts already owned by another state/source file unless the pointer or short summary is necessary for routing.
+
+When a durable conclusion is non-obvious or easy to overgeneralize, optionally use a compact `Claim / Status / Evidence / Limit` note. Do not use that structure for obvious facts or trivial state maintenance.
+
+A worker may promote a derived claim when exact evidence clearly supports the synthesis and the evidence ceiling is preserved. Keep interpretive/ambiguous/directional claims proposed or route them through the project's decision authority instead of silently hardening them into accepted state.
 
 ## Known Issues / Open Questions
 
