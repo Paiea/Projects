@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Praxis 5001 Study Engine</title>
+<style>
+:root{font-family:Inter,system-ui,sans-serif;color-scheme:dark;background:#101114;color:#f5f5f5}*{box-sizing:border-box}body{margin:0}.wrap{max-width:920px;margin:auto;padding:32px 20px 80px}header{margin-bottom:32px}h1{font-size:clamp(2rem,7vw,4rem);line-height:.95;margin:.2em 0}.muted{color:#aaa}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}.card,.panel{background:#191b20;border:1px solid #2b2e35;border-radius:18px;padding:20px}.card h2{margin-top:0}.code{font-size:.8rem;color:#aaa}.bar{height:8px;background:#30333a;border-radius:99px;overflow:hidden}.fill{height:100%;background:#eee;width:0}.panel{margin-top:18px}button{border:0;border-radius:12px;padding:12px 16px;font-weight:700;cursor:pointer}ul{line-height:1.7;padding-left:20px}.tag{display:inline-block;padding:5px 9px;border:1px solid #3a3d45;border-radius:99px;font-size:.78rem;margin:3px}</style>
+</head><body><main class="wrap"><header><div class="code">PRAXIS 5001</div><h1>Study Engine</h1><p class="muted">Diagnose. Practice. Track the miss. Attack the weakness. Repeat.</p></header>
+<section class="grid" id="subjects"></section>
+<section class="panel"><h2>Performance model</h2><p>Every miss should tell us something. Track whether the problem was knowledge, speed, confidence, procedure, or simply reading the damn question wrong.</p><div><span class="tag">Concept gap</span><span class="tag">Procedure error</span><span class="tag">Misread</span><span class="tag">Time pressure</span><span class="tag">Second-guessing</span></div></section>
+<section class="panel"><h2>Next build</h2><ul><li>Recover the prior Praxis question bank and study artifacts.</li><li>Map questions to ETS-aligned skills.</li><li>Add one-question-at-a-time quiz mode.</li><li>Store attempts and weak areas locally in the browser.</li><li>Generate targeted sessions from the error ledger.</li></ul></section>
+</main><script>
+const subjects=[['5002','Reading & Language Arts'],['5003','Mathematics'],['5004','Social Studies'],['5005','Science']];
+const progress=JSON.parse(localStorage.getItem('praxisProgress')||'{}');
+document.querySelector('#subjects').innerHTML=subjects.map(([code,name])=>`<article class="card"><div class="code">${code}</div><h2>${name}</h2><p class="muted">Progress tracking ready for recovered question bank.</p><div class="bar"><div class="fill" style="width:${progress[code]||0}%"></div></div></article>`).join('');
+</script></body></html>
