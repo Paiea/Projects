@@ -1,112 +1,118 @@
-# Chapter 1: The Road Out
+# Cliff — First-Person WIP
 
 > **WIP REVIEW PROSE**
 >
-> First-person associative rewrite. This file is review material on `cliff/first-person-story-reader`; accepted manuscript authority remains `BOOK_01.md` on `main` until explicitly promoted.
+> First-person associative rewrite on `cliff/first-person-story-reader`. Cliff's consciousness is foreground; routine action is compressed and only unusual danger earns sustained physical detail. Accepted manuscript authority remains `BOOK_01.md` on `main` until explicitly promoted.
+
+# Chapter 1: The Road Out
 
 Ralph had found us again.
 
 I knew because the forest stopped making noise.
 
-Then Loben said, “Run.”
+It wasn't completely quiet. Forests were never completely quiet. Something always dripped, crawled, chewed, hatched, died, or tried very hard to make something else die.
+
+But there was a particular kind of quiet Ralph made.
+
+Birds first.
+
+Then the little red lizards that screamed at everything.
+
+Then anything with enough sense to understand why the birds and lizards had stopped.
+
+I understood.
+
+Loben apparently did too.
+
+“Run.”
 
 I was already running.
 
-I ducked under white thorns, planted one boot on a fallen ironwood, and let the moss take me.
+I'd been running from Ralph for six years.
 
-My foot slid.
+Not continuously.
 
-Fine.
+That would have been exhausting.
 
-I rode the trunk down instead of fighting it, hit the ground moving, and threw one hand behind me.
+He disappeared for months sometimes. Once almost a year. I'd thought he was dead that time.
 
-A barrier hardened between two trees.
+I'd been sad.
 
-Something hit it.
+Not very sad.
 
-The forest grunted.
+More the kind of sad you were when a familiar tree fell over.
 
-The force punched through my arm and kicked my shoulder forward. I nearly went down.
+Actually, I had been much sadder when Benjamin fell over.
 
-Didn't look back.
+Benjamin had been a tree.
 
-Didn't need to.
+Loben hated that I'd named a tree Benjamin.
 
-The barrier bowed inside my awareness.
+I hadn't meant to. I'd been talking to myself while cutting bark and called it Benjamin for some reason. After that it was Benjamin.
 
-Harder.
+Names were difficult that way.
 
-Harder.
+Ralph hit something behind us hard enough to shake water out of the leaves.
 
-Too hard.
+Right.
 
-I dropped it.
+Running.
 
-Wood burst behind me.
+I threw a barrier between two trees without looking back.
 
-Ralph came through.
+He hit it.
 
-I looked back then.
+My shoulder jerked.
 
-Black scales. Four hooked foreclaws. A head too broad for the space between the trees.
+I let the barrier go before he could turn my arm into a lesson.
 
-Then his jaw opened.
+Wood burst behind us.
 
-Not down.
-
-Apart.
-
-Four wet sections peeled back along his neck, each lined with teeth.
-
-Still ugly.
-
-Good to know some things didn't change.
-
-I ran faster.
-
-Ralph had once swallowed a tuskhog without chewing.
-
-That was the day I'd named him Ralph.
-
-I used to name everything.
-
-Birds. Lizards. Things that were probably neither. One tree, although that had been an accident and I'd stopped calling it Benjamin after Loben made fun of me.
-
-Eventually I stopped.
-
-Things died.
-
-Ralph ate a lot of them.
-
-Not all of them. That would be unfair to Ralph.
-
-But enough.
-
-Ahead, Loben cleared a shoulder-high boulder without touching it with his hands.
+Loben cleared a boulder without touching it.
 
 I went around.
 
 Show-off.
 
-A trunk cracked behind us.
+There were advantages to whatever Loben was.
 
-Closer.
+I had asked once.
 
-The north ridge was somewhere beyond the trees. Beyond that, the shore. Beyond the shore, the causeway.
+He'd bitten me.
 
-If the tide was right.
+Not hard.
 
-If the mainlanders had kept their word.
+That was the sort of answer you learned not to ask follow-up questions about.
 
-If the wardstones worked.
+The north ridge was somewhere ahead. Beyond that was the shore. Beyond the shore was the causeway. Beyond the causeway was a road.
 
-Lots of ifs.
+I'd been thinking about the road all morning.
 
-I'd left two cooking pots, three shirts, half a rain tarp, a cracked spearhead, and a coil of good rope behind that morning so I could run this fast.
+Not freedom.
 
-I regretted the rope.
+Not civilization.
 
-Ralph hit the ground behind me.
+The road.
+
+Flat ground someone had made flat on purpose.
+
+Thalia said I remembered roads as wider than they really were.
+
+I told her she had never seen the roads I remembered.
+
+She said that wasn't the point.
+
+That argument had lasted most of an afternoon and ended when a vine tried to pull her into a tree.
+
+It was hard to finish arguments on Norend.
+
+Sometimes that was useful.
+
+I wondered if people on the mainland had to finish all of theirs.
+
+That sounded terrible.
+
+Ralph's stride came through the ground behind me.
 
 Four impacts.
 
@@ -120,243 +126,201 @@ Drag.
 
 Two.
 
-I knew that stride.
+I knew that stride better than some people's voices.
 
-Too close.
+I knew when he was tired, when he was hurt, when he was playing, and when he'd decided I was specifically annoying him.
 
-Two mossy stones ahead.
+Today felt personal.
+
+Maybe it was the rope.
+
+I'd left a coil of good rope behind that morning because it weighed too much.
+
+Two cooking pots too.
+
+Three shirts.
+
+Half a rain tarp.
+
+A cracked spearhead I had been meaning to do something with for approximately four years.
+
+The rope bothered me most.
+
+Good rope was hard to make.
+
+Good rope that hadn't tried to strangle you was harder.
+
+I'd had one vine rope that tightened whenever it got wet.
+
+That had seemed useful until the rainy season.
+
+Loben had laughed for a week.
+
+I still thought it had potential.
+
+Two mossy stones appeared ahead.
+
+That mattered.
 
 “Down.”
 
 Loben dropped.
 
-I stopped.
+I stopped, turned, put one barrier low and another high, and let Ralph trip over his own enthusiasm.
 
-Not slowed.
+He hit both.
 
-Stopped.
+Pain flashed through my arms.
 
-Turned.
+Ralph went sideways through three young ironwoods.
 
-Ralph came through the trees.
+I lost feeling in two fingers.
 
-First barrier low. Slanted across the path.
+We kept running.
 
-Second high.
+That was most fights on Norend.
 
-Ralph filled the gap.
+Something tried to kill you.
 
-Wait.
+You tried not to let it.
 
-One more step.
+Nobody announced who had won.
 
-Now.
+If you were still moving, you could decide later.
 
-His forefoot hit the lower barrier and shot forward. His chest smashed into the upper.
+I used to think fighting was supposed to be more important than that.
 
-Both impacts reached me at once.
+My father had owned a sword.
 
-My elbows buckled.
+I remembered that.
 
-Drop them.
+Or I remembered remembering it.
 
-I did.
+Silver guard. Brown leather around the grip. He'd told me never to touch it, which meant I had touched it whenever possible.
 
-Too late.
+I couldn't remember his face nearly as well as the sword.
 
-Pain flashed white through both arms.
-
-Ralph went sideways anyway.
-
-He tore through a stand of young ironwood, rolled once, and disappeared under snapping trunks.
-
-I closed my right hand.
-
-Three fingers listened.
-
-Two didn't.
-
-Fine.
-
-I'd had worse.
-
-I couldn't immediately remember when.
-
-That was probably a good sign.
-
-Loben was already up.
-
-I ran.
-
-Leaves shifted behind us.
-
-Too soon.
+That seemed unfair.
 
 Ralph screamed.
 
-The sound started below hearing. I felt it through my ribs before it climbed into a shriek that emptied the canopy of birds.
+The sound came through my ribs before my ears.
 
-I hated that scream.
+I forgot the sword.
 
-I'd hated it the first time too.
+For a while there was only forest.
 
-Back then I'd thought something that sounded that horrible must be enormous.
+Roots.
 
-I'd been right.
+Red leaves meant soft earth.
 
-Nice when that happened.
+Pale fungus meant dead wood.
 
-We kept moving.
+Sweet smell meant turn away.
 
-No talking now.
+Loben's back.
 
-Roots crossed the ground like ropes. My feet found the spaces between them without me looking.
+My right hand slowly remembering how fingers worked.
 
-Red leaves, soft earth.
+Ralph behind us.
 
-Pale fungus, dead wood.
+I didn't think about those things in sentences anymore.
 
-Sweet smell, turn away.
+My feet knew.
 
-Norend had taught me all of it.
+My skin knew.
 
-Which berries stopped vomiting.
+My stomach knew a surprising amount.
 
-Which nearly stopped the man.
+My stomach had saved my life twice.
 
-Which insects slept inside boots.
+It had also nearly killed me several dozen times, so I tried not to encourage it.
 
-Which flowers wanted you closer.
-
-How to hide smoke.
-
-How to sleep lightly.
-
-How to bleed where the wind wouldn't carry it downhill.
-
-How long a body stayed warm in the rain.
-
-Which things you could eat.
-
-Which things you could eat only once.
-
-I'd learned that distinction later than I would have liked.
-
-And how to run.
-
-Especially how to run.
-
-Dead men were very dignified.
-
-I preferred being embarrassing.
-
-The ground rose.
-
-North ridge.
-
-I drove uphill.
-
-My right hand still tingled.
-
-Closed it.
-
-Nothing.
-
-Again.
-
-The fingers moved.
-
-Good enough.
-
-A branch whipped back across the trail.
-
-Loben had already passed it.
-
-Of course he had.
-
-I got an arm up too late. Bark tore my cheek.
-
-Blood filled my mouth.
-
-No.
-
-Cheek.
-
-I touched it.
+A branch caught my cheek.
 
 Blood.
 
-Ralph behind me.
-
-Bad combination.
+That was annoying.
 
 Ralph could smell blood through rain.
 
-I knew that because of Peter.
+I knew because of Peter.
 
 Peter had been a goat.
 
 Mostly.
 
-I never figured out what the other part was.
+I never learned what the other part was.
 
-Didn't matter now.
+He had horns, hooves, the personality of a goat, and an extra row of small teeth behind the first row. That last part had bothered Thalia more than it bothered me.
 
-I wiped my cheek with my sleeve and shoved the bloody cloth against my chest beneath my coat.
+Peter followed us for almost a month.
 
-Wouldn't hide the smell.
+I started leaving scraps for him.
 
-Might confuse it.
+Then Ralph found him during a storm.
 
-Probably not.
+We found one horn afterward.
 
-Something to do.
+I kept it for a while.
 
-Ahead, Loben changed direction.
+I couldn't remember when I'd lost it.
 
-No warning.
+That bothered me more than Peter being dead, which probably said something unpleasant about me.
+
+I wiped the blood off my cheek and shoved the cloth under my coat.
+
+Loben changed direction.
 
 I followed.
 
-The ground where I would have stepped collapsed inward.
+The ground where I'd been about to step opened into a mouth.
 
-A pale mouth snapped shut beneath a skin of leaves.
+Ralph stepped on it instead.
 
-Didn't see the rest of it.
+There was a wet crunch.
 
-Didn't need to.
-
-“Thanks.”
-
-Loben raised one hand without turning.
-
-Then Ralph hit the hidden thing.
-
-The ground erupted.
-
-A smaller shriek cut off under a wet crunch.
-
-Poor bastard.
+Poor thing.
 
 I wondered if I'd named that one.
 
 Probably not.
 
-I hadn't named much the last few years.
+I used to name everything.
 
-It got tiring.
+Birds. Lizards. Things that were probably neither. Benjamin. Peter. Kevin. Three Susans. Two Ralphs.
 
-You named something. You learned where it slept. Maybe it learned you weren't food. Maybe you learned it wasn't food.
+The first Ralph had been much smaller.
 
-Then winter came.
+He'd died quickly.
+
+That was before I understood that names made things inconvenient.
+
+You named something and then you noticed it.
+
+You learned where it slept.
+
+You noticed when it stopped showing up.
+
+Maybe you went looking.
+
+Then you found half of it under a fern.
+
+Or winter came.
 
 Or something bigger came.
 
 Usually Ralph came.
 
+Eventually I stopped naming new things.
+
+Not deliberately.
+
+I just noticed one day that I hadn't done it in a long time.
+
 After a while a thing could just be a thing.
 
-Easier that way.
+Easier.
 
 Four impacts.
 
@@ -368,25 +332,17 @@ Still coming.
 
 Of course.
 
-Loben reached the ridge first.
-
-Stopped.
-
-I almost ran into him.
+Loben reached the ridge first and stopped so suddenly I nearly ran into him.
 
 Blue opened beyond the trees.
 
 Sea.
 
-For half a heartbeat I forgot Ralph.
+For a moment Ralph disappeared from my head entirely.
 
-Below us, Norend dropped toward black rock and exposed tidal flats. Across them ran a pale stone causeway.
+Below us, Norend dropped toward black rock and exposed tidal flats. A pale stone causeway crossed them. Glass lanterns burned gold on the wardstones.
 
-Glass lanterns burned gold atop wardstones on both sides.
-
-At the far end stood a gate.
-
-Beyond the gate was a road.
+And at the other end was the road.
 
 Flat.
 
@@ -394,113 +350,65 @@ Gray.
 
 Straight.
 
-A road.
+I stared at it.
 
-I'd seen roads before.
+Someone had built that.
 
-I thought I had.
+Not because a road fought monsters.
 
-Ten years was a long time to remember something as boring as a road.
+Not because roads could be eaten.
 
-Maybe the one I remembered had been wider.
+Not because the ground had become angry and needed to be contained.
 
-Maybe I'd made it wider.
+They had put stones beside other stones because they wanted walking to be easier.
 
-Memory did that.
+An absurd amount of effort had gone into making something boring.
 
-Thalia said I remembered everything from before Norend bigger than it really was.
+I wanted to touch it.
 
-I'd told her she had no way of knowing.
-
-She'd told me that wasn't the point.
-
-I still didn't know what the point had been.
-
-The road below didn't care.
-
-Someone had built it expecting to walk from one place to another and arrive.
-
-I liked the arrogance of that.
-
-Something struck the ridge behind us.
+Something hit the ridge behind us.
 
 Right.
 
 Ralph.
 
-We moved.
+We went downhill.
 
-Loose stone rolled under my boots as I plunged downhill.
+He came after us.
 
-Loben cut left between two boulders.
+Most of that part wasn't interesting.
 
-I followed.
+It hurt.
 
-Ralph came over the ridge.
+I used barriers where I could. Ralph broke what he could. Loben took routes that would have broken my neck. I took routes that only threatened it.
 
-Four.
+Then Ralph jumped left.
 
-Drag.
+Except I had expected right.
 
-Two.
+No.
 
-Faster downhill.
-
-I looked at the causeway.
-
-Too far.
-
-Ralph jumped.
-
-Loben moved.
-
-I didn't.
+Other way.
 
 I'd expected left.
 
-Ralph came right.
+He came right.
 
 Wrong.
 
-His shadow swallowed me.
+That mattered.
 
-Barrier.
+His shadow covered me.
 
-Overhead.
+I put a barrier overhead.
 
-Ralph landed on it.
-
-The barrier slammed down.
+He landed on it.
 
 My knees hit stone.
 
-Palms next.
-
-My teeth snapped together and I bit my tongue.
-
-The barrier cracked.
-
-Not where I could see.
-
-Inside.
-
-I felt the fracture spreading through the pressure above me.
-
-Ralph shifted his weight.
-
-The crack widened.
-
-Roll.
-
-My pack caught against a rock.
-
-Of course it did.
-
-Ralph pushed down.
+My pack caught when I tried to roll.
 
 The barrier sank.
-
-My arms shook.
 
 Move.
 
@@ -526,317 +434,143 @@ Me?
 
 No.
 
-Loben.
-
-No.
-
 Now.
 
 Now.
 
 Now.
 
-Then Loben hit Ralph from the side.
+Loben hit Ralph from the side.
 
 Not like a man.
-
-Flesh struck scales.
-
-Something came out of Loben's throat that belonged deeper in the island.
-
-Ralph lurched.
 
 Air came back.
 
 So did I.
 
-I tore one shoulder free of my pack.
+My pack didn't.
 
-The barrier broke.
+One of Ralph's claws tore it away when I rolled free.
 
-Rolled.
+I saw the strap snap.
 
-A black forefoot smashed into the stone beside my head.
+The rope wasn't in it.
 
-One claw caught my pack.
+Of course it wasn't.
 
-Gone.
+I'd left the rope behind.
 
-I came up without it.
+For some reason that made me feel better.
 
-Loben stood three paces away, low to the ground.
+Loben stood between me and Ralph with black nails buried in a crack in the stone.
 
-His fingers were buried in a crack in the boulder.
+His mouth was too wide.
 
-Black nails.
+I'd seen that before too.
 
-Too long.
-
-His mouth opened wider than it should.
-
-I'd seen both before.
-
-Not often.
-
-The first time I'd asked about the nails.
-
-He'd bitten me.
-
-Not hard.
-
-I stopped asking.
-
-Ralph turned toward him.
-
-“Loben.”
-
-Nothing.
+Later.
 
 Ralph lowered his head.
 
-No.
+I put a barrier between them.
 
-I cast between them.
+That one I remember clearly.
 
-Sideways barrier.
+Teeth inches from my face.
 
-Ralph lunged.
+Black saliva hissing against pressure.
 
-His face hit clear pressure.
+Wet iron and rotten fruit.
 
-The impact drove me backward over loose stone.
+My arms burning.
 
-One heel slid.
+Loben looking at me.
 
-Held.
+I moved the barrier backward with me until he understood and ran.
 
-Ralph shoved.
+Moving barriers was expensive.
 
-My forearms burned.
+I had learned that when I was thirteen.
 
-Loben looked at me.
+I'd tried to make one into a sled.
 
-I jerked my chin downhill.
+It worked.
 
-He went.
+Once.
 
-No argument.
+Thalia hadn't met me yet, which was fortunate because I never told her about the tree.
 
-Good.
-
-Ralph shoved again.
-
-I gave ground.
-
-One step.
-
-Another.
-
-Moved the barrier with me.
-
-Expensive.
-
-My fingertips went numb.
-
-Ralph's jaw opened against the clear wall.
-
-Four sections spread around it.
-
-Teeth scraped pressure inches from my face.
-
-Black saliva hissed against the barrier.
-
-Wet iron.
-
-Rotten fruit.
-
-I'd eaten rotten fruit for six days once.
-
-Not the same fruit.
-
-Six different rotten fruits would have been worse.
-
-Probably.
-
-Two breaths left.
-
-Maybe three.
-
-My arms said one.
+My arms said the barrier had one breath left.
 
 I trusted my arms.
 
 Dropped it.
 
-Ralph surged forward.
+Ralph surged.
 
-I was already falling sideways.
+I put a slanted plane under one foot and another against his head.
 
-Not a wall.
+He spun past me.
 
-A narrow plane hardened beneath his leading foot.
+That was enough.
 
-Slanted.
+I ran.
 
-Claw hit.
+My ankle folded on the third step.
 
-Slid.
+“Oh, come on.”
 
-His shoulder dropped.
+Loben came back for me.
 
-Second plane against the other side of his head.
+I told him to go.
 
-For one heartbeat his own charge trapped him between two angles.
+He ignored me.
 
-Release.
+That was another thing about Loben. He rarely listened when listening would have been useful.
 
-Ralph spun past me and hit the slope chest-first.
+We made the rock split together.
 
-Run.
+Ralph didn't fit.
 
-My right boot landed wrong.
+For half a second I felt clever.
 
-Ankle folded.
-
-Pain shot up my leg.
-
-Oh, come on.
-
-I stumbled three steps.
-
-Loben doubled back.
-
-I shoved him away.
-
-“Go.”
-
-He caught me under one arm anyway.
-
-We ran together.
-
-Not fast enough.
-
-The slope narrowed where black stone punched through the soil.
-
-Split in the rock.
-
-Barely wide enough for two men.
-
-I saw it.
-
-Loben saw it.
-
-We separated.
-
-He went through.
-
-I stopped at the mouth.
-
-My ankle screamed at the turn.
-
-Ralph came downhill.
-
-Too big.
-
-Good.
-
-Barrier across the opening.
-
-Ralph hit it.
-
-Something cracked.
-
-Not barrier.
-
-Rock.
-
-Oh.
-
-He hit it again.
-
-A slab sheared loose above me.
-
-Loben grabbed my collar and dragged me backward.
-
-Stone crashed into the passage.
-
-For half a second I thought we'd done it.
-
-Then the entire right side of the outcrop moved.
-
-No.
-
-Ralph wasn't trying to fit through.
-
-He was removing the rock.
+Then he started removing the rock.
 
 That was new.
 
 I disliked new.
 
-“Run.”
+We ran again.
 
-We ran.
+By the time we reached the tidal flat, my ankle was swelling, my hands were numb, my cheek was bleeding, my pack was gone, and I was thinking about lunch.
 
-Stone broke behind us in pieces large enough to feel through my boots.
+Not metaphorically.
 
-The shore was close.
+I was hungry.
 
-Black rock.
+I'd skipped breakfast because Loben said we should leave before dawn.
 
-Gold wardlight.
+He had eaten.
 
-Causeway.
+He always ate.
 
-Ralph behind us.
+I had once watched him eat something while running.
 
-No time to count.
+It had still been alive.
 
-I looked.
+That was one of the many reasons I didn't ask what he was anymore.
 
-He was bleeding from the mouth.
+The wardstones were close.
 
-Good.
+Gold flame in glass.
 
-He was gaining.
+Safety, assuming mainlanders weren't liars.
 
-Bad.
+A pale shape moved in the water beside us.
 
-My pack hung from one claw.
-
-The rope.
-
-My good rope.
-
-“Bastard.”
-
-Loben hit the black rock first.
-
-I limped after him.
-
-Splash.
-
-Right.
-
-Mud bulged in the tidal flat.
-
-Of course it did.
-
-A long pale shape rolled beneath the shallow water parallel to the causeway.
-
-Another surfaced ahead.
-
-Ridged back.
-
-Needle fins.
-
-Gone.
-
-I didn't know that one.
+I didn't know it.
 
 Years ago I would have named it.
-
-Something stupid.
 
 Probably Susan.
 
@@ -844,129 +578,89 @@ I'd had three Susans.
 
 All dead.
 
-Two Ralph.
+I wondered why Susan.
 
-One Ralph left.
+I didn't think I'd ever known a Susan.
 
-Maybe that was when I'd stopped.
+Maybe I had before Norend.
 
-The open road had teeth too.
+Maybe my mother knew one.
 
-Center stones.
+My mother.
 
-I changed my line.
+Brown hair?
 
-Loben adjusted without looking.
+No.
 
-Ralph screamed.
+That might have been someone else's mother.
+
+Ralph screamed behind me.
 
 Ten paces.
 
-The pale shape accelerated.
+The pale thing accelerated.
 
 Five.
 
 My ankle buckled.
 
-Hand down.
-
-Caught myself.
-
-Loben turned.
-
-Wardstone.
-
-Gold flame.
-
 Three.
-
-Ralph jumped.
 
 Water exploded beside us.
 
-A narrow head on a white neck shot toward the causeway.
-
-Mouth sideways.
-
-Glassy teeth.
+A white neck and sideways mouth came out of it.
 
 I looked at Ralph.
 
 My hand didn't.
 
-Left arm snapped toward the water.
+Barrier to the water.
 
-Barrier.
-
-The pale head struck it and twisted away.
+The pale thing hit it and twisted away.
 
 Wrong threat.
 
-Ralph's shadow covered me.
+Ralph jumped.
 
-I cast behind myself.
+I cast behind me.
 
 Nothing.
 
-No.
-
 Again.
 
-A barrier flickered.
-
-Thin.
+Thin barrier.
 
 Wrong angle.
 
-Ralph hit it.
+It broke immediately.
 
-Gone.
+But Ralph landed half a step wrong.
 
-It shattered so quickly I barely felt the impact.
+Half a step was enough for Loben.
 
-But Ralph's foot moved.
+He grabbed my shirt and threw me through the wardline.
 
-Half a step.
+I hit the causeway shoulder-first.
 
-Loben grabbed the back of my shirt.
+Gold rang behind me.
 
-Then I was flying.
+Not flashed.
 
-I crossed between the wardstones in the air.
+Rang.
 
-Hit shoulder-first.
-
-Rolled.
-
-Gold exploded behind me.
-
-Ralph struck the wardline.
-
-The sound wasn't a roar.
-
-Wasn't a crack.
-
-It was a deep metallic note that came out of every stone in the causeway at once.
-
-I curled around my arms.
+A deep metallic note came out of every stone at once.
 
 Ralph flew backward.
 
-Hit black rock.
-
-Rolled.
-
-Came up screaming.
-
-The pale thing struck the wardline from the side.
+The pale thing hit the wardline too.
 
 Gold.
 
-Gone into the mud.
+Gone.
 
 Then Loben crossed.
 
-Nothing happened.
+Nothing happened to him.
 
 No gold.
 
@@ -974,13 +668,11 @@ No sound.
 
 Nothing.
 
-I saw it.
-
-Filed it away.
+I noticed.
 
 Later.
 
-Ralph charged.
+Ralph charged again.
 
 Gold.
 
@@ -994,19 +686,19 @@ Again.
 
 He couldn't cross.
 
-I pushed myself upright.
+I knew what that meant.
 
-My hands were raised.
+My body didn't.
 
-No barrier.
+My hands were up.
+
+No barrier between us.
 
 Didn't need one.
 
 Wardline.
 
 Safe.
-
-My shoulders disagreed.
 
 Lower.
 
@@ -1020,21 +712,15 @@ Lower.
 
 Nothing.
 
-Lower.
-
 My arm shook.
 
 Come on.
 
 It came down.
 
-Ralph paced beyond the wardstones.
+Ralph paced beyond the wardstones with my torn pack under one foot.
 
-Four-part jaw flexing.
-
-My torn pack under one forefoot.
-
-I wondered if he'd eat the rope.
+I wondered if he'd eat it.
 
 He'd eaten worse.
 
@@ -1044,9 +730,53 @@ Actually, I'd eaten one of his kills once.
 
 That had been a strange week for both of us.
 
-Loben stood beside me breathing hard.
+Loben stood beside me, breathing hard.
 
-I looked down the causeway.
+I looked back at Norend.
+
+Ten years.
+
+I had imagined leaving often enough that the different versions had blurred together.
+
+In some I killed something enormous first.
+
+In some a ship came.
+
+Once, when I was younger, I'd imagined my father arriving with soldiers.
+
+Later I stopped putting my father in them.
+
+Later still I stopped putting anyone in them.
+
+I thought leaving would feel larger.
+
+There should have been something.
+
+A sound.
+
+A certainty.
+
+A different person standing where I was.
+
+Instead my ankle hurt.
+
+My cheek was sticky.
+
+I was hungry.
+
+Ralph was angry about my pack.
+
+Or about me.
+
+Probably me.
+
+Beyond him the trees had started making noise again.
+
+That was rude.
+
+I turned toward the mainland.
+
+The causeway stretched ahead.
 
 Pale stone.
 
@@ -1054,11 +784,11 @@ Gold lights.
 
 Open sky.
 
-No cover.
+No cover anywhere.
 
 I hated it.
 
-One step.
+I took one step.
 
 Nothing hit me.
 
@@ -1074,17 +804,15 @@ Nothing hit me.
 
 We walked.
 
+# Chapter 2: The Road
+
 Halfway across, I noticed the ground.
 
 Flat.
 
 Actually flat.
 
-Not root-flat.
-
-Not beach-flat.
-
-Not a patch of dirt pretending there wasn't a burrow underneath.
+Not root-flat. Not beach-flat. Not a patch of dirt pretending there wasn't a burrow underneath.
 
 Someone had put stones beside other stones on purpose until walking became easy.
 
@@ -1106,21 +834,23 @@ The other held a cup.
 
 Neither had drawn a weapon.
 
-I stopped.
+That bothered me.
 
-The seated guard looked at me.
+Not because I wanted them armed.
 
-At Loben.
+I wanted them concerned.
 
-At my empty shoulders.
+Concern seemed appropriate.
 
-Past us toward Ralph.
+Ralph was still visible behind us.
+
+The seated guard looked at me, at Loben, at my empty shoulders, then past us toward Ralph.
 
 “Morning.”
 
-I looked behind myself.
+I looked behind myself to make sure Ralph hadn't vanished while I wasn't watching.
 
-Ralph was still there.
+He hadn't.
 
 “Morning,” I said.
 
@@ -1132,7 +862,7 @@ He looked at Ralph again.
 
 “Huh.”
 
-He turned a page.
+Then he turned a page.
 
 I stared at him.
 
@@ -1140,7 +870,31 @@ He was reading.
 
 With Ralph right there.
 
-“Causeway closes at third bell. Don't head back after that unless you fancy swimming.”
+I couldn't read much anymore.
+
+That thought arrived without permission.
+
+I used to.
+
+I thought I did.
+
+There had been books before Norend. A tutor too, maybe. An old man whose breath smelled like cloves.
+
+Or that might have been a cook.
+
+Ten years was enough time for memories to trade clothes.
+
+The guard's finger moved down the page.
+
+I wondered whether I could still read that book.
+
+Probably not.
+
+That bothered me more than Ralph being behind us, which was ridiculous because Ralph could eat me and the book probably couldn't.
+
+Probably.
+
+“Causeway closes at third bell,” the guard said. “Don't head back after that unless you fancy swimming.”
 
 “I don't.”
 
@@ -1158,31 +912,39 @@ That was it.
 
 I kept waiting for the rest.
 
-No bell.
-
 No questions.
 
-No monster out of the ditch.
+No inspection.
 
-No hidden teeth around my ankle.
+Nobody asked what Loben was.
 
-Just a road.
+Nobody asked why I'd been on Norend.
 
-I stood on it.
+Nobody asked why I'd stayed ten years.
 
-Grass grew beside fitted gray stone.
+I didn't know the answer to that one anyway.
 
-Short grass.
+Because I couldn't leave was true for some of the years.
 
-Soft-looking grass.
+Because leaving became frightening was probably true for others.
 
-A low wooden fence followed the road.
+Because Thalia was there.
 
-I touched it.
+Because Loben was there.
+
+Because I knew where the water was.
+
+Because I knew which shadows mattered.
+
+Because eventually a terrible place could become the place where you knew how to live.
+
+I didn't like that thought.
+
+So I touched the fence.
 
 Smooth.
 
-Ran my thumb over it again.
+I ran my thumb over it again.
 
 “Someone sanded this.”
 
@@ -1212,11 +974,21 @@ Civilization had apparently reached the point where splinters were a problem wor
 
 I liked civilization.
 
-We walked.
+For approximately forty paces.
 
-I limped for the first hundred paces.
+Then I started wondering what problems people invented once they had solved splinters.
 
-Then my ankle warmed enough to tolerate me.
+Thalia would have had an answer.
+
+Something irritating about people being people wherever they lived.
+
+I could hear her saying it.
+
+I could hear a lot of things she said.
+
+I couldn't remember the last thing she'd said to me.
+
+I stopped thinking about Thalia.
 
 A stone trough stood beside the road.
 
@@ -1248,6 +1020,8 @@ Drank again.
 
 Still nothing.
 
+Wonderful.
+
 There had been a spring near our third shelter that tasted like flowers.
 
 Thalia loved it.
@@ -1256,37 +1030,49 @@ I didn't.
 
 Water shouldn't taste pretty.
 
-Three months later we found a dead blue thing wedged twenty paces upstream.
+Three months later we found a dead blue thing wedged upstream.
 
 Thalia stopped arguing with me about the spring.
 
 Mostly because I never stopped mentioning the blue thing.
 
-This water tasted like absolutely nothing.
+I had stopped thinking about Thalia for almost twelve seconds.
 
-Wonderful.
+Good effort.
 
-I reached automatically for my canteen.
+I reached for my canteen.
 
 No canteen.
 
+Pack.
+
 Ralph.
 
-Bastard.
+“Bastard.”
 
-A cart came toward us before we reached the wayhouse.
+Loben looked back toward the island.
 
-Wheels.
+“He can't hear you.”
 
-I stepped off the road.
+“He could.”
+
+“He can't.”
+
+“You don't know everything about Ralph.”
+
+“I know more than I want to.”
+
+Fair.
+
+A cart came toward us.
+
+I stepped off the road before I understood why.
 
 Brown horse.
 
 Woman holding the reins.
 
 Small boy beside her, sleeping against a sack of grain.
-
-I watched him pass.
 
 Outside.
 
@@ -1296,11 +1082,11 @@ Mouth open.
 
 Throat exposed.
 
-I looked at the trees.
+I checked the trees.
 
 Nothing.
 
-Looked under the cart.
+Under the cart.
 
 Nothing.
 
@@ -1332,31 +1118,45 @@ Loben looked back toward Norend.
 
 Oh.
 
-We kept walking.
+I thought about that for the rest of the walk.
+
+Not continuously.
+
+I also thought about bread.
+
+Mostly bread.
 
 The wayhouse appeared around the next bend.
 
-Two stories.
+Two stories. Faded green paint. Stable. Smoke from a chimney. Someone had left a broom against the wall.
 
-Faded green paint.
+A broom.
 
-Stable.
+Just sitting there.
 
-Smoke from a chimney.
+Nobody had tied it down.
 
-Someone had left a broom against the wall.
+Nobody had hidden it.
 
-I stopped looking at the broom when I realized I was looking at a broom.
+Nobody appeared concerned that something might steal the broom.
 
-Loben kept walking.
+I had owned a broom once.
 
-Then I smelled bread.
+Technically Thalia owned it.
 
-Warm bread.
+Technically it wasn't a broom.
 
-My stomach cramped.
+It was a bundle of reeds tied to a bone.
 
-Everything else disappeared.
+I had borrowed it and left it outside.
+
+Something took the bone.
+
+Thalia made me clean the shelter with the remaining reeds for a month.
+
+I wondered whether the broom would still be there when we came back out.
+
+Then I smelled bread and stopped caring about the broom.
 
 Inside, people sat at tables.
 
@@ -1376,7 +1176,7 @@ Plate hit wood.
 
 Kettle whistled.
 
-My attention snapped from one to the next.
+My attention snapped from one sound to the next.
 
 Nothing.
 
@@ -1388,17 +1188,7 @@ Nothing.
 
 That was exhausting.
 
-A broad gray-haired woman approached with bowls along one arm.
-
-She looked at Loben.
-
-Me.
-
-Mud.
-
-Blood.
-
-The place where my pack should have been.
+A broad gray-haired woman approached.
 
 “Norend?”
 
@@ -1410,11 +1200,7 @@ We sat.
 
 She put stew in front of us.
 
-Potatoes.
-
-Carrots.
-
-Meat.
+Potatoes. Carrots. Meat.
 
 Nothing moving.
 
@@ -1427,8 +1213,6 @@ Still nothing moving.
 “Yes.”
 
 She waited.
-
-What?
 
 Loben looked at me.
 
@@ -1446,9 +1230,9 @@ I looked at the bowl.
 
 “How much?”
 
-He reached into his coat and put three coins on the table.
+He put three coins on the table.
 
-I stared.
+I stared at them.
 
 “I thought we had six.”
 
@@ -1472,9 +1256,7 @@ I stared.
 
 I picked up a coin.
 
-Face on one side.
-
-Bird on the other.
+Face on one side. Bird on the other.
 
 Kevin had tried to eat Loben for four months.
 
@@ -1546,7 +1328,7 @@ I used to hide food from Loben.
 
 He always found it.
 
-Once I buried half a smoked leg beneath our shelter and woke up with his face six inches from mine.
+Once I buried half a smoked leg beneath our shelter and woke with his face six inches from mine.
 
 He'd asked why my bed smelled like dinner.
 
@@ -1566,7 +1348,43 @@ I ate slowly.
 
 Mostly.
 
-Afterward, the woman gave us two rooms.
+The bread deserved its own thought.
+
+Maybe several.
+
+I couldn't remember the last time I'd eaten bread.
+
+Real bread.
+
+There had been something Thalia made from ground seeds that we called bread because calling it paste made it harder to swallow.
+
+This had a crust.
+
+Someone had intentionally made the outside different from the inside.
+
+People had time for that here.
+
+That might have been what civilization was.
+
+Having enough time to care about crust.
+
+Or splinters.
+
+Or books.
+
+Or sleeping outside because you expected to wake up.
+
+I looked around the room again.
+
+The man still had his back to the door.
+
+Maybe he wasn't an idiot.
+
+That was going to take getting used to.
+
+# Chapter 3: The Lock
+
+The woman gave us two rooms.
 
 Loben did something with the coins.
 
@@ -1588,7 +1406,7 @@ She pointed down the hall.
 
 “Third door on the left.”
 
-I looked at the brass marks nailed to the doors.
+Brass marks were nailed to the doors.
 
 One looked familiar.
 
@@ -1626,19 +1444,43 @@ Ten sounded longer when other people said it.
 
 I didn't like that.
 
-She pointed again.
+I had counted the years differently on Norend.
 
-“Third on the left.”
+Wet season.
+
+Dry season.
+
+The year of the red moths.
+
+The year the southern spring went bad.
+
+The winter Loben disappeared.
+
+The year Thalia found me.
+
+The year she left.
+
+The year after.
+
+Ten was cleaner.
+
+Civilization seemed to like clean things.
+
+Straight roads. Smooth fences. Clear water. Numbers that meant the same thing every time you looked at them.
+
+I wondered what they did with years that didn't fit neatly.
+
+“Third on the left,” the woman repeated.
 
 My room had a bed.
 
 A chair.
 
-A washbasin.
+Washbasin.
 
-A window.
+Window.
 
-A little table with a candle.
+Little table with a candle.
 
 I stood in the doorway.
 
@@ -1652,6 +1494,10 @@ Inside one tree.
 
 That had been a good tree.
 
+Not Benjamin.
+
+Benjamin would have been terrible to sleep inside. Too narrow.
+
 I'd slept under an overturned boat for almost a year until something laid eggs beneath it.
 
 I'd slept inside the rib cage of something large enough that I never learned what it had been.
@@ -1663,8 +1509,6 @@ Thalia hated it.
 Loben liked it immediately, which should have warned me.
 
 This room had a bed.
-
-A bed.
 
 I checked underneath it.
 
@@ -1804,23 +1648,89 @@ Sometimes Ralph helped.
 
 The little piece of metal in my hand just kept working.
 
-I looked at the bed.
+I sat on the bed.
 
-Window.
+The mattress sank beneath me.
 
-Door.
+I stood again immediately.
+
+Loben laughed.
+
+“Shut up.”
+
+I pushed down on the mattress with one hand.
+
+It came back.
+
+Again.
+
+Back.
+
+Someone had made a surface for sleeping that deliberately gave way under a body without collapsing.
+
+That was suspiciously close to barrier work.
+
+I wondered what was inside it.
+
+Hair maybe.
+
+Feathers.
+
+If it was feathers, how many birds did a bed require?
+
+Did people raise birds specifically to sleep on them?
+
+That seemed cruel until I remembered Peter.
+
+Then it seemed ordinary.
+
+I sat again.
+
+Slower.
+
+The mattress accepted me.
+
+My ankle throbbed.
 
 My forearms ached.
 
-Right hand still tingled.
-
-Ankle swelling.
-
-Cheek sticky with dried blood.
+My cheek was sticky with dried blood.
 
 I should clean that.
 
 Later.
+
+The key was still in my hand.
+
+I looked at the door.
+
+Locked.
+
+Still locked.
+
+I didn't have to do anything.
+
+That was the part I couldn't understand.
+
+A barrier needed me.
+
+Even a simple one was a held thing. A little pressure. A little attention. You could learn to keep one while talking or walking or sleeping badly, but somewhere underneath everything you were still holding it.
+
+The lock didn't care about me.
+
+I could forget it.
+
+I could sleep.
+
+I could be stupid.
+
+I could be sick.
+
+I could be somewhere else entirely.
+
+The door would remain what I'd told it to be.
+
+Closed.
 
 I lifted one hand.
 
@@ -1845,8 +1755,6 @@ My bed.
 I considered objecting.
 
 Didn't.
-
-I sat in the chair beside the door.
 
 Someone laughed downstairs.
 
@@ -1918,10 +1826,4 @@ Downstairs, somebody laughed again.
 
 Nobody screamed afterward.
 
-That would take getting used to.
-
-Ten years on Norend had taught me how to stay alive.
-
-By the end of my first hour in civilization, I'd learned something much harder.
-
-I had no idea what to do when staying alive was easy.
+I listened anyway.
