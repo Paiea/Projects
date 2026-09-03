@@ -12,199 +12,73 @@
 
 Ralph had found them again.
 
-Cliff heard the forest stop making noise three breaths before Loben said, “Run.”
+Cliff heard the forest stop making noise.
+
+Then Loben said, “Run.”
 
 Cliff was already running.
 
-He ducked under a branch thick with white thorns and landed on the slanted trunk of a dead ironwood. His left boot slipped on moss. He let it. Fighting the slide would have cost him time. He rode the trunk down, hit the ground in a crouch, and threw one hand behind him.
+He ducked under white thorns, planted one boot on a fallen ironwood, and let the moss take him. His foot slid. He rode the trunk down instead of fighting it, hit the ground moving, and threw one hand behind him.
 
-The barrier appeared without light or thunder. Just a hard shimmer in the wet air, a clear wall stretched between two trees.
+A barrier hardened between two trees.
 
 Something hit it.
 
-The whole forest seemed to grunt.
+The forest grunted.
 
-Cliff’s shoulder jolted in its socket.
+The force punched through Cliff’s arm and kicked his shoulder forward. He nearly went down.
 
-“Still Ralph?” Loben called from somewhere ahead.
+He didn’t look back.
 
-Cliff got his feet under him. “Who else?”
+The barrier bowed inside his awareness. Harder. Harder.
 
-The barrier bowed.
-
-A black shape pressed through ferns on the other side, too large to fit cleanly between the trees. One foreleg came down beside the dead ironwood. The foot had four hooked toes, each longer than Cliff’s hand. Wet scales flexed above them.
-
-The barrier groaned inside Cliff’s bones.
+Too hard.
 
 He dropped it.
 
-Ralph crashed forward with all the enthusiasm of a falling house.
+Wood burst behind him.
 
-Cliff ran.
+Ralph came through.
 
-The creature snapped at the space where his back had been. Its jaws did not open the way a mouth should. They split farther down the neck, peeling apart in four muscular sections lined with teeth. Cliff had once watched Ralph swallow a tuskhog without chewing.
+Cliff caught one glimpse over his shoulder. Black scales. Four hooked foreclaws. A head too broad for the space between the trees.
 
-It had taken less time than breakfast.
+Then the jaw opened.
 
-That had been the day he named it Ralph.
+Not down.
 
-He had never found a better name.
+Apart.
 
-Loben vaulted a boulder ahead. He did not use his hands. His bare feet touched the stone once, then he was on top of it, then gone over the other side.
+Four wet sections peeled back along the neck, each lined with teeth.
+
+Cliff ran faster.
+
+Ralph had once swallowed a tuskhog without chewing.
+
+That had been the day Cliff named him Ralph.
+
+There had never been a reason to change it.
+
+Ahead, Loben cleared a shoulder-high boulder without touching it with his hands.
 
 Cliff went around.
 
-“North!” Loben shouted.
+A trunk cracked behind them.
 
-“I know where north is!”
+Closer.
 
-“You got turned around last week.”
+The north ridge was still somewhere beyond the trees. Beyond that, the shore. Beyond the shore, the causeway.
 
-“That was underground.”
+If the tide was right.
 
-“It was a straight tunnel.”
+If the mainlanders had kept their word.
 
-“There were roots.”
+If the wardstones worked.
 
-A tree exploded behind them.
+Cliff had left two cooking pots, three shirts, half a rain tarp, a cracked spearhead, and a coil of good rope behind that morning so he could run this fast.
 
-Cliff stopped arguing.
+He regretted the rope.
 
-They had been moving north since before sunrise, packs cut down to what they could carry at a sprint. Cliff had left two cooking pots, a coil of good rope, half a rain tarp, a cracked spearhead he had been saving for no reason he could explain, and three shirts that had taken years to acquire.
-
-He regretted the rope most.
-
-The old North Causeway opened at midday.
-
-That was what the men in blue coats had said when they came to Norend three months earlier and relit the dead wardstones along the coast. The mainland had decided the road was worth reclaiming. There had been surveyors, masons, soldiers, three wagons of supplies, and a little man with a red face who had stood behind two guards and shouted that the crossing would reopen on the first clear tide of each month.
-
-Cliff had watched them from the trees.
-
-Loben had stolen one of their notices.
-
-Neither of them could read it.
-
-Fortunately, Loben had also stolen one of the surveyors.
-
-Only for an hour.
-
-The surveyor had explained the schedule very clearly after that.
-
-Today was the first clear tide.
-
-And Ralph, apparently, was sentimental.
-
-Cliff heard the creature gaining.
-
-“Down!” he shouted.
-
-Loben dropped flat without looking back.
-
-Cliff spun.
-
-He planted one barrier low between two mossy stones, not upright but slanted toward the ground like a pane of glass someone had kicked halfway over. Then he planted a second above it, angled the other way.
-
-Ralph came through the brush at full speed.
-
-Its first forefoot struck the lower barrier.
-
-The foot slid.
-
-Its chest hit the upper barrier.
-
-Cliff dropped both before the impact could finish traveling through him.
-
-Ralph’s own weight did the rest.
-
-The creature went sideways, tore through a stand of young ironwood, and disappeared into a green avalanche of leaves and snapping trunks.
-
-Loben was up immediately.
-
-“That was clever.”
-
-Cliff’s hands shook once. He closed them into fists.
-
-“That was two barriers.”
-
-“Yes.”
-
-“I know how many it was.”
-
-“You usually start complaining after four.”
-
-“I’m pacing myself.”
-
-Ralph screamed behind them.
-
-The sound began too low to hear properly. Cliff felt it in his stomach first. Then it climbed until birds burst out of the canopy half a valley away.
-
-Loben smiled.
-
-Cliff pointed north. “Run.”
-
-They ran.
-
-Norend had taught Cliff a great many useful things.
-
-It had taught him which green berries stopped a man from vomiting and which nearly stopped the man. It had taught him that striped centipedes liked sleeping inside boots, that rainwater caught in red leaves was safe if it did not smell sweet, and that anything on the island beautiful enough to make you walk closer was probably using beauty as bait.
-
-It had taught him to sleep lightly, eat quickly, hide smoke, distrust still water, and never bleed where the wind could carry the smell downhill.
-
-Most of all, Norend had taught him that there was no shame in running.
-
-Dead men were very dignified.
-
-Cliff preferred being embarrassing.
-
-The ground began to rise.
-
-Good.
-
-The north ridge.
-
-Beyond it lay the shore, then the causeway, then a road made by people who apparently built roads without expecting them to be eaten by vines within a season.
-
-Cliff had been thinking about that road for three months.
-
-Not the city beyond it. He did not know the city’s name.
-
-Not the academy the surveyor had mentioned after seeing Cliff’s barriers. Cliff was not sure what an academy did, except that the surveyor had looked at him as if he had found a rare animal wearing trousers.
-
-The road was enough.
-
-A road meant somebody expected to walk from one place to another and arrive.
-
-Cliff liked the arrogance of that.
-
-They reached the ridge at a dead sprint.
-
-Loben went over first.
-
-Cliff hit the top a heartbeat later and saw blue through the trees.
-
-Sea.
-
-Below them, Norend’s northern slope fell steeply through scrub toward a strip of black rock. Past it, a stone causeway crossed the exposed tidal flats in a pale line toward the mainland. Wardstones stood along both sides, each one newly capped with a glass lantern burning steady gold despite the wind.
-
-At the far end was a gate.
-
-Beyond the gate was a road.
-
-Cliff almost stopped.
-
-Loben caught the back of his shirt and yanked him forward.
-
-“Admire it later.”
-
-“Right.”
-
-They plunged downhill.
-
-Ralph came over the ridge behind them.
-
-Cliff knew without looking.
-
-There was a particular rhythm to the creature’s stride. Four fast impacts, a drag, then two heavier ones. Ralph had hurt one of its rear legs years ago. Maybe before Cliff came to Norend. Maybe Loben knew. Loben knew things about the island he never explained.
+Ralph hit the ground behind him.
 
 Four impacts.
 
@@ -212,307 +86,547 @@ A drag.
 
 Two.
 
-Closer.
+Four.
 
-The trees thinned.
+Drag.
 
-The slope turned to loose stone.
+Two.
 
-Cliff let gravity take him.
+Cliff knew that stride.
 
-“Left!” Loben shouted.
+Too close.
 
-Cliff shifted left as a shadow passed over him.
+He saw two mossy stones ahead.
 
-Ralph landed where he had been.
+“Down.”
 
-Stone burst outward.
+Loben dropped.
 
-Cliff threw a barrier between himself and the spray. Rocks struck it hard enough to flash white spots across his vision. He held the wall for half a breath, just long enough for Loben to get behind it, then released.
+Cliff stopped.
 
-Three barriers.
+Not slowed. Stopped.
 
-His right forearm felt hot under the skin.
+He turned into Ralph’s charge.
 
-Ralph twisted toward them.
+The first barrier went low, slanted across the path.
 
-Up close, it smelled like wet iron and rotten fruit.
+The second went high.
 
-Loben hissed.
-
-Not shouted. Hissed.
-
-His mouth opened a little too wide.
-
-His fingers dug into the face of a boulder beside him.
-
-For an instant, his nails looked black and much too long.
-
-Cliff barely noticed.
-
-“Don’t,” he said.
-
-Loben’s eyes stayed on Ralph.
-
-“I can slow it.”
-
-“You can annoy it.”
-
-“That too.”
-
-“We’re almost there.”
-
-Ralph lowered its head.
-
-Cliff knew that posture.
-
-“Oh, shit.”
-
-He grabbed Loben’s coat and hauled him sideways.
-
-Ralph lunged.
-
-Cliff cast around them instead of in front of them.
-
-The barrier snapped into place as a curved shell, close enough that Loben’s shoulder pressed against Cliff’s. Ralph hit it with its entire head.
-
-Pain slammed through Cliff from his palms to his teeth.
-
-He heard himself make a sound.
-
-The shell held.
-
-For one impossible second, Ralph’s face spread across the clear curve around them. Teeth scraped inches from Cliff’s cheek. Black saliva streaked the barrier and hissed where it touched the air.
-
-Loben looked at the teeth.
-
-Then at Cliff.
-
-“Four.”
-
-“Not helping.”
-
-Cliff shifted his stance.
-
-A barrier did not need to stop something forever.
-
-People got strange ideas about defensive magic. They saw a wall and thought its purpose was to remain a wall until the world gave up.
-
-Walls broke.
-
-Cliff had learned that young.
-
-The trick was deciding when.
-
-He waited until Ralph pushed harder.
-
-Then he dropped the left half of the shell.
-
-The creature’s head slid past them.
-
-Cliff kept the right half solid for one more heartbeat. Ralph’s own momentum twisted its neck and shoulder. Loben moved with Cliff without being told. They slipped out behind the creature as it crashed into the rocks.
-
-They ran.
-
-The shore was fifty paces away.
-
-Forty.
-
-Thirty.
-
-Cliff’s forearms burned now. His fingertips felt thick and stupid. He flexed them as he ran.
-
-The wardstones along the causeway shone brighter as they approached.
-
-There was no guard at the Norend end.
-
-Of course there wasn’t.
-
-Who would volunteer for that?
-
-Loben hit the first paving stone.
-
-Cliff followed.
-
-The change under his boots was so sudden he nearly stumbled.
-
-Flat.
-
-The ground was flat.
-
-Not root-flat. Not beach-flat. Not a clever patch of soil hiding a burrow.
-
-Actually flat.
-
-Someone had put stones beside other stones on purpose until walking became easy.
-
-Cliff stared down at his feet for two steps.
-
-“Cliff.”
-
-“Sorry.”
-
-Ralph roared behind them.
-
-They ran harder.
-
-The causeway stretched perhaps two hundred paces across the tidal flats. Mud and shallow water gleamed on both sides. Small silver things skipped over the surface.
-
-Cliff did not trust them.
-
-He did not trust the water either.
-
-He especially did not trust how open everything was.
-
-No trees. No cover. No climbable rock. No ditch deep enough to hide in.
-
-The road was exposed from one end to the other.
-
-“This is a terrible road,” he said.
-
-Loben laughed.
-
-Behind them, Ralph reached the first wardstone.
-
-The golden light flared.
-
-The creature recoiled.
-
-Cliff looked back.
-
-Ralph paced along the black rock at the edge of the island. Its head swung from one wardstone to the other. The four sections of its jaw flexed open.
-
-It would not step onto the causeway.
-
-Cliff slowed.
-
-“Keep moving,” Loben said.
-
-“It stopped.”
-
-“Yes.”
-
-“Why?”
-
-“The wards.”
-
-Cliff looked at the little gold lanterns.
-
-“That’s it?”
-
-“That’s generally what wards are for.”
-
-Ralph threw itself at the invisible line.
-
-Gold flashed.
-
-The creature bounced back hard enough to gouge trenches in the wet stone.
-
-Cliff stopped walking.
-
-Loben took three more steps before noticing.
-
-“Cliff.”
-
-Ralph lunged again.
-
-The wardline held.
+Ralph filled the space between the trees.
 
 Cliff waited.
 
-The creature paced.
+One more step.
 
-It screamed.
+Now.
 
-It snapped at nothing.
+Ralph’s forefoot struck the lower barrier and shot forward. Its chest smashed into the upper.
 
-It did not cross.
+Both impacts reached Cliff at once.
 
-Cliff’s breathing was loud in his ears.
+His elbows buckled.
 
-He became aware that his hands were still raised.
+He dropped the barriers.
 
-He lowered them.
+Too late.
 
-“No barrier,” he said.
+Pain flashed white through both arms.
 
-Loben’s expression changed.
+Ralph went sideways anyway.
 
-Only a little.
+The creature tore through a stand of young ironwood, rolled once, and vanished under snapping trunks.
 
-“No.”
+Cliff tried to close his right hand.
+
+Three fingers obeyed.
+
+Two did not.
+
+Bad.
+
+Loben was already up.
+
+Cliff ran.
+
+Behind them, leaves shifted.
+
+Too soon.
+
+Ralph screamed.
+
+The sound started below hearing. Cliff felt it through his ribs before it climbed into a shriek that emptied the canopy of birds.
+
+They kept moving.
+
+No talking now.
+
+Roots crossed the ground like ropes. Cliff stepped between them without looking. Red leaves meant soft earth. Pale fungus meant dead wood. A sweet smell meant turn away.
+
+Norend had taught him all of it.
+
+Which berries stopped vomiting.
+
+Which nearly stopped the man.
+
+Which insects slept inside boots.
+
+Which flowers wanted you closer.
+
+How to hide smoke.
+
+How to sleep lightly.
+
+How to bleed where the wind would not carry it downhill.
+
+And how to run.
+
+Especially how to run.
+
+Dead men were very dignified.
+
+Cliff preferred being embarrassing.
+
+The ground rose.
+
+North ridge.
+
+He drove uphill.
+
+His right hand still tingled. He flexed it once.
+
+Nothing.
+
+Again.
+
+The fingers moved.
+
+Good enough.
+
+Loben reached the ridge first.
+
+He stopped.
+
+Cliff almost hit him.
+
+Blue opened beyond the trees.
+
+Sea.
+
+Below them, Norend fell steeply toward black rock and exposed tidal flats. Across the flats ran a pale stone causeway. Glass lanterns burned gold atop the wardstones on both sides.
+
+At the far end stood a gate.
+
+Beyond the gate was a road.
+
+Flat. Gray. Straight.
+
+A road meant somebody expected to walk from one place to another and arrive.
+
+Cliff liked the arrogance of that.
+
+Something struck the ridge behind them.
+
+They moved.
+
+Loose stone rolled under Cliff’s boots as he plunged downhill. Loben cut left between two boulders.
+
+Cliff followed.
+
+Ralph came over the ridge.
+
+Four impacts.
+
+Drag.
+
+Two.
+
+Faster downhill.
+
+Cliff looked once at the causeway.
+
+Too far.
+
+Ralph jumped.
+
+Loben moved.
+
+Cliff didn’t.
+
+He had expected the jump left.
+
+Ralph came right.
+
+Wrong.
+
+The shadow swallowed him.
+
+Cliff threw a barrier overhead.
+
+Ralph landed on it.
+
+The barrier slammed down.
+
+Cliff’s knees hit stone.
+
+His palms struck the ground. His teeth snapped together hard enough to bite his tongue.
+
+The barrier cracked.
+
+Not visibly.
+
+He felt it.
+
+A fracture running through the pressure above him.
+
+Ralph’s weight shifted.
+
+The crack spread.
+
+Cliff tried to roll.
+
+His pack caught against a rock.
+
+Ralph pushed down.
+
+The barrier sank another handspan.
+
+Cliff’s arms shook.
+
+Loben hit Ralph from the side.
+
+Not like a man.
+
+Cliff heard flesh strike scales, then a sound from Loben’s throat that belonged deeper in the island.
+
+Ralph lurched.
+
+The weight lifted.
+
+Cliff tore one shoulder free of his pack.
+
+The barrier broke.
+
+He rolled as a black forefoot smashed into the stone beside his head.
+
+A hooked claw caught his pack and ripped it away.
+
+Cliff came up without it.
+
+Loben stood three paces away, low to the ground.
+
+His fingers were buried in a crack in the boulder.
+
+His nails were black.
+
+Too long.
+
+His mouth opened wider than it should.
+
+Ralph turned toward him.
+
+“Loben.”
+
+Loben didn’t move.
+
+Ralph lowered its head.
+
+Cliff saw what came next.
+
+He cast between them.
+
+The barrier appeared sideways.
+
+Ralph lunged.
+
+Its face hit clear pressure.
+
+The impact drove Cliff backward over loose stone.
+
+He slid on one heel.
+
+Held.
+
+Ralph shoved.
+
+Cliff’s forearms burned.
+
+Loben looked at him.
+
+Cliff jerked his chin downhill.
+
+Loben went.
+
+No argument.
+
+Good.
+
+Ralph shoved again.
+
+Cliff gave ground.
+
+One step.
+
+Another.
+
+The barrier moved with him.
+
+That was expensive.
+
+His fingertips went numb.
+
+Ralph’s jaw opened against the clear wall. Four sections spread around it, teeth scraping pressure inches from Cliff’s face.
+
+Black saliva hissed where it struck the air.
+
+Cliff smelled wet iron and rotten fruit.
+
+He waited.
+
+Ralph pushed harder.
+
+Cliff dropped the barrier.
+
+The creature surged forward.
+
+Cliff was already falling sideways.
+
+He cast again, not a wall this time.
+
+A narrow plane hardened beneath Ralph’s leading foot.
+
+Slanted.
+
+The claw struck and slid.
+
+Ralph’s shoulder dropped.
+
+Cliff put a second plane against the other side of its head.
+
+For one heartbeat the creature’s own charge trapped it between two angles.
+
+Then Cliff released both.
+
+Ralph spun past him and hit the slope chest-first.
+
+Cliff ran.
+
+His right boot landed wrong.
+
+Ankle folded.
+
+Pain shot up his leg.
+
+He stumbled three steps and nearly fell.
+
+Loben doubled back.
+
+Cliff shoved him away.
+
+“Go.”
+
+Loben caught Cliff under one arm anyway.
+
+They ran together.
+
+Not fast enough.
+
+The shore was close now.
+
+Black rock.
+
+Gold wardlight.
+
+The first paving stones of the causeway.
+
+Cliff could hear Ralph behind them again.
+
+No time to count the stride.
+
+He risked a glance.
+
+Ralph was bleeding from the mouth.
+
+It was also gaining.
+
+Cliff’s pack hung from one of its claws.
+
+The good rope was still inside it.
+
+Bastard.
+
+Loben hit the black rock first.
+
+Cliff limped after him.
+
+Ten paces.
+
+Ralph screamed.
+
+Five.
+
+Cliff’s ankle buckled.
+
+He caught himself on one hand.
+
+Loben turned.
+
+Cliff looked past him at the wardstone.
+
+Gold flame in glass.
+
+Three paces.
+
+Ralph jumped.
+
+Cliff cast behind himself.
+
+Nothing happened.
+
+His stomach dropped.
+
+He tried again.
+
+A barrier flickered.
+
+Thin.
+
+Wrong angle.
+
+Ralph hit it.
+
+It shattered immediately.
+
+The impact never reached Cliff because there was almost nothing there to carry it.
+
+But it changed Ralph’s landing by half a step.
+
+Half a step was enough.
+
+Loben seized Cliff by the back of his shirt and threw him.
+
+Cliff crossed between the wardstones in the air.
+
+He hit the causeway shoulder-first and rolled.
+
+Gold exploded behind him.
+
+Ralph struck the wardline.
+
+The sound was not a roar or a crack.
+
+It was a deep metallic note that seemed to come from every stone in the causeway at once.
+
+Cliff curled around his aching arms.
+
+Ralph flew backward.
+
+The creature hit black rock, rolled, and came up screaming.
+
+Loben crossed the line at a run.
+
+The wards did nothing to him.
+
+Cliff noticed that.
+
+Some distant part of him filed it away.
+
+Ralph charged again.
+
+Gold flared.
+
+The creature recoiled.
+
+Again.
+
+Gold.
+
+Again.
+
+It could not cross.
+
+Cliff pushed himself upright.
+
+His hands were raised.
+
+He had no barrier.
+
+He lowered them slowly.
+
+Ralph paced beyond the wardstones. Its four-part jaw flexed. Cliff’s torn pack lay under one forefoot.
+
+Loben stood beside him, breathing hard.
 
 Cliff looked down the causeway.
 
-Gold lights. Pale stones. Open sky.
+Pale stone.
 
-“No barrier,” he said again.
+Gold lights.
 
-“You already said that.”
+Open sky.
 
-“I know.”
+No cover anywhere.
 
-Loben waited.
+He hated it.
 
-Cliff turned his back on Ralph.
+He took one step.
+
+Nothing hit him.
+
+Another.
+
+Nothing.
+
+He turned his back on Ralph.
 
 Every muscle between his shoulders tightened.
 
 Nothing hit him.
 
-He took one step.
+They walked.
 
-Then another.
+Halfway across, Cliff realized the ground beneath his boots was flat.
 
-Nothing hit him.
+Actually flat.
 
-By the time they reached the mainland gate, Ralph’s screams had become distant enough to sound like weather.
+Not root-flat. Not beach-flat. Not a patch of dirt pretending there wasn’t a burrow underneath.
 
-The gate stood open.
+Someone had put stones beside other stones on purpose until walking became easy.
 
-There were two guards there after all, just not on the suicidal side.
+His ankle still hurt.
 
-Both wore blue coats over light armor. One was sitting on a stool with a book balanced on his knee. The other had a cup in one hand.
+The road did not make it worse.
+
+Cliff stared down at it.
+
+Loben kept moving.
+
+At the mainland gate, two guards waited in blue coats.
+
+One sat on a stool with a book on his knee.
+
+The other held a cup.
 
 Neither had drawn a weapon.
 
-Cliff stopped several paces away.
+Cliff stopped.
 
-The seated guard looked up.
-
-His eyes moved over Cliff’s mud-streaked clothes, the knife at his hip, the patched pack, then Loben’s bare feet.
+The seated guard looked at him, at Loben, at Cliff’s missing pack, then past them toward Ralph.
 
 “Morning.”
 
 Cliff looked behind himself.
 
-No one else was there.
-
-The guard waited.
-
-“Morning,” Cliff said carefully.
-
-The second guard sipped from his cup.
+“Morning,” he said.
 
 “You coming off Norend?”
 
-Cliff looked back at the island.
-
-Ralph was a black shape at the far end of the causeway.
-
 “Yes.”
 
-The guard with the book looked too.
+The guard looked at Ralph again.
 
 “Huh.”
 
-That was all.
-
-Cliff waited for more.
-
-None came.
-
-The guard wet one finger and turned a page.
+He turned a page.
 
 “Causeway closes at third bell. Don’t head back after that unless you fancy swimming.”
 
@@ -522,23 +636,13 @@ Cliff stared at him.
 
 “Good policy.”
 
-Loben made a choking sound beside him.
+The other guard pointed with his cup toward the road.
 
-Cliff elbowed him.
+“Wayhouse is half a mile. Mara can sort you out.”
 
-The second guard lifted his cup toward the road beyond the gate.
-
-“Wayhouse is half a mile. Town is another four. If you need a registry office, mage office, post, work board, or someone to tell you where the hell you’re supposed to be, start at the wayhouse. Mara knows everybody.”
-
-Cliff understood perhaps half of those words in that order.
-
-He nodded anyway.
+Cliff nodded.
 
 “Thank you.”
-
-The guard smiled.
-
-Cliff did not know why.
 
 Then he and Loben walked through the gate.
 
@@ -550,33 +654,21 @@ No monster came out of the ditch.
 
 No hidden teeth closed around his ankle.
 
-No one demanded proof that he deserved to be alive on this side of the wall.
-
 There was just a road.
 
 Cliff stood on it.
 
-The road was wider than the causeway, built from fitted gray stone with shallow drainage ditches on both sides. Grass grew beyond those. Actual grass. Short, soft-looking grass that had somehow been allowed to exist without thorns, poison bladders, snapping seedpods, or territorial insects the size of thumbs.
+Grass grew beside fitted gray stone. Short grass. Soft-looking grass. A low wooden fence followed the road.
 
-A low wooden fence ran beside it.
+Cliff touched it.
 
-Cliff touched the fence.
+Smooth.
 
-Loben stopped.
-
-“What are you doing?”
-
-“Checking.”
-
-“For what?”
-
-“I don’t know yet.”
-
-The wood remained wood.
-
-Cliff rubbed his thumb over the smooth top rail.
+He ran his thumb over the top rail.
 
 “Someone sanded this.”
+
+Loben stopped beside him.
 
 “Yes.”
 
@@ -584,331 +676,141 @@ Cliff rubbed his thumb over the smooth top rail.
 
 “So people don’t get splinters.”
 
-Cliff looked at him.
-
-Loben’s face was perfectly serious.
-
-Cliff looked back at the fence.
+Cliff looked at the fence again.
 
 A civilization that spent effort preventing splinters seemed too good to be real.
 
 They walked.
 
-Cliff kept waiting for the road to reveal its trick.
+Cliff limped for the first hundred paces. Then the ankle warmed enough to tolerate him.
 
-It did not.
+A stone trough stood beside the road farther on. A metal pipe poured clear water into it.
 
-Ten minutes later, they passed a field full of pale yellow flowers.
+Loben drank.
 
-Nothing moved beneath them.
+Cliff watched him.
 
-A little farther on, they found a stone trough beside the road with a metal pipe pouring clear water into it.
+Then the water.
 
-Cliff stopped again.
+Then Loben.
 
-Loben sighed.
+“What?” Loben asked.
 
-“What now?”
+“Nothing.”
 
-Cliff crouched beside the trough.
+Cliff drank.
 
-The water smelled like water.
+It tasted like absolutely nothing.
 
-He watched it for movement.
+He drank again.
 
-Nothing.
+He had no canteen anymore.
 
-He dipped one finger in.
+Ralph had that too.
 
-Cool.
-
-No burning.
-
-“No sign,” he said.
-
-“Of what?”
-
-“Anything.”
-
-Loben knelt and drank directly from the stream pouring out of the pipe.
-
-Cliff grabbed his shoulder.
-
-Loben kept drinking.
-
-“You don’t know what’s in that.”
-
-“Water.”
-
-“That isn’t an answer.”
-
-“It is on this side.”
-
-Loben wiped his mouth with his sleeve.
-
-Cliff stared at the pipe.
-
-“You can just drink it?”
-
-“Yes.”
-
-“Anyone?”
-
-“That is why it is beside the road.”
-
-Cliff looked around for the owner.
-
-There was no one.
-
-“Free?”
-
-Loben’s mouth twitched.
-
-“Cliff.”
-
-“What?”
-
-“Drink the water.”
-
-Cliff drank the water.
-
-It was the best water he had ever tasted because it tasted like absolutely nothing.
-
-He drank until his stomach hurt.
-
-Then he filled both canteens.
-
-Then, because he had survived Norend for ten years and was not a complete idiot, he waited several minutes to see if he died.
-
-He did not.
-
-They kept walking.
+Bastard.
 
 A cart came toward them before they reached the wayhouse.
 
-Cliff heard it early and stepped off the road automatically.
+Cliff heard the wheels and stepped off the road automatically.
 
-Loben kept walking.
+A brown horse pulled it. A woman held the reins.
 
-Cliff grabbed him and pulled him into the grass.
+Beside her, a small boy slept against a sack of grain with his mouth open.
 
-“What?” Loben said.
+Cliff watched the child pass.
 
-“Cart.”
+Outside.
 
-“I can see it.”
+Asleep.
 
-“Then why are you standing in front of it?”
+Throat exposed.
 
-“It has room.”
+No one scanning the trees.
 
-The cart rolled closer.
+No one holding a weapon.
 
-A brown horse pulled it.
-
-Cliff watched the horse carefully.
-
-It had a normal mouth.
-
-Probably.
-
-A woman sat on the driver’s bench. Beside her, a small boy slept against a sack of grain with his mouth open.
-
-Cliff stared at the boy.
-
-The cart passed within six paces.
-
-The woman lifted two fingers from the reins.
+The woman lifted two fingers.
 
 “Morning.”
 
 Loben returned the gesture.
 
-Cliff did not.
-
-He was still looking at the child.
-
-The boy was asleep.
-
-Outside.
-
-On a road.
-
-In daylight.
-
-With his throat exposed.
-
 Cliff watched the cart until it disappeared around a bend.
-
-“That was a child,” he said.
-
-“I noticed.”
 
 “He was sleeping.”
 
 “Yes.”
 
-“In a cart.”
+“Outside.”
 
 “Yes.”
 
-“What was watching him?”
-
-“His mother, presumably.”
-
-Cliff frowned.
-
-“That can’t be enough.”
-
 Loben looked back toward Norend.
 
-Then at Cliff.
-
-“Here it can.”
-
-Cliff did not know what to do with that.
+“Here he can.”
 
 The wayhouse appeared around the next bend.
 
-It was not impressive.
-
-Cliff had expected civilization to announce itself with towers, polished stone, flags, perhaps several armed men standing in formation for no practical reason.
-
-Instead, the first building waiting for him was broad, two stories high, and painted a faded green. A stable leaned against one side. Smoke came from a chimney. Three tables sat beneath an awning out front.
+Two stories. Faded green paint. Stable on one side. Smoke from a chimney.
 
 Someone had left a broom against the wall.
 
-Unattended.
-
 Cliff looked at it.
 
-Loben followed his gaze.
+Loben kept walking.
 
-“No one is going to steal the broom.”
+Cliff followed.
 
-“I wasn’t thinking that.”
-
-“You were thinking about the broom.”
-
-“I was wondering why it wasn’t tied down.”
-
-Loben laughed again.
-
-Cliff was beginning to dislike civilization’s effect on him.
-
-A wooden sign hung above the door.
-
-Cliff could not read it.
-
-He knew there were letters. He knew some letters. Ten years ago he had known more.
-
-The knowledge had worn away from disuse like everything else that did not keep him alive.
-
-The smell coming through the open windows stopped him before embarrassment could.
+Then the smell reached him.
 
 Bread.
 
-Not flat ash bread. Not root mash baked on stone. Not the dense black loaves Loben made whenever he insisted he remembered how people cooked.
-
-Real bread.
-
 Warm bread.
 
-Something else underneath it.
+His stomach cramped.
 
-Butter, maybe.
+Inside, people sat at tables.
 
-Cliff’s stomach cramped so hard he bent slightly.
+One man had his back to the door.
 
-Loben’s eyes narrowed.
+A woman read while she ate.
 
-“You all right?”
+Cliff stopped just inside the threshold.
 
-“I can smell the building.”
+Plates knocked against wood. Someone laughed. A chair scraped. A kettle whistled.
 
-“That usually means you should go inside.”
+His attention snapped to each sound.
 
-Cliff looked through the open door.
+None mattered.
 
-People sat at tables.
+A broad gray-haired woman approached carrying bowls along one arm. She looked at Loben. Looked at Cliff. Looked at the mud and blood and Cliff’s empty shoulders where a pack should have been.
 
-Nobody was armed that he could see.
-
-One man had his back to the entrance.
-
-A woman near the window was reading while she ate.
-
-Reading.
-
-While eating.
-
-Cliff had once lost half a roast bird because he looked away from it long enough to sneeze.
-
-“This place is insane,” he whispered.
-
-Loben went in.
-
-Cliff followed because Loben had spent ten years proving that his worst ideas were usually survivable.
-
-Usually.
-
-Inside, the wayhouse was warm and loud.
-
-Not danger loud.
-
-Cliff had to remind himself of that.
-
-Plates knocked against tables. Someone laughed. A chair scraped. A kettle whistled behind a counter.
-
-Cliff’s attention jumped to each sound before he could stop it.
-
-A broad woman with gray threaded through her dark hair came toward them carrying three bowls stacked along one forearm.
-
-She stopped.
-
-Looked at Loben.
-
-Looked at Cliff.
-
-Looked at the mud on both of them.
-
-Then looked past them through the door toward the north road.
-
-“Norend?” she asked.
+“Norend?”
 
 Cliff nodded.
 
-“Thought so.”
+“Sit.”
 
-She jerked her head toward an empty table.
+They sat.
 
-“Sit before you fall over. Stew’s hot. Bread came out ten minutes ago.”
-
-Cliff looked at Loben.
-
-Loben sat.
-
-Cliff sat.
-
-The woman set two bowls in front of them.
-
-He stared down.
+She put stew in front of them.
 
 Potatoes.
 
 Carrots.
 
-Meat cut into small cubes.
+Meat.
 
-He recognized all three ingredients.
+Nothing moving.
 
-Nothing was moving.
+“Bread?”
 
-“Bread?” the woman asked.
+“Yes.”
 
-“Yes,” Cliff said.
+She waited.
 
-She raised an eyebrow.
+Cliff glanced at Loben.
 
 “Yes, please.”
 
@@ -916,33 +818,11 @@ She raised an eyebrow.
 
 She walked away.
 
-Cliff watched her go.
+Loben started eating.
 
-“Did we order?” he asked.
+Cliff looked at the bowl.
 
-Loben had already started eating.
-
-“No.”
-
-“Then why did she give us food?”
-
-“Because we look like we came off Norend.”
-
-“That explains the food?”
-
-“It explains a great deal.”
-
-Cliff looked at his stew.
-
-“How much is it?”
-
-Loben paused.
-
-Cliff waited.
-
-“How much money?”
-
-“Yes.”
+“How much?”
 
 Loben reached into his coat and put three coins on the table.
 
@@ -952,239 +832,95 @@ Cliff stared.
 
 “We have twelve.”
 
-“When did that happen?”
+“When?”
 
 “I traded the black teeth.”
 
-“You traded Ralph’s teeth?”
+“Ralph’s?”
 
-“Not Ralph. The little one.”
-
-“The little one had a name.”
-
-“It had six legs and lived under our floor.”
+“The little one.”
 
 “Kevin.”
 
 “Yes. Kevin.”
 
-“You traded Kevin’s teeth without telling me.”
+“You traded Kevin’s teeth?”
 
 “You were asleep.”
 
-Cliff picked up one of the coins.
+Cliff picked up a coin.
 
-There was a face stamped on one side and a bird on the other.
+A face on one side. A bird on the other.
 
 “What is this worth?”
 
-“More than the stew.”
+“More than lunch.”
 
 “That is not a number.”
 
-“You are going to love money.”
+“You’re going to love money.”
 
 “I already hate money.”
 
-“Then you’re adapting.”
-
-The gray-haired woman returned with a basket of bread.
+The woman returned with bread.
 
 Cliff forgot the coins.
 
-The first bite hurt.
-
-Not his teeth.
-
-Something lower.
+The first bite hurt somewhere below his ribs.
 
 He had not expected softness.
 
-That was stupid. Bread was supposed to be soft. He remembered that now, distantly, from before Norend.
+Warm bread tore beneath his fingers. Butter disappeared into it.
 
-But memory had not prepared him for warm bread tearing under his fingers or butter melting into it faster than he could spread it.
+His body told him to eat fast.
 
-He chewed slowly.
+He didn't.
 
-Loben stopped eating.
+He put the bread down.
 
-Cliff looked up.
-
-“What?”
-
-“Nothing.”
-
-“You’re staring.”
-
-“I’m not.”
-
-“You are.”
-
-Loben returned to his stew.
-
-Cliff took another bite.
-
-He did not rush.
-
-That was harder than he expected.
-
-His body wanted to finish before something came for the food.
-
-He made himself put the bread down between bites.
+Waited.
 
 No one took it.
 
-He tried again.
+He ate another bite.
+
+Put it down again.
 
 Still there.
 
-The gray-haired woman passed and slapped Loben’s hand away when he reached for a third piece from the basket she was carrying to another table.
+Across the table, Loben stopped watching him and returned to his stew.
 
-“Ask.”
+Afterward, the woman gave them two rooms.
 
-Loben smiled up at her.
+Cliff understood almost none of the bargaining Loben did to get them.
 
-“May I?”
+He understood the key even less.
 
-“No.”
+He held it in his palm upstairs.
 
-She kept walking.
+“What is this for?”
 
-Cliff laughed before he could stop himself.
-
-It came out strange.
-
-Too loud.
-
-He covered his mouth.
-
-No one cared.
-
-That might have been the strangest thing yet.
-
-After they ate, the woman came back with a small slate.
-
-“Need beds?”
-
-Cliff said, “Yes,” at the same time Loben said, “Probably.”
-
-She looked between them.
-
-“One room or two?”
-
-Cliff opened his mouth.
-
-Stopped.
-
-He had not considered the possibility of two.
-
-“Two,” Loben said.
-
-The woman named a price.
-
-Cliff looked at Loben.
-
-Loben named a lower one.
-
-The woman snorted.
-
-Loben named another.
-
-She crossed her arms.
-
-Cliff watched in fascination.
-
-Nothing about the exchange made sense. The woman clearly knew the price. Loben clearly knew she knew the price. Yet both were pretending the number could move if they pushed it hard enough.
-
-Eventually the woman sighed and agreed to something between the first two numbers.
-
-Loben handed over coins.
-
-Cliff leaned toward him.
-
-“What just happened?”
-
-“I saved us money.”
-
-“By lying?”
-
-“By asking.”
-
-“You asked wrong numbers.”
-
-“That is called bargaining.”
-
-Cliff looked toward the woman.
-
-She was already serving someone else.
-
-“Does she hate us now?”
-
-“No.”
-
-“How do you know?”
-
-“She didn’t charge us more afterward.”
-
-Cliff rubbed his face.
-
-Ralph was easier.
-
-The room was upstairs.
-
-His room.
-
-That thought was strange enough that he nearly missed the key the woman handed him.
-
-He held it on his palm.
-
-“What is this?”
-
-She looked at him.
-
-“A key.”
+“Your door,” the woman said.
 
 “I know what a key is.”
 
 “Congratulations.”
 
-“What is it for?”
+She pointed down the hall.
 
-“Your door.”
+“Third door on the left.”
 
-Cliff looked down the hall.
+Cliff looked at the brass marks nailed to the doors.
 
-There were six doors.
+“You don’t read numbers?” she asked.
 
-“Which one?”
-
-“Seven.”
-
-He looked again.
-
-There was a small brass shape nailed to each door.
-
-He recognized none of them.
-
-The woman studied his face.
-
-“You don’t read numbers?”
-
-“I read some numbers.”
+“Some.”
 
 “Not seven.”
 
 “Apparently not.”
 
-She pointed to the third door on the left.
-
-“That one.”
-
-Cliff nodded.
-
-“Thank you.”
-
-Her expression softened enough that he wished it had not.
+Her expression changed.
 
 “You really came off the island.”
 
@@ -1192,73 +928,39 @@ Her expression softened enough that he wished it had not.
 
 “How long?”
 
-Cliff looked at the key.
-
 “Ten years.”
 
-The hallway went quiet in a way the dining room never had.
-
-Not actually quiet. Cliff could still hear dishes downstairs, boots outside, someone coughing in another room.
-
-But the woman stopped moving.
+She stopped moving.
 
 “Ten?”
 
+Cliff looked at the key.
+
 “Yes.”
 
-She looked toward the stairs, where Loben had paused with his own key.
-
-Then back to Cliff.
-
-“All right,” she said.
-
-He waited for the rest.
-
-There wasn’t any.
-
-She only pointed to the door again.
+She pointed again.
 
 “Third on the left.”
 
-Cliff went to it.
-
-The key fit.
-
-He turned it.
-
-The lock clicked.
-
-He opened the door.
-
-Bed.
-
-Chair.
-
-Washbasin.
-
-Window.
-
-A little table with a candle on it.
-
-Nothing else.
+His room had a bed, a chair, a washbasin, a window, and a little table with a candle.
 
 It was the most beautiful room Cliff had ever seen.
 
-He stepped inside and checked under the bed.
+He checked under the bed.
 
 Empty.
 
-He opened the washstand cupboard.
+Cupboard.
 
-Empty except for a folded cloth.
+Empty except for cloth.
 
-He checked behind the curtain.
+Curtain.
 
 Wall.
 
-He opened the window, looked down, measured the drop, noted the stable roof below and the drainpipe two paces to the right.
+Window.
 
-Then he closed it.
+Two-story drop, stable roof below, drainpipe to the right.
 
 Loben leaned in the doorway.
 
@@ -1268,77 +970,25 @@ Cliff looked up.
 
 Plain plaster.
 
-“Funny.”
+He ignored him and went back to the door.
 
-“You used to laugh more.”
+“Show me the lock.”
 
-“I laughed downstairs.”
+Loben did.
 
-“That was mostly at me.”
+Key in.
 
-“It still counts.”
-
-Loben stepped into the room and sat on the edge of the bed.
-
-The mattress sank beneath him.
-
-Cliff stared.
-
-Loben bounced once.
-
-Then again.
-
-“Stop that.”
-
-“You should try it.”
-
-“I know what a bed is.”
-
-“Do you?”
-
-Cliff ignored him.
-
-He went back to the door.
-
-“Show me.”
-
-“What?”
-
-“The lock.”
-
-Loben’s smile disappeared.
-
-He stood.
-
-Cliff closed the door.
-
-The hallway vanished.
-
-The latch caught.
-
-Loben pointed to the keyhole.
-
-“Put it in. Turn left.”
-
-Cliff did.
+Turn.
 
 Click.
 
-He tried the handle.
+Cliff tried the handle.
 
 The door stayed shut.
 
-He tried harder.
+He pulled harder.
 
 Still shut.
-
-“Now what?” he asked.
-
-“Now it is locked.”
-
-Cliff waited.
-
-Loben waited too.
 
 “If someone wants to come in?”
 
@@ -1350,13 +1000,11 @@ Loben waited too.
 
 “And if they don’t?”
 
-Loben shrugged.
-
-“Then they would have to break the door.”
+“Then they break the door.”
 
 Cliff put one hand against the wood.
 
-It was not especially thick.
+Not especially thick.
 
 He could break it.
 
@@ -1370,27 +1018,15 @@ The people downstairs did not have four-part jaws.
 
 Probably.
 
-Cliff turned the key again.
+Cliff unlocked the door.
+
+Locked it.
 
 Unlocked.
 
 Locked.
 
-Unlocked.
-
-Locked.
-
-Loben sat back down on the bed.
-
-“Are you going to do that all afternoon?”
-
-“No.”
-
-Cliff turned the key once more just to make sure.
-
-Locked.
-
-He took it out.
+Then he removed the key.
 
 The door stayed locked.
 
@@ -1404,17 +1040,15 @@ A sleeping man’s grip loosened.
 
 Everything useful demanded attention eventually.
 
-The little piece of metal in his hand had made the door stay closed and did not care whether he watched it.
+The little piece of metal in his hand kept working without him.
 
 Cliff looked at the bed.
 
-Then the window.
+The window.
 
-Then the door.
+The door.
 
-His forearms still ached from the run. His fingertips tingled when he curled them.
-
-Four hard barriers in less than a minute, plus the stone spray. More than he liked. He could force another if he had to. Two, maybe, if he was willing to spend tomorrow useless.
+His forearms ached. His right hand still tingled from Ralph. His ankle had begun to swell.
 
 He lifted one hand.
 
@@ -1426,41 +1060,23 @@ Thin.
 
 Barely more than a skin of pressure.
 
-It cost almost nothing.
-
 Loben looked at it.
 
 Then at Cliff.
 
-Cliff lowered his hand, leaving the barrier in place.
+“I know,” Cliff said.
 
-“I know,” he said.
-
-“I didn’t say anything.”
-
-“You were going to.”
-
-“No.”
-
-“You have a face.”
-
-“So do you.”
-
-“Yours is worse.”
-
-Loben lay backward across the bed and folded his hands behind his head.
+Loben lay backward across the bed.
 
 Cliff sat in the chair by the door.
 
 Downstairs, someone laughed.
 
-His hand moved toward his knife before he caught it.
+His hand moved toward his knife.
 
-He stopped.
+Stopped.
 
-Listened.
-
-Another laugh answered the first.
+Another laugh answered.
 
 A plate clinked.
 
