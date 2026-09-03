@@ -9,217 +9,195 @@ Resurrect the strongest parts of the old Cliff fantasy project as a new, discipl
 ## Authority
 
 - Accepted authority: `main` in `Paiea/Projects`.
-- Exact Book 1 manuscript authority: `cliff/manuscript/BOOK_01.md`.
-- Hot project state: `cliff/PROJECT_STATE.md`.
+- Exact accepted Book 1 manuscript authority: `cliff/manuscript/BOOK_01.md` on `main`.
+- Hot project state: `cliff/PROJECT_STATE.md` on `main`.
 - Historical archaeology: `cliff/recovery/OLD_DRAFT_RECOVERY.md`.
-- Human-facing route: `cliff/`.
 
 Authority precedence:
+1. accepted manuscript prose on `main`
+2. accepted durable reboot direction in this file on `main`
+3. deliberate WIP on named branches
+4. recovered historical material
+5. old chats, generated variants, notes, and historical PDF
 
-1. accepted new manuscript prose in `cliff/manuscript/BOOK_01.md`
-2. accepted durable reboot direction in this file
-3. recovered historical material in `cliff/recovery/OLD_DRAFT_RECOVERY.md`
-4. old chats, generated variants, notes, and the original historical PDF
-
-The old draft is **RECOVERED SOURCE, NOT CANON**. Historical material may be reused, reinterpreted, or discarded, but it does not bind the reboot merely because it existed first.
-
-If this state summary and the exact accepted manuscript ever disagree about story events, the accepted manuscript wins and this file must be refreshed.
+The old draft is **RECOVERED SOURCE, NOT CANON**.
 
 ## Current State
 
-Cliff is in reboot/bootstrap state. No replacement manuscript prose has yet been accepted.
+Chapter 1, **The Road Out**, is accepted on `main`. It is an action-heavy escape from Norend followed by the shock of ordinary safety. Cliff is deliberately being used as an action-writing laboratory before similar techniques are selectively borrowed by Peg-Leg Greg.
 
-### Working Book 1 premise
+### Chapter 1 movement
 
-After surviving roughly ten formative years on a monster-infested island by mastering defensive magic, Cliff enters magical society wanting little more than safety, friends, food, comfort, and an ordinary life. His unusual barrier talent eventually brings him into the orbit of a brilliant, lonely, controversial enchanter known as the Dollmaker. Cliff treats him with compassion when others keep their distance, and one well-meant insight helps the Dollmaker discover how to make truly living artificial people by using human souls.
+- Cliff and Loben flee `Ralph`, a terrifying Norend predator Cliff sincerely named himself.
+- Cliff mistimes releases, misreads Ralph, gets pinned under a failing barrier, loses his pack, injures his ankle, exhausts his casting, and recovers under pressure.
+- Loben and Cliff coordinate with little dialogue. Familiarity is expressed through movement and immediate response.
+- Norend itself participates in the chase through hidden predators, unstable terrain, rock, tidal threats, and the wardline.
+- Cliff reaches the North Causeway with almost no magic left. A nearly useless barrier changes Ralph's landing by half a step, which is enough.
+- The wardline creates the literal transition from survival into safety.
+- Civilization is introduced through ordinary infrastructure and behavior: flat road, sanded fence, free clean water, sleeping child outside, warm bread, money, private room, persistent lock.
+- The chapter closes on Cliff realizing Norend taught him how to stay alive, but he does not know what to do when staying alive is easy.
 
-### Thematic spine
+## Embodied Action Engine
 
-Cliff survived by putting barriers between himself and danger. Book 1 forces him to learn that physically protecting people is not enough when his own judgment, trust, and compassion can help create the danger.
+Cliff is an action-heavier fantasy than Peg-Leg Greg. Use it deliberately to develop embodied action prose rather than dialogue-heavy or camera-like choreography.
+
+### Core loop
+
+**CONTACT → RESPONSE → CHOICE → CONSEQUENCE**
+
+- Contact: the most urgent thing reaching Cliff's awareness now.
+- Response: body, thought, or both, whichever carries new information.
+- Choice: a character-specific decision under the actual constraint.
+- Consequence: the world changes, usually imperfectly, creating the next contact.
+
+This is a causal diagnostic, not a sentence template.
+
+### Thought and body
+
+Thought is welcome during action. Redundancy is not.
+
+**Body and thought should not narrate the same beat twice. When both appear, the difference between them should matter.**
+
+Useful mismatches:
+- mind knows what to do; injured/exhausted body cannot execute
+- body reacts before conscious understanding
+- mind knows Cliff is safe; body remains defensive
+- body contradicts Cliff's claim that he is fine
+- thought says run; loyalty makes him cast again
+- conscious attention chooses one threat while trained instinct responds to another
+
+When mind and body agree, prefer whichever channel conveys the beat most strongly.
+
+### Narrative bandwidth
+
+Consciousness expands and contracts with pressure.
+
+At maximum danger, perception may narrow to fragments: **claw, footing, Loben, barrier**.
+
+With a few seconds of space, Cliff can assess injury, geography, enemy adaptation, magic cost, and options.
+
+After danger, he can interpret what his body already did or refused to do.
+
+Do not equate action with nonstop short sentences. Rhythm contracts and expands with available attention.
+
+### Action rules
+
+- Action is a chain of deteriorating or changing problems, not attack/counterattack resets.
+- Spatial details matter when they create, remove, or alter options.
+- Cliff fights with geometry: angle, momentum, surfaces, bottlenecks, timing, leverage, distance, release.
+- Barrier magic is embodied. Show cost through specific physical consequences rather than abstract reserves.
+- Competence includes recovery. Cliff may make wrong predictions, lose resources, get hurt, or spend too much and still solve the next problem.
+- Solutions should often create the next problem or remove an option.
+- Serious action dialogue is expensive. Favor commands, warnings, names, and essential information. Humor can remain in perception.
+- Setting is usable geometry, not decorative inventory.
+- Aftermath matters. Cliff's body should remember the fight after the scene is safe.
+- Sensation must alter information, choice, cost, attention, or emotional meaning rather than merely make prose visceral.
+
+### Action revision diagnostic
+
+1. Are we inhabiting Cliff rather than watching a camera?
+2. Is physical consequence specific?
+3. Is usable geography legible?
+4. Does each important beat follow causally from the previous one?
+5. Is Cliff choosing under pressure rather than receiving choreography?
+6. Does solving a problem cost or change something?
+7. Are details selected by immediate attention?
+8. Does rhythm accelerate and decelerate rather than stay uniformly staccato?
+9. Could the dialogue realistically be spoken during this pressure?
+10. Does the body remember the action afterward?
+11. If thought and body both appear, are they contributing different information?
+
+This engine is accepted Cliff craft direction but remains revisable from manuscript evidence.
+
+## Working Book 1 Premise
+
+After surviving roughly ten formative years on monster-infested Norend by mastering defensive magic, Cliff enters magical society wanting safety, friends, food, comfort, and ordinary life. His unusual barrier talent eventually brings him into the orbit of a brilliant, lonely, controversial enchanter known as the Dollmaker. Cliff treats him with compassion when others keep their distance, and one well-meant insight helps the Dollmaker discover how to make truly living artificial people by using human souls.
+
+## Thematic Spine
+
+Cliff survived by putting barriers between himself and danger. Book 1 forces him to learn that physically protecting people is not enough when his own judgment, trust, and compassion can help create danger.
 
 Cliff's empathy remains a real virtue. The Dollmaker tragedy works because Cliff is not wrong to see loneliness, intelligence, and humanity in someone others fear. He is wrong only if he assumes understanding someone makes them safe.
 
-### Cliff's accepted protagonist core
+## Cliff's Accepted Protagonist Core
 
-Keep:
+Keep: roughly ten formative years on Norend; unusual barrier/projected-aura competence; intelligent flight from unwinnable danger; island-shaped worldview; improvised creature names; desire for comfort, food, friendship, safety, and ordinary life; warmth, loyalty, curiosity, empathy; magic whose thematic expression is safety and shelter.
 
-- roughly ten formative years of survival on monster-infested Norend Isle
-- unusual competence in defensive / barrier / projected-aura magic
-- practical willingness to flee unwinnable danger rather than performing heroism for its own sake
-- an island-shaped worldview and culture shock around ordinary civilization
-- improvised creature names and odd comparisons born from having learned monsters by observation rather than formal taxonomy
-- desire for comfort, food, friendship, safety, and ordinary life rather than glory
-- warmth, loyalty, curiosity, and empathy
-- magic whose emotional/thematic expression is safety and shelter
+## Academy Function
 
-A recovered example of the desired feel is that Cliff's barriers can be experienced as warm, secure, cocoon-like protection. This is a direction to reinterpret, not prose to preserve automatically.
+The academy remains useful as a pressure cooker for social transition, magic, work, status, factions, money, friendship, and the wider magical world. Do not return to generic class-tour exposition. Cliff should move toward it because current needs and opportunities lead there, not because the manuscript knows it is an academy story.
 
-### Academy function
+## Fortune Legion
 
-The academy remains a useful environment because it compresses social transition, magic systems, work, status, factions, money, friendship, and exposure to the wider magical world.
+Fortune remains a strong salvage candidate: practical opportunity, resources/trade, magical crafting, fieldwork, and unconventional problem solving.
 
-It must not become thirty chapters of class-tour exposition.
+## Supporting Cast Status
 
-Use mundane academy life only when it carries character pressure, humor, relationship movement, consequence, setup, or contrast with Cliff's island upbringing. The modern craft target is to make ordinary scenes carry story rather than pausing story for routine.
-
-### Fortune Legion
-
-Fortune is retained as a strong salvage candidate, not yet locked in every historical detail.
-
-Preferred function:
-
-- practical opportunity
-- resources and trade
-- magical crafting
-- fieldwork
-- unconventional problem solving
-- people who find value others miss
-
-Avoid a vague identity built only around `luck` unless the reboot later makes that concrete and useful.
-
-### Supporting cast status
-
-The following are **salvage candidates**, not automatic historical continuity:
-
-- **Loben:** major island companion; the old non-human / monster / shape-shifter reveal is worth retaining or reinterpreting.
+- **Loben:** major island companion; non-human / monster / shape-shifter direction remains strong.
 - **Lily:** goofy, grounded friend energy with later scout/observer potential.
-- **Elena:** more experienced enchanter/mentor figure; reboot version needs independent wants, friction, and personhood rather than functioning mainly as Cliff admiration.
-- **Thalia:** important island-history figure and former romantic companion in recovered material; exact reboot role remains open.
+- **Elena:** experienced enchanter/mentor who needs independent wants and friction.
+- **Thalia:** meaningful island-history figure; exact reboot role remains open.
 
-Nelly, Gregor, Judge, Ethan, and other historical supporting characters should be recovered only when the current book earns them.
+Other historical characters return only if the current book earns them.
 
 ## Dollmaker Arc
 
-The Dollmaker is the strongest recovered central plot and the likely Book 1 spine.
+The Dollmaker remains the strongest recovered central plot and likely Book 1 spine.
 
-Durable mechanism to preserve unless later design deliberately improves it:
-
-1. Cliff's unusual defensive magic leads him toward enchantment, crafting, or questions about extending his capabilities.
-2. He meets a brilliant, controversial, isolated master enchanter known as the Dollmaker, historically named Sam.
-3. Other people warn Cliff away.
-4. Cliff befriends him because he sees a lonely person rather than only a dangerous reputation.
-5. The Dollmaker's lifelike creations still lack true consciousness or life.
-6. Cliff offers a compassionate insight involving imperfection and what makes real life real.
-7. The Dollmaker interprets the insight as a technical breakthrough and begins using human souls.
-8. People die because of the experiments.
-9. The Dollmaker sincerely credits or thanks Cliff for the insight that unlocked the breakthrough.
+Durable mechanism:
+1. Cliff's defensive magic leads toward enchantment/crafting/extension.
+2. He meets isolated master enchanter Sam, the Dollmaker.
+3. Others warn Cliff away.
+4. Cliff befriends him.
+5. Dollmaker's lifelike creations lack true consciousness.
+6. Cliff offers compassionate insight about imperfection and real life.
+7. Dollmaker interprets it as breakthrough and uses human souls.
+8. People die.
+9. Dollmaker sincerely credits Cliff.
 10. Authorities appear to stop him.
-11. Cliff later recognizes the Dollmaker surviving in a perfected artificial body and disappearing.
-12. Cliff is left with unresolved moral responsibility for having contributed through kindness rather than malice.
+11. Cliff later recognizes Dollmaker surviving in a perfected artificial body.
+12. Cliff carries unresolved moral responsibility.
 
-Open for redesign:
-
-- exact enchantment mechanics
-- exact wording of Cliff's advice
-- victim scale
-- investigation structure
-- how early the Dollmaker enters the book
-- whether Cliff directly participates in discovering the crimes
-- exact climax and apparent defeat
-- exact nature of the perfected body
-
-The Dollmaker should be capable of being a genuine friend to Cliff and a murderer. Flattening him into a secretly fake friendship weakens the moral problem.
+The Dollmaker should be capable of genuine friendship and murder.
 
 ## Durable Decisions
 
 ### Keep
-
-- Cliff
-- Norend Isle survival background
-- barrier / defensive magic
-- running as intelligent survival behavior
-- improvised monster naming and island comparisons
-- ordinary-life hunger
-- Loben
-- Lily
-- Elena
-- Thalia as potentially important history
-- Fortune as a practical/crafting/resource-oriented faction candidate
-- magical crafting and economics
-- Dollmaker as likely Book 1 center
-- magical academy as social transition environment
-- larger magical underworld as possible later-book pressure
+Cliff; Norend; barrier magic; intelligent running; monster naming; ordinary-life hunger; Loben; Lily; Elena; Thalia as potential history; Fortune; crafting/economics; Dollmaker; academy as social-transition environment; larger underworld as possible later pressure.
 
 ### Rebuild
+All prose from page one; academy pacing/function; faction identity; magic costs; supporting-character agency; demonstrations of Cliff's ability; exact Dollmaker mechanics/escalation.
 
-- all prose from page one
-- academy pacing and function
-- faction identity
-- magic costs and limitations
-- supporting-character agency and friction
-- how Cliff's exceptional ability is demonstrated
-- exact Dollmaker mechanics and escalation
-
-Do not rely on characters repeatedly praising Cliff as proof that he is interesting or powerful. Show competence through action, tradeoffs, social consequences, and other people's concrete responses.
-
-### Delay by default
-
-- powerful grandfather / magical crime-family focus
-- House of Goat
-- inherited shadow legacy
-- Ethan / Lily political pressure
-- broad underworld-family conflict
-- sequel architecture
-
-These may be lightly seeded if useful. They should not compete with the Dollmaker for Book 1's center merely because old notes contain them.
+### Delay
+Powerful grandfather/crime-family focus; House of Goat; shadow legacy; Ethan/Lily politics; broad underworld conflict; sequel architecture.
 
 ### Discard
-
-- automatic continuation from old numbered chapters
-- preserving old prose for sentimental reasons
-- sprawling six-book immortality escalation
-- generic prophecy / ancient-evil inflation
-- allurement used as magical sexual compulsion, harem machinery, or consent bypass
-- incest-adjacent sexual branches from old brainstorming
-- automatic preservation of every old character or subplot
-- giant lore infrastructure before the book earns it
-
-If an influence/allurement concept ever returns, it must function as an ethical and consent problem rather than wish fulfillment.
+Automatic old continuity; sentimental prose preservation; six-book immortality escalation; prophecy inflation; allurement as sexual compulsion/harem/consent bypass; incest-adjacent branches; automatic preservation of every old subplot; giant lore infrastructure.
 
 ## Known Issues / Open Questions
 
-Only live reboot questions belong here:
-
-- What is the strongest replacement opening sequence: leaving Norend Isle, arriving at civilization, or another compressed entry point?
-- How quickly should Loben separate from Cliff, and what should the reader know about Loben at the start?
-- What concrete costs and limitations make Cliff's barriers powerful without removing tension?
-- What practical role does Fortune play in the reboot, and does Cliff deliberately choose it?
-- How early should Elena, Lily, and the Dollmaker enter?
-- What ordinary desire or obligation gives Cliff forward motion before the Dollmaker arc fully ignites?
-
-These are open design questions, not invitations to build a giant prewriting bible before drafting.
-
-## On-Demand References
-
-- `cliff/recovery/OLD_DRAFT_RECOVERY.md` — read when mining historical characters, scenes, world ideas, or discarded branches.
-- `docs/superpowers/specs/2026-09-02-cliff-resurrection-design.md` — read when checking bootstrap intent or reboot boundaries.
-
-Do not load the full recovery file on every routine chapter continuation once the manuscript becomes established.
+- How quickly should Chapter 2 force Cliff to interact with civilization rather than allowing extended decompression?
+- What immediate need naturally moves Cliff toward work, registration, magic training, or the academy?
+- How much does Loben understand civilization, and why?
+- What durable limits/costs should barrier magic develop beyond Chapter 1 evidence?
+- When should civilized taxonomy first identify Loben as something other than an ordinary man?
 
 ## Last Meaningful Changes
 
-- Project reboot approved on 2026-09-02.
-- Historical draft formally demoted to recovered, non-canon source material.
-- Dollmaker selected as the likely Book 1 central arc.
-- Underworld-family and sprawling-series material delayed rather than allowed to compete with Book 1.
-- New Book 1 authority established at `cliff/manuscript/BOOK_01.md` with no imported historical prose.
+- Chapter 1 accepted on `main` after multiple passes toward substantially heavier action.
+- Ralph pursuit now uses failure, injury, resource loss, environmental threats, enemy adaptation, sparse dialogue, changing geometry, and mind/body desynchronization.
+- Embodied Action Engine is durable Cliff craft authority.
+- Explicit academy mention was removed from Chapter 1 so academy entry can be earned through Cliff's needs.
+- Civilization aftermath remains quieter so action-to-safety contrast carries the emotional payoff.
 
 ## NEXT_TASK
 
-Design and draft the replacement opening sequence from page one.
+Design Chapter 2 from the actual Chapter 1 endpoint.
 
-Before writing:
+Do not automatically make it an academy orientation chapter. Begin from Cliff's immediate condition and needs: injured ankle, lost pack/supplies, limited literacy, little understanding of money/civilized systems, Loben beside him, and the first genuinely safe room he has had in years.
 
-1. read root `AGENTS.md`, `state/PROJECT_REGISTRY.md`, and `state/HANDSHAKE_PROTOCOL.md`;
-2. read this file;
-3. inspect `cliff/manuscript/BOOK_01.md` to confirm the exact accepted manuscript endpoint;
-4. consult `cliff/recovery/OLD_DRAFT_RECOVERY.md` only as needed for useful fossils;
-5. preserve the authority rule that recovered material is not canon.
-
-The opening should establish Cliff's specific appeal quickly: survival competence, defensive magic, island-shaped worldview, odd naming/humor, and his hunger for ordinary civilized safety.
-
-Do not reproduce the old chapter sequence merely because it existed. Prefer one complete, purposeful opening movement that can plausibly carry into the new Book 1.
+Find the next actual pressure that makes ordinary civilization difficult and begins pulling Cliff toward the wider magical world. Preserve the action engine for scenes that earn action rather than manufacturing fights to demonstrate it.
 
 ## RE-PROMPT
 
-> Continue Cliff from current Paiea/Projects GitHub authority. Read root AGENTS.md, state/PROJECT_REGISTRY.md, state/HANDSHAKE_PROTOCOL.md, and cliff/PROJECT_STATE.md, then inspect cliff/manuscript/BOOK_01.md before changing anything. Execute the current durable NEXT_TASK, treating cliff/recovery/OLD_DRAFT_RECOVERY.md as recovered non-canon source material only. Preserve newer accepted authority, keep Book 1 centered on Cliff's defensive-magic/ordinary-life arc and the likely Dollmaker spine, validate the work, update project state, and leave the next handshake.
+> Continue Cliff from current Paiea/Projects GitHub authority. Read current project authority and the endpoint of cliff/manuscript/BOOK_01.md before changing anything. Treat historical Cliff material as recovered non-canon source only. Execute the durable NEXT_TASK. Preserve the Embodied Action Engine, especially non-redundant thought/body channels and pressure-dependent narrative bandwidth. Do not manufacture action when the next actual claim is social, practical, or emotional. Validate the work, update project state, and leave the next handshake.
