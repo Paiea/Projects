@@ -148,6 +148,146 @@ A derived summary should never silently become more authoritative than the evide
 
 When provenance is uncertain, preserve the uncertainty instead of laundering it into confident state.
 
+## Proposal before promotion
+
+When a worker converts messy evidence, research, archaeology, discussion, or exploratory reasoning into persistent memory, use this conceptual flow:
+
+**EXPLORATION / OBSERVATION -> PROPOSED OR DERIVED CLAIM -> REVIEW AGAINST THE OWNING SOURCE -> ACCEPTED DURABLE CLAIM**
+
+Do not make this ceremonial for exact facts or trivial mechanical updates. The gate matters when interpretation could otherwise harden into pseudo-fact.
+
+### Evidence-bounded worker promotion
+
+A worker may promote a derived claim into accepted durable state without explicit user approval when all of these are true:
+
+1. the owning exact source/evidence is known;
+2. the claim is a faithful synthesis of that evidence rather than a new product/story decision;
+3. the destination file/lane actually owns that synthesis;
+4. any important evidence ceiling or limit is preserved;
+5. no stronger authority conflicts with the claim.
+
+Require explicit author/user approval or the project's designated decision lane when the worker would be:
+
+- choosing among multiple plausible interpretations;
+- establishing new direction, policy, canon, or product behavior not compelled by source;
+- resolving meaningful ambiguity or contradiction;
+- retconning accepted authority;
+- turning research analogy into project/world fact;
+- asserting motive, causality, relationship, hierarchy, or generalization beyond what evidence clearly establishes.
+
+This is deliberately lighter than a strict human-approval queue. It preserves throughput while preventing confident inference from silently becoming durable truth.
+
+### Evidence-backed durable claims
+
+When a durable conclusion is non-obvious or easy to overgeneralize, prefer a compact shape such as:
+
+- **Claim:** the durable synthesis
+- **Status:** EXACT / ACCEPTED DERIVED / POSSIBILITY / etc.
+- **Evidence:** chapter, path, commit, artifact, or other owning source pointer
+- **Limit:** optional ceiling describing what the evidence does **not** establish
+
+Do not require this shape for every ordinary bullet. Use it when future workers are likely to ask "where did we establish that?" or when similar facts are easy to merge incorrectly.
+
+Prefer pointers over copied evidence blocks.
+
+Do not create a giant evidence index merely because this convention exists. An index earns itself only when workers repeatedly redo the same source archaeology to locate already-known evidence. Any such index must remain derived, replaceable, and subordinate to the owning source.
+
+## Validation boundary: structure vs meaning
+
+Formal/mechanical validation should claim only what it can actually prove.
+
+Mechanical validation may check things such as:
+
+- required state fields/files exist;
+- authority paths resolve;
+- stale pointers or duplicate ownership are detectable;
+- branch/main state is what the workflow expects;
+- formats/schemas/references are structurally valid;
+- builds, tests, lint, and deterministic generators pass.
+
+Mechanical validation must **not** pretend to prove semantic truth such as:
+
+- a relationship interpretation is correct;
+- a character motive is established;
+- recovered history is current truth;
+- a narrative/product direction is good;
+- two facts imply causality merely because a graph or index connects them.
+
+Reasoning workers interpret meaning against exact evidence and project authority. Exact source remains the evidence ceiling.
+
+## Reasoning worker and execution worker specialization
+
+Use capability specialization as a default, not a rigid caste system.
+
+### Reasoning / planning / review worker
+
+Best used for:
+
+- inspecting committed GitHub authority;
+- discussing the problem with the user;
+- diagnosing root causes and challenging the proposed solution;
+- deciding whether work is worth doing;
+- defining constraints and acceptance criteria;
+- reviewing committed results for regressions or architecture drift.
+
+### Execution worker
+
+Best used for:
+
+- inspecting the real implementation workspace and local/uncommitted state;
+- making bounded file/code changes;
+- running builds/tests/linters/runtime checks;
+- checkpointing or committing durable implementation;
+- reporting exact implementation results.
+
+Do not pay execution cost for open-ended thinking when the problem can be diagnosed first. Do not have a reasoning worker pretend to know local runtime state it cannot inspect.
+
+Preferred loop:
+
+**DISCUSS / DIAGNOSE -> WRITE DURABLE INTENT OR EXECUTABLE EDGE -> IMPLEMENT IN REAL WORKSPACE -> COMMIT / CHECKPOINT -> REVIEW ACTUAL RESULT -> NEXT DECISION**
+
+GitHub is the normal communication substrate. Shared chat history may help, but continuity must not depend on it.
+
+For tiny obvious changes, skip ceremony.
+
+## Optional executable work units: GitHub Issues
+
+GitHub Issues are optional execution surfaces, not project memory.
+
+`PROJECT_STATE.md` owns where the project is, authority, current operating truth, live constraints, and the next meaningful direction.
+
+An Issue may earn itself when it represents:
+
+- one bounded implementation problem;
+- a reproducible bug;
+- an independently executable improvement;
+- explicit acceptance criteria;
+- work that can safely sit in a queue without becoming misleading project state.
+
+Do not create Issues for every thought, every `NEXT_TASK`, every chapter, vague future possibilities, or work that is already one obvious immediate action.
+
+A good Issue should eventually support a tiny instruction such as:
+
+> Implement issue #47 from current GitHub authority.
+
+If a repository does not benefit from an Issue backlog, do not manufacture one.
+
+## Derived views and graphs
+
+A project may someday earn derived visualizations, graphs, indexes, or dashboards that make complex accepted memory easier to inspect.
+
+Such views must remain:
+
+- derived from owning source/state;
+- replaceable;
+- non-authoritative;
+- scoped to a useful question;
+- rebuildable without losing project truth.
+
+Prefer a scoped relationship neighborhood, dependency view, evidence map, or other question-shaped visualization over an "everything graph" that becomes wallpaper at scale.
+
+Do not create a structured second canon merely to render a graph.
+
 ## When to add specialist brains
 
 Do **not** copy Peg-Leg Greg's full state tree into every project.
@@ -200,6 +340,8 @@ Before substantial work that depends on freshness:
 4. if they disagree, preserve the newer exact authority and repair state before continuing from the stale assumption.
 
 Do not infer that a stale summary invalidates newer source. The source wins.
+
+When a rapidly changing fact already has a clear owner, prefer a pointer to that owner over caching the changing value in multiple hot files.
 
 ### End-of-run hygiene
 
