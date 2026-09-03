@@ -26,6 +26,16 @@ Private/recovery-only projects do not need to appear here. Cross-project recover
 - Status: external active
 - Purpose: long-form illustrated serial fiction reader and its production system
 
+## Cliff
+
+- Category: Writing & Story Projects
+- Hosting: internal
+- Public route: `cliff/`
+- Source: `cliff/`
+- Durable state: `cliff/PROJECT_STATE.md`
+- Status: rebooting
+- Purpose: fantasy novel resurrection centered on Cliff, defensive magic, adaptation to magical society, and the Dollmaker arc
+
 ## Project-brain standard
 
 New projects should follow `docs/PROJECT_BRAIN_STANDARD.md` and begin from `templates/project-brain/`.
