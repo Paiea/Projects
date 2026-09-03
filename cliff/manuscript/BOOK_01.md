@@ -202,6 +202,58 @@ The fingers moved.
 
 Good enough.
 
+A branch whipped back across the trail.
+
+Loben had already passed it.
+
+Cliff got an arm up too late. Bark tore his cheek. He tasted blood.
+
+Blood.
+
+Ralph was behind him.
+
+Bad combination.
+
+Cliff wiped his cheek with his sleeve as he ran and shoved the bloody cloth against his chest beneath his coat.
+
+The smell would still carry.
+
+Nothing to do about it.
+
+Ahead, Loben changed direction without warning.
+
+Cliff followed on instinct.
+
+A heartbeat later the ground where he would have stepped collapsed inward. A pale mouth snapped shut beneath a skin of leaves.
+
+Cliff never saw the rest of the animal.
+
+Didn’t need to.
+
+“Thanks.”
+
+Loben raised one hand without turning.
+
+Then Ralph hit the hidden thing.
+
+The ground erupted.
+
+A shriek, much smaller than Ralph’s, cut off under a wet crunch.
+
+Cliff almost smiled.
+
+Almost.
+
+Four impacts.
+
+Drag.
+
+Two.
+
+Still coming.
+
+Of course.
+
 Loben reached the ridge first.
 
 He stopped.
@@ -292,7 +344,17 @@ The barrier sank another handspan.
 
 Cliff’s arms shook.
 
-Loben hit Ralph from the side.
+Move.
+
+His body didn’t.
+
+Move.
+
+Nothing.
+
+For one stupid heartbeat he was ten years younger, flat on his back beneath another thing with too many teeth, hands too small, lungs locked shut.
+
+Then Loben hit Ralph from the side.
 
 Not like a man.
 
@@ -300,9 +362,11 @@ Cliff heard flesh strike scales, then a sound from Loben’s throat that belonge
 
 Ralph lurched.
 
-The weight lifted.
+Air came back.
 
-Cliff tore one shoulder free of his pack.
+So did Cliff.
+
+He tore one shoulder free of his pack.
 
 The barrier broke.
 
@@ -380,13 +444,17 @@ Black saliva hissed where it struck the air.
 
 Cliff smelled wet iron and rotten fruit.
 
-He waited.
+The barrier could hold another two breaths.
 
-Ralph pushed harder.
+Maybe three.
 
-Cliff dropped the barrier.
+His arms said one.
 
-The creature surged forward.
+Cliff trusted his arms.
+
+He dropped it.
+
+Ralph surged forward.
 
 Cliff was already falling sideways.
 
@@ -430,6 +498,58 @@ They ran together.
 
 Not fast enough.
 
+The slope narrowed ahead where black stone punched through the soil. A split in the rock made a crooked passage barely wide enough for two men shoulder to shoulder.
+
+Cliff saw it.
+
+So did Loben.
+
+They separated without speaking.
+
+Loben went through.
+
+Cliff stopped at the mouth.
+
+His ankle screamed at the sudden turn.
+
+Ralph came downhill.
+
+Too big for the gap.
+
+Good.
+
+Cliff put a barrier across the opening.
+
+Ralph hit it.
+
+The rock on Cliff’s left cracked.
+
+Not the barrier.
+
+The rock.
+
+Oh.
+
+Ralph hit it again.
+
+A slab sheared loose above Cliff’s head.
+
+Loben grabbed his collar and dragged him backward as stone crashed into the passage.
+
+For half a second Cliff thought they had done it.
+
+Then the entire right side of the outcrop moved.
+
+Ralph was not trying to fit through.
+
+It was going around by removing the rock.
+
+“Run.”
+
+They ran.
+
+Behind them, stone broke in pieces large enough to feel through Cliff’s boots.
+
 The shore was close now.
 
 Black rock.
@@ -458,9 +578,29 @@ Loben hit the black rock first.
 
 Cliff limped after him.
 
-Ten paces.
+A sound came from the tidal flats to his right.
+
+Splash.
+
+Cliff looked.
+
+The mud bulged.
+
+Of course it did.
+
+A long pale shape rolled beneath the shallow water parallel to the causeway. Another surfaced farther ahead, all ridged back and needle fins, then vanished again.
+
+The open road suddenly had teeth too.
+
+Cliff changed his line toward the center stones.
+
+Loben saw him do it and adjusted.
 
 Ralph screamed.
+
+Ten paces.
+
+The pale shape in the water accelerated.
 
 Five.
 
@@ -478,13 +618,31 @@ Three paces.
 
 Ralph jumped.
 
+The water beside them exploded.
+
+A narrow head on a white neck shot toward the causeway, mouth opening sideways around rows of glassy teeth.
+
+Cliff’s mind chose Ralph.
+
+His body chose the water.
+
+His left hand snapped out.
+
+A barrier flashed beside the causeway.
+
+The pale head struck it and twisted away.
+
+Wrong threat.
+
+Ralph’s shadow covered him.
+
 Cliff cast behind himself.
 
 Nothing happened.
 
 His stomach dropped.
 
-He tried again.
+Again.
 
 A barrier flickered.
 
@@ -522,6 +680,12 @@ Ralph flew backward.
 
 The creature hit black rock, rolled, and came up screaming.
 
+The pale thing struck the wardline from the side.
+
+Gold flashed again.
+
+It vanished into the mud.
+
 Loben crossed the line at a run.
 
 The wards did nothing to him.
@@ -550,7 +714,23 @@ His hands were raised.
 
 He had no barrier.
 
-He lowered them slowly.
+He knew the wardline was holding.
+
+His shoulders did not know.
+
+He lowered one hand.
+
+The other stayed up.
+
+Cliff stared at it.
+
+Lower.
+
+His arm shook.
+
+Lower.
+
+It came down.
 
 Ralph paced beyond the wardstones. Its four-part jaw flexed. Cliff’s torn pack lay under one forefoot.
 
