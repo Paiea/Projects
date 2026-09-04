@@ -16,6 +16,16 @@ Private/recovery-only projects do not need to appear here. Cross-project recover
 - Status: active
 - Purpose: lightweight classroom instruction, WIN grouping, quick checks, proficiency evidence, and reusable teacher-led activities
 
+## Praxis 5001 Study App
+
+- Category: Classroom Tools
+- Hosting: internal
+- Public route: `praxis/`
+- Source: `praxis/`
+- Durable state: `praxis/PROJECT_STATE.md`
+- Status: active
+- Purpose: local-first Praxis Elementary Education: Multiple Subjects (5001) study engine with targeted practice, simulations, explanations, and browser-local progress tracking
+
 ## Peg-Leg Greg Reader
 
 - Category: Writing & Story Projects
