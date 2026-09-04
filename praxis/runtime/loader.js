@@ -5,8 +5,8 @@
       throw new Error('This browser does not support DecompressionStream, which is required to load the packaged Praxis study engine.');
     }
     const parts = window.__praxisGz || [];
-    if (parts.length !== 6) {
-      throw new Error(`Praxis runtime incomplete: expected 6 parts, found ${parts.length}.`);
+    if (parts.length !== 10) {
+      throw new Error(`Praxis runtime incomplete: expected 10 parts, found ${parts.length}.`);
     }
     const b64 = parts.join('');
     const binary = atob(b64);
