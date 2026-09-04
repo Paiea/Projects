@@ -1,0 +1,102 @@
+Praxis V2.2 validation
+UTC 2026-09-04T07:08:40Z
+
+UI QUALITY TEST PASSED
+QUALITY TEST PASSED
+OTHER SUBJECT QUALITY TEST PASSED
+
+5002 sample n=100
+answer positions [ 22, 18, 29, 31 ]
+domains { 'rla-writing': 53, 'rla-reading': 47 }
+topics {
+  'grammar-usage': 12,
+  'writing-types': 11,
+  'phonological-awareness': 6,
+  fluency: 9,
+  'phonics-word-analysis': 10,
+  'writing-process': 11,
+  research: 6,
+  'key-ideas': 11,
+  'language-vocab': 5,
+  'text-structure': 6,
+  'speaking-listening': 13
+}
+
+5003 sample n=100
+answer positions [ 23, 23, 29, 25 ]
+domains { 'math-algebra': 30, 'math-number': 40, 'math-geo': 30 }
+topics {
+  linear: 11,
+  estimation: 9,
+  'place-value': 13,
+  geometry: 11,
+  patterns: 7,
+  measurement: 12,
+  'factors-multiples': 7,
+  probability: 4,
+  'rational-operations': 4,
+  expressions: 12,
+  'fractions-decimals': 7,
+  'data-statistics': 3
+}
+
+5004 sample n=100
+answer positions [ 25, 28, 22, 25 ]
+domains { 'ss-geo': 30, 'ss-world': 25, 'ss-us': 45 }
+topics {
+  'human-environment': 7,
+  economics: 12,
+  'culture-society': 11,
+  'revolution-founding': 9,
+  'world-regional-geography': 12,
+  'government-citizenship': 11,
+  'world-history': 13,
+  'us-history': 10,
+  'exploration-colonization': 6,
+  'documents-cases': 9
+}
+
+5005 sample n=100
+answer positions [ 22, 31, 21, 26 ]
+domains { 'sci-life': 33, 'sci-physical': 34, 'sci-earth': 33 }
+topics {
+  'evolution-adaptation': 10,
+  heredity: 9,
+  energy: 9,
+  ecosystems: 4,
+  space: 9,
+  matter: 6,
+  'earth-processes': 6,
+  'cells-systems': 10,
+  'force-motion': 9,
+  'earth-history': 11,
+  'earth-structure': 7,
+  inquiry: 10
+}
+
+5003 sample n=1000
+answer positions [ 280, 257, 226, 237 ]
+domains { 'math-algebra': 300, 'math-number': 400, 'math-geo': 300 }
+topics {
+  linear: 167,
+  'rational-operations': 111,
+  probability: 16,
+  geometry: 151,
+  patterns: 29,
+  expressions: 104,
+  measurement: 129,
+  'data-statistics': 4,
+  'fractions-decimals': 61,
+  'factors-multiples': 32,
+  estimation: 62,
+  'place-value': 134
+}
+
+VALIDATION PASSED
+quick count= 10 distinct stems= 9 valid= true
+math-full count= 50 distinct stems= 50 valid= true
+mixed count= 20 distinct stems= 20 valid= true
+5002 full A= 80 full B= 80 fingerprint overlap= 3 families/skills= 15
+5003 full A= 50 full B= 50 fingerprint overlap= 0 families/skills= 24
+5004 full A= 60 full B= 60 fingerprint overlap= 0 families/skills= 36
+5005 full A= 55 full B= 55 fingerprint overlap= 0 families/skills= 33

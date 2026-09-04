@@ -1,0 +1,23 @@
+Praxis 5001 V2.3 fidelity iteration verification
+Date: 2026-09-03
+
+Passed:
+- ui-fidelity-test.js
+- fidelity-test.js
+- authenticity-test.js across 5 seeded 5003 full mocks
+- quality-test.js + PrepSaret calibration coverage
+- other-quality-test.js
+- ui-quality-test.js
+- validate.js including 1,000 sampled 5003 questions
+- smoke.js
+- replay-test.js
+
+Seeded 5003 audit (seed 20260903):
+- 50 questions
+- item types: 48 single-select, 1 multiple-select, 1 numeric-entry
+- cognitive operations: 16 application-reasoning, 16 multistep-context, 12 representation-model, 3 error-analysis, 3 recall-procedure
+- 36 distinct families; maximum 2 from one family
+- 13 distinct topics
+- domain quota remains 20/15/15
+
+Important: item-type counts are an internal practice design choice, not a claim about secret ETS live-form percentages. Practice accuracy is not an ETS scaled score.

@@ -1,0 +1,2 @@
+global.window=global;require('./blueprint.js');require('./questions.js');require('./content-expansion.js');const Q=global.PRAXIS_QUESTIONS;
+for (const [label,code,n] of [['quick','5002',10],['math-full','5003',50],['mixed','MIXED',20]]){const items=Q.session(code,n,{seed:12345});const stems=new Set(items.map(x=>x.stem));console.log(label,'count=',items.length,'distinct stems=',stems.size,'valid=',items.every(x=>Q.validateItem(x).ok&&x.explanation));}

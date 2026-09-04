@@ -1,0 +1,53 @@
+
+### 5002
+1. [mcq] ets-phoneme-count
+How many phonemes are in the word “ship”?
+
+2. [multi-select] ets-select-two-syllables
+Which TWO of the following words contain a closed first syllable?
+
+3. [mcq] ets-most-appropriate-fluency
+Which of the following is the most appropriate activity for improving a student’s oral-reading fluency after the student can accurately decode the passage?
+
+4. [mcq] ets-revision-best
+A student’s paragraph gives a clear claim and two relevant facts but does not explain how either fact supports the claim. Which revision would best improve the paragraph?
+
+
+### 5003
+1. [multi-select] ets-select-all-number
+Select ALL that apply. Which of the following numbers are greater than 0.7?
+
+2. [mcq] ets-best-estimate
+A school has 238 notebooks to divide as equally as possible among 6 classrooms. Which of the following is the best estimate of the number of notebooks each classroom will receive?
+
+3. [mcq] ets-could-be-product
+The only prime factors of a certain positive integer are 2, 3, and 5. Which of the following could be the integer?
+
+4. [mcq] ets-property-recognition
+Which of the following is an example of the associative property of addition?
+
+
+### 5004
+1. [mcq] ets-civics-direct
+In the United States, the division of governmental power between the national government and state governments is known as
+
+2. [mcq] ets-econ-application
+A student has enough money to buy either a concert ticket or a new backpack and chooses the concert ticket. Which of the following is the opportunity cost of that choice?
+
+3. [mcq] ets-map-type
+Which of the following types of maps is most useful for showing the boundaries of countries and states?
+
+4. [mcq] ets-source-inference
+A nineteenth-century newspaper advertisement offers factory jobs to newly arrived immigrants in a rapidly growing city. Which of the following conclusions is best supported by the advertisement?
+
+
+### 5005
+1. [mcq] ets-earth-process
+Which of the following geological processes adds new igneous rock to Earth’s surface?
+
+2. [multi-select] ets-select-three-adaptation
+Which THREE of the following responses help a mammal conserve or produce heat in cold conditions?
+
+3. [mcq] ets-lab-instrument
+Which of the following instruments would be most appropriate for determining the volume of a rectangular wooden block?
+

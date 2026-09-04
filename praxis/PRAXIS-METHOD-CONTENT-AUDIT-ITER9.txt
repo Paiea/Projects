@@ -1,0 +1,18 @@
+Iteration 9 approved queue
+1 Research: reread current public ETS 5001 Study Companion test-at-a-glance and question-type guidance.
+2 Research: review 5002 public competency/discussion-question morphology.
+3 Research: review 5003 public method cues: estimation, representation, remainder, numeric entry.
+4 Research: review 5004 source, chronology, geography, and economics task forms.
+5 Research: review 5005 experimental, evidence, model, and multi-response task forms.
+6 Content: add 5002 phoneme-manipulation archetype.
+7 Content: add 5002 passage-evidence archetype.
+8 Content: add 5002 revision-stage multi-response archetype.
+9 Content: add 5003 remainder-in-context archetype.
+10 Content: add 5003 rational-representation comparison archetype.
+11 Content: add 5003 contextual numeric-entry archetype.
+12 Content: add 5004 chronology/causation, source-purpose, and geographic-pattern archetypes.
+13 Content: add 5005 controlled-variable, data-interpretation, and model-prediction archetypes.
+14 Review: preserve format spacing and existing 44/3/3 5003 format mix after new content.
+15 Review: run full fidelity, authenticity, quality, validation, smoke, and replay gates.
+
+Principle: practice the Praxis decision method and content together. Do not turn every item into generic hard reasoning. Preserve direct knowledge items where ETS uses them, but repeatedly rehearse cues such as BEST, supported by, which TWO/THREE, Select ALL, approximation, source purpose, variable control, and numeric entry.

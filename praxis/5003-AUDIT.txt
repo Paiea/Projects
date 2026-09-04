@@ -1,0 +1,150 @@
+1. [math-algebra] [multi-select] [application-reasoning] [hard] Select TWO statements that are true.
+   CHOICES: The solution to 3x + 5 = 20 is x = 5. | If x > 4, then x = 6 is a possible solution. | The expression 2x + 7 is an equation. | The solution to 2x = 12 is x = 10.
+
+2. [math-geo] [mcq] [representation-model] [hard] A researcher wants to show whether study time and test score tend to increase together. Which display is most useful?
+   CHOICES: Venn diagram | Scatterplot | Circle graph | Single-value pictograph
+
+3. [math-geo] [mcq] [application-reasoning] [medium] An event has probability 0.9. Which description is best?
+   CHOICES: unlikely | certain | likely | impossible
+
+4. [math-number] [mcq] [multistep-context] [medium] Two signals repeat every 10 minutes and 15 minutes. They occur together at 9:00. When will they next occur together?
+   CHOICES: 9:25 | 11:30 | 9:30 | 9:05
+
+5. [math-algebra] [numeric-entry] [representation-model] [hard] A table follows the rule y = 3x + 6. If one row has y = 30, what x-value belongs in that row?
+   ANSWER: 8
+
+6. [math-geo] [mcq] [application-reasoning] [hard] The data set 4, 6, 7, 8, 10 has mean 7. If 25 is added, what happens to the mean?
+   CHOICES: It decreases. | It increases to 10. | It stays the same. | It becomes 25.
+
+7. [math-algebra] [mcq] [multistep-context] [hard] Solve 3(x + 4) = 36.
+   CHOICES: 36 | 12 | 4 | 8
+
+8. [math-number] [mcq] [error-analysis] [hard] A teacher estimates 9 items at about $31 each, so the total should be about $279. A calculator shows $282.60. Which conclusion is best?
+   CHOICES: The calculator result is reasonable because it is close to the estimate. | The exact total should be replaced by the estimate. | The estimate is useless unless it is exact. | The calculator must be wrong because it does not equal the estimate.
+
+9. [math-geo] [mcq] [representation-model] [hard] A net is made of 2 congruent triangles and 3 rectangles. Which solid can it form?
+   CHOICES: Triangular prism | Rectangular prism | Square pyramid | Cube
+
+10. [math-geo] [mcq] [application-reasoning] [medium] A fair coin lands heads five times in a row. What is the probability of heads on the next toss?
+   CHOICES: 1/2 | 5/6 | 1/6 | 0
+
+11. [math-number] [mcq] [application-reasoning] [medium] A student solves x + 10 = 36 by subtracting 10 from both sides. Which idea justifies that step?
+   CHOICES: Division distributes over addition. | Multiplication always makes numbers larger. | Subtraction undoes addition. | Adding the same number changes equality.
+
+12. [math-number] [mcq] [multistep-context] [medium] A school reports 3,847 library visits. Which is the best report if visits are rounded to the nearest hundred?
+   CHOICES: 3700 | 3800 | 3850 | 3900
+
+13. [math-geo] [mcq] [multistep-context] [hard] A rectangle is 5 by 3. Both dimensions are doubled. How does its area change?
+   CHOICES: It increases by 2 square units. | It doubles to 30 square units. | It becomes 4 times as large (60 square units). | It stays 15 square units.
+
+14. [math-algebra] [mcq] [representation-model] [hard] A table follows the rule y = 5x + 9. If one row has y = 39, what x-value belongs in that row?
+   CHOICES: 15 | 7 | 30 | 6
+
+15. [math-number] [mcq] [application-reasoning] [medium] Which expression is equivalent to 8,085?
+   CHOICES: 8×1,000 + 8×10 + 5 | 8×1,000 + 8 + 50 | 16×1,000 + 5 | 8×100 + 8×10 + 5
+
+16. [math-geo] [mcq] [multistep-context] [hard] A dispenser contains 4 L of water. Each bottle holds 300 mL. After filling as many complete bottles as possible, how much water remains?
+   CHOICES: 13 mL | 3700 mL | 1200 mL | 100 mL
+
+17. [math-geo] [mcq] [multistep-context] [hard] A container holds 4 gallons. After 2 quarts are used, how many quarts remain?
+   CHOICES: 8 | 14 | 2 | 16
+
+18. [math-algebra] [mcq] [application-reasoning] [medium] Which expression means “five less than three times n”?
+   CHOICES: 3n - 5 | 3(n - 5) | 5n - 3 | 5 - 3n
+
+19. [math-geo] [mcq] [application-reasoning] [medium] A board is 8 feet 9 inches long. How many inches long is it?
+   CHOICES: 96 | 105 | 17 | 1260
+
+20. [math-number] [mcq] [multistep-context] [hard] An item costs $43. It is discounted 30% and then a 10% tax is applied to the discounted price. About how much is the final cost?
+   CHOICES: $47.30 | $25.80 | $30.10 | $33.11
+
+21. [math-number] [mcq] [multistep-context] [hard] Two signals repeat every 12 minutes and 8 minutes. They occur together at 9:00. When will they next occur together?
+   CHOICES: 9:24 | 10:36 | 9:20 | 9:04
+
+22. [math-geo] [mcq] [representation-model] [medium] A student needs to measure the length of a classroom table to the nearest centimeter. Which tool is most appropriate?
+   CHOICES: Balance scale | Thermometer | Meterstick marked in centimeters | Graduated cylinder
+
+23. [math-number] [mcq] [recall-procedure] [easy] In 6,274, what is the value of the digit 2?
+   CHOICES: 100 | 200 | 2 | 2000
+
+24. [math-algebra] [mcq] [representation-model] [hard] A table follows the rule y = 3x + 9. If one row has y = 27, what x-value belongs in that row?
+   CHOICES: 9 | 15 | 6 | 18
+
+25. [math-number] [mcq] [error-analysis] [medium] Which is the best estimate of 88 × 18?
+   CHOICES: 1800 | 18000 | 180 | 70
+
+26. [math-geo] [mcq] [multistep-context] [hard] A dispenser contains 8 L of water. Each bottle holds 300 mL. After filling as many complete bottles as possible, how much water remains?
+   CHOICES: 2400 mL | 7700 mL | 26 mL | 200 mL
+
+27. [math-number] [mcq] [multistep-context] [hard] A container has 6.3 L. 3.7 L are added and 0.9 L are poured out. How much remains?
+   CHOICES: 9.1 | 1.7 | 10.0 | 10.9
+
+28. [math-number] [mcq] [application-reasoning] [medium] A student solves x + 6 = 29 by subtracting 6 from both sides. Which idea justifies that step?
+   CHOICES: Multiplication always makes numbers larger. | Subtraction undoes addition. | Adding the same number changes equality. | Division distributes over addition.
+
+29. [math-algebra] [mcq] [representation-model] [medium] A student must read at least 12 pages. Which inequality represents the number p of pages read?
+   CHOICES: p ≥ 12 | p > 12 | p ≤ 12 | p = 11
+
+30. [math-number] [mcq] [multistep-context] [hard] A mixture uses 3 cups of concentrate for every 8 cups of water. At the same rate, how many cups of concentrate are needed for 40 cups of water?
+   CHOICES: 40 | 5 | 43 | 15
+
+31. [math-number] [mcq] [multistep-context] [hard] A teacher buys 7 packs of 10 markers. After 7 markers are used, how many remain?
+   CHOICES: 21 | 77 | 63 | 10
+
+32. [math-number] [mcq] [recall-procedure] [easy] In 343, what is the value of the digit 4?
+   CHOICES: 40 | 10 | 400 | 4
+
+33. [math-number] [mcq] [multistep-context] [hard] Two signals repeat every 10 minutes and 8 minutes. They occur together at 9:00. When will they next occur together?
+   CHOICES: 9:40 | 9:02 | 10:20 | 9:18
+
+34. [math-algebra] [mcq] [representation-model] [medium] A student must read at least 8 pages. Which inequality represents the number p of pages read?
+   CHOICES: p = 7 | p > 8 | p ≤ 8 | p ≥ 8
+
+35. [math-number] [mcq] [multistep-context] [hard] A box holds 25 tiles. A class uses 2/5 of them for one project. How many tiles remain?
+   CHOICES: 15 | 23 | 5 | 10
+
+36. [math-algebra] [mcq] [representation-model] [hard] The pattern 4, 7, 10, 13, ... continues by the same rule. What is the 8th term?
+   CHOICES: 16 | 24 | 25 | 21
+
+37. [math-geo] [mcq] [application-reasoning] [medium] Which statement is always true?
+   CHOICES: Every trapezoid is a triangle. | Every rhombus has four right angles. | Every square is a rectangle. | Every rectangle is a square.
+
+38. [math-algebra] [mcq] [application-reasoning] [medium] A relationship follows y = 5x + 5. What is y when x = 2?
+   CHOICES: 20 | 15 | 12 | 10
+
+39. [math-number] [mcq] [application-reasoning] [medium] A digit has value 7 in the ones place. What value would the same digit have 1 place to the left?
+   CHOICES: 700 | 7 | 70 | 0.7
+
+40. [math-geo] [mcq] [multistep-context] [hard] A 8 m by 5 m garden has a 2 m-wide path around the outside. What is the area of the path?
+   CHOICES: 108 | 68 | 40 | 26
+
+41. [math-geo] [mcq] [multistep-context] [hard] A rectangular prism is 4 by 4 by 5. If only the height doubles, what is the new volume?
+   CHOICES: 160 | 80 | 320 | 85
+
+42. [math-number] [mcq] [multistep-context] [easy] Which percent is equivalent to 6/8?
+   CHOICES: 60% | 12.5% | 75% | 48%
+
+43. [math-algebra] [mcq] [application-reasoning] [medium] Which expression is equivalent to 4(x + 3)?
+   CHOICES: x + 12 | 4x + 3 | 4x + 12 | 4x × 12
+
+44. [math-algebra] [mcq] [representation-model] [hard] A function table contains (1, 5), (2, 9), and (3, 13). Which rule describes the relationship?
+   CHOICES: y = 1x + 4 | y = x + 5 | y = 4x - 1 | y = 4x + 1
+
+45. [math-geo] [mcq] [application-reasoning] [medium] A board is 5 feet 6 inches long. How many inches long is it?
+   CHOICES: 11 | 66 | 792 | 60
+
+46. [math-algebra] [mcq] [application-reasoning] [hard] A museum group must have at least 26 people to receive a discount. Which value is a solution to p ≥ 26?
+   CHOICES: 26 | 0 | 25 | 21
+
+47. [math-number] [mcq] [multistep-context] [medium] A school reports 3,465 library visits. Which is the best report if visits are rounded to the nearest hundred?
+   CHOICES: 3600 | 3400 | 3500 | 3470
+
+48. [math-algebra] [mcq] [representation-model] [hard] A function table contains (1, 7), (2, 11), and (3, 15). Which rule describes the relationship?
+   CHOICES: y = x + 7 | y = 4x - 3 | y = 4x + 3 | y = 3x + 4
+
+49. [math-algebra] [mcq] [representation-model] [medium] A taxi fare is modeled by C = 4 + 2.5m, where m is miles traveled. Which variable is dependent?
+   CHOICES: m, because miles must always depend on cost. | 4, because it is a constant. | 2.5, because it is a coefficient. | C, because the cost changes as the miles change.
+
+50. [math-number] [mcq] [multistep-context] [medium] A school reports 4,479 library visits. Which is the best report if visits are rounded to the nearest hundred?
+   CHOICES: 4480 | 4600 | 4400 | 4500
+

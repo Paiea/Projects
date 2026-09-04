@@ -1,0 +1,332 @@
+
+5002 questions 80 distinct families 27 difficulty { medium: 57, hard: 23 } cognitive {
+  'representation-model': 19,
+  'application-reasoning': 48,
+  'multistep-context': 8,
+  'error-analysis': 5
+}
+top families [
+  [ 'purpose', 7 ],
+  [ 'vocabulary in context', 5 ],
+  [ 'communication-scenario', 5 ],
+  [ 'fluency-diagnostic', 5 ],
+  [ 'genre-purpose', 5 ],
+  [ 'source-evaluation', 5 ],
+  [ 'phonological-diagnostic', 5 ],
+  [ 'infer', 4 ],
+  [ 'grammar-context', 4 ],
+  [ 'revision-decision', 4 ],
+  [ 'discussion norms', 4 ],
+  [ 'main', 3 ]
+]
+1. [infer] [representation-model] Read the passage.
+
+A seed bank stores seeds from many plant varieties under cool, dry conditions. The seeds are not kept because scientists expect to plant every one next year. Instead, collections preserve genetic diversity that might otherwise disappear when a crop variety falls out of use or a wild population declines. Years later, breeders may use stored seeds to find traits such as drought tolerance or disease resistance.
+
+Which inference is best supported by the passage?
+2. [purpose] [application-reasoning] Read the passage.
+
+An octopus can squeeze through an opening much smaller than its body appears to allow. Most of its body is soft tissue, and it has no rigid skeleton. The main limitation is its beak, a hard structure used for feeding. If the beak can pass through an opening, the rest of the animal often can too. This flexibility helps an octopus hide from predators and explore narrow spaces while hunting.
+
+What is the author’s main purpose?
+3. [purpose] [application-reasoning] Read the passage.
+
+When movable-type printing spread through Europe, producing a book still required skilled labor, paper, ink, and money. Yet printers could reproduce many copies more quickly than scribes could copy manuscripts by hand. Books and pamphlets therefore became available to wider audiences. The change did not make everyone literate overnight, but it accelerated the circulation of religious, scientific, and political ideas.
+
+What is the author’s main purpose?
+4. [vocabulary in context] [representation-model] The first model was fragile, so the students handled it with unusual care.
+
+What does “fragile” most nearly mean?
+5. [communication-scenario] [application-reasoning] A listener is unsure whether they understood a speaker’s main point. What is the strongest response?
+6. [revision-purpose-audience] [application-reasoning] A student is writing an argument to the school board asking for a later start time. The draft gives three statistics but never explains how they support the request. Which revision would most improve the draft for its purpose and audience?
+7. [fluency-diagnostic] [application-reasoning] A student reads quickly but repeatedly substitutes similar-looking words. Which fluency component should be addressed first?
+8. [genre-purpose] [application-reasoning] A class anthology asks students to recount an imagined storm from one character’s point of view. Which feature is most central?
+9. [fluency-diagnostic] [application-reasoning] A reader correctly decodes a passage after several attempts but is extremely slow on the first read. Which practice most directly targets the weakness?
+10. [vocabulary in context] [multistep-context] Because the evidence was compelling, even the skeptical committee members changed their minds.
+
+What does “compelling” most nearly mean?
+11. [grammar-context] [multistep-context] Which revision fixes the misplaced modifier?
+12. [communication-scenario] [application-reasoning] A speaker is presenting to younger students. Which adjustment best reflects audience awareness?
+13. [revision-decision] [representation-model] A paragraph repeats the same idea three times but contains no supporting example. Which revision would help most?
+14. [genre-purpose] [application-reasoning] A class anthology asks students to recount an imagined storm from one character’s point of view. Which feature is most central?
+15. [revision-purpose-audience] [application-reasoning] A student is writing an argument to the school board asking for a later start time. The draft gives three statistics but never explains how they support the request. Which revision would most improve the draft for its purpose and audience?
+16. [revision-decision] [representation-model] A paragraph repeats the same idea three times but contains no supporting example. Which revision would help most?
+17. [source-evaluation] [application-reasoning] A student paraphrases a source accurately. What still needs to happen in formal research writing?
+18. [fluency-diagnostic] [application-reasoning] A reader correctly decodes a passage after several attempts but is extremely slow on the first read. Which practice most directly targets the weakness?
+19. [vocabulary in context] [multistep-context] Because the evidence was compelling, even the skeptical committee members changed their minds.
+
+What does “compelling” most nearly mean?
+20. [text-structure-analysis] [representation-model] A passage first describes declining bee populations, then explains several causes, and ends by evaluating two proposed responses. Why is this structure effective?
+21. [communication-scenario] [application-reasoning] A speaker is presenting to younger students. Which adjustment best reflects audience awareness?
+22. [vocabulary in context] [multistep-context] After hiking for hours in steep heat, Lena found the final climb grueling.
+
+What does “grueling” most nearly mean as used in the sentence?
+23. [fluency-diagnostic] [application-reasoning] Two students read the same passage. One is accurate but slow; the other is fast but inaccurate. What does this comparison show?
+24. [purpose] [representation-model] Read the passage.
+
+Before sunrise, volunteers met near the bay with clipboards and small collection bags. They were not there to remove every shell or piece of seaweed. Instead, they recorded the kinds and amounts of debris found along fixed sections of shoreline. By repeating the survey each month, the group could tell whether plastic fragments, fishing line, and other trash were becoming more or less common. Cleanup mattered, but consistent measurements allowed the volunteers to identify patterns and judge whether prevention efforts were working.
+
+What is the author’s main purpose?
+25. [fluency-diagnostic] [application-reasoning] A student reads every word correctly but pauses between almost every word. Which fluency need is most evident?
+26. [decoding] [representation-model] Which word is most directly decodable using a common consonant-vowel-consonant pattern?
+27. [phonological-diagnostic] [application-reasoning] A student says “sunshine” without “sun.” What level of sound manipulation is this?
+28. [phonics-diagnostic] [error-analysis] A student reads “hope” correctly but reads “hoping” as if the first vowel were short. Which instructional focus most directly addresses the error?
+29. [phonological-diagnostic] [application-reasoning] A student can identify rhyming words but cannot separate “fish” into /f/ /i/ /sh/. Which skill needs more support?
+30. [source-evaluation] [application-reasoning] A student finds a five-year-old article about a rapidly changing technology. What should the student consider first?
+31. [source-evaluation] [representation-model] Two sources disagree about a state’s current population. Source A is a recent Census Bureau table with methodology notes. Source B is an undated tourism blog that gives no citation. What is the strongest reason to prefer Source A?
+32. [grammar-context] [multistep-context] Which sentence uses parallel structure?
+33. [vocabulary in context] [multistep-context] Unlike the noisy hallway, the library was tranquil.
+
+What does “tranquil” most nearly mean?
+34. [grammar-context] [multistep-context] Which sentence has correct subject-verb agreement?
+35. [communication-scenario] [representation-model] Which behavior most supports equitable collaboration?
+36. [phonics-diagnostic] [error-analysis] A student reads “hope” correctly but reads “hoping” as if the first vowel were short. Which instructional focus most directly addresses the error?
+37. [main] [application-reasoning] Read the passage.
+
+The town planned to replace a narrow wooden footbridge after repeated flooding damaged its supports. Engineers considered a wider concrete bridge, but residents worried that a larger structure would speed storm water toward homes downstream. The final plan raised the bridge, strengthened its supports, and left more open space beneath it for high water to pass. The project cost more than simply rebuilding the old bridge, but it addressed both transportation and flood risk.
+
+Which statement best expresses the central idea?
+38. [morphology-analysis] [error-analysis] A student says the word “preview” must mean “to view again” because the prefix pre- means again. Which response best addresses the error?
+39. [CVe] [representation-model] Which word most clearly demonstrates a consonant-vowel-consonant-silent-e pattern?
+40. [genre-purpose] [application-reasoning] Students must write about a fictional character who gets separated from a group during a field trip and eventually finds help. Which mode best fits?
+41. [phonological-diagnostic] [application-reasoning] Which task is phonological awareness rather than phonics?
+42. [phonological-diagnostic] [application-reasoning] Which activity practices onset-rime blending?
+43. [genre-purpose] [application-reasoning] Students must explain how a bill becomes a law using accurate steps and domain vocabulary. Which mode best fits?
+44. [phonological-diagnostic] [application-reasoning] Which task is phonological awareness rather than phonics?
+45. [decoding] [representation-model] Which word is most directly decodable using a common consonant-vowel-consonant pattern?
+46. [communication-scenario] [representation-model] Which behavior most supports equitable collaboration?
+47. [revision-decision] [application-reasoning] After revising ideas and organization, a writer finds several comma splices. What stage should receive attention now?
+48. [source-evaluation] [application-reasoning] A student paraphrases a source accurately. What still needs to happen in formal research writing?
+49. [revision-cohesion] [representation-model] A paragraph gives a claim, then an example, then a sentence that explains a cause that should come before the example. Which revision most improves cohesion?
+50. [CVe] [representation-model] Which word most clearly demonstrates a consonant-vowel-consonant-silent-e pattern?
+51. [revision-decision] [application-reasoning] After revising ideas and organization, a writer finds several comma splices. What stage should receive attention now?
+52. [grammar-context] [multistep-context] Which revision fixes the misplaced modifier?
+53. [genre-purpose] [application-reasoning] Students must explain how a bill becomes a law using accurate steps and domain vocabulary. Which mode best fits?
+54. [source-evaluation] [application-reasoning] A website sells a product while claiming that the product is scientifically proven. Which question is most important?
+55. [discussion-evidence] [error-analysis] During a discussion, a student responds, “I disagree because that just sounds wrong.” Which revision best strengthens the response?
+56. [main] [representation-model] Read the passage.
+
+Jalen practiced the same eight measures every afternoon, but he did not always play them from beginning to end. On some days he slowed the tempo until every rhythm was accurate. On others he isolated two difficult transitions and repeated them. Near the recital, he recorded himself and noticed that he rushed whenever the melody became familiar. His practice became less comfortable, but his performance became steadier.
+
+Which statement best expresses the central idea?
+57. [detail] [representation-model] Read the passage.
+
+Jalen practiced the same eight measures every afternoon, but he did not always play them from beginning to end. On some days he slowed the tempo until every rhythm was accurate. On others he isolated two difficult transitions and repeated them. Near the recital, he recorded himself and noticed that he rushed whenever the melody became familiar. His practice became less comfortable, but his performance became steadier.
+
+Which detail is explicitly stated in the passage?
+58. [morphology] [application-reasoning] A student uses the prefix “un-” and the base word “happy” to interpret “unhappy.” Which word-analysis strategy is this?
+59. [morphology] [application-reasoning] A student uses the prefix “un-” and the base word “happy” to interpret “unhappy.” Which word-analysis strategy is this?
+60. [detail] [application-reasoning] Read the passage.
+
+Each autumn, thousands of shorebirds stop at the wetland before continuing south. Some remain only a day; others feed there for weeks. During migration, the birds must replace energy used in long flights. When water levels are too high, shallow feeding areas disappear. When the wetland dries completely, insects and small aquatic animals become scarce. Managers therefore adjust water levels to maintain a patchwork of shallow pools and exposed mud.
+
+Which detail is explicitly stated in the passage?
+61. [infer] [application-reasoning] Read the passage.
+
+Each autumn, thousands of shorebirds stop at the wetland before continuing south. Some remain only a day; others feed there for weeks. During migration, the birds must replace energy used in long flights. When water levels are too high, shallow feeding areas disappear. When the wetland dries completely, insects and small aquatic animals become scarce. Managers therefore adjust water levels to maintain a patchwork of shallow pools and exposed mud.
+
+Which inference is best supported by the passage?
+62. [passage-inference-evidence] [application-reasoning] A teacher notices that students can retell events from a story but struggle to explain why a character changes a decision near the end. Which follow-up question would best assess inferential comprehension?
+63. [main] [application-reasoning] Read the passage.
+
+Mara checked the sky before leaving for the trail. The morning was bright, but clouds had begun building over the ridge. Halfway to the lookout, she noticed the wind becoming cooler and heard a low rumble. She turned around even though the summit was less than a mile away. Rain started just as she reached the parking area. Mara was disappointed, but she knew the mountain would still be there another day.
+
+Which statement best expresses the central idea?
+64. [passage-inference-evidence] [application-reasoning] A town replaced several downtown parking spaces with trees and shaded benches. At first, some shop owners worried fewer parking spaces would reduce business. Six months later, pedestrian counts were higher, and several stores reported more walk-in customers. Which conclusion is best supported by the passage?
+65. [infer] [application-reasoning] Read the passage.
+
+The town planned to replace a narrow wooden footbridge after repeated flooding damaged its supports. Engineers considered a wider concrete bridge, but residents worried that a larger structure would speed storm water toward homes downstream. The final plan raised the bridge, strengthened its supports, and left more open space beneath it for high water to pass. The project cost more than simply rebuilding the old bridge, but it addressed both transportation and flood risk.
+
+Which inference is best supported by the passage?
+66. [discussion norms] [application-reasoning] During a collaborative discussion, which response best builds on another student’s idea?
+67. [discussion norms] [application-reasoning] During a collaborative discussion, which response best builds on another student’s idea?
+68. [discussion norms] [application-reasoning] During a collaborative discussion, which response best builds on another student’s idea?
+69. [presentation] [application-reasoning] Which change would most improve an oral presentation that is accurate but difficult to follow?
+70. [revision and editing] [error-analysis] A writer notices repeated comma errors after the ideas and organization are already strong. What is the best next step?
+71. [purpose] [application-reasoning] Read the passage.
+
+Each autumn, thousands of shorebirds stop at the wetland before continuing south. Some remain only a day; others feed there for weeks. During migration, the birds must replace energy used in long flights. When water levels are too high, shallow feeding areas disappear. When the wetland dries completely, insects and small aquatic animals become scarce. Managers therefore adjust water levels to maintain a patchwork of shallow pools and exposed mud.
+
+What is the author’s main purpose?
+72. [phoneme segmentation] [application-reasoning] A student hears the word “ship” and says each sound separately. Which skill is the student demonstrating?
+73. [revision and editing] [representation-model] A draft contains good evidence, but the paragraphs are in an illogical order. What should the writer do first?
+74. [infer] [application-reasoning] Read the passage.
+
+An octopus can squeeze through an opening much smaller than its body appears to allow. Most of its body is soft tissue, and it has no rigid skeleton. The main limitation is its beak, a hard structure used for feeding. If the beak can pass through an opening, the rest of the animal often can too. This flexibility helps an octopus hide from predators and explore narrow spaces while hunting.
+
+Which inference is best supported by the passage?
+75. [discussion norms] [application-reasoning] During a collaborative discussion, which response best builds on another student’s idea?
+76. [source credibility] [application-reasoning] A student needs reliable information about historical text of a federal law. Which source is generally strongest?
+77. [purpose] [representation-model] Read the passage.
+
+A seed bank stores seeds from many plant varieties under cool, dry conditions. The seeds are not kept because scientists expect to plant every one next year. Instead, collections preserve genetic diversity that might otherwise disappear when a crop variety falls out of use or a wild population declines. Years later, breeders may use stored seeds to find traits such as drought tolerance or disease resistance.
+
+What is the author’s main purpose?
+78. [purpose] [representation-model] Read the passage.
+
+Jalen practiced the same eight measures every afternoon, but he did not always play them from beginning to end. On some days he slowed the tempo until every rhythm was accurate. On others he isolated two difficult transitions and repeated them. Near the recital, he recorded himself and noticed that he rushed whenever the melody became familiar. His practice became less comfortable, but his performance became steadier.
+
+What is the author’s main purpose?
+79. [purpose] [application-reasoning] Read the passage.
+
+Each autumn, thousands of shorebirds stop at the wetland before continuing south. Some remain only a day; others feed there for weeks. During migration, the birds must replace energy used in long flights. When water levels are too high, shallow feeding areas disappear. When the wetland dries completely, insects and small aquatic animals become scarce. Managers therefore adjust water levels to maintain a patchwork of shallow pools and exposed mud.
+
+What is the author’s main purpose?
+80. [source credibility] [application-reasoning] A student needs reliable information about official election turnout totals. Which source is generally strongest?
+
+5004 questions 60 distinct families 43 difficulty { hard: 26, easy: 5, medium: 29 } cognitive {
+  'application-reasoning': 45,
+  'recall-procedure': 5,
+  'representation-model': 8,
+  'error-analysis': 2
+}
+top families [
+  [ 'migration', 3 ],
+  [ 'cultural diffusion', 2 ],
+  [ 'civic-scenario', 2 ],
+  [ 'civil rights', 2 ],
+  [ 'opportunity cost', 2 ],
+  [ 'geography-evidence', 2 ],
+  [ 'irrigation', 2 ],
+  [ 'classical Greece', 2 ],
+  [ 'twentieth century decolonization', 2 ],
+  [ 'cause-effect-history', 2 ],
+  [ 'economics-scenario', 2 ],
+  [ 'checks balances', 2 ]
+]
+1. [resource settlement] [application-reasoning] Consider the following question. Why have many cities historically developed near rivers or coastlines?
+2. [cultural diffusion] [recall-procedure] Consider the following question. Which is the best example of cultural diffusion?
+3. [civic-scenario] [application-reasoning] A city council passes a local rule, a state legislature passes a conflicting statewide law on the same issue, and the dispute reaches a court. Which principle is most directly involved in deciding which level of government has authority?
+4. [civil rights] [application-reasoning] Consider the following question. Brown v. Board of Education is most closely associated with
+5. [opportunity cost] [recall-procedure] Consider the following question. A student chooses to study for two hours instead of working a paid shift. The opportunity cost is best described as
+6. [geography-evidence] [representation-model] A region has steep mountains, frequent heavy rain, and limited flat land. Which settlement pattern is most consistent with that physical geography?
+7. [irrigation] [application-reasoning] Which is the best example of humans modifying the environment to support agriculture?
+8. [global exchange] [representation-model] Why did long-distance trade networks matter historically beyond moving goods?
+9. [geography-evidence] [representation-model] A region has steep mountains, frequent heavy rain, and limited flat land. Which settlement pattern is most consistent with that physical geography?
+10. [cultural diffusion] [application-reasoning] Which is the best example of cultural diffusion?
+11. [interaction] [application-reasoning] Consider the following question. Which is the clearest example of people modifying an environment to meet a need?
+12. [social institutions] [application-reasoning] Schools, families, governments, and religious organizations are examples of
+13. [Roman legacy] [recall-procedure] Which response is best? Which is a major Roman contribution that influenced later societies?
+14. [agriculture civilizations] [application-reasoning] Consider the following question. The development of agriculture most directly contributed to
+15. [classical Greece] [application-reasoning] Which contribution is most strongly associated with classical Athens?
+16. [twentieth century decolonization] [application-reasoning] Which response is best? Decolonization after World War II refers to the process by which
+17. [scarcity] [application-reasoning] Consider the following question. Why is scarcity a central economic concept?
+18. [cause-effect-history] [application-reasoning] During the 1800s, a new transportation route sharply reduced the cost of moving farm goods from inland areas to eastern cities. Which development would most likely follow?
+19. [judicial review] [application-reasoning] Consider the following question. Marbury v. Madison is most closely associated with which principle?
+20. [civil rights] [application-reasoning] Which response is best? Brown v. Board of Education is most closely associated with
+21. [economics-scenario] [application-reasoning] A storm destroys much of a region’s coffee crop while consumer demand for coffee remains about the same. What is the most likely short-run effect?
+22. [migration] [application-reasoning] Which is a pull factor in migration?
+23. [irrigation] [recall-procedure] Consider the following question. Which is the best example of humans modifying the environment to support agriculture?
+24. [economics-scenario] [application-reasoning] A storm destroys much of a region’s coffee crop while consumer demand for coffee remains about the same. What is the most likely short-run effect?
+25. [checks balances] [application-reasoning] Which is an example of checks and balances?
+26. [primary-source-reasoning] [representation-model] A political pamphlet argues that government power is legitimate only when people consent to be governed. Which founding-era idea does the argument most directly reflect?
+27. [chronology-change] [error-analysis] A student claims that industrialization affected only factory production and did not alter American cities. Which evidence most directly challenges the claim?
+28. [cause-effect-history] [application-reasoning] During the 1800s, a new transportation route sharply reduced the cost of moving farm goods from inland areas to eastern cities. Which development would most likely follow?
+29. [westward expansion consequence] [representation-model] Consider the following question. Which consequence followed most directly from rapid U.S. westward expansion in the nineteenth century?
+30. [opportunity cost] [application-reasoning] Consider the following question. A student chooses to study for two hours instead of working a paid shift. The opportunity cost is best described as
+31. [migration] [application-reasoning] Which response is best? Which is a pull factor in migration?
+32. [specialization trade] [application-reasoning] Which response is best? Why can specialization encourage trade?
+33. [Magna Carta influence] [application-reasoning] Which response is best? Why is Magna Carta often discussed in the development of constitutional government?
+34. [social institution] [recall-procedure] Which response is best? Which is best described as a social institution?
+35. [migration] [application-reasoning] Consider the following question. Which is a pull factor in migration?
+36. [map-reasoning] [representation-model] A map shows most major cities in a region clustered along navigable rivers and a coastline, while the mountainous interior has few large settlements. Which inference is best supported?
+37. [federalism] [application-reasoning] Which response is best? Which statement best describes federalism in the U.S. constitutional system?
+38. [twentieth century decolonization] [application-reasoning] Consider the following question. Decolonization after World War II refers to the process by which
+39. [social institution] [application-reasoning] Consider the following question. Which is best described as a social institution?
+40. [latitude] [representation-model] Which coordinate measures distance north or south of the Equator?
+41. [civic-scenario] [application-reasoning] A city council passes a local rule, a state legislature passes a conflicting statewide law on the same issue, and the dispute reaches a court. Which principle is most directly involved in deciding which level of government has authority?
+42. [map projection] [representation-model] Consider the following question. Why do flat world maps necessarily distort some geographic properties?
+43. [longitude] [application-reasoning] Longitude is measured east or west from the
+44. [industrial revolution] [application-reasoning] Which response is best? One major effect of the Industrial Revolution was
+45. [Bill of Rights purpose] [application-reasoning] Consider the following question. Why was the Bill of Rights added to the Constitution?
+46. [Civil War cause] [application-reasoning] Consider the following question. Which issue was central to the sectional conflict that led to the Civil War?
+47. [classical Greece] [application-reasoning] Which response is best? Which contribution is most strongly associated with classical Athens?
+48. [economic-tradeoff] [error-analysis] A town can fund either a new library wing or repairs to several playgrounds this year, but not both. A student says there is no opportunity cost because neither project makes a profit. What is the best correction?
+49. [Marbury] [application-reasoning] Consider the following question. Marbury v. Madison is most closely associated with establishing the principle of
+50. [checks balances] [application-reasoning] Consider the following question. Which is an example of checks and balances?
+51. [separation of powers] [application-reasoning] Consider the following question. Which action is primarily a legislative function at the federal level?
+52. [civil war] [application-reasoning] Which response is best? Which issue was central to the sectional conflict that led to the U.S. Civil War?
+53. [civic responsibility] [application-reasoning] Which is a civic responsibility rather than a constitutionally protected right?
+54. [bill rights] [application-reasoning] Which response is best? Which protection is found in the First Amendment?
+55. [Louisiana Purchase] [application-reasoning] Why was the Louisiana Purchase significant to the United States?
+56. [Louisiana Purchase] [application-reasoning] Which response is best? Why was the Louisiana Purchase significant to the United States?
+57. [Great Migration] [application-reasoning] Consider the following question. The Great Migration of the twentieth century refers largely to the movement of
+58. [Great Migration] [application-reasoning] The Great Migration of the twentieth century refers largely to the movement of
+59. [Reconstruction] [application-reasoning] Which was a major goal of Reconstruction after the Civil War?
+60. [Bill of Rights purpose] [application-reasoning] Why was the Bill of Rights added to the Constitution?
+
+5005 questions 55 distinct families 46 difficulty { medium: 22, hard: 27, easy: 6 } cognitive {
+  'application-reasoning': 38,
+  'recall-procedure': 6,
+  'representation-model': 8,
+  'error-analysis': 3
+}
+top families [
+  [ 'classification', 2 ],
+  [ 'trait environment', 2 ],
+  [ 'variation', 2 ],
+  [ 'energy flow', 2 ],
+  [ 'systems-cause-effect', 2 ],
+  [ 'solution', 2 ],
+  [ 'tides', 2 ],
+  [ 'mineral properties', 2 ],
+  [ 'weathering erosion', 2 ],
+  [ 'classification evidence', 1 ],
+  [ 'geologic change', 1 ],
+  [ 'seasons', 1 ]
+]
+1. [classification] [application-reasoning] Which response is best? Organisms are classified partly to
+2. [classification evidence] [application-reasoning] Consider the following question. Modern biological classification increasingly uses DNA evidence because DNA can
+3. [geologic change] [application-reasoning] Which observation best supports the idea that Earth’s surface changes over long periods?
+4. [seasons] [recall-procedure] What is the primary cause of Earth’s seasons?
+5. [independent variable] [application-reasoning] Consider the following question. Students test whether fertilizer amount affects plant growth. They vary fertilizer amount but keep plant species, light, water, and soil the same. What is the independent variable?
+6. [trait environment] [application-reasoning] Consider the following question. Which example best shows that phenotype can reflect both heredity and environment?
+7. [variation] [application-reasoning] Which process produces offspring that usually have a new combination of parental genes?
+8. [physical vs chemical] [recall-procedure] Which response is best? Which change is a chemical change?
+9. [dominance] [application-reasoning] Consider the following question. Which statement about a dominant allele is most accurate?
+10. [energy flow] [application-reasoning] Which response is best? Why are there usually fewer organisms at higher trophic levels in a food web?
+11. [adaptation] [application-reasoning] Which response is best? Which trait is best described as an adaptation?
+12. [systems-cause-effect] [application-reasoning] A disease sharply reduces a population of insects that are a major food source for local birds. Which effect is most reasonable to predict first?
+13. [speed] [application-reasoning] Consider the following question. A cyclist travels 18 kilometers in 1.5 hours at constant speed. What is the speed?
+14. [solution] [application-reasoning] Consider the following question. Which mixture is a solution?
+15. [systems-cause-effect] [application-reasoning] Two identical carts are pushed with different constant forces on the same surface. Which cart should have the greater acceleration?
+16. [simple machine] [recall-procedure] A ramp helps move a heavy object to a higher level mainly by
+17. [energy transformation] [recall-procedure] As a ball falls, ignoring air resistance, its gravitational potential energy primarily
+18. [data-pattern] [representation-model] Students measure runoff from identical trays during equal simulated rain. A bare-soil tray loses 42 g of soil, a grass-covered tray loses 9 g, and a tray with leaf litter loses 16 g. Which conclusion is best supported?
+19. [moon phase] [application-reasoning] Which response is best? Moon phases are caused by
+20. [tides] [recall-procedure] Consider the following question. Ocean tides are caused primarily by
+21. [variable-diagnosis] [error-analysis] Students test whether ramp height affects a toy car’s travel distance. For each trial they change both ramp height and the car’s mass. What is the main problem?
+22. [energy flow] [representation-model] Which response is best? In a food web, an arrow from grass to a rabbit most directly represents
+23. [variation] [application-reasoning] Which response is best? Which process produces offspring that usually have a new combination of parental genes?
+24. [evidence-conclusion] [application-reasoning] In an experiment, plants receiving 4 hours of light averaged 7 cm of growth, plants receiving 8 hours averaged 12 cm, and plants receiving 12 hours averaged 12.5 cm. Which conclusion is best supported?
+25. [relative dating] [application-reasoning] In an undisturbed sequence of sedimentary rock layers, which layer is generally oldest?
+26. [plate boundary] [application-reasoning] Consider the following question. Most earthquakes occur near tectonic plate boundaries because
+27. [trait environment] [application-reasoning] Which example best shows that phenotype can reflect both heredity and environment?
+28. [mineral properties] [application-reasoning] Which response is best? Which property is most useful for identifying a mineral?
+29. [water cycle] [application-reasoning] Liquid water entering the atmosphere as water vapor from plant leaves is called
+30. [earth layers] [application-reasoning] Which response is best? Which Earth layer is primarily liquid iron and nickel?
+31. [reliability] [application-reasoning] Which response is best? Which change would most improve confidence in an experimental result?
+32. [carrying capacity] [application-reasoning] Which response is best? A population cannot grow indefinitely because
+33. [evidence-revision] [error-analysis] After one trial, a student concludes, “This material is always the best insulator in every situation.” Which revision is most scientifically appropriate?
+34. [solar eclipse] [application-reasoning] Which response is best? A solar eclipse occurs when
+35. [radiation] [recall-procedure] Which response is best? Which mode of thermal energy transfer can occur through empty space?
+36. [inheritance-model] [representation-model] A model shows that two parents each carry one dominant allele A and one recessive allele a. Which statement is supported by the model?
+37. [model-misconception] [error-analysis] A student says summer occurs because Earth is much closer to the Sun in June than in December. Which evidence or model best corrects the explanation?
+38. [energy-data-model] [representation-model] A diagram of a flashlight shows chemical energy in a battery → electrical energy in a circuit → light and thermal energy. Which statement best interprets the model?
+39. [classification] [application-reasoning] Organisms are classified partly to
+40. [life cycle] [representation-model] Which response is best? Which sequence correctly represents a complete metamorphosis life cycle?
+41. [weathering erosion] [application-reasoning] Which statement correctly distinguishes weathering from erosion?
+42. [mechanism-explanation] [representation-model] A pond receives excess fertilizer runoff. Algae increase rapidly, then dissolved oxygen falls and many fish die. Which mechanism best explains the sequence?
+43. [fossil evidence] [application-reasoning] Consider the following question. Why are fossils useful evidence about Earth’s history?
+44. [levels organization] [application-reasoning] Which sequence goes from simplest to more complex biological organization?
+45. [model-application] [representation-model] A cell membrane is damaged so it can no longer regulate movement of substances effectively. Which cell function is most directly threatened?
+46. [conservation] [application-reasoning] If 10 grams of substance A react completely with 15 grams of substance B in a closed system, the total mass of products should be
+47. [mineral properties] [application-reasoning] Which response is best? Which property is most useful for identifying a mineral?
+48. [Earth layers] [application-reasoning] Consider the following question. Which Earth layer is liquid and composed mainly of iron and nickel?
+49. [weathering erosion] [application-reasoning] Which statement correctly distinguishes weathering from erosion?
+50. [tides] [application-reasoning] Ocean tides are caused primarily by
+51. [control group] [application-reasoning] Which response is best? Why is a control group useful in an experiment?
+52. [physical chemical change] [application-reasoning] Consider the following question. Which is primarily a physical change?
+53. [friction] [application-reasoning] Which response is best? Friction generally acts
+54. [net force] [representation-model] Which response is best? A hockey puck moves at constant velocity in a straight line. What can be concluded about the net force on it?
+55. [solution] [application-reasoning] Which mixture is a solution?

@@ -1,0 +1,400 @@
+1. [math-algebra] [linear] [medium] [inequality-language]
+A student must read at least 9 pages. Which inequality represents the number p of pages read?
+  A. p ≤ 9
+  B. p = 8
+  C. p ≥ 9 *
+  D. p > 9
+  At least includes the boundary, so p is greater than or equal to the target.
+
+2. [math-geo] [data-statistics] [hard] [graph-interpretation]
+A researcher wants to show whether study time and test score tend to increase together. Which display is most useful?
+  A. Venn diagram
+  B. Scatterplot *
+  C. Circle graph
+  D. Single-value pictograph
+  A scatterplot displays paired numerical variables and makes association visible.
+
+3. [math-geo] [probability] [hard] [compound-probability]
+A spinner has 4 equal color sections, one of them blue. A fair 6-sided number cube is rolled. What is the probability of landing on blue and then rolling either 1 or 2?
+  A. 1/4
+  B. 1/12 *
+  C. 6/6
+  D. 2/6
+  Multiply independent probabilities: 1/4 × 2/6 = 2/24 = 1/12.
+
+4. [math-number] [factors-multiples] [medium] [lcm-context]
+Two signals repeat every 10 minutes and 15 minutes. They occur together at 9:00. When will they next occur together?
+  A. 9:25
+  B. 11:30
+  C. 9:30 *
+  D. 9:05
+  They coincide after the least common multiple, 30 minutes.
+
+5. [math-algebra] [linear] [hard] [linear-representation]
+A table follows the rule y = 3x + 6. If one row has y = 30, what x-value belongs in that row?
+  A. 24
+  B. 8 *
+  C. 14
+  D. 10
+  Solve 30 = 3x + 6: subtract 6, then divide by 3, giving x=8.
+
+6. [math-geo] [data-statistics] [hard] [center-data-change]
+The data set 4, 6, 7, 8, 10 has mean 7. If 25 is added, what happens to the mean?
+  A. It decreases.
+  B. It increases to 10. *
+  C. It stays the same.
+  D. It becomes 25.
+  The new total is 60 over 6 values, so the mean becomes 10.
+
+7. [math-algebra] [linear] [medium] [linear-substitution]
+A relationship follows y = 3x + 3. What is y when x = 7?
+  A. 27
+  B. 13
+  C. 21
+  D. 24 *
+  Substitute x=7: y=24.
+
+8. [math-number] [estimation] [hard] [estimate-reasonableness]
+A teacher estimates 9 items at about $31 each, so the total should be about $279. A calculator shows $282.60. Which conclusion is best?
+  A. The calculator result is reasonable because it is close to the estimate. *
+  B. The exact total should be replaced by the estimate.
+  C. The estimate is useless unless it is exact.
+  D. The calculator must be wrong because it does not equal the estimate.
+  The estimate is a magnitude check. $282.60 is close to about $279.
+
+9. [math-geo] [geometry] [hard] [dimension-change]
+A rectangular prism is 4 by 4 by 2. If only the height doubles, what is the new volume?
+  A. 128
+  B. 32
+  C. 64 *
+  D. 34
+  Original volume is 32; doubling one dimension doubles volume to 64.
+
+10. [math-geo] [probability] [medium] [independence]
+A fair coin lands heads five times in a row. What is the probability of heads on the next toss?
+  A. 1/2 *
+  B. 5/6
+  C. 1/6
+  D. 0
+  Independent tosses do not change the next probability.
+
+11. [math-number] [rational-operations] [hard] [multistep-rational-context]
+A container has 6.4 L. 2.5 L are added and 2.2 L are poured out. How much remains?
+  A. 1.7
+  B. 11.1
+  C. 6.7 *
+  D. 8.9
+  Combine the changes in order: 6.4 + 2.5 − 2.2 = 6.7 L.
+
+12. [math-number] [place-value] [medium] [rounding-context]
+A school reports 3,847 library visits. Which is the best report if visits are rounded to the nearest hundred?
+  A. 3700
+  B. 3800 *
+  C. 3850
+  D. 3900
+  Rounding 3,847 to the nearest hundred gives 3,800.
+
+13. [math-geo] [geometry] [hard] [dimension-change]
+A rectangle is 5 by 3. Both dimensions are doubled. How does its area change?
+  A. It increases by 2 square units.
+  B. It doubles to 30 square units.
+  C. It becomes 4 times as large (60 square units). *
+  D. It stays 15 square units.
+  Doubling both dimensions multiplies area by 2 × 2 = 4.
+
+14. [math-algebra] [linear] [hard] [linear-representation]
+A table follows the rule y = 5x + 9. If one row has y = 39, what x-value belongs in that row?
+  A. 15
+  B. 7
+  C. 30
+  D. 6 *
+  Solve 39 = 5x + 9: subtract 9, then divide by 5, giving x=6.
+
+15. [math-number] [place-value] [hard] [estimate-reasonableness]
+A district estimated an enrollment of about 5,000 students. The final count was 5,114. Which statement best evaluates the estimate?
+  A. It is reasonable because the final count is only 114 away from the estimate. *
+  B. It proves the final count should be changed to 5,000.
+  C. Any count from 1,000 to 9,999 would be equally reasonable.
+  D. It is unreasonable because an estimate must equal the final count.
+  An estimate checks magnitude and closeness, not exact equality. A difference of 114 is small relative to about 5,000.
+
+16. [math-geo] [measurement] [hard] [convert-divide-remainder]
+A dispenser contains 4 L of water. Each bottle holds 250 mL. After filling as many complete bottles as possible, how much water remains?
+  A. 16 mL
+  B. 3750 mL
+  C. 1000 mL
+  D. 0 mL *
+  Convert 4 L to 4000 mL, divide by 250, and interpret the remainder. 0 mL remains.
+
+17. [math-geo] [measurement] [hard] [convert-divide-remainder]
+A container holds 4 gallons. After 2 quarts are used, how many quarts remain?
+  A. 8
+  B. 14 *
+  C. 2
+  D. 16
+  4 gallons = 16 quarts. Subtract 2: 14 quarts remain.
+
+18. [math-algebra] [expressions] [medium] [translate-expression]
+Which expression means “five less than three times n”?
+  A. 3n - 5 *
+  B. 3(n - 5)
+  C. 5n - 3
+  D. 5 - 3n
+  Three times n is 3n; five less means subtract 5.
+
+19. [math-geo] [measurement] [medium] [mixed-unit-conversion]
+A board is 8 feet 9 inches long. How many inches long is it?
+  A. 96
+  B. 105 *
+  C. 17
+  D. 1260
+  8 feet is 96 inches; add 9 inches for 105.
+
+20. [math-number] [fractions-decimals] [hard] [percent-ratio-context]
+An item costs $43. It is discounted 30% and then a 10% tax is applied to the discounted price. About how much is the final cost?
+  A. $47.30
+  B. $25.80
+  C. $30.10
+  D. $33.11 *
+  Discount first: $30.10. Then apply 10% tax to that amount: about $33.11.
+
+21. [math-number] [factors-multiples] [hard] [lcm-context]
+Two signals repeat every 12 minutes and 8 minutes. They occur together at 9:00. When will they next occur together?
+  A. 9:24 *
+  B. 10:36
+  C. 9:20
+  D. 9:04
+  They coincide after the least common multiple, 24 minutes.
+
+22. [math-geo] [measurement] [hard] [elapsed-multistep]
+A workshop starts at 8:20. It has a 45-minute lesson, a 15-minute break, and a 40-minute activity. When does it end?
+  A. 8:45
+  B. 10:00 *
+  C. 8:20
+  D. 11:00
+  Total elapsed time is 100 minutes. Adding that to the start time gives 10:00.
+
+23. [math-number] [place-value] [easy] [digit-value]
+In 6,274, what is the value of the digit 2?
+  A. 100
+  B. 200 *
+  C. 2
+  D. 2000
+  The digit 2 is in the 100 place, so its value is 200.
+
+24. [math-algebra] [linear] [hard] [linear-representation]
+A table follows the rule y = 3x + 9. If one row has y = 27, what x-value belongs in that row?
+  A. 9
+  B. 15
+  C. 6 *
+  D. 18
+  Solve 27 = 3x + 9: subtract 9, then divide by 3, giving x=6.
+
+25. [math-number] [estimation] [medium] [estimate-product]
+Which is the best estimate of 88 × 18?
+  A. 1800 *
+  B. 18000
+  C. 180
+  D. 70
+  Round to compatible tens; the product should be near 1,800.
+
+26. [math-geo] [measurement] [hard] [convert-divide-remainder]
+A dispenser contains 8 L of water. Each bottle holds 400 mL. After filling as many complete bottles as possible, how much water remains?
+  A. 3200 mL
+  B. 7600 mL
+  C. 20 mL
+  D. 0 mL *
+  Convert 8 L to 8000 mL, divide by 400, and interpret the remainder. 0 mL remains.
+
+27. [math-number] [rational-operations] [hard] [multistep-rational-context]
+A container has 6.3 L. 3.7 L are added and 0.9 L are poured out. How much remains?
+  A. 9.1 *
+  B. 1.7
+  C. 10.0
+  D. 10.9
+  Combine the changes in order: 6.3 + 3.7 − 0.9 = 9.1 L.
+
+28. [math-number] [rational-operations] [hard] [multistep-rational-context]
+A container has 3.9 L. 3.5 L are added and 0.9 L are poured out. How much remains?
+  A. 6.5 *
+  B. 8.3
+  C. 7.4
+  D. 0.5
+  Combine the changes in order: 3.9 + 3.5 − 0.9 = 6.5 L.
+
+29. [math-algebra] [linear] [medium] [inequality-language]
+A student must read at least 12 pages. Which inequality represents the number p of pages read?
+  A. p ≥ 12 *
+  B. p > 12
+  C. p ≤ 12
+  D. p = 11
+  At least includes the boundary, so p is greater than or equal to the target.
+
+30. [math-number] [fractions-decimals] [hard] [percent-ratio-context]
+An item costs $86. It is discounted 30% and then a 10% tax is applied to the discounted price. About how much is the final cost?
+  A. $51.60
+  B. $60.20
+  C. $94.60
+  D. $66.22 *
+  Discount first: $60.20. Then apply 10% tax to that amount: about $66.22.
+
+31. [math-number] [rational-operations] [hard] [multistep-rational-context]
+A teacher buys 7 packs of 10 markers. After 7 markers are used, how many remain?
+  A. 21
+  B. 77
+  C. 63 *
+  D. 10
+  First find the total markers: 7 × 10 = 70. Then subtract 7: 63.
+
+32. [math-number] [place-value] [easy] [digit-value]
+In 343, what is the value of the digit 4?
+  A. 40 *
+  B. 10
+  C. 400
+  D. 4
+  The digit 4 is in the 10 place, so its value is 40.
+
+33. [math-number] [factors-multiples] [hard] [lcm-context]
+Two signals repeat every 10 minutes and 8 minutes. They occur together at 9:00. When will they next occur together?
+  A. 9:40 *
+  B. 9:02
+  C. 10:20
+  D. 9:18
+  They coincide after the least common multiple, 40 minutes.
+
+34. [math-algebra] [linear] [medium] [inequality-language]
+A student must read at least 8 pages. Which inequality represents the number p of pages read?
+  A. p = 7
+  B. p > 8
+  C. p ≤ 8
+  D. p ≥ 8 *
+  At least includes the boundary, so p is greater than or equal to the target.
+
+35. [math-number] [rational-operations] [hard] [multistep-rational-context]
+A box holds 25 tiles. A class uses 2/5 of them for one project. How many tiles remain?
+  A. 15 *
+  B. 23
+  C. 5
+  D. 10
+  2/5 of 25 is 10. Subtract from 25: 15 remain.
+
+36. [math-algebra] [patterns] [hard] [pattern-generalization]
+The pattern 4, 7, 10, 13, ... continues by the same rule. What is the 8th term?
+  A. 16
+  B. 24
+  C. 25 *
+  D. 21
+  The nth term is 4 + (n−1)(3); for n=8, the term is 25.
+
+37. [math-geo] [geometry] [medium] [classification]
+Which statement is always true?
+  A. Every trapezoid is a triangle.
+  B. Every rhombus has four right angles.
+  C. Every square is a rectangle. *
+  D. Every rectangle is a square.
+  A square meets the definition of a rectangle and adds four equal sides.
+
+38. [math-algebra] [linear] [medium] [linear-substitution]
+A relationship follows y = 5x + 5. What is y when x = 2?
+  A. 20
+  B. 15 *
+  C. 12
+  D. 10
+  Substitute x=2: y=15.
+
+39. [math-number] [place-value] [medium] [place-scaling]
+A digit has value 7 in the ones place. What value would the same digit have 1 place to the left?
+  A. 700
+  B. 7
+  C. 70 *
+  D. 0.7
+  Each move left multiplies the digit's value by 10, so the value becomes 70.
+
+40. [math-geo] [geometry] [hard] [dimension-change]
+A rectangle is 5 by 6. Both dimensions are doubled. How does its area change?
+  A. It increases by 2 square units.
+  B. It doubles to 60 square units.
+  C. It becomes 4 times as large (120 square units). *
+  D. It stays 30 square units.
+  Doubling both dimensions multiplies area by 2 × 2 = 4.
+
+41. [math-geo] [geometry] [hard] [dimension-change]
+A rectangular prism is 4 by 4 by 5. If only the height doubles, what is the new volume?
+  A. 160 *
+  B. 80
+  C. 320
+  D. 85
+  Original volume is 80; doubling one dimension doubles volume to 160.
+
+42. [math-algebra] [expressions] [hard] [model-and-solve]
+A fee of $5 plus $3 per item totals $23. How many items were purchased?
+  A. 7
+  B. 18
+  C. 6 *
+  D. 11
+  Model 3x + 5 = 23. Subtract 5, then divide by 3; x=6.
+
+43. [math-number] [fractions-decimals] [hard] [percent-ratio-context]
+An item costs $78. It is discounted 30% and then a 5% tax is applied to the discounted price. About how much is the final cost?
+  A. $81.90
+  B. $54.60
+  C. $50.70
+  D. $57.33 *
+  Discount first: $54.60. Then apply 5% tax to that amount: about $57.33.
+
+44. [math-algebra] [expressions] [hard] [model-and-solve]
+A school orders 4 identical kits. Each kit has x student notebooks and 4 teacher notebooks. Which expression models the total, and what is the total when x = 30?
+  A. x + 8; 38
+  B. 4(x + 4); 136 *
+  C. 4(x) + 16; 124
+  D. 4x + 4; 124
+  The total is 4(x + 4). With x=30, the total is 136.
+
+45. [math-algebra] [patterns] [hard] [pattern-generalization]
+A pattern has term n given by 3n + 2. Which term has value 23?
+  A. 6th
+  B. 5th
+  C. 7th *
+  D. 8th
+  Solve 3n+2=23; n=7.
+
+46. [math-geo] [measurement] [hard] [convert-divide-remainder]
+A container holds 3 gallons. After 1 quarts are used, how many quarts remain?
+  A. 8
+  B. 12
+  C. 2
+  D. 11 *
+  3 gallons = 12 quarts. Subtract 1: 11 quarts remain.
+
+47. [math-algebra] [linear] [medium] [inequality-language]
+A student must read at least 7 pages. Which inequality represents the number p of pages read?
+  A. p = 6
+  B. p ≤ 7
+  C. p > 7
+  D. p ≥ 7 *
+  At least includes the boundary, so p is greater than or equal to the target.
+
+48. [math-number] [place-value] [medium] [rounding-context]
+A school reports 4,407 library visits. Which is the best report if visits are rounded to the nearest hundred?
+  A. 4400 *
+  B. 4500
+  C. 4410
+  D. 4300
+  Rounding 4,407 to the nearest hundred gives 4,400.
+
+49. [math-algebra] [patterns] [hard] [pattern-generalization]
+A pattern has term n given by 4n + 1. Which term has value 29?
+  A. 7th *
+  B. 5th
+  C. 8th
+  D. 6th
+  Solve 4n+1=29; n=7.
+
+50. [math-number] [factors-multiples] [hard] [lcm-context]
+Two signals repeat every 6 minutes and 18 minutes. They occur together at 9:00. When will they next occur together?
+  A. 9:24
+  B. 9:18 *
+  C. 10:48
+  D. 9:06
+  They coincide after the least common multiple, 18 minutes.
+
