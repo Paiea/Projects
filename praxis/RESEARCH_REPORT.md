@@ -72,3 +72,14 @@ V2 therefore expands passage contexts, adds more Social Studies and Science conc
 ## V2 content policy
 
 No paid bank was scraped or reproduced. No login/paywall was bypassed. Free authored items were treated as calibration unless reuse rights were explicit. The local bank is original/procedural, with sourceBasis metadata pointing to the ETS blueprint or a high-level calibration pattern rather than pretending each generated item has an external citation.
+
+## Iteration 11: feedback-mode review
+
+Current ETS prep pages separate two useful study behaviors: Learning Paths advertises practice questions with feedback, while full-length practice tests are positioned as timed simulations. Iteration 11 therefore keeps both behaviors instead of forcing one across all full tests.
+
+- Study Full Test: official-length/timed local practice with explicit Check Answer feedback.
+- Exam Simulation: official-length/timed local practice with no correctness or explanation until submission.
+- Full-test questions hide topic/skill labels during the attempt so the UI does not cue the tested method.
+- Immediate-feedback answers lock after feedback so the stored result reflects the learner's first checked answer.
+
+Research checked 2026-09-04 against the current ETS 5001 page, Elementary Education Test Prep page, and Study Companion.

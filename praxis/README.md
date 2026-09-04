@@ -126,3 +126,12 @@ This pass treats the app primarily as Praxis preparation. It adds original items
 - Adds original practice for best-supported evidence, most-appropriate choices, estimation vs exact work, exact-set selection, numeric entry, source limits, opportunity cost, controlled variables, and population-change reasoning.
 - Five-form cycling regression checks method breadth and respects recent fingerprints.
 - Public ETS task morphology is used as calibration only; ETS question text is not copied.
+
+## Iteration 11
+
+Full tests now support two distinct workflows:
+
+- **Study Full Test**: full length, real timer, explicit Check Answer feedback, then locked answer.
+- **Exam Simulation**: full length, real timer, no correctness/explanations until submission.
+
+The app also records Praxis-method metadata in attempts and reports method-level accuracy when enough attempts exist. Full-test screens no longer show topic/skill hints before feedback, and real timers auto-submit at zero.
