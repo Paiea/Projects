@@ -19,6 +19,8 @@ class PidginOleloPrototypeTests(unittest.TestCase):
         self.assertEqual(len(re.findall(r"\bid\s*:\s*['\"]", app)), 30)
         self.assertEqual(len(re.findall(r"\bpidgin\s*:\s*['\"]", app)), 30)
         self.assertEqual(len(re.findall(r"\bhawaiian\s*:\s*['\"]", app)), 30)
+        self.assertEqual(len(re.findall(r"\bexamplePidgin\s*:\s*['\"]", app)), 30)
+        self.assertEqual(len(re.findall(r"\bexampleHawaiian\s*:\s*['\"]", app)), 30)
 
     def test_required_interaction_hooks_exist_without_audio(self):
         html = self.read(PROJECT / "index.html")
@@ -28,6 +30,8 @@ class PidginOleloPrototypeTests(unittest.TestCase):
             "direction-hawaiian",
             "prompt",
             "answer",
+            "example-pidgin",
+            "example-hawaiian",
             "show-answer",
             "got-it",
             "miss-it",
@@ -37,6 +41,8 @@ class PidginOleloPrototypeTests(unittest.TestCase):
         self.assertNotIn('id="listen"', html)
         self.assertNotIn('id="voice-status"', html)
         self.assertIn("localStorage", app)
+        self.assertIn("current.examplePidgin", app)
+        self.assertIn("current.exampleHawaiian", app)
         self.assertNotIn("speechSynthesis", app)
         self.assertNotIn("SpeechSynthesisUtterance", app)
 
