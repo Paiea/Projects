@@ -62,7 +62,17 @@ h1 {
   line-height: 1.5;
 }
 
-.experience-nav,
+.experience-nav {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 12px;
+  padding: 6px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: rgba(255, 253, 247, 0.75);
+}
+
 .mode-switch {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -134,7 +144,8 @@ h1 {
   box-shadow: 0 18px 50px rgba(44, 46, 38, 0.08);
 }
 
-.challenge-card { min-height: 430px; }
+.challenge-card,
+.noeau-card { min-height: 430px; }
 
 .card-topline {
   display: flex;
@@ -180,6 +191,13 @@ h1 {
 .challenge-prompt {
   min-height: 7rem;
   margin-top: 22px;
+}
+
+.noeau-saying {
+  min-height: 8rem;
+  font-size: clamp(1.7rem, 6vw, 3rem);
+  line-height: 1.13;
+  letter-spacing: -0.025em;
 }
 
 .answer-wrap {
@@ -238,6 +256,41 @@ h1 {
 
 .example-line--hawaiian { font-weight: 800; }
 
+.noeau-meaning {
+  margin: 0;
+  font-size: 1.08rem;
+  font-weight: 700;
+  line-height: 1.55;
+}
+
+.noeau-hook-wrap {
+  margin-top: 18px;
+  padding: 16px;
+  border-radius: 14px;
+  background: rgba(255, 253, 247, 0.78);
+  border: 1px dashed rgba(201, 111, 59, 0.42);
+}
+
+.noeau-hook {
+  margin: 0;
+  font-size: clamp(1.2rem, 4vw, 1.6rem);
+  font-weight: 850;
+  line-height: 1.35;
+}
+
+.noeau-hook-note,
+.noeau-source-line {
+  margin: 9px 0 0;
+  color: var(--muted);
+  font-size: 0.84rem;
+  line-height: 1.45;
+}
+
+.noeau-source-line a {
+  color: var(--accent);
+  font-weight: 750;
+}
+
 .primary-button,
 .rating-button,
 .history-button {
@@ -279,6 +332,10 @@ h1 {
   grid-template-columns: 1fr 1fr 1fr;
   gap: 8px;
   margin-top: 10px;
+}
+
+.noeau-card .history-actions {
+  grid-template-columns: 1fr 1fr;
 }
 
 .history-button {
@@ -323,7 +380,8 @@ h1 {
     padding: 20px;
   }
 
-  .challenge-card { min-height: 390px; }
+  .challenge-card,
+  .noeau-card { min-height: 390px; }
 
   .card-topline {
     align-items: flex-start;
@@ -339,5 +397,5 @@ h1 {
   }
 
   .challenge-prompt { margin-top: 20px; }
-  .rating-actions, .history-actions { grid-template-columns: 1fr; }
+  .rating-actions, .history-actions, .noeau-card .history-actions { grid-template-columns: 1fr; }
 }
