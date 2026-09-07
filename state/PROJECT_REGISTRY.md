@@ -16,6 +16,16 @@ Private/recovery-only projects do not need to appear here. Cross-project recover
 - Status: active
 - Purpose: lightweight classroom instruction, WIN grouping, quick checks, proficiency evidence, and reusable teacher-led activities
 
+## Pidgin → ʻŌlelo
+
+- Category: Language Learning
+- Hosting: internal
+- Public route: `pidgin-olelo/`
+- Source: `pidgin-olelo/`
+- Durable state: `pidgin-olelo/PROJECT_STATE.md`
+- Status: prototype
+- Purpose: spoken retrieval experiment using familiar Pidgin thoughts as a scaffold into useful ʻōlelo Hawaiʻi production and comprehension
+
 ## Peg-Leg Greg Reader
 
 - Category: Writing & Story Projects
