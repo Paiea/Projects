@@ -72,6 +72,32 @@ h1 {
   line-height: 1.5;
 }
 
+.experience-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 12px;
+  padding: 6px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: rgba(255, 253, 247, 0.75);
+}
+
+.experience-nav a {
+  min-height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 11px;
+  color: var(--muted);
+  font-weight: 850;
+  text-decoration: none;
+}
+
+.experience-nav a[aria-current="page"] {
+  background: var(--ink);
+  color: white;
+}
+
 .mode-switch {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -139,6 +165,24 @@ h1 {
   font-weight: 850;
   line-height: 1.05;
   letter-spacing: -0.04em;
+}
+
+.challenge-card {
+  min-height: 430px;
+}
+
+.challenge-instruction {
+  max-width: 36rem;
+  margin: 28px 0 0;
+  color: var(--muted);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.challenge-prompt {
+  min-height: 7rem;
+  margin-top: 22px;
 }
 
 .answer-wrap {
@@ -243,6 +287,10 @@ h1 {
     padding: 20px;
   }
 
+  .challenge-card {
+    min-height: 390px;
+  }
+
   .card-topline {
     align-items: flex-start;
     flex-direction: column;
@@ -256,6 +304,10 @@ h1 {
   .prompt {
     min-height: 7rem;
     margin: 28px 0 24px;
+  }
+
+  .challenge-prompt {
+    margin-top: 20px;
   }
 
   .rating-actions {
