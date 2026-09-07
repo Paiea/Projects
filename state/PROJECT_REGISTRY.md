@@ -21,10 +21,12 @@ Private/recovery-only projects do not need to appear here. Cross-project recover
 - Category: Language Learning
 - Hosting: internal
 - Public route: `pidgin-olelo/`
-- Source: `pidgin-olelo/`
+- V1 Practice: `pidgin-olelo/index.html`
+- V2 Challenge: `pidgin-olelo/challenge.html`
+- Shared language-bank authority: `pidgin-olelo/bank.js`
 - Durable state: `pidgin-olelo/PROJECT_STATE.md`
 - Status: prototype
-- Purpose: spoken retrieval experiment using familiar Pidgin thoughts as a scaffold into useful ʻōlelo Hawaiʻi production and comprehension
+- Purpose: retrieval experiment using familiar Pidgin thoughts and Hawaiian-order memory scaffolds to build useful ʻōlelo Hawaiʻi production and comprehension; all modes consume one shared phrase bank
 
 ## Peg-Leg Greg Reader
 
