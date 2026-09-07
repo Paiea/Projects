@@ -29,6 +29,7 @@ Interaction:
 - Pidgin → ʻŌlelo retrieval
 - ʻŌlelo → Pidgin reverse comprehension
 - learner answers aloud before reveal
+- reveal includes a concrete paired `Pidgin / Hawaiian` usage example
 - `Got um` / `Miss` browser-local strength
 - missed items return sooner
 - progress shown as owned/seen counts, not streaks
@@ -51,11 +52,14 @@ The same thought should eventually survive multiple representations:
 
 1. Pidgin prompt → Hawaiian production
 2. Hawaiian text → Pidgin comprehension
-3. situation → Hawaiian production
-4. Hawaiian prompt → Hawaiian response
-5. delayed retrieval in real conversation
+3. concrete paired example that fills the pattern with real words
+4. situation → Hawaiian production
+5. Hawaiian prompt → Hawaiian response
+6. delayed retrieval in real conversation
 
-V0 implements only the first two forms plus delayed resurfacing.
+V0 implements the first three forms plus delayed resurfacing.
+
+**Concrete examples beat abstract blanks.** Pattern cards may still use blanks for retrieval, but the reveal should show one ordinary filled-in Pidgin/Hawaiian example such as `Where the car stay? / Ma hea ke kaʻa?` so the learner sees how the pattern lives in actual speech.
 
 **Device/browser TTS is intentionally removed.** Early prototype feedback showed that low-quality synthetic Hawaiian pronunciation hurts trust more than it helps learning. Future audio should return only when there is reliable fluent-speaker or otherwise trustworthy Hawaiian speech.
 
@@ -70,18 +74,19 @@ These are calibration references, not a substitute for fluent-speaker review.
 
 ## NEXT_TASK
 
-Use the prototype with Dad before adding features.
+Use the prototype with Dad before adding larger features.
 
 Observe:
 
 - whether he understands the Pidgin prompts without explanation;
 - whether he actually answers aloud;
+- whether the filled-in paired examples make patterns easier to remember;
 - which Hawaiian items come back faster because of the Pidgin cue;
-- which Pidgin prompts feel forced or wrong;
+- which Pidgin prompts or examples feel forced or wrong;
 - whether he wants to continue after a short session.
 
 Do not add AI conversation, speech scoring, accounts, synthetic audio, or a large curriculum until this produces real learner signal.
 
 ## RE-PROMPT
 
-> Continue Pidgin → ʻŌlelo from current `Paiea/Projects` GitHub authority. Read root `AGENTS.md`, `state/PROJECT_REGISTRY.md`, `state/HANDSHAKE_PROTOCOL.md`, and `pidgin-olelo/PROJECT_STATE.md`, then inspect the exact current `pidgin-olelo/` source before changing anything. Preserve Pidgin as learner scaffold rather than Hawaiian grammatical authority. Device/browser TTS was deliberately removed after poor prototype feedback; do not restore synthetic audio without a materially better pronunciation source. Use real Dad testing to choose the next change instead of expanding features speculatively.
+> Continue Pidgin → ʻŌlelo from current `Paiea/Projects` GitHub authority. Read root `AGENTS.md`, `state/PROJECT_REGISTRY.md`, `state/HANDSHAKE_PROTOCOL.md`, and `pidgin-olelo/PROJECT_STATE.md`, then inspect the exact current `pidgin-olelo/` source before changing anything. Preserve Pidgin as learner scaffold rather than Hawaiian grammatical authority. Preserve the concrete paired-example layer unless real learner testing shows it hurts retrieval. Device/browser TTS was deliberately removed after poor prototype feedback; do not restore synthetic audio without a materially better pronunciation source. Use real Dad testing to choose the next change instead of expanding features speculatively.
