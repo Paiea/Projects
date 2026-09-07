@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Learn ʻōlelo noʻeau through their established meaning and a clearly labeled modern local memory hook.">
+  <meta name="theme-color" content="#172117">
+  <title>Pidgin → ʻŌlelo Noʻeau</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="app-header">
+      <a class="back-link" href="../">← Projects</a>
+      <p class="eyebrow">PAIEA LANGUAGE LAB</p>
+      <h1>ʻŌlelo Noʻeau</h1>
+      <p class="lede">Old wisdom, real meaning, one modern local memory hook. The joke helps you remember. It does not rewrite the saying.</p>
+    </header>
+
+    <nav class="experience-nav" aria-label="Pidgin to ʻŌlelo modes">
+      <a href="index.html">Learn</a>
+      <a href="challenge.html">Challenge</a>
+      <a href="noeau.html" aria-current="page">Noʻeau</a>
+    </nav>
+
+    <section class="practice-card noeau-card" aria-live="polite">
+      <div class="card-topline">
+        <span class="card-label">Kūpuna said</span>
+        <span id="noeau-count" class="progress">1 / 10</span>
+      </div>
+
+      <p id="noeau-saying" class="prompt noeau-saying"></p>
+
+      <div id="noeau-reveal" class="answer-wrap noeau-reveal" hidden>
+        <p class="answer-label">What it carries</p>
+        <p id="noeau-meaning" class="noeau-meaning"></p>
+
+        <div class="noeau-hook-wrap">
+          <p class="example-label">Today maybe</p>
+          <p id="noeau-hook" class="noeau-hook"></p>
+          <p class="noeau-hook-note">Modern memory hook only. Not the historical translation.</p>
+        </div>
+
+        <p class="noeau-source-line">Source: <a id="noeau-source" href="" target="_blank" rel="noreferrer"></a></p>
+      </div>
+
+      <button id="noeau-show" class="primary-button" type="button">What that carry?</button>
+
+      <div class="history-actions" aria-label="Browse ʻōlelo noʻeau">
+        <button id="noeau-prev" class="history-button" type="button" disabled>← Previous</button>
+        <button id="noeau-next" class="history-button" type="button">Next →</button>
+      </div>
+    </section>
+
+    <section class="quick-rule" aria-label="How Noʻeau mode works">
+      <strong>Keep the layers straight:</strong> the ʻōlelo noʻeau is the cultural text, “What it carries” is the sourced meaning in plain language, and “Today maybe” is just a modern local analogy to make it stick.
+    </section>
+
+    <footer class="app-footer">
+      <p><strong>First 10 only.</strong> Curated before scaling.</p>
+      <p class="small-print">Meanings are concise paraphrases of Mary Kawena Pukui’s ʻŌlelo Noʻeau material as reproduced by Kamehameha Schools Kaʻiwakīloumoku. The modern local lines are newly written memory hooks and are deliberately labeled separately.</p>
+    </footer>
+  </main>
+
+  <script src="noeau.js"></script>
+  <script src="noeau-app.js"></script>
+</body>
+</html>
