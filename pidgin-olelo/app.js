@@ -93,7 +93,7 @@ function updateProgress() {
 
 function updateHistoryControls() {
   els.backCard.disabled = historyCursor <= 0;
-  els.forwardCard.disabled = historyCursor < 0 || historyCursor >= history.length - 1;
+  els.forwardCard.disabled = !current;
   els.replayCard.disabled = !current;
 }
 
@@ -117,8 +117,8 @@ function renderFeedback(kind, item = current) {
   const messages = {
     got: `Got um. ${item.hawaiian} can wait longer before it comes back.`,
     miss: `Miss. No hide. ${item.hawaiian} coming back soon. Use the Hawaiian shape, then try um again.`,
-    back: "Going backwards. Review only, so Got Um / Miss stay locked until you return to the newest card.",
-    forward: "Going forward through your session history.",
+    back: "Going backwards through cards you already saw.",
+    forward: "Going forward through cards you already saw.",
     replay: "Replay. No peek. Say um one more time before Show me.",
   };
 
@@ -159,6 +159,16 @@ function showHistoryItem(nextCursor, feedbackKind) {
   current = itemById(history[historyCursor]);
   drawCurrent();
   renderFeedback(feedbackKind);
+}
+
+function moveForward() {
+  if (historyCursor < history.length - 1) {
+    showHistoryItem(historyCursor + 1, "forward");
+    return;
+  }
+
+  renderFeedback(null);
+  renderNextQueuedItem();
 }
 
 function rateCurrent(delta) {
@@ -207,7 +217,7 @@ els.showAnswer.addEventListener("click", () => setRevealed(true));
 els.gotIt.addEventListener("click", () => rateCurrent(1));
 els.missIt.addEventListener("click", () => rateCurrent(-1));
 els.backCard.addEventListener("click", () => showHistoryItem(historyCursor - 1, "back"));
-els.forwardCard.addEventListener("click", () => showHistoryItem(historyCursor + 1, "forward"));
+els.forwardCard.addEventListener("click", moveForward);
 els.replayCard.addEventListener("click", () => {
   setRevealed(false);
   renderFeedback("replay");
