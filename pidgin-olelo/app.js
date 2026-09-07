@@ -46,11 +46,9 @@ const els = {
   answer: document.querySelector("#answer"),
   note: document.querySelector("#note"),
   showAnswer: document.querySelector("#show-answer"),
-  listen: document.querySelector("#listen"),
   gotIt: document.querySelector("#got-it"),
   missIt: document.querySelector("#miss-it"),
   progress: document.querySelector("#progress"),
-  voiceStatus: document.querySelector("#voice-status"),
 };
 
 let direction = DIRECTIONS.P2H;
@@ -161,43 +159,10 @@ function setDirection(nextDirection) {
   renderCurrent();
 }
 
-function chooseHawaiianVoice() {
-  if (!("speechSynthesis" in window)) return null;
-  const voices = window.speechSynthesis.getVoices();
-  return voices.find((voice) => voice.lang.toLowerCase().startsWith("haw")) || null;
-}
-
-function speakHawaiian() {
-  if (!current || !("speechSynthesis" in window)) {
-    els.voiceStatus.textContent = "This browser has no speech playback. Keep practicing aloud without it.";
-    return;
-  }
-
-  window.speechSynthesis.cancel();
-  const utterance = new SpeechSynthesisUtterance(current.hawaiian);
-  const hawaiianVoice = chooseHawaiianVoice();
-
-  if (hawaiianVoice) {
-    utterance.voice = hawaiianVoice;
-    utterance.lang = hawaiianVoice.lang;
-    els.voiceStatus.textContent = `Using device voice: ${hawaiianVoice.name}. It is a practice aid, not pronunciation authority.`;
-  } else {
-    els.voiceStatus.textContent = "No Hawaiian device voice found. Using device fallback as a practice aid, not pronunciation authority.";
-  }
-
-  utterance.rate = 0.82;
-  window.speechSynthesis.speak(utterance);
-}
-
 els.showAnswer.addEventListener("click", () => setRevealed(true));
 els.gotIt.addEventListener("click", () => rateCurrent(1));
 els.missIt.addEventListener("click", () => rateCurrent(-1));
-els.listen.addEventListener("click", speakHawaiian);
 els.directionPidgin.addEventListener("click", () => setDirection(DIRECTIONS.P2H));
 els.directionHawaiian.addEventListener("click", () => setDirection(DIRECTIONS.H2P));
-
-if ("speechSynthesis" in window) {
-  window.speechSynthesis.addEventListener?.("voiceschanged", chooseHawaiianVoice);
-}
 
 renderCurrent();

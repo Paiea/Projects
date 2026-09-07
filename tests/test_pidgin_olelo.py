@@ -20,7 +20,7 @@ class PidginOleloPrototypeTests(unittest.TestCase):
         self.assertEqual(len(re.findall(r"\bpidgin\s*:\s*['\"]", app)), 30)
         self.assertEqual(len(re.findall(r"\bhawaiian\s*:\s*['\"]", app)), 30)
 
-    def test_required_interaction_hooks_exist(self):
+    def test_required_interaction_hooks_exist_without_audio(self):
         html = self.read(PROJECT / "index.html")
         app = self.read(PROJECT / "app.js")
         for control_id in (
@@ -29,15 +29,16 @@ class PidginOleloPrototypeTests(unittest.TestCase):
             "prompt",
             "answer",
             "show-answer",
-            "listen",
             "got-it",
             "miss-it",
             "progress",
         ):
             self.assertIn(f'id="{control_id}"', html)
+        self.assertNotIn('id="listen"', html)
+        self.assertNotIn('id="voice-status"', html)
         self.assertIn("localStorage", app)
-        self.assertIn("speechSynthesis", app)
-        self.assertIn("haw", app)
+        self.assertNotIn("speechSynthesis", app)
+        self.assertNotIn("SpeechSynthesisUtterance", app)
 
     def test_static_runtime_has_no_external_dependency(self):
         html = self.read(PROJECT / "index.html")
@@ -45,13 +46,13 @@ class PidginOleloPrototypeTests(unittest.TestCase):
         self.assertIn('href="styles.css"', html)
         self.assertIn('src="app.js"', html)
 
-    def test_phone_layout_and_device_voice_disclaimer_exist(self):
+    def test_phone_layout_remains_and_audio_disclaimer_is_gone(self):
         styles = self.read(PROJECT / "styles.css")
         html = self.read(PROJECT / "index.html")
         self.assertIn("@media", styles)
         self.assertIn("480px", styles)
-        self.assertIn("device voice", html.lower())
-        self.assertIn("not pronunciation authority", html.lower())
+        self.assertNotIn("device voice", html.lower())
+        self.assertNotIn("pronunciation authority", html.lower())
 
     def test_hub_and_registry_route_to_project(self):
         hub = self.read(ROOT / "index.html")

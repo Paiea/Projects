@@ -32,35 +32,32 @@ Interaction:
 - `Got um` / `Miss` browser-local strength
 - missed items return sooner
 - progress shown as owned/seen counts, not streaks
-- optional browser Speech Synthesis playback
 
-No backend, account, framework, database, external runtime API, speech recognition, or pronunciation scoring.
+No backend, account, framework, database, external runtime API, speech playback, speech recognition, or pronunciation scoring.
 
 ## Content / Language Boundary
 
 The first phrase set is intentionally conservative and is based on beginner/common-use structures found in established Hawaiian-language learning materials, including Kamehameha Schools Kulāiwi materials and common Hawaiian phrase resources.
 
-Important limit:
-
-**The current browser/device voice is not Hawaiian pronunciation authority.**
-
-Before expanding this into a public curriculum or treating audio as instructional authority, get fluent-speaker/kumu review of both the Hawaiian phrase inventory and recordings.
-
 Pidgin wording should remain natural local scaffolding rather than academic Standard English translated into eye dialect.
 
-## Durable Product Decision
+Hawaiian content should get fluent-speaker/kumu review before the prototype grows into curriculum authority.
+
+## Durable Product Decisions
 
 The unit of learning is a **useful thought**, not an isolated vocabulary card.
 
 The same thought should eventually survive multiple representations:
 
 1. Pidgin prompt → Hawaiian production
-2. Hawaiian audio/text → Pidgin comprehension
+2. Hawaiian text → Pidgin comprehension
 3. situation → Hawaiian production
 4. Hawaiian prompt → Hawaiian response
 5. delayed retrieval in real conversation
 
 V0 implements only the first two forms plus delayed resurfacing.
+
+**Device/browser TTS is intentionally removed.** Early prototype feedback showed that low-quality synthetic Hawaiian pronunciation hurts trust more than it helps learning. Future audio should return only when there is reliable fluent-speaker or otherwise trustworthy Hawaiian speech.
 
 ## References Used for V0 Calibration
 
@@ -81,11 +78,10 @@ Observe:
 - whether he actually answers aloud;
 - which Hawaiian items come back faster because of the Pidgin cue;
 - which Pidgin prompts feel forced or wrong;
-- whether browser speech playback helps or hurts;
 - whether he wants to continue after a short session.
 
-Do not add AI conversation, speech scoring, accounts, or a large curriculum until this produces real learner signal.
+Do not add AI conversation, speech scoring, accounts, synthetic audio, or a large curriculum until this produces real learner signal.
 
 ## RE-PROMPT
 
-> Continue Pidgin → ʻŌlelo from current `Paiea/Projects` GitHub authority. Read root `AGENTS.md`, `state/PROJECT_REGISTRY.md`, `state/HANDSHAKE_PROTOCOL.md`, and `pidgin-olelo/PROJECT_STATE.md`, then inspect the exact current `pidgin-olelo/` source before changing anything. Preserve Pidgin as learner scaffold rather than Hawaiian grammatical authority. Use real Dad testing to choose the next change instead of expanding features speculatively.
+> Continue Pidgin → ʻŌlelo from current `Paiea/Projects` GitHub authority. Read root `AGENTS.md`, `state/PROJECT_REGISTRY.md`, `state/HANDSHAKE_PROTOCOL.md`, and `pidgin-olelo/PROJECT_STATE.md`, then inspect the exact current `pidgin-olelo/` source before changing anything. Preserve Pidgin as learner scaffold rather than Hawaiian grammatical authority. Device/browser TTS was deliberately removed after poor prototype feedback; do not restore synthetic audio without a materially better pronunciation source. Use real Dad testing to choose the next change instead of expanding features speculatively.
