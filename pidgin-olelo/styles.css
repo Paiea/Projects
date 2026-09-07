@@ -114,7 +114,8 @@ h1 {
 
 .card-label,
 .progress,
-.answer-label {
+.answer-label,
+.example-label {
   font-size: 0.72rem;
   font-weight: 900;
   letter-spacing: 0.09em;
@@ -148,7 +149,8 @@ h1 {
   background: var(--accent-soft);
 }
 
-.answer-label {
+.answer-label,
+.example-label {
   margin: 0 0 7px;
   color: var(--muted);
 }
@@ -164,6 +166,22 @@ h1 {
   margin: 8px 0 0;
   color: var(--muted);
   line-height: 1.45;
+}
+
+.example-wrap {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(23, 33, 23, 0.14);
+}
+
+.example-line {
+  margin: 3px 0;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.example-line--hawaiian {
+  font-weight: 800;
 }
 
 .primary-button,
