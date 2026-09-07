@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="One small Pidgin to ʻōlelo Hawaiʻi challenge every ten minutes.">
+  <meta name="theme-color" content="#172117">
+  <title>Pidgin → ʻŌlelo Challenge</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="app-header">
+      <a class="back-link" href="../">← Projects</a>
+      <p class="eyebrow">PAIEA LANGUAGE LAB</p>
+      <h1>Pidgin → ʻŌlelo</h1>
+      <p class="lede">One small retrieval challenge at a time. New one every 10 minutes.</p>
+    </header>
+
+    <nav class="experience-nav" aria-label="Pidgin to ʻŌlelo modes">
+      <a href="index.html">Learn</a>
+      <a href="challenge.html" aria-current="page">Challenge</a>
+    </nav>
+
+    <section class="practice-card challenge-card" aria-live="polite">
+      <div class="card-topline">
+        <span id="challenge-label" class="card-label">CHALLENGE</span>
+        <span id="challenge-timer" class="progress">Next one in 10:00</span>
+      </div>
+
+      <p id="challenge-instruction" class="challenge-instruction"></p>
+      <p id="challenge-prompt" class="prompt challenge-prompt"></p>
+
+      <div id="challenge-answer-wrap" class="answer-wrap" hidden>
+        <p class="answer-label">Answer</p>
+        <p id="challenge-answer" class="answer"></p>
+        <p id="challenge-note" class="note"></p>
+      </div>
+
+      <button id="challenge-show-answer" class="primary-button" type="button">Show me</button>
+    </section>
+
+    <section class="quick-rule" aria-label="How challenge mode works">
+      <strong>Same challenge for the whole 10-minute block.</strong> Refresh all you like. It changes when the clock does.
+    </section>
+
+    <footer class="app-footer">
+      <p><strong>30 useful thoughts, four challenge shapes.</strong> Retrieve it. Recognize it. Say it. Use it.</p>
+      <p class="small-print">Pidgin is the memory bridge, not a claim that Pidgin and Hawaiian grammar are the same. Hawaiian content should get fluent-speaker or kumu review before this grows beyond prototype use.</p>
+    </footer>
+  </main>
+
+  <script src="phrases.js"></script>
+  <script src="challenge.js"></script>
+</body>
+</html>
