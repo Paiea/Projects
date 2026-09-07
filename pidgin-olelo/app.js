@@ -13,7 +13,10 @@ const els = {
   prompt: document.querySelector("#prompt"),
   answerWrap: document.querySelector("#answer-wrap"),
   answer: document.querySelector("#answer"),
+  shape: document.querySelector("#shape"),
   note: document.querySelector("#note"),
+  examplePidgin: document.querySelector("#example-pidgin"),
+  exampleHawaiian: document.querySelector("#example-hawaiian"),
   showAnswer: document.querySelector("#show-answer"),
   gotIt: document.querySelector("#got-it"),
   missIt: document.querySelector("#miss-it"),
@@ -94,7 +97,10 @@ function renderCurrent() {
   els.directionLabel.textContent = pidginFirst ? "HOW YOU SAY UM?" : "WHAT THIS MEAN?";
   els.prompt.textContent = pidginFirst ? current.pidgin : current.hawaiian;
   els.answer.textContent = pidginFirst ? current.hawaiian : current.pidgin;
+  els.shape.textContent = current.shape;
   els.note.textContent = current.note || "";
+  els.examplePidgin.textContent = current.examplePidgin;
+  els.exampleHawaiian.textContent = current.exampleHawaiian;
   setRevealed(false);
   updateProgress();
 }
