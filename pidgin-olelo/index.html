@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Practice useful ʻōlelo Hawaiʻi from familiar Pidgin thoughts, one spoken retrieval at a time.">
+  <meta name="theme-color" content="#172117">
+  <title>Pidgin → ʻŌlelo</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="app-header">
+      <a class="back-link" href="../">← Projects</a>
+      <p class="eyebrow">PAIEA LANGUAGE LAB</p>
+      <h1>Pidgin → ʻŌlelo</h1>
+      <p class="lede">You already know the thought. Say how Hawaiian carries um.</p>
+    </header>
+
+    <section class="mode-switch" aria-label="Practice direction">
+      <button id="direction-pidgin" class="mode-button is-active" type="button" aria-pressed="true">Pidgin → ʻŌlelo</button>
+      <button id="direction-hawaiian" class="mode-button" type="button" aria-pressed="false">ʻŌlelo → Pidgin</button>
+    </section>
+
+    <section class="practice-card" aria-live="polite">
+      <div class="card-topline">
+        <span id="direction-label" class="card-label">HOW YOU SAY UM?</span>
+        <span id="progress" class="progress">0 owned • 0 seen</span>
+      </div>
+
+      <p id="prompt" class="prompt"></p>
+
+      <div id="answer-wrap" class="answer-wrap" hidden>
+        <p class="answer-label">Answer</p>
+        <p id="answer" class="answer"></p>
+        <p id="note" class="note"></p>
+      </div>
+
+      <button id="show-answer" class="primary-button" type="button">Show me</button>
+
+      <div class="secondary-actions">
+        <button id="listen" class="secondary-button" type="button">🔊 Listen</button>
+      </div>
+
+      <div class="rating-actions" aria-label="Rate recall">
+        <button id="miss-it" class="rating-button" type="button" disabled>Miss</button>
+        <button id="got-it" class="rating-button rating-button--strong" type="button" disabled>Got um</button>
+      </div>
+    </section>
+
+    <section class="quick-rule" aria-label="How to use">
+      <strong>One rule:</strong> say your answer out loud before you tap <em>Show me</em>.
+    </section>
+
+    <footer class="app-footer">
+      <p><strong>30 useful thoughts.</strong> No streaks. Missed ones come back sooner.</p>
+      <p id="voice-status">Listen uses your device voice as a practice aid. It is not pronunciation authority.</p>
+      <p class="small-print">Pidgin is the memory bridge, not a claim that Pidgin and Hawaiian grammar are the same. Hawaiian content should get fluent-speaker or kumu review before this grows beyond prototype use.</p>
+    </footer>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
