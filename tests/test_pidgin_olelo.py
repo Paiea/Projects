@@ -56,25 +56,33 @@ class PidginOleloPrototypeTests(unittest.TestCase):
         self.assertNotIn("SpeechSynthesisUtterance", app)
 
     def test_static_runtime_has_no_external_dependency(self):
-        for page_name in ("index.html", "challenge.html"):
+        for page_name in ("index.html", "challenge.html", "noeau.html"):
             html = self.read(PROJECT / page_name)
             self.assertNotRegex(html, r'<(?:script|link)[^>]+(?:src|href)=["\']https?://')
             self.assertIn('href="styles.css"', html)
-            self.assertIn('src="phrases.js"', html)
+        self.assertIn('src="phrases.js"', self.read(PROJECT / "index.html"))
+        self.assertIn('src="phrases.js"', self.read(PROJECT / "challenge.html"))
         self.assertIn('src="app.js"', self.read(PROJECT / "index.html"))
         self.assertIn('src="challenge.js"', self.read(PROJECT / "challenge.html"))
+        self.assertIn('src="noeau.js"', self.read(PROJECT / "noeau.html"))
+        self.assertIn('src="noeau-app.js"', self.read(PROJECT / "noeau.html"))
 
-    def test_learn_and_challenge_are_two_pages_in_one_interface(self):
-        learn = self.read(PROJECT / "index.html")
-        challenge = self.read(PROJECT / "challenge.html")
-        for html in (learn, challenge):
+    def test_three_learning_modes_share_one_navigation(self):
+        pages = [
+            self.read(PROJECT / "index.html"),
+            self.read(PROJECT / "challenge.html"),
+            self.read(PROJECT / "noeau.html"),
+        ]
+        for html in pages:
             self.assertIn('class="experience-nav"', html)
             self.assertIn('href="index.html"', html)
             self.assertIn('href="challenge.html"', html)
+            self.assertIn('href="noeau.html"', html)
             self.assertIn(">Learn<", html)
             self.assertIn(">Challenge<", html)
-        self.assertIn('aria-current="page"', learn)
-        self.assertIn('aria-current="page"', challenge)
+            self.assertIn(">Noʻeau<", html)
+        for html in pages:
+            self.assertIn('aria-current="page"', html)
 
     def test_challenge_page_reveals_same_shape_and_examples_from_shared_bank(self):
         html = self.read(PROJECT / "challenge.html")
@@ -137,6 +145,45 @@ console.log(JSON.stringify({
         self.assertEqual(set(result["types"]), {"p2h", "h2p", "say", "use"})
         self.assertRegex(result["countdown"], r"^\d{2}:\d{2}$")
 
+    def test_noeau_bank_keeps_historical_meaning_separate_from_modern_hook(self):
+        bank = self.read(PROJECT / "noeau.js")
+        self.assertEqual(len(re.findall(r"\bid\s*:\s*['\"]", bank)), 10)
+        for field in ("hawaiian", "meaning", "localHook", "sourceLabel", "sourceUrl"):
+            self.assertEqual(len(re.findall(rf"\b{field}\s*:\s*['\"]", bank)), 10)
+        self.assertIn("window.PIDGIN_OLELO_NOEAU", bank)
+        for expected in (
+            "Aia nō i ke au a ka wāwae",
+            "I ʻolaʻolā nō ka huewai i ka piha ʻole",
+            "Pili kau, pili hoʻoilo",
+            "ʻO ka mea ua hala, ua hala ia",
+        ):
+            self.assertIn(expected, bank)
+        self.assertIn("group chat", bank.lower())
+        self.assertIn("screenshot", bank.lower())
+        self.assertIn("H-1", bank)
+
+    def test_noeau_page_reveals_meaning_then_clearly_labeled_modern_hook(self):
+        html = self.read(PROJECT / "noeau.html")
+        app = self.read(PROJECT / "noeau-app.js")
+        for control_id in (
+            "noeau-saying",
+            "noeau-reveal",
+            "noeau-meaning",
+            "noeau-hook",
+            "noeau-source",
+            "noeau-show",
+            "noeau-prev",
+            "noeau-next",
+        ):
+            self.assertIn(f'id="{control_id}"', html)
+        self.assertIn("Kūpuna said", html)
+        self.assertIn("What it carries", html)
+        self.assertIn("Today maybe", html)
+        self.assertIn("current.meaning", app)
+        self.assertIn("current.localHook", app)
+        self.assertIn("current.sourceUrl", app)
+        self.assertIn("modern memory hook", html.lower())
+
     def test_local_memory_examples_exist_without_turning_humor_into_authority(self):
         phrases = self.read(PROJECT / "phrases.js")
         state = self.read(PROJECT / "PROJECT_STATE.md")
@@ -144,14 +191,19 @@ console.log(JSON.stringify({
             self.assertIn(cue.lower(), phrases.lower())
         self.assertIn("memory hook", state.lower())
         self.assertIn("fluent-speaker", state.lower())
+        self.assertIn("historical meaning", state.lower())
+        self.assertIn("modern local", state.lower())
 
     def test_phone_layout_remains_and_audio_stays_removed(self):
         styles = self.read(PROJECT / "styles.css")
-        learn = self.read(PROJECT / "index.html")
-        challenge = self.read(PROJECT / "challenge.html")
+        pages = [
+            self.read(PROJECT / "index.html"),
+            self.read(PROJECT / "challenge.html"),
+            self.read(PROJECT / "noeau.html"),
+        ]
         self.assertIn("@media", styles)
         self.assertIn("480px", styles)
-        for html in (learn, challenge):
+        for html in pages:
             self.assertNotIn("device voice", html.lower())
             self.assertNotIn("pronunciation authority", html.lower())
 
