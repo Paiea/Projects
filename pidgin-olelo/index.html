@@ -14,7 +14,7 @@
       <a class="back-link" href="../">← Projects</a>
       <p class="eyebrow">PAIEA LANGUAGE LAB</p>
       <h1>Pidgin → ʻŌlelo</h1>
-      <p class="lede">You already know the thought. Say how Hawaiian carries um.</p>
+      <p class="lede">You already know the thought. Train your brain to stack um the Hawaiian way.</p>
     </header>
 
     <nav class="experience-nav" aria-label="Pidgin to ʻŌlelo modes">
@@ -27,6 +27,8 @@
       <button id="direction-hawaiian" class="mode-button" type="button" aria-pressed="false">ʻŌlelo → Pidgin</button>
     </section>
 
+    <p id="feedback" class="feedback" role="status" aria-live="polite" hidden></p>
+
     <section class="practice-card" aria-live="polite">
       <div class="card-topline">
         <span id="direction-label" class="card-label">HOW YOU SAY UM?</span>
@@ -38,7 +40,19 @@
       <div id="answer-wrap" class="answer-wrap" hidden>
         <p class="answer-label">Answer</p>
         <p id="answer" class="answer"></p>
+
+        <div class="shape-wrap">
+          <p class="shape-label">Hawaiian shape</p>
+          <p id="shape" class="shape"></p>
+        </div>
+
         <p id="note" class="note"></p>
+
+        <div class="example-wrap">
+          <p class="example-label">Use um</p>
+          <p id="example-pidgin" class="example-line"></p>
+          <p id="example-hawaiian" class="example-line example-line--hawaiian"></p>
+        </div>
       </div>
 
       <button id="show-answer" class="primary-button" type="button">Show me</button>
@@ -47,15 +61,21 @@
         <button id="miss-it" class="rating-button" type="button" disabled>Miss</button>
         <button id="got-it" class="rating-button rating-button--strong" type="button" disabled>Got um</button>
       </div>
+
+      <div class="history-actions" aria-label="Review cards">
+        <button id="back-card" class="history-button" type="button" disabled>← Back</button>
+        <button id="replay-card" class="history-button" type="button">↻ Replay</button>
+        <button id="forward-card" class="history-button" type="button" disabled>Forward →</button>
+      </div>
     </section>
 
     <section class="quick-rule" aria-label="How to use">
-      <strong>One rule:</strong> say your answer out loud before you tap <em>Show me</em>.
+      <strong>One rule:</strong> say your answer out loud before you tap <em>Show me</em>. Then notice the Hawaiian shape before moving on.
     </section>
 
     <footer class="app-footer">
-      <p><strong>30 useful thoughts.</strong> No streaks. Missed ones come back sooner.</p>
-      <p class="small-print">Pidgin is the memory bridge, not a claim that Pidgin and Hawaiian grammar are the same. Hawaiian content should get fluent-speaker or kumu review before this grows beyond prototype use.</p>
+      <p><strong>100 useful thoughts.</strong> Same bank as Challenge. Missed ones come back sooner.</p>
+      <p class="small-print">Pidgin is the memory bridge. The Hawaiian-shape line is a memory scaffold kept in Hawaiian order, not a separate correct Pidgin sentence. Local jokes live in examples to make retrieval sticky, not to define Hawaiian grammar. Hawaiian content should get fluent-speaker or kumu review before this grows into curriculum authority.</p>
     </footer>
   </main>
 
