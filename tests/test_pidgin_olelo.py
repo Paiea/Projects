@@ -55,6 +55,14 @@ class PidginOleloPrototypeTests(unittest.TestCase):
         self.assertNotIn("speechSynthesis", app)
         self.assertNotIn("SpeechSynthesisUtterance", app)
 
+    def test_forward_navigation_advances_when_history_is_exhausted(self):
+        app = self.read(PROJECT / "app.js")
+        self.assertIn("function moveForward()", app)
+        self.assertIn("historyCursor < history.length - 1", app)
+        self.assertIn("renderNextQueuedItem();", app)
+        self.assertIn('els.forwardCard.addEventListener("click", moveForward)', app)
+        self.assertNotIn("els.forwardCard.disabled = historyCursor < 0 || historyCursor >= history.length - 1", app)
+
     def test_static_runtime_has_no_external_dependency(self):
         for page_name in ("index.html", "challenge.html"):
             html = self.read(PROJECT / page_name)
