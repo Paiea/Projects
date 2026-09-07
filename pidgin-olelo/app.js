@@ -1,6 +1,6 @@
 const ITEMS = window.PIDGIN_OLELO_ITEMS;
 
-const STORAGE_KEY = "pidgin-olelo-v1-strength";
+const STORAGE_KEY = "pidgin-olelo-v0-strength";
 const DIRECTIONS = {
   P2H: "p2h",
   H2P: "h2p",
