@@ -10,7 +10,15 @@ function challengeForBlock(block, items) {
 
   const item = items[(block * 17 + 11) % items.length];
   const type = CHALLENGE_TYPES[(block * 3 + 1) % CHALLENGE_TYPES.length];
-  const common = { block, itemId: item.id, type, note: item.note || "" };
+  const common = {
+    block,
+    itemId: item.id,
+    type,
+    note: item.note || "",
+    shape: item.shape || "",
+    examplePidgin: item.examplePidgin || "",
+    exampleHawaiian: item.exampleHawaiian || "",
+  };
 
   if (type === "h2p") {
     return {
@@ -26,7 +34,7 @@ function challengeForBlock(block, items) {
     return {
       ...common,
       label: "SAY UM",
-      instruction: "Say this Hawaiian out loud. Then check the thought you just said.",
+      instruction: "Say this Hawaiian out loud. Then check the thought you just said and notice its shape.",
       prompt: item.hawaiian,
       answer: item.pidgin,
     };
@@ -87,7 +95,10 @@ if (typeof document !== "undefined") {
     prompt: document.querySelector("#challenge-prompt"),
     answerWrap: document.querySelector("#challenge-answer-wrap"),
     answer: document.querySelector("#challenge-answer"),
+    shape: document.querySelector("#challenge-shape"),
     note: document.querySelector("#challenge-note"),
+    examplePidgin: document.querySelector("#challenge-example-pidgin"),
+    exampleHawaiian: document.querySelector("#challenge-example-hawaiian"),
     showAnswer: document.querySelector("#challenge-show-answer"),
   };
 
@@ -103,7 +114,10 @@ if (typeof document !== "undefined") {
       els.instruction.textContent = challenge.instruction;
       els.prompt.textContent = challenge.prompt;
       els.answer.textContent = challenge.answer;
+      els.shape.textContent = challenge.shape;
       els.note.textContent = challenge.note;
+      els.examplePidgin.textContent = challenge.examplePidgin;
+      els.exampleHawaiian.textContent = challenge.exampleHawaiian;
       els.answerWrap.hidden = true;
       els.showAnswer.hidden = false;
       renderedBlock = block;
