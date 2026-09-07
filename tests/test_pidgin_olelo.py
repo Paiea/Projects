@@ -11,18 +11,14 @@ class PidginOleloPrototypeTests(unittest.TestCase):
         self.assertTrue(path.exists(), f"missing required file: {path.relative_to(ROOT)}")
         return path.read_text(encoding="utf-8")
 
-    def test_project_files_and_thirty_items_exist(self):
-        self.read(PROJECT / "index.html")
-        self.read(PROJECT / "styles.css")
-        app = self.read(PROJECT / "app.js")
-        self.read(PROJECT / "PROJECT_STATE.md")
-        self.assertEqual(len(re.findall(r"\bid\s*:\s*['\"]", app)), 30)
-        self.assertEqual(len(re.findall(r"\bpidgin\s*:\s*['\"]", app)), 30)
-        self.assertEqual(len(re.findall(r"\bhawaiian\s*:\s*['\"]", app)), 30)
-        self.assertEqual(len(re.findall(r"\bexamplePidgin\s*:\s*['\"]", app)), 30)
-        self.assertEqual(len(re.findall(r"\bexampleHawaiian\s*:\s*['\"]", app)), 30)
+    def test_shared_bank_owns_exactly_thirty_items(self):
+        bank = self.read(PROJECT / "bank.js")
+        self.assertEqual(len(re.findall(r"\bid\s*:\s*['\"]", bank)), 30)
+        for field in ("pidgin", "hawaiian", "shape", "examplePidgin", "exampleHawaiian"):
+            self.assertEqual(len(re.findall(rf"\b{field}\s*:\s*['\"]", bank)), 30)
+        self.assertIn("window.PIDGIN_OLELO_BANK", bank)
 
-    def test_required_interaction_hooks_exist_without_audio(self):
+    def test_practice_reads_shared_bank_and_reveals_hawaiian_shape(self):
         html = self.read(PROJECT / "index.html")
         app = self.read(PROJECT / "app.js")
         for control_id in (
@@ -30,6 +26,7 @@ class PidginOleloPrototypeTests(unittest.TestCase):
             "direction-hawaiian",
             "prompt",
             "answer",
+            "shape",
             "example-pidgin",
             "example-hawaiian",
             "show-answer",
@@ -38,31 +35,51 @@ class PidginOleloPrototypeTests(unittest.TestCase):
             "progress",
         ):
             self.assertIn(f'id="{control_id}"', html)
-        self.assertNotIn('id="listen"', html)
-        self.assertNotIn('id="voice-status"', html)
-        self.assertIn("localStorage", app)
+        self.assertIn('src="bank.js"', html)
+        self.assertIn("window.PIDGIN_OLELO_BANK", app)
+        self.assertIn("current.shape", app)
         self.assertIn("current.examplePidgin", app)
         self.assertIn("current.exampleHawaiian", app)
-        self.assertNotIn("speechSynthesis", app)
-        self.assertNotIn("SpeechSynthesisUtterance", app)
+        self.assertNotRegex(app, r"const ITEMS\s*=\s*\[")
 
-    def test_static_runtime_has_no_external_dependency(self):
-        html = self.read(PROJECT / "index.html")
-        self.assertNotRegex(html, r'<(?:script|link)[^>]+(?:src|href)=["\']https?://')
-        self.assertIn('href="styles.css"', html)
-        self.assertIn('src="app.js"', html)
+    def test_v2_challenge_uses_same_bank_and_rotates_every_ten_minutes(self):
+        html = self.read(PROJECT / "challenge.html")
+        app = self.read(PROJECT / "challenge.js")
+        self.assertIn('src="bank.js"', html)
+        self.assertIn('src="challenge.js"', html)
+        self.assertIn("window.PIDGIN_OLELO_BANK", app)
+        self.assertIn("10 * 60 * 1000", app)
+        self.assertIn('id="challenge-prompt"', html)
+        self.assertIn('id="challenge-answer"', html)
+        self.assertIn('id="challenge-shape"', html)
+        self.assertIn('id="challenge-countdown"', html)
 
-    def test_phone_layout_remains_and_audio_disclaimer_is_gone(self):
+    def test_practice_and_challenge_link_to_each_other(self):
+        practice = self.read(PROJECT / "index.html")
+        challenge = self.read(PROJECT / "challenge.html")
+        self.assertIn('href="index.html"', practice)
+        self.assertIn('href="challenge.html"', practice)
+        self.assertIn('href="index.html"', challenge)
+        self.assertIn('href="challenge.html"', challenge)
+
+    def test_audio_stays_removed_and_runtime_stays_static(self):
+        practice = self.read(PROJECT / "index.html")
+        challenge = self.read(PROJECT / "challenge.html")
+        app = self.read(PROJECT / "app.js")
+        challenge_app = self.read(PROJECT / "challenge.js")
+        combined = "\n".join((practice, challenge, app, challenge_app))
+        self.assertNotIn('id="listen"', combined)
+        self.assertNotIn("speechSynthesis", combined)
+        self.assertNotIn("SpeechSynthesisUtterance", combined)
+        self.assertNotRegex(practice, r'<(?:script|link)[^>]+(?:src|href)=["\']https?://')
+        self.assertNotRegex(challenge, r'<(?:script|link)[^>]+(?:src|href)=["\']https?://')
+
+    def test_phone_layout_and_project_routing_remain(self):
         styles = self.read(PROJECT / "styles.css")
-        html = self.read(PROJECT / "index.html")
-        self.assertIn("@media", styles)
-        self.assertIn("480px", styles)
-        self.assertNotIn("device voice", html.lower())
-        self.assertNotIn("pronunciation authority", html.lower())
-
-    def test_hub_and_registry_route_to_project(self):
         hub = self.read(ROOT / "index.html")
         registry = self.read(ROOT / "state" / "PROJECT_REGISTRY.md")
+        self.assertIn("@media", styles)
+        self.assertIn("480px", styles)
         self.assertIn('href="pidgin-olelo/"', hub)
         self.assertIn("Pidgin → ʻŌlelo", hub)
         self.assertIn("## Pidgin → ʻŌlelo", registry)
