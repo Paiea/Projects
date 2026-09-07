@@ -13,19 +13,19 @@ class PidginOleloPrototypeTests(unittest.TestCase):
         self.assertTrue(path.exists(), f"missing required file: {path.relative_to(ROOT)}")
         return path.read_text(encoding="utf-8")
 
-    def test_project_files_and_thirty_items_exist(self):
+    def test_shared_bank_has_one_hundred_multi_form_items(self):
         self.read(PROJECT / "index.html")
         self.read(PROJECT / "styles.css")
         app = self.read(PROJECT / "app.js")
         phrases = self.read(PROJECT / "phrases.js")
         self.read(PROJECT / "PROJECT_STATE.md")
-        self.assertEqual(len(re.findall(r"\bid\s*:\s*['\"]", phrases)), 30)
+        self.assertEqual(len(re.findall(r"\bid\s*:\s*['\"]", phrases)), 100)
         for field in ("pidgin", "hawaiian", "shape", "examplePidgin", "exampleHawaiian"):
-            self.assertEqual(len(re.findall(rf"\b{field}\s*:\s*['\"]", phrases)), 30)
+            self.assertEqual(len(re.findall(rf"\b{field}\s*:\s*['\"]", phrases)), 100)
         self.assertIn("window.PIDGIN_OLELO_ITEMS", phrases)
         self.assertIn("window.PIDGIN_OLELO_ITEMS", app)
 
-    def test_required_interaction_hooks_exist_without_audio(self):
+    def test_learn_reveals_shape_examples_feedback_and_review_navigation(self):
         html = self.read(PROJECT / "index.html")
         app = self.read(PROJECT / "app.js")
         for control_id in (
@@ -36,18 +36,22 @@ class PidginOleloPrototypeTests(unittest.TestCase):
             "shape",
             "example-pidgin",
             "example-hawaiian",
+            "feedback",
+            "back-card",
+            "replay-card",
+            "forward-card",
             "show-answer",
             "got-it",
             "miss-it",
             "progress",
         ):
             self.assertIn(f'id="{control_id}"', html)
-        self.assertNotIn('id="listen"', html)
-        self.assertNotIn('id="voice-status"', html)
-        self.assertIn("localStorage", app)
         self.assertIn("current.shape", app)
         self.assertIn("current.examplePidgin", app)
         self.assertIn("current.exampleHawaiian", app)
+        self.assertIn("history", app)
+        self.assertIn("historyCursor", app)
+        self.assertIn("renderFeedback", app)
         self.assertNotIn("speechSynthesis", app)
         self.assertNotIn("SpeechSynthesisUtterance", app)
 
@@ -133,7 +137,15 @@ console.log(JSON.stringify({
         self.assertEqual(set(result["types"]), {"p2h", "h2p", "say", "use"})
         self.assertRegex(result["countdown"], r"^\d{2}:\d{2}$")
 
-    def test_phone_layout_remains_and_audio_disclaimer_is_gone(self):
+    def test_local_memory_examples_exist_without_turning_humor_into_authority(self):
+        phrases = self.read(PROJECT / "phrases.js")
+        state = self.read(PROJECT / "PROJECT_STATE.md")
+        for cue in ("H-1", "Costco", "auntie", "parking", "rain"):
+            self.assertIn(cue.lower(), phrases.lower())
+        self.assertIn("memory hook", state.lower())
+        self.assertIn("fluent-speaker", state.lower())
+
+    def test_phone_layout_remains_and_audio_stays_removed(self):
         styles = self.read(PROJECT / "styles.css")
         learn = self.read(PROJECT / "index.html")
         challenge = self.read(PROJECT / "challenge.html")
