@@ -20,8 +20,8 @@ class PidginOleloPrototypeTests(unittest.TestCase):
         phrases = self.read(PROJECT / "phrases.js")
         self.read(PROJECT / "PROJECT_STATE.md")
         self.assertEqual(len(re.findall(r"\bid\s*:\s*['\"]", phrases)), 30)
-        self.assertEqual(len(re.findall(r"\bpidgin\s*:\s*['\"]", phrases)), 30)
-        self.assertEqual(len(re.findall(r"\bhawaiian\s*:\s*['\"]", phrases)), 30)
+        for field in ("pidgin", "hawaiian", "shape", "examplePidgin", "exampleHawaiian"):
+            self.assertEqual(len(re.findall(rf"\b{field}\s*:\s*['\"]", phrases)), 30)
         self.assertIn("window.PIDGIN_OLELO_ITEMS", phrases)
         self.assertIn("window.PIDGIN_OLELO_ITEMS", app)
 
@@ -33,6 +33,9 @@ class PidginOleloPrototypeTests(unittest.TestCase):
             "direction-hawaiian",
             "prompt",
             "answer",
+            "shape",
+            "example-pidgin",
+            "example-hawaiian",
             "show-answer",
             "got-it",
             "miss-it",
@@ -42,6 +45,9 @@ class PidginOleloPrototypeTests(unittest.TestCase):
         self.assertNotIn('id="listen"', html)
         self.assertNotIn('id="voice-status"', html)
         self.assertIn("localStorage", app)
+        self.assertIn("current.shape", app)
+        self.assertIn("current.examplePidgin", app)
+        self.assertIn("current.exampleHawaiian", app)
         self.assertNotIn("speechSynthesis", app)
         self.assertNotIn("SpeechSynthesisUtterance", app)
 
@@ -66,8 +72,9 @@ class PidginOleloPrototypeTests(unittest.TestCase):
         self.assertIn('aria-current="page"', learn)
         self.assertIn('aria-current="page"', challenge)
 
-    def test_challenge_page_is_one_timed_retrieval_prompt(self):
+    def test_challenge_page_reveals_same_shape_and_examples_from_shared_bank(self):
         html = self.read(PROJECT / "challenge.html")
+        js = self.read(PROJECT / "challenge.js")
         for control_id in (
             "challenge-label",
             "challenge-timer",
@@ -75,10 +82,16 @@ class PidginOleloPrototypeTests(unittest.TestCase):
             "challenge-prompt",
             "challenge-answer-wrap",
             "challenge-answer",
+            "challenge-shape",
+            "challenge-example-pidgin",
+            "challenge-example-hawaiian",
             "challenge-note",
             "challenge-show-answer",
         ):
             self.assertIn(f'id="{control_id}"', html)
+        self.assertIn("item.shape", js)
+        self.assertIn("item.examplePidgin", js)
+        self.assertIn("item.exampleHawaiian", js)
         self.assertNotIn('id="listen"', html)
         self.assertNotIn("streak", html.lower())
         self.assertNotIn("score", html.lower())
@@ -89,9 +102,9 @@ class PidginOleloPrototypeTests(unittest.TestCase):
         script = r'''
 const engine = require(process.argv[1]);
 const items = [
-  {id: "a", pidgin: "P1", hawaiian: "H1", note: "N1"},
-  {id: "b", pidgin: "P2", hawaiian: "H2", note: "N2"},
-  {id: "c", pidgin: "P3", hawaiian: "H3", note: "N3"},
+  {id: "a", pidgin: "P1", hawaiian: "H1", note: "N1", shape: "S1", examplePidgin: "EP1", exampleHawaiian: "EH1"},
+  {id: "b", pidgin: "P2", hawaiian: "H2", note: "N2", shape: "S2", examplePidgin: "EP2", exampleHawaiian: "EH2"},
+  {id: "c", pidgin: "P3", hawaiian: "H3", note: "N3", shape: "S3", examplePidgin: "EP3", exampleHawaiian: "EH3"},
 ];
 const base = 42 * engine.CHALLENGE_WINDOW_MS;
 const first = engine.challengeForTime(base + 1, items);
