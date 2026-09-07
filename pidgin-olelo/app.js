@@ -1,4 +1,35 @@
-const ITEMS = window.PIDGIN_OLELO_ITEMS;
+const ITEMS = [
+  { id: "aloha", pidgin: "Aloha.", hawaiian: "Aloha.", note: "Hello, greeting, love, or farewell depending on context." },
+  { id: "how-you", pidgin: "How you?", hawaiian: "Pehea ʻoe?", note: "A basic way to ask how somebody is." },
+  { id: "i-good", pidgin: "I good.", hawaiian: "Maikaʻi au.", note: "A simple answer to Pehea ʻoe?" },
+  { id: "same-same", pidgin: "Same like always.", hawaiian: "ʻO ia mau nō.", note: "Same as usual / same as always." },
+  { id: "yeah", pidgin: "Yeah.", hawaiian: "ʻAe.", note: "Yes." },
+  { id: "no", pidgin: "No.", hawaiian: "ʻAʻole.", note: "No / not." },
+  { id: "thanks", pidgin: "Thanks.", hawaiian: "Mahalo.", note: "Thank you." },
+  { id: "sorry", pidgin: "Sorry. / Excuse me.", hawaiian: "E kala mai.", note: "A common pardon or apology." },
+  { id: "no-understand", pidgin: "I no understand.", hawaiian: "ʻAʻole maopopo iaʻu.", note: "It is not clear to me / I do not understand." },
+  { id: "say-again", pidgin: "Say um again.", hawaiian: "E ʻōlelo hou mai.", note: "Ask the other person to say it again." },
+  { id: "what-this", pidgin: "What this?", hawaiian: "He aha kēia?", note: "Ask what something near you is." },
+  { id: "what-that", pidgin: "What that?", hawaiian: "He aha kēlā?", note: "Ask what something farther away is." },
+  { id: "your-name", pidgin: "What your name?", hawaiian: "ʻO wai kou inoa?", note: "Ask somebody's name." },
+  { id: "my-name", pidgin: "My name ___.", hawaiian: "ʻO ___ koʻu inoa.", note: "Drop your name into the blank." },
+  { id: "where-you", pidgin: "Where you stay?", hawaiian: "Aia i hea ʻoe?", note: "A locational question: where are you?" },
+  { id: "where-thing", pidgin: "Where the ___ stay?", hawaiian: "Ma hea ka ___?", note: "Use this frame to ask where a thing or place is." },
+  { id: "where-from", pidgin: "Where you from?", hawaiian: "No hea mai ʻoe?", note: "Ask where somebody is from." },
+  { id: "from-place", pidgin: "I from ___.", hawaiian: "No ___ mai au.", note: "Drop the place into the blank." },
+  { id: "want-eat-q", pidgin: "You like eat?", hawaiian: "Makemake ʻoe e ʻai?", note: "Makemake + e + action is a high-use want-to-do pattern." },
+  { id: "want-eat-a", pidgin: "I like eat.", hawaiian: "Makemake au e ʻai.", note: "Use au for I." },
+  { id: "want-water-q", pidgin: "You like drink water?", hawaiian: "Makemake ʻoe e inu wai?", note: "Same makemake pattern, new action." },
+  { id: "want-water-a", pidgin: "I like drink water.", hawaiian: "Makemake au e inu wai.", note: "A useful substitution pattern for practice." },
+  { id: "lets-go-all", pidgin: "We go. Everybody.", hawaiian: "E hele kākou.", note: "Kākou includes the speaker, listener, and others." },
+  { id: "lets-go-two", pidgin: "We go. You and me.", hawaiian: "E hele kāua.", note: "Kāua means you and me." },
+  { id: "come", pidgin: "Come.", hawaiian: "E hele mai.", note: "Mai points the movement toward the speaker." },
+  { id: "wait", pidgin: "Wait.", hawaiian: "E kali.", note: "A simple command." },
+  { id: "look", pidgin: "Look.", hawaiian: "E nānā.", note: "A simple command." },
+  { id: "listen", pidgin: "Listen.", hawaiian: "E hoʻolohe.", note: "A simple command." },
+  { id: "help-me", pidgin: "Help me.", hawaiian: "E kōkua mai iaʻu.", note: "Ask somebody to help you." },
+  { id: "pau", pidgin: "Pau already.", hawaiian: "Pau.", note: "Finished / done." },
+];
 
 const STORAGE_KEY = "pidgin-olelo-v0-strength";
 const DIRECTIONS = {
