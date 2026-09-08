@@ -11,27 +11,30 @@ class PidginOleloVisualTests(unittest.TestCase):
         self.assertTrue(path.exists(), f"missing {path.relative_to(ROOT)}")
         return path.read_text(encoding="utf-8")
 
-    def test_shell_uses_local_visual_assets(self):
-        self.assertTrue((PROJECT / "assets" / "uncle-seally.webp").exists())
-        self.assertTrue((PROJECT / "assets" / "island-backdrop.svg").exists())
-        styles = self.read("styles.css")
-        self.assertIn("assets/island-backdrop.svg", styles)
-        self.assertIn("assets/uncle-seally.webp", self.read("index.html"))
-        self.assertIn("assets/uncle-seally.webp", self.read("challenge.html"))
+    def test_shell_uses_current_local_visual_assets(self):
+        self.assertTrue((PROJECT / "assets" / "characters" / "uncle-seally@2x.webp").exists())
+        self.assertTrue((PROJECT / "assets" / "bg" / "hero-bg-desktop.webp").exists())
+        self.assertTrue((PROJECT / "assets" / "bg" / "hero-bg-mobile.webp").exists())
+        simplify = self.read("simplify.css")
+        self.assertIn("assets/bg/hero-bg-desktop.webp", simplify)
+        self.assertIn("assets/bg/hero-bg-mobile.webp", simplify)
+        self.assertIn("assets/characters/uncle-seally@2x.webp", self.read("index.html"))
+        self.assertIn("assets/characters/uncle-seally@2x.webp", self.read("challenge.html"))
 
-    def test_learn_has_responsive_coach_lesson_and_side_rail(self):
+    def test_learn_has_coach_lesson_and_inline_noeau_without_side_rail(self):
         html = self.read("index.html")
         for class_name in (
             "app-grid",
             "seally-coach",
             "lesson-column",
-            "side-rail",
+            "noeau-inline",
             "mobile-bottom-nav",
         ):
             self.assertIn(class_name, html)
         self.assertIn('id="seally-line"', html)
-        self.assertIn('id="more-link"', html)
-        self.assertIn('href="#more-practice"', html)
+        self.assertNotIn("side-rail", html)
+        self.assertNotIn('id="more-link"', html)
+        self.assertNotIn('href="#more-practice"', html)
 
     def test_uncle_seally_commentary_responds_to_learning_state(self):
         app = self.read("app.js")
@@ -53,10 +56,11 @@ class PidginOleloVisualTests(unittest.TestCase):
         self.assertIn("Preferably somebody get food", js)
 
     def test_css_has_distinct_desktop_and_mobile_layouts(self):
-        styles = self.read("styles.css")
-        self.assertIn("grid-template-columns: minmax(210px, 0.7fr) minmax(0, 1.45fr) minmax(250px, 0.85fr)", styles)
+        styles = self.read("styles.css") + "\n" + self.read("simplify.css")
+        self.assertIn("grid-template-columns: minmax(260px, 0.72fr) minmax(0, 1.72fr)", styles)
         self.assertIn("@media (max-width: 900px)", styles)
         self.assertIn("@media (max-width: 640px)", styles)
+        self.assertIn("@media (max-width: 480px)", styles)
         self.assertIn("position: fixed", styles)
 
     def test_visual_pass_does_not_restore_synthetic_audio(self):
