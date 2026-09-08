@@ -135,7 +135,7 @@ console.log(JSON.stringify({
             "more-like-this", "back-card", "replay-card", "forward-card", "progress",
         ):
             self.assertIn(f'id="{control_id}"', html)
-        self.assertIn("preferredItemId = itemId", app)
+        self.assertRegex(app, r"preferredItemId = (?:itemId|currentQuestion\.itemId)")
         self.assertIn("recordKnownChoice", app)
         self.assertIn("Almost, uncle", app)
         self.assertIn("Wrong scene", app)
