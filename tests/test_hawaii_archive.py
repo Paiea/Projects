@@ -134,7 +134,7 @@ class HawaiiArchiveTests(unittest.TestCase):
         pilot_text = pilot_page.read_text(encoding="utf-8")
         script_text = pilot_script.read_text(encoding="utf-8")
         self.assertIn("Original → Restored → Color", pilot_text)
-        self.assertIn("HAR-IMG", script_text)
+        self.assertIn("imageRecord.id", script_text)
         self.assertIn("Color", script_text)
 
 
