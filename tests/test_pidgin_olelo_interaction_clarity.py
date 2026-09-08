@@ -31,9 +31,10 @@ console.log(JSON.stringify(q));
         self.assertEqual(question["label"], "REPLY BACK")
         self.assertIn("conversation", question["instruction"].lower())
         self.assertNotIn("translate", question["instruction"].lower())
-        self.assertIn("Uncle: Pehea ʻoe?", question["prompt"])
-        self.assertIn("You mean: I good.", question["prompt"])
-        self.assertIn("You: ___", question["prompt"])
+        self.assertIn("Uncle:\nPehea ʻoe?", question["prompt"])
+        self.assertIn("You:\nI good.", question["prompt"])
+        self.assertIn("Say it in Hawaiian:\n___", question["prompt"])
+        self.assertNotIn("You mean:", question["prompt"])
         self.assertEqual(question["answer"], "Maikaʻi au.")
 
     def test_open_recall_can_be_self_rated_without_revealing_first(self):
