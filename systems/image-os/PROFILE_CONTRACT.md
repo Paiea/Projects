@@ -1,128 +1,140 @@
 # Image OS — Profile Contract
 
-> Boot from `systems/image-os/CURRENT.md` first. This file is the reusable contract loaded on demand when defining or reviewing an image job/profile.
+> Boot from `systems/image-os/CURRENT.md` first. Exact sources and project-local evidence outrank all derived work.
 
-Image OS is a reusable state wrapper around image generation/editing. It exists so visual judgment, constraints, provenance, and successful corrections do not disappear between one-off prompts.
-
-The current v1 proving ground is Hawaiʻi Archive Revival, but this contract remains cross-project. Hawaiʻi-specific historical research, image selection, and public feed decisions stay project-local.
+Image OS is a reusable state wrapper around image generation/editing. It preserves source authority, stage routing, job constraints, review findings, approved outputs, and reusable learning across projects.
 
 ## Source Authority
 
 Every job names the exact source image/reference set and where authority lives.
 
-A derived restoration, color reconstruction, style pass, or generated variant never silently replaces the source.
+A restoration, enhancement, color reconstruction, or generated variant never silently replaces source authority.
 
-## Profile / Job Type
+## Job Types
 
-Current Image OS v1 supports:
+Current Image OS supports:
 
 - `restore_bw`
 - `color_reconstruct`
 
-Future profiles may include book illustration, character reference, UI/brand assets, and other generation lanes only after a real use case earns them.
+V2 jobs may route through optional specialist stages. The reusable staged contract is `systems/image-os/rules/pipeline-v2.md`.
 
-Project-specific taste belongs in the project profile, not in one universal mega-prompt.
+## V2 Stage Contract
+
+A historical-photo job may produce/checkpoint:
+
+- `source`
+- `preflight`
+- `restore_bw`
+- `detail_optional`
+- `face_optional`
+- `restored_approval`
+- `semantic_color`
+- `color_review`
+- `approved_output`
+
+A stage may be explicitly `skipped` when the source does not justify its cost/risk.
 
 ## Minimum Job Record
 
-A durable image job should be able to identify:
+A durable image job should identify only fields that affect execution or continuity:
 
 - stable image/job ID
 - project owner
 - exact source/provenance
-- job type
-- profile
+- profile and job type
 - locked elements
 - allowed changes
-- evidence/confidence notes that materially affect the edit
-- edit instructions
-- result/version
+- preflight findings
+- stage route decisions
+- backend/model used for executed specialist stages
+- evidence/confidence notes
+- exact result/version artifacts
 - review outcome
 - approved result when one exists
-- reusable learning residue when one is earned
-
-Do not add fields merely because they might someday be useful.
+- reusable learning residue when earned
 
 ## Locked Elements
 
-List what must not change unless the job explicitly authorizes reconstruction.
-
-Typical historical-photo locks:
+Historical-photo jobs lock by default:
 
 - identity and facial structure
-- body position
+- body position / gesture
 - object count and placement
-- architecture/geometry
-- signage/text
+- architecture / geometry
+- signage / text
 - camera angle and composition
+- clothing geometry and other identity-bearing details
 
 ## Allowed Changes
 
-State the bounded edit surface.
+Bound the edit surface explicitly. Examples:
 
-Examples:
-
-- dust/scratch repair
+- dust/scratch/fading/stain correction
 - tonal recovery
-- tear reconstruction where evidence supports it
-- color reconstruction
-- crop extension when explicitly requested
+- restrained noise/detail recovery
+- small repair where surrounding evidence constrains the result
+- semantic color reconstruction
+
+Large missing-region invention requires explicit escalation and is not implied by `restore_bw`.
+
+## Stage Routing
+
+Default principles:
+
+- repair/normalize damage before colorization;
+- run **Real-ESRGAN** only for justified general detail/upscale work;
+- run **GFPGAN** only when a meaningful face is materially degraded;
+- use a semantic backend such as **DDColor** for `color_reconstruct`;
+- do not count CSS, filters, gradients, blanket tinting, or hue wash as semantic colorization.
 
 ## Evidence / Confidence
 
-Track important visual claims as:
+Track important claims as:
 
 - `unknown`
 - `plausible`
 - `supported`
 - `verified`
 
-Color is not recoverable from grayscale alone. Historically informed color reconstruction must distinguish evidence from plausible interpretation.
-
-## Edit Instructions
-
-Store the smallest job-specific instruction set needed to execute the current pass. Prefer targeted edits over repeatedly regenerating the whole image when preservation matters.
+Model confidence is not historical evidence. A convincing generated color does not upgrade `plausible` to `supported`.
 
 ## Review Findings
 
-Review the result against the locked source, including:
+Review stage outputs against the locked source. Relevant checks include:
 
 - identity drift
 - geometry drift
 - invented/removed objects
-- damaged or invented text
+- damaged/invented text
 - anatomy/body changes
-- historically unsupported details
-- over-smoothing or loss of source character
+- over-smoothing
+- damage misread as scene content
+- luminance/detail loss during colorization
+- broad tint behavior where semantic region color is expected
 
-Use `systems/image-os/rules/review.md` for the v1 review order/outcomes.
+Use `systems/image-os/rules/review.md` plus stage-specific rules.
 
 ## Approved Result
 
-An approved result points to the exact output artifact and records which job/version produced it. Approval does not promote every job choice into a global rule.
+Approval points to exact output artifacts and stage/version evidence. Approval is per output. A restored B&W approval does not prove a color reconstruction historically exact.
 
-For Hawaiʻi Archive Revival, publication as a feed `photo`/`combo` item remains a project decision. Image OS approval only says the visual output passed its image job review.
+For Hawaiʻi Archive Revival, Image OS approval says the visual passed its image job. The Hawaiʻi project still owns whether it belongs in a feed post.
 
 ## Reusable Learning
 
-After a job, ask:
+Promote learning by scope:
 
-> Was this success/failure specific to this image, specific to this project/profile, or genuinely reusable across image work?
+1. **job-local** — specific to one source/job;
+2. **profile-local** — reusable for a project/visual lane;
+3. **global Image OS** — genuinely cross-project.
 
-Promote only repeated or clearly general lessons upward.
-
-Use three scopes:
-
-1. **job-local** — stays with this image/job;
-2. **profile-local** — reusable for this project or visual lane;
-3. **global Image OS** — rare, cross-project operating rule.
-
-Job-specific luck must not become global visual policy.
+Failed experiments are useful residue when they reveal a reusable failure mode. Do not erase them merely because a later method replaces them.
 
 ## Runtime boundary
 
 Current implementation remains file-based:
 
-`source → profile → locks → allowed edits → evidence → instructions → result → review → approved residue`
+`source -> profile -> preflight -> route -> stage artifacts -> review -> approved result -> learning residue`
 
-Do not build a database, orchestration service, generalized prompt compiler, or automatic multi-model queue until repeated real jobs demonstrate that files/contracts are no longer sufficient.
+Do not build a database, orchestration service, or generalized automatic multi-model queue until repeated real jobs show that files/contracts are insufficient.
