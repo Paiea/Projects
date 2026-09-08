@@ -1,4 +1,5 @@
 from pathlib import Path
+import hashlib
 import json
 import unittest
 
@@ -22,14 +23,19 @@ class HawaiiImageAssetStateTests(unittest.TestCase):
             self.assertTrue(color)
             self.assertEqual(len({original, restored, color}), 3)
 
+            hashes = []
             for relative in (original, restored, color):
                 asset = ROOT / "hawaii-archive" / relative
                 self.assertTrue(asset.exists(), f"missing image asset: {asset}")
                 self.assertGreater(asset.stat().st_size, 1000)
+                hashes.append(hashlib.sha256(asset.read_bytes()).hexdigest())
+
+            self.assertEqual(len(set(hashes)), 3, f"image states are byte-identical for {image['id']}")
 
     def test_media_controls_swap_image_source_instead_of_only_css_classes(self):
         app = (ROOT / "hawaii-archive" / "app.js").read_text(encoding="utf-8")
         pilot = (ROOT / "hawaii-archive" / "image-pilot.js").read_text(encoding="utf-8")
+        styles = (ROOT / "hawaii-archive" / "styles.css").read_text(encoding="utf-8")
 
         for script in (app, pilot):
             self.assertIn("original_asset", script)
@@ -39,6 +45,10 @@ class HawaiiImageAssetStateTests(unittest.TestCase):
 
         self.assertNotIn('stage.classList.add("is-color"', app)
         self.assertNotIn('stage.classList.add("is-color"', pilot)
+        self.assertNotIn(".media-stage.is-color", styles)
+        self.assertNotIn(".color-kaulia::after", styles)
+        self.assertNotIn(".color-palace::after", styles)
+        self.assertNotIn(".color-poi::after", styles)
 
 
 if __name__ == "__main__":
