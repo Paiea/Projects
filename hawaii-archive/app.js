@@ -81,8 +81,8 @@ function makeVoiceSourcePanel(item) {
   return wrapper;
 }
 
-function publicationInitial(publication) {
-  return publication.replace(/^Ka\s+/i, "").trim().charAt(0).toUpperCase() || "N";
+function publicationInitial(value) {
+  return value.replace(/^Ka\s+/i, "").trim().charAt(0).toUpperCase() || "N";
 }
 
 function renderPost(item) {
@@ -92,10 +92,12 @@ function renderPost(item) {
   const header = document.createElement("header");
   header.className = "post-header";
 
+  const displayAuthor = item.voice_actor || item.publication;
+
   const avatar = document.createElement("div");
   avatar.className = "post-avatar";
   avatar.setAttribute("aria-hidden", "true");
-  avatar.textContent = publicationInitial(item.publication);
+  avatar.textContent = publicationInitial(displayAuthor);
   header.append(avatar);
 
   const identity = document.createElement("div");
@@ -103,12 +105,13 @@ function renderPost(item) {
 
   const author = document.createElement("p");
   author.className = "post-author";
-  author.textContent = item.publication;
+  author.textContent = displayAuthor;
   identity.append(author);
 
   const meta = document.createElement("p");
   meta.className = "post-meta";
-  meta.textContent = `${item.place} · ${formatPostDate(item.date)}`;
+  const sourceIdentity = item.voice_actor ? `${item.publication} · ` : "";
+  meta.textContent = `${sourceIdentity}${item.place} · ${formatPostDate(item.date)}`;
   identity.append(meta);
   header.append(identity);
 
