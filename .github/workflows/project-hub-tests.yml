@@ -1,0 +1,28 @@
+name: Project Hub Tests
+
+on:
+  push:
+    paths:
+      - 'index.html'
+      - 'state/PROJECT_REGISTRY.md'
+      - 'praxis/**'
+      - 'tests/test_project_hub.py'
+      - '.github/workflows/project-hub-tests.yml'
+  pull_request:
+    paths:
+      - 'index.html'
+      - 'state/PROJECT_REGISTRY.md'
+      - 'praxis/**'
+      - 'tests/test_project_hub.py'
+      - '.github/workflows/project-hub-tests.yml'
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify project hub registration
+        run: python tests/test_project_hub.py
