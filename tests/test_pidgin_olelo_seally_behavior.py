@@ -35,7 +35,10 @@ class UncleSeallyBehaviorTests(unittest.TestCase):
         self.assertIsNotNone(start_block)
         self.assertNotIn("seal", start_block.group(1).lower())
         self.assertNotIn("thumbs", start_block.group(1).lower())
-        self.assertRegex(app, r"%\s*(?:1[3-9]|[2-9]\d)")
+        cadence = re.search(r"SEALLY_SEAL_EVERY\s*=\s*(\d+)", app)
+        self.assertIsNotNone(cadence)
+        self.assertGreaterEqual(int(cadence.group(1)), 13)
+        self.assertIn("state.repCount % SEALLY_SEAL_EVERY", app)
 
     def test_harder_transition_uses_teacher_language_and_intro_does_not_repeat_opening(self):
         app = self.app()
