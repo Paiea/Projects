@@ -1,0 +1,20 @@
+{
+  "image_id": "HAR-IMG-0001",
+  "pipeline": "image-os-v2",
+  "source_asset": "assets/images/HAR-IMG-0001/original.jpg",
+  "restored_asset": "assets/images/HAR-IMG-0001/v2-restored.jpg",
+  "color_asset": "assets/images/HAR-IMG-0001/v2-color.jpg",
+  "restoration_backend": "deterministic-low-frequency-stain-normalization",
+  "detail_route": "skipped",
+  "face_route": "skipped",
+  "color_backend": "DDColor-tiny-ONNX",
+  "model_sha256": "2653da00dc15e54a45e5200b61dbf82ee9ceaf56b02bb9b9657569ac775e82e6",
+  "metrics": {
+    "structural_correlation": 0.830968,
+    "mean_chroma": 23.430185,
+    "luminance_mae": 0.129952,
+    "restoration_delta": 15.240507
+  },
+  "automated_review": "hold",
+  "publication_gate": "human-review-required"
+}
