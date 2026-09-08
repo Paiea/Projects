@@ -81,20 +81,21 @@
       <strong>Quiet engine underneath:</strong> easy ones drift away. Missed angles come back. Every few reps you get a harder SHOW WHAT YOU KNOW check.
     </section>
 
-    <details id="more-practice" class="more-practice">
-      <summary>More</summary>
-      <div class="more-grid">
-        <div class="more-card">
-          <strong>70 more phrases</strong>
-          <p>They still exist. We are parking them until the Core 30 feels alive instead of making the menu bigger.</p>
-        </div>
-        <a class="more-card more-card--link" href="noeau.html">
-          <span class="flavor-tag">Flavor 🌺</span>
-          <strong>ʻŌlelo Noʻeau</strong>
-          <p>Old wisdom, sourced meaning, small local memory hooks. Side dish, not the meal.</p>
-        </a>
+    <aside id="noeau-widget" class="noeau-widget" aria-label="Kūpuna side note">
+      <div class="noeau-widget-topline">
+        <span class="flavor-tag">Kūpuna side note 🌺</span>
+        <button id="noeau-widget-next" class="noeau-widget-next" type="button">Another</button>
       </div>
-    </details>
+      <p id="noeau-widget-saying" class="noeau-widget-saying"></p>
+      <button id="noeau-widget-reveal" class="noeau-widget-reveal" type="button">What that carry?</button>
+      <div id="noeau-widget-body" hidden>
+        <p class="noeau-widget-label">What it carries</p>
+        <p id="noeau-widget-meaning" class="noeau-widget-meaning"></p>
+        <p class="noeau-widget-label">Today maybe</p>
+        <p id="noeau-widget-hook" class="noeau-widget-hook"></p>
+        <p class="noeau-widget-note">Modern memory hook only. Not the historical translation.</p>
+      </div>
+    </aside>
 
     <footer class="app-footer">
       <p><strong>Thirty thoughts, many forms.</strong> Recognition, production, missing-word repair, situations, saying it, and real-world use all strengthen different retrieval paths.</p>
@@ -105,6 +106,7 @@
   <script src="phrases.js"></script>
   <script src="curriculum.js"></script>
   <script src="core-engine.js"></script>
+  <script src="noeau.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
