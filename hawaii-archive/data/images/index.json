@@ -19,28 +19,34 @@
       "restoration_class": "restore-neutral-albumen",
       "crop_mode": "none",
       "review_status": "approved",
-      "color_decision": "skipped",
-      "color_reason": "The grayscale/albumen source does not establish the specific colors of Kaulia's suit, waistcoat, gloves, background, or surrounding people. Color would add invention without enough historical value for this first feed use."
+      "color_decision": "approved",
+      "color_method": "best-estimate-hand-tint",
+      "colorization_class": "color-kaulia",
+      "color_confidence": "plausible",
+      "color_reason": "Proof-of-concept reconstruction uses restrained period-plausible tones: warm brown skin, white shirt/cuffs, dark charcoal suit, muted brown-gray waistcoat, and a neutral studio background. Exact garment and backdrop colors are not recoverable from the albumen print and remain explicitly interpretive."
     },
     {
       "id": "HAR-IMG-0002",
       "image_class": "built-environment",
       "title": "ʻIolani Palace",
-      "display_date": "c. 1890",
-      "caption": "ʻIolani Palace around 1890, several years before the September 1897 Palace Square meeting. Shown as place context, not as a photograph of that meeting.",
+      "display_date": "c. 1889–1890",
+      "caption": "ʻIolani Palace around 1889–1890, several years before the September 1897 Palace Square meeting. Shown as place context, not as a photograph of that meeting.",
       "source_authority_url": "https://digitalarchives.hawaii.gov/browse/parent/ark%3A70111/1z1Z",
       "source_record_label": "Hawaiʻi State Archives, PPWD-1-8-010, Buildings Government - Iolani Palace, c. 1890, Theodore P. Severin",
-      "source_image_url": "https://cdn.kastatic.org/ka-content-images/cc03c742e85e9d0265514c4f4f4edcdd20fbe5e2.jpg",
-      "source_image_access_note": "Web access copy of the c. 1890 Severin palace photograph; Hawaiʻi State Archives record PPWD-1-8-010 remains source authority.",
-      "rights_note": "The source photograph dates to c. 1890. The project preserves the Hawaiʻi State Archives record and provenance rather than asserting broader licensing terms beyond the source record.",
+      "source_image_url": "https://imagesofoldhawaii.com/wp-content/uploads/Iolani-Palace-circa-1889.jpg",
+      "source_image_access_note": "Web access copy of a period exterior palace photograph; Hawaiʻi State Archives PPWD-1-8-010 anchors the c. 1890 place/date authority for this proving record.",
+      "rights_note": "The archival source is a late-19th-century photograph. The project preserves source provenance and does not silently promote the web access copy into archival authority.",
       "relationship_default": "context",
       "relationship_label": "Same place · c. 1890 context",
       "restore_method": "deterministic-tonal",
       "restoration_class": "restore-neutral-bw",
       "crop_mode": "none",
       "review_status": "approved",
-      "color_decision": "skipped",
-      "color_reason": "A useful color reconstruction would require period-specific evidence for stone, trim, roof, grounds, and other visible materials. Current visual evidence is not enough to justify a historical-color claim."
+      "color_decision": "approved",
+      "color_method": "best-estimate-hand-tint",
+      "colorization_class": "color-palace",
+      "color_confidence": "supported",
+      "color_reason": "The overall reconstruction is anchored by the surviving/restored palace's known light masonry, dark roof, tropical green grounds, and Honolulu sky. Exact 1889–1890 paint, vegetation, atmospheric, and material colors are still estimates, so the image is labeled reconstructed rather than historically exact."
     },
     {
       "id": "HAR-IMG-0003",
@@ -59,8 +65,11 @@
       "restoration_class": "restore-neutral-bw",
       "crop_mode": "stereo-left",
       "review_status": "approved",
-      "color_decision": "skipped",
-      "color_reason": "The source does not establish specific colors for clothing, food vessels, vegetation, structures, or skin rendering under the original photographic process. Generic colorization would overstate certainty and could amplify a staged-tourist reading of the scene."
+      "color_decision": "approved",
+      "color_method": "best-estimate-hand-tint",
+      "colorization_class": "color-poi",
+      "color_confidence": "plausible",
+      "color_reason": "The proof-of-concept reconstruction uses restrained brown earth/wood and skin tones, muted green vegetation, and neutral cloth. Exact clothing, vessel, vegetation, and food colors are not established by the stereograph and remain best estimates."
     }
   ]
 }
