@@ -124,6 +124,19 @@ class HawaiiArchiveTests(unittest.TestCase):
         self.assertIn(".color-kaulia", styles)
         self.assertIn(".color-palace", styles)
 
+    def test_image_os_pilot_comparison_view_is_live_and_reachable(self):
+        page = (ROOT / "hawaii-archive" / "index.html").read_text(encoding="utf-8")
+        pilot_page = ROOT / "hawaii-archive" / "image-pilot.html"
+        pilot_script = ROOT / "hawaii-archive" / "image-pilot.js"
+        self.assertTrue(pilot_page.exists())
+        self.assertTrue(pilot_script.exists())
+        self.assertIn('href="image-pilot.html"', page)
+        pilot_text = pilot_page.read_text(encoding="utf-8")
+        script_text = pilot_script.read_text(encoding="utf-8")
+        self.assertIn("Original → Restored → Color", pilot_text)
+        self.assertIn("HAR-IMG", script_text)
+        self.assertIn("Color", script_text)
+
 
 if __name__ == "__main__":
     unittest.main()
