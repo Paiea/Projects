@@ -44,9 +44,9 @@ Metrics:
 
 **Visual finding: reject for publication.** The output is genuinely semantic rather than a CSS/global tint, but it contains large unreasonable orange/red color regions. Neighboring cropped figures become over-orange, Kaulia's white shirtfront is pushed toward flesh/peach tone, and reddish color spreads across clothing/background regions. This is materially better evidence about the engine than the v1 tint, but not a trustworthy public result.
 
-## Escalation
+## Color decision / escalation
 
-Try DDColor's full **artistic** model next. Upstream DDColor documentation notes that the artistic model omits colorfulness loss and may produce fewer unreasonable color artifacts. Preserve the current restored B&W checkpoint so only the failing color stage is retried.
+The DDColor-tiny candidate is rejected. The full **DDColor artistic** candidate has now been generated from the fixed v2 restored B&W checkpoint and remains behind the human publication gate until visual comparison is complete.
 
 Do not process ʻIolani Palace or the poi scene until Kaulia has one approved v2 color result or the color lane is explicitly held.
 
