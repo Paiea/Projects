@@ -34,3 +34,5 @@ jobs:
         run: python tests/test_project_hub.py
       - name: Verify Hawaiʻi Archive Revival contracts
         run: python tests/test_hawaii_archive.py
+      - name: Check Hawaiʻi Archive JavaScript syntax
+        run: node --check hawaii-archive/app.js
