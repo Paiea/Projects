@@ -12,6 +12,8 @@ The learner-facing model is now ELL-style gradual release:
 
 Pidgin is a trusted scaffold. It is not Hawaiian grammatical authority, and **Pidgin should never be the joke**.
 
+As the learner gets stronger, **Pidgin support fades** rather than disappearing on a fixed schedule.
+
 ## Authority
 
 - Public route/source: `pidgin-olelo/`
