@@ -19,7 +19,7 @@ class HawaiiArchiveTests(unittest.TestCase):
         path = ROOT / "hawaii-archive" / "data" / "weeks" / "1897-09-06.json"
         payload = json.loads(path.read_text(encoding="utf-8"))
         self.assertEqual(payload["week_start"], "1897-09-06")
-        self.assertGreaterEqual(len(payload["items"]), 3)
+        self.assertGreaterEqual(len(payload["items"]), 12)
         for item in payload["items"]:
             self.assertTrue(item["source_url"].startswith("https://"))
             self.assertIn(item["confidence"], {"unknown", "plausible", "supported", "verified"})
@@ -30,9 +30,14 @@ class HawaiiArchiveTests(unittest.TestCase):
             self.assertIn("rhetorical_mode", item)
             self.assertTrue(item["voice_evidence"])
 
-        energetic = payload["items"][2]
-        self.assertIn("!!", energetic["hawaiian"])
-        self.assertIn("!!", energetic["feed_rendering"])
+        energetic = [item for item in payload["items"] if "!!" in item["hawaiian"]]
+        self.assertTrue(energetic)
+        self.assertTrue(any("!!" in item["feed_rendering"] for item in energetic))
+
+        voiced = [item for item in payload["items"] if item.get("voice_actor")]
+        self.assertGreaterEqual(len(voiced), 6)
+        self.assertTrue(any(item["rhetorical_mode"] == "call-and-response" for item in voiced))
+        self.assertTrue(any(item["rhetorical_mode"] == "warning" for item in voiced))
 
     def test_public_page_feels_like_social_feed_without_hiding_source(self):
         page = (ROOT / "hawaii-archive" / "index.html").read_text(encoding="utf-8")
@@ -43,6 +48,7 @@ class HawaiiArchiveTests(unittest.TestCase):
         self.assertIn("What Hawaiʻi was talking about", page)
         self.assertIn("post-author", script)
         self.assertIn("post-actions", script)
+        self.assertIn("voice_actor", script)
         self.assertIn("Original Hawaiian", script)
         self.assertIn("Close English", script)
         self.assertIn("Voice & source", script)
@@ -55,6 +61,7 @@ class HawaiiArchiveTests(unittest.TestCase):
         contract = (ROOT / "hawaii-archive" / "data" / "ITEM_CONTRACT.md").read_text(encoding="utf-8")
         self.assertIn("rhetorical_mode", contract)
         self.assertIn("voice_evidence", contract)
+        self.assertIn("voice_actor", contract)
         self.assertIn("social intent", contract.lower())
         self.assertIn("do not invent", contract.lower())
 
