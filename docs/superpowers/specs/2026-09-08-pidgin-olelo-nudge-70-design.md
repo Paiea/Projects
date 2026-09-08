@@ -80,18 +80,25 @@ A NUDGE item may introduce at most **two new Hawaiian words/chunks in one scene*
 
 ### 3. Progression state
 
-The extra 70 need a shallow-to-deep state layered on top of existing vector strength rather than a second unrelated scoring system.
+Do not give NUDGE exposure the same mastery weight as producing the full Hawaiian phrase.
 
-Recommended item phases:
+Keep one semantic item, but track a tiny NUDGE state beside the existing full-phrase vector strengths:
 
-- `nudge_seen`
-- `nudge_retrieved`
-- `nudge_used`
-- `full_hawaiian_unlocked`
+- `nudgeSeen: boolean`
+- `nudgeRetrieveWins: 0..2`
+- `nudgeContextWins: 0..1`
+- `fullMissStreak: integer`
 
-The existing six vectors still handle recognition, production, scenario, saying, and use once a representation is active.
+The fuller Hawaiian representation continues to use the existing six vectors: `recognize`, `cloze`, `produce`, `scenario`, `say`, and `use`.
 
-The router decides which representation to render. It should not invent a seventh learner-facing mode.
+Initial graduation rule:
+
+- first exposure sets `nudgeSeen`
+- two successful chunk retrievals set `nudgeRetrieveWins = 2`
+- one successful contextual reuse sets `nudgeContextWins = 1`
+- **MORE HAWAIIAN unlocks when `nudgeRetrieveWins >= 2` and `nudgeContextWins >= 1`**
+
+This is intentionally simple and can be tuned after Dad testing. It is not presented as a scientific mastery formula.
 
 ### 4. Routing judgment
 
@@ -100,10 +107,12 @@ The router should prefer one language problem at a time.
 Rules:
 
 - If the semantic item is new, show the Hawaiian island inside familiar Pidgin.
-- If the island has been seen but not retrieved, ask for the island directly from Pidgin context.
-- If the island is retrievable, reuse it in another local context.
-- If the island is stable enough, unlock the fuller Hawaiian representation.
-- If the fuller Hawaiian form is missed repeatedly, fall back to the NUDGE representation for that same semantic item.
+- If the island has been seen but has fewer than two successful retrievals, ask for the island directly from Pidgin context.
+- Once the island has two successful retrievals, route one contextual reuse scene.
+- Once the island has two retrieval wins plus one context win, unlock the fuller Hawaiian representation.
+- Fuller Hawaiian uses the existing six-vector engine and spacing logic.
+- Two consecutive misses on the fuller Hawaiian representation trigger **one NUDGE fallback rep** for that same item. The fallback does not erase full-phrase strength or re-lock the item.
+- After the fallback rep, the item is eligible for fuller Hawaiian again according to normal weak-path routing.
 - Do not introduce a new full Hawaiian sentence and two new vocabulary items in the same rep.
 - Core 30 remains mostly direct whole-phrase learning; occasional micro-scenes may reinforce known Core material but do not replace the Core flow.
 
@@ -133,6 +142,8 @@ Possible derived reps from that one scene:
 
 The content area can include easy arithmetic, but arithmetic is only context. The subject is still language learning.
 
+The first implementation slice should add **8 seed scenes**, enough to cover food, quantity, objects, animals, place, shopping/money, time, and ordinary errands without building a giant content system.
+
 ### 6. Extra-70 utility order
 
 The extra 70 should be explicitly ordered by adult usefulness, not raw file position or grammatical simplicity.
@@ -149,15 +160,19 @@ Priority should generally favor:
 
 A deterministic order is required so progress and tests are reproducible.
 
+The earlier `feature/pidgin-olelo-utility-70` branch contains useful explicit ordering work that may be selectively reused, but that branch must not be merged as-is.
+
 ### 7. Access and UI
 
 The extra 70 remain secondary to Core 30.
 
 - Core 30 remains the default Learn experience.
 - The extra layer should not become a third primary navigation tab.
-- A low-prominence entry point may unlock after meaningful Core progress.
-- Direct URL access may remain available for testing and continuity.
-- The extra page should reuse the existing practice shell and `core-engine.js` rather than clone the learning engine.
+- The low-prominence `More phrases` entry point unlocks when **5 Core phrases are solid** under the existing `ENGINE.isOwned` threshold.
+- Before 5 Core phrases are solid, the entry point stays hidden.
+- Direct URL access remains available for testing and continuity.
+- The extra page reuses the existing practice shell and `core-engine.js` rather than cloning the learning engine.
+- The extra page starts with the first **10 utility-ranked extra meanings** active and unlocks one additional meaning every **8 extra-deck reps**, matching the existing gradual-pool cadence.
 - On phone, preserve the no-scroll practice surface where practical.
 
 ## Five Implementation Updates
@@ -171,15 +186,16 @@ The extra 70 remain secondary to Core 30.
    - Add retrieval prompts for the island without creating a new mode.
 
 3. **Representation router**
-   - Add shallow-to-deep routing and reversible fallback between NUDGE and fuller Hawaiian.
-   - Reuse existing six vectors and spacing logic.
+   - Add shallow-to-deep routing and reversible fallback between NUDGE and fuller Hawaiian using the concrete thresholds above.
+   - Reuse existing six vectors and spacing logic for the fuller Hawaiian layer.
 
 4. **Micro-scene seed set**
-   - Add a small initial set of adult/local scenes covering food, objects, animals, quantity, place, and ordinary errands.
+   - Add 8 adult/local scenes covering food, quantity, objects, animals, place, shopping/money, time, and ordinary errands.
    - Keep each scene bounded to one intended learning outcome and at most two new Hawaiian chunks.
 
 5. **Quiet extra-70 surface + continuity guardrails**
    - Add the low-prominence extra page using the shared runtime.
+   - Gate its visible link at 5 Core-solid phrases, start with 10 utility-ranked meanings, and expand one meaning every 8 reps.
    - Add validation for item references, utility order, scene vocabulary limits, orthography-sensitive Hawaiian strings, Core-30 preservation, and no duplicate learning engine.
    - Update `pidgin-olelo/PROJECT_STATE.md` with the NUDGE model and routing rules.
 
@@ -191,6 +207,7 @@ The extra 70 remain secondary to Core 30.
 - NUDGE text must be labeled/treated as Pidgin context with Hawaiian insertion, never as Hawaiian grammar authority.
 - Hawaiian strings remain NFC-normalized and preserve ʻokina/kahakō.
 - New Hawaiian wording remains subject to fluent-speaker/kumu review before being treated as curriculum authority.
+- Prefer deriving the first NUDGE chunks from Hawaiian already present in the existing 100-item bank. Any genuinely new Hawaiian vocabulary in the 8 seed scenes must be explicitly marked for review rather than silently treated as established curriculum authority.
 
 ## Testing Strategy
 
@@ -202,10 +219,13 @@ Required regressions:
 - Extra 70 contain exactly 70 unique non-Core IDs.
 - Utility order is explicit and deterministic.
 - NUDGE reps can render a Hawaiian island inside Pidgin context.
+- NUDGE graduation requires two retrieval wins plus one context win.
 - The same semantic item can later render fuller Hawaiian.
-- Repeated failure in fuller Hawaiian can route back to NUDGE.
+- Two consecutive fuller-Hawaiian misses route one NUDGE fallback without erasing fuller-Hawaiian state.
 - Scene definitions cannot exceed two new chunks.
 - Scene-referenced item IDs must exist.
+- The visible More Phrases link remains hidden until 5 Core phrases are solid.
+- Extra page starts with 10 active meanings and grows by one every 8 extra reps.
 - Extra page uses the shared engine/runtime rather than a cloned mode.
 - Mobile Core practice behavior remains unchanged.
 
