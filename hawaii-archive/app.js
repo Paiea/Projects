@@ -66,6 +66,13 @@ function makeVoiceSourcePanel(item) {
   voice.textContent = item.voice_evidence;
   wrapper.append(voice);
 
+  if (item.information_lag_note) {
+    const lag = document.createElement("p");
+    lag.className = "information-lag";
+    lag.textContent = item.information_lag_note;
+    wrapper.append(lag);
+  }
+
   const source = document.createElement("p");
   source.className = "source-line";
   const link = document.createElement("a");
@@ -76,9 +83,11 @@ function makeVoiceSourcePanel(item) {
   source.append(link);
   wrapper.append(source);
 
-  const evidence = document.createElement("p");
-  evidence.textContent = item.translation_basis;
-  wrapper.append(evidence);
+  if (item.translation_basis) {
+    const evidence = document.createElement("p");
+    evidence.textContent = item.translation_basis;
+    wrapper.append(evidence);
+  }
 
   const routing = document.createElement("p");
   routing.className = "routing-line";
@@ -250,7 +259,10 @@ function renderPost(item, imageMap) {
 function renderWeek(payload, imagePayload) {
   feed.replaceChildren();
   count.textContent = String(payload.items.length);
-  scopeNote.textContent = payload.scope_note;
+  scopeNote.textContent = payload.scope_note.replace(
+    /\d+ sourced items/,
+    `${payload.items.length} sourced items`,
+  );
 
   const imageMap = new Map(imagePayload.images.map((imageRecord) => [imageRecord.id, imageRecord]));
   const grouped = new Map();

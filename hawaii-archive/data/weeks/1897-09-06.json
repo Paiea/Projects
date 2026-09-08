@@ -2,7 +2,7 @@
   "week_start": "1897-09-06",
   "week_end": "1897-09-12",
   "title": "September 6–12, 1897",
-  "scope_note": "Pilot week: 13 sourced items, centered on the September 6 anti-annexation mass meeting and the September 10–11 nūpepa record. This is still curated, not a complete ingestion of every paper published that week.",
+  "scope_note": "Expansion in progress: 23 sourced items following historical attention rather than a topic quota. The current batch preserves the September 6 anti-annexation mass meeting, the September 10–11 nūpepa record, and directly dated Hui Aloha ʻĀina petition pages across five islands. Event time and publication time remain distinct when known.",
   "items": [
     {
       "id": "HAR-1897-09-06-ALOHA-001",
@@ -22,7 +22,10 @@
       "confidence": "supported",
       "route": "review",
       "status": "pilot",
-      "image_ref": "HAR-IMG-0001"
+      "image_ref": "HAR-IMG-0001",
+      "event_date": "1897-09-06",
+      "publication_date": "1897-09-11",
+      "information_lag_note": "The speech occurred at the September 6 Palace Square mass meeting; the Ke Aloha Aina account was published September 11, preserving a five-day event-to-publication lag."
     },
     {
       "id": "HAR-1897-09-06-ALOHA-002",
@@ -41,7 +44,10 @@
       "translation_basis": "Kamakakoʻi provides the Hawaiian excerpt and English translation.",
       "confidence": "supported",
       "route": "review",
-      "status": "pilot"
+      "status": "pilot",
+      "event_date": "1897-09-06",
+      "publication_date": "1897-09-11",
+      "information_lag_note": "The speech occurred at the September 6 Palace Square mass meeting; the Ke Aloha Aina account was published September 11, preserving a five-day event-to-publication lag."
     },
     {
       "id": "HAR-1897-09-06-ALOHA-003",
@@ -60,7 +66,10 @@
       "translation_basis": "UH Mānoa preserves the exchange in English; the Hawaiian wording is also quoted in Noenoe K. Silva's Aloha Betrayed from the historical speech record.",
       "confidence": "supported",
       "route": "review",
-      "status": "pilot"
+      "status": "pilot",
+      "event_date": "1897-09-06",
+      "publication_date": "1897-09-11",
+      "information_lag_note": "The speech occurred at the September 6 Palace Square mass meeting; the Ke Aloha Aina account was published September 11, preserving a five-day event-to-publication lag."
     },
     {
       "id": "HAR-1897-09-06-ALOHA-004",
@@ -80,7 +89,10 @@
       "confidence": "supported",
       "route": "review",
       "status": "pilot",
-      "image_ref": "HAR-IMG-0002"
+      "image_ref": "HAR-IMG-0002",
+      "event_date": "1897-09-06",
+      "publication_date": "1897-09-11",
+      "information_lag_note": "The speech occurred at the September 6 Palace Square mass meeting; the Ke Aloha Aina account was published September 11, preserving a five-day event-to-publication lag."
     },
     {
       "id": "HAR-1897-09-06-ALOHA-005",
@@ -99,7 +111,10 @@
       "translation_basis": "The scholarly source quotes and translates the historical line.",
       "confidence": "supported",
       "route": "review",
-      "status": "pilot"
+      "status": "pilot",
+      "event_date": "1897-09-06",
+      "publication_date": "1897-09-11",
+      "information_lag_note": "The speech occurred at the September 6 Palace Square mass meeting; the Ke Aloha Aina account was published September 11, preserving a five-day event-to-publication lag."
     },
     {
       "id": "HAR-1897-09-06-ALOHA-006",
@@ -118,7 +133,10 @@
       "translation_basis": "UH Mānoa summarizes and translates Kaulia's declaration; the Hawaiian line is preserved in scholarship on the meeting.",
       "confidence": "supported",
       "route": "review",
-      "status": "pilot"
+      "status": "pilot",
+      "event_date": "1897-09-06",
+      "publication_date": "1897-09-11",
+      "information_lag_note": "The speech occurred at the September 6 Palace Square mass meeting; the Ke Aloha Aina account was published September 11, preserving a five-day event-to-publication lag."
     },
     {
       "id": "HAR-1897-09-06-ALOHA-007",
@@ -137,7 +155,10 @@
       "translation_basis": "Kamehameha Schools provides the historical Hawaiian line and English translation/context.",
       "confidence": "supported",
       "route": "cheap-pass",
-      "status": "pilot"
+      "status": "pilot",
+      "event_date": "1897-09-06",
+      "publication_date": "1897-09-11",
+      "information_lag_note": "The speech occurred at the September 6 Palace Square mass meeting; the Ke Aloha Aina account was published September 11, preserving a five-day event-to-publication lag."
     },
     {
       "id": "HAR-1897-09-06-ALOHA-008",
@@ -156,7 +177,10 @@
       "translation_basis": "The resource supplies the Hawaiian passage and a close English translation.",
       "confidence": "supported",
       "route": "review",
-      "status": "pilot"
+      "status": "pilot",
+      "event_date": "1897-09-06",
+      "publication_date": "1897-09-11",
+      "information_lag_note": "The speech occurred at the September 6 Palace Square mass meeting; the Ke Aloha Aina account was published September 11, preserving a five-day event-to-publication lag."
     },
     {
       "id": "HAR-1897-09-06-ALOHA-009",
@@ -175,7 +199,10 @@
       "translation_basis": "The study quotes the Hawaiian passage and provides a translation credited to Maly.",
       "confidence": "supported",
       "route": "high-fidelity",
-      "status": "pilot"
+      "status": "pilot",
+      "event_date": "1897-09-06",
+      "publication_date": "1897-09-11",
+      "information_lag_note": "The speech occurred at the September 6 Palace Square mass meeting; the Ke Aloha Aina account was published September 11, preserving a five-day event-to-publication lag."
     },
     {
       "id": "HAR-1897-09-10-KUOKOA-001",
@@ -245,6 +272,176 @@
       "source_url": "https://libweb.hawaii.edu/digicoll/annexation/petition/pet-intro.php",
       "source_label": "UH Mānoa Library, The 1897 Petitions Protesting Annexation",
       "translation_basis": "UH Mānoa gives the Hawaiian petition heading and its English meaning.",
+      "confidence": "verified",
+      "route": "cheap-pass",
+      "status": "pilot"
+    },
+    {
+      "id": "HAR-1897-09-11-PETITION-HI-W-001",
+      "date": "1897-09-11",
+      "publication": "Hui Aloha ʻĀina petition record",
+      "place": "South Kona, Hawaiʻi",
+      "kind": "petition-district-page",
+      "hawaiian": "APANA O KONA HEMA\nMOKUPUNI O HAWAII",
+      "english_close": "Women. District of South Kona, Island of Hawaiʻi.",
+      "feed_rendering": "South Kona women are on the petition against annexation.",
+      "rhetorical_mode": "collective-protest-record",
+      "voice_evidence": "The dated Hui Aloha ʻĀina petition page identifies women from this district and island. This supports a collective protest/organizing record, not invented speech for individual signers.",
+      "source_url": "https://libweb.hawaii.edu/digicoll/annexation/petition/pet007.php",
+      "source_label": "UH Mānoa Library, Hui Aloha ʻĀina anti-annexation petition, South Kona, Hawaiʻi, Women, Sept. 11, 1897",
+      "confidence": "verified",
+      "route": "cheap-pass",
+      "status": "pilot"
+    },
+    {
+      "id": "HAR-1897-09-11-PETITION-HI-M-001",
+      "date": "1897-09-11",
+      "publication": "Hui Aloha ʻĀina petition record",
+      "place": "South Kona, Hawaiʻi",
+      "kind": "petition-district-page",
+      "hawaiian": "APANA O KONA HEMA\nMOKUPUNI O HAWAII",
+      "english_close": "Men. District of South Kona, Island of Hawaiʻi.",
+      "feed_rendering": "South Kona men are on the petition against annexation.",
+      "rhetorical_mode": "collective-protest-record",
+      "voice_evidence": "The dated Hui Aloha ʻĀina petition page identifies men from this district and island. This supports a collective protest/organizing record, not invented speech for individual signers.",
+      "source_url": "https://libweb.hawaii.edu/digicoll/annexation/petition/pet501.php",
+      "source_label": "UH Mānoa Library, Hui Aloha ʻĀina anti-annexation petition, South Kona, Hawaiʻi, Men, Sept. 11, 1897",
+      "confidence": "verified",
+      "route": "cheap-pass",
+      "status": "pilot"
+    },
+    {
+      "id": "HAR-1897-09-11-PETITION-MAUI-W-001",
+      "date": "1897-09-11",
+      "publication": "Hui Aloha ʻĀina petition record",
+      "place": "Lahaina, Maui",
+      "kind": "petition-district-page",
+      "hawaiian": "APANA O LAHAINA\nMOKUPUNI O MAUI",
+      "english_close": "Women. District of Lahaina, Island of Maui.",
+      "feed_rendering": "Lahaina women are on the petition against annexation.",
+      "rhetorical_mode": "collective-protest-record",
+      "voice_evidence": "The dated Hui Aloha ʻĀina petition page identifies women from this district and island. This supports a collective protest/organizing record, not invented speech for individual signers.",
+      "source_url": "https://libweb.hawaii.edu/digicoll/annexation/petition/pet099.php",
+      "source_label": "UH Mānoa Library, Hui Aloha ʻĀina anti-annexation petition, Lahaina, Maui, Women, Sept. 11, 1897",
+      "confidence": "verified",
+      "route": "cheap-pass",
+      "status": "pilot"
+    },
+    {
+      "id": "HAR-1897-09-11-PETITION-MAUI-M-001",
+      "date": "1897-09-11",
+      "publication": "Hui Aloha ʻĀina petition record",
+      "place": "Lahaina, Maui",
+      "kind": "petition-district-page",
+      "hawaiian": "APANA O LAHAINA\nMOKUPUNI O MAUI",
+      "english_close": "Men. District of Lahaina, Island of Maui.",
+      "feed_rendering": "Lahaina men are on the petition against annexation.",
+      "rhetorical_mode": "collective-protest-record",
+      "voice_evidence": "The dated Hui Aloha ʻĀina petition page identifies men from this district and island. This supports a collective protest/organizing record, not invented speech for individual signers.",
+      "source_url": "https://libweb.hawaii.edu/digicoll/annexation/petition/pet613.php",
+      "source_label": "UH Mānoa Library, Hui Aloha ʻĀina anti-annexation petition, Lahaina, Maui, Men, Sept. 11, 1897",
+      "confidence": "verified",
+      "route": "cheap-pass",
+      "status": "pilot"
+    },
+    {
+      "id": "HAR-1897-09-11-PETITION-MOLOKAI-W-001",
+      "date": "1897-09-11",
+      "publication": "Hui Aloha ʻĀina petition record",
+      "place": "Kona, Molokaʻi",
+      "kind": "petition-district-page",
+      "hawaiian": "APANA O KONA MOLOKAI\nMOKUPUNI O MOLOKAI",
+      "english_close": "Women. District of Kona Molokaʻi, Island of Molokaʻi.",
+      "feed_rendering": "Kona, Molokaʻi women are on the petition against annexation.",
+      "rhetorical_mode": "collective-protest-record",
+      "voice_evidence": "The dated Hui Aloha ʻĀina petition page identifies women from this district and island. This supports a collective protest/organizing record, not invented speech for individual signers.",
+      "source_url": "https://libweb.hawaii.edu/digicoll/annexation/petition/pet158.php",
+      "source_label": "UH Mānoa Library, Hui Aloha ʻĀina anti-annexation petition, Kona, Molokaʻi, Women, Sept. 11, 1897",
+      "confidence": "verified",
+      "route": "cheap-pass",
+      "status": "pilot"
+    },
+    {
+      "id": "HAR-1897-09-11-PETITION-MOLOKAI-M-001",
+      "date": "1897-09-11",
+      "publication": "Hui Aloha ʻĀina petition record",
+      "place": "Pelekunu, Molokaʻi",
+      "kind": "petition-district-page",
+      "hawaiian": "APANA O PELEKUNU\nMOKUPUNI O MOLOKAI",
+      "english_close": "Men. District of Pelekunu, Island of Molokaʻi.",
+      "feed_rendering": "Pelekunu men are on the petition against annexation.",
+      "rhetorical_mode": "collective-protest-record",
+      "voice_evidence": "The dated Hui Aloha ʻĀina petition page identifies men from this district and island. This supports a collective protest/organizing record, not invented speech for individual signers.",
+      "source_url": "https://libweb.hawaii.edu/digicoll/annexation/petition/pet683.php",
+      "source_label": "UH Mānoa Library, Hui Aloha ʻĀina anti-annexation petition, Pelekunu, Molokaʻi, Men, Sept. 11, 1897",
+      "confidence": "verified",
+      "route": "cheap-pass",
+      "status": "pilot"
+    },
+    {
+      "id": "HAR-1897-09-11-PETITION-OAHU-W-001",
+      "date": "1897-09-11",
+      "publication": "Hui Aloha ʻĀina petition record",
+      "place": "Honolulu, Oʻahu",
+      "kind": "petition-district-page",
+      "hawaiian": "APANA O HONOLULU\nMOKUPUNI O OAHU",
+      "english_close": "Women. District of Honolulu, Island of Oʻahu.",
+      "feed_rendering": "Honolulu women are on the petition against annexation.",
+      "rhetorical_mode": "collective-protest-record",
+      "voice_evidence": "The dated Hui Aloha ʻĀina petition page identifies women from this district and island. This supports a collective protest/organizing record, not invented speech for individual signers.",
+      "source_url": "https://libweb.hawaii.edu/digicoll/annexation/petition/pet168.php",
+      "source_label": "UH Mānoa Library, Hui Aloha ʻĀina anti-annexation petition, Honolulu, Oʻahu, Women, Sept. 11, 1897",
+      "confidence": "verified",
+      "route": "cheap-pass",
+      "status": "pilot"
+    },
+    {
+      "id": "HAR-1897-09-11-PETITION-OAHU-M-001",
+      "date": "1897-09-11",
+      "publication": "Hui Aloha ʻĀina petition record",
+      "place": "Honolulu, Oʻahu",
+      "kind": "petition-district-page",
+      "hawaiian": "APANA O HONOLULU\nMOKUPUNI O OAHU",
+      "english_close": "Men. District of Honolulu, Island of Oʻahu.",
+      "feed_rendering": "Honolulu men are on the petition against annexation.",
+      "rhetorical_mode": "collective-protest-record",
+      "voice_evidence": "The dated Hui Aloha ʻĀina petition page identifies men from this district and island. This supports a collective protest/organizing record, not invented speech for individual signers.",
+      "source_url": "https://libweb.hawaii.edu/digicoll/annexation/petition/pet701.php",
+      "source_label": "UH Mānoa Library, Hui Aloha ʻĀina anti-annexation petition, Honolulu, Oʻahu, Men, Sept. 11, 1897",
+      "confidence": "verified",
+      "route": "cheap-pass",
+      "status": "pilot"
+    },
+    {
+      "id": "HAR-1897-09-11-PETITION-KAUAI-W-001",
+      "date": "1897-09-11",
+      "publication": "Hui Aloha ʻĀina petition record",
+      "place": "Līhuʻe, Kauaʻi",
+      "kind": "petition-district-page",
+      "hawaiian": "APANA O LIHUE\nMOKUPUNI O KAUAI",
+      "english_close": "Women. District of Līhuʻe, Island of Kauaʻi.",
+      "feed_rendering": "Līhuʻe women are on the petition against annexation.",
+      "rhetorical_mode": "collective-protest-record",
+      "voice_evidence": "The dated Hui Aloha ʻĀina petition page identifies women from this district and island. This supports a collective protest/organizing record, not invented speech for individual signers.",
+      "source_url": "https://libweb.hawaii.edu/digicoll/annexation/petition/pet084.php",
+      "source_label": "UH Mānoa Library, Hui Aloha ʻĀina anti-annexation petition, Līhuʻe, Kauaʻi, Women, Sept. 11, 1897",
+      "confidence": "verified",
+      "route": "cheap-pass",
+      "status": "pilot"
+    },
+    {
+      "id": "HAR-1897-09-11-PETITION-KAUAI-M-001",
+      "date": "1897-09-11",
+      "publication": "Hui Aloha ʻĀina petition record",
+      "place": "Līhuʻe, Kauaʻi",
+      "kind": "petition-district-page",
+      "hawaiian": "APANA O LIHUE\nMOKUPUNI O KAUAI",
+      "english_close": "Men. District of Līhuʻe, Island of Kauaʻi.",
+      "feed_rendering": "Līhuʻe men are on the petition against annexation.",
+      "rhetorical_mode": "collective-protest-record",
+      "voice_evidence": "The dated Hui Aloha ʻĀina petition page identifies men from this district and island. This supports a collective protest/organizing record, not invented speech for individual signers.",
+      "source_url": "https://libweb.hawaii.edu/digicoll/annexation/petition/pet600.php",
+      "source_label": "UH Mānoa Library, Hui Aloha ʻĀina anti-annexation petition, Līhuʻe, Kauaʻi, Men, Sept. 11, 1897",
       "confidence": "verified",
       "route": "cheap-pass",
       "status": "pilot"
