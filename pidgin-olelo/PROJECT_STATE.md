@@ -27,6 +27,7 @@ Pidgin support fades as the learner gets stronger. Pidgin is never the joke.
 - Browser runtime regression: `tests/test_pidgin_olelo_browser_runtime.py`
 - Dialogue/scroll regression: `tests/test_pidgin_olelo_response_scroll.py`
 - Uncle Seally behavior regression: `tests/test_pidgin_olelo_seally_behavior.py`
+- Mobile practice-shell regression: `tests/test_pidgin_olelo_mobile_practice.py`
 
 ## Learning Model
 
@@ -95,12 +96,28 @@ Current shell is intentionally simple:
 
 - desktop: Uncle Seally beside the main lesson area
 - Noʻeau sits inline underneath the lesson rather than in a More drawer/right rail
-- tablet/mobile: one vertical learning stack with compact Seally above the lesson
+- tablet: one vertical learning stack with compact Seally above the lesson
 - mobile navigation is **Learn / Mission** only
 
 Do not restore a dashboard-style right rail or a More control just to house Noʻeau.
 
-When a true Next/new-question transition replaces a taller revealed card with a shorter fresh prompt, the runtime brings the practice card back into view. It does not reload the page. Initial page load does not auto-scroll into the lesson.
+### Phone practice is viewport-first
+
+On phones, the learning loop should behave like an app screen rather than a long responsive webpage.
+
+- the large hero/header disappears on the Learn screen
+- Uncle Seally collapses to a shallow teacher strip
+- Core progress becomes a compact bar rather than a separate summary card
+- the active practice card is sized from the dynamic viewport so the primary loop fits above the fixed mobile navigation
+- the primary Hawaiian answer stays inside the practice card
+- stale multiple-choice options collapse once the answer is revealed
+- **Show me / Miss / Got um / Next** remain reachable without document scrolling
+- `Hawaiian shape`, note, and `Use um` examples are secondary help below the primary practice card, not obstacles between the answer and Next
+- true Next/new-question transitions swap content in place on phone and do not call `scrollIntoView`
+- desktop/tablet may still bring the practice card back into view when moving between questions
+- initial page load never auto-scrolls into the lesson
+
+If a future phone change makes the learner scroll just to reveal the answer or reach Next, treat that as a layout regression rather than adding more auto-scroll logic.
 
 The visual treatment is intentionally restrained: one local island backdrop behind translucent cream/green cards. Do not turn every surface into illustration.
 
@@ -152,16 +169,17 @@ A future **hear it** vector should return only with trustworthy fluent-speaker o
 
 Use the shipped Core 30 version with Dad before adding vocabulary or major modes. Watch whether:
 
+- the full question → reveal → rate → Next loop actually fits common phone viewports without scrolling
+- the separate answer-support block is useful when intentionally opened by scrolling, without getting in the way of the primary loop
 - Seally feels funny without becoming noisy
 - the Pidgin scaffold fades at the right speed
 - translation questions and response questions feel clearly different
 - cloze/scenario/conversational response/recasting make missed thoughts stick
 - MORE LIKE THIS helps from a different angle
-- Next keeps the fresh prompt visible on mobile and desktop
 - 10-Min Mission produces Hawaiian outside the app
 - Noʻeau feels like cultural flavor
 - any Hawaiian target, ʻokina, kahakō, particle, article, or example gets flagged by a fluent speaker/kumu
 
 ## RE-PROMPT
 
-> Continue Pidgin → ʻŌlelo from current `Paiea/Projects` authority. Read root `AGENTS.md`, `state/PROJECT_REGISTRY.md`, `state/HANDSHAKE_PROTOCOL.md`, and `pidgin-olelo/PROJECT_STATE.md`, then inspect current source. Preserve Core 30 as the permanent default, one mixed Learn flow, ELL-style fading, six hidden vectors, recasting, WIN-style MORE LIKE THIS / SHOW WHAT YOU KNOW, compiler-style one-thought-many-representations, quiet spacing, working Back/Replay/Forward, conversational replies as a derived `scenario` representation rather than a new mode, real-world Mission use credit, orthography checks, inline Noʻeau under the lesson, and responsive Uncle Seally commentary. Keep translation meaning distinct from a plausible conversational reply. Keep Uncle Seally sparse: ordinary correct reactions are throttled, while miss/repeated miss, mastery, Show Me, Replay, and harder scaffold transitions are teacher moments; seal jokes stay rare. Pidgin is the trusted scaffold and never the punchline. Do not restore synthetic audio. Prefer real Dad testing and fluent-speaker/kumu corrections over feature expansion.
+> Continue Pidgin → ʻŌlelo from current `Paiea/Projects` authority. Read root `AGENTS.md`, `state/PROJECT_REGISTRY.md`, `state/HANDSHAKE_PROTOCOL.md`, and `pidgin-olelo/PROJECT_STATE.md`, then inspect current source. Preserve Core 30 as the permanent default, one mixed Learn flow, ELL-style fading, six hidden vectors, recasting, WIN-style MORE LIKE THIS / SHOW WHAT YOU KNOW, compiler-style one-thought-many-representations, quiet spacing, working Back/Replay/Forward, conversational replies as a derived `scenario` representation rather than a new mode, real-world Mission use credit, orthography checks, inline Noʻeau under the lesson, and responsive Uncle Seally commentary. Keep translation meaning distinct from a plausible conversational reply. Keep Uncle Seally sparse: ordinary correct reactions are throttled, while miss/repeated miss, mastery, Show Me, Replay, and harder scaffold transitions are teacher moments; seal jokes stay rare. On phones, preserve the viewport-first practice shell: no large Learn hero, compact Seally/progress, primary answer/actions inside the viewport, secondary shape/examples below, and no document auto-scroll on Next. Pidgin is the trusted scaffold and never the punchline. Do not restore synthetic audio. Prefer real Dad testing and fluent-speaker/kumu corrections over feature expansion.
