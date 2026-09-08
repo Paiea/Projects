@@ -45,6 +45,22 @@ function getStrength(strengths, itemId, vector) {
   return clampStrength(strengths?.[itemId]?.[vector] || 0);
 }
 
+function conversationQuestionText(questionItem, strengths = {}, missCount = 0) {
+  if (!questionItem) return "";
+  if (Number(missCount) > 0) return questionItem.pidgin;
+  return getStrength(strengths, questionItem.id, "recognize") >= 1
+    ? questionItem.hawaiian
+    : questionItem.pidgin;
+}
+
+function canUnlockNext(activeIds = [], evidenceIds = [], repeatedMissIds = []) {
+  const evidence = new Set(evidenceIds);
+  const repeated = new Set(repeatedMissIds);
+  return activeIds.length > 0
+    && activeIds.every((itemId) => evidence.has(itemId))
+    && activeIds.every((itemId) => !repeated.has(itemId));
+}
+
 function itemAverage(strengths, itemId) {
   const total = VECTORS.reduce((sum, vector) => sum + getStrength(strengths, itemId, vector), 0);
   return total / VECTORS.length;
@@ -317,6 +333,8 @@ const coreEngineApi = {
   MAX_VECTOR_STRENGTH,
   VECTOR_META,
   getStrength,
+  conversationQuestionText,
+  canUnlockNext,
   itemAverage,
   isOwned,
   stageFor,

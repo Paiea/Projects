@@ -173,7 +173,7 @@ const EXTRA_MIXED = {
   "talk-together": "Put the phone down. We can kamaʻilio.",
   yesterday: "I nehinei rain plenty.",
   why: "No ke aha? Why you bought five?",
-  "how-many": "You need five. ʻEhia you get?",
+  "how-many": "You need five. ʻEhia? How many you get?",
   "want-this": "You like this one? Zoom in on kēia inside the Hawaiian.",
   "want-that": "You like that one? Zoom in on kēlā inside the Hawaiian.",
   "dont-want": "Too expensive. ʻAʻole au makemake.",
@@ -204,7 +204,10 @@ function islandStrength(strengths, islandId, vector) {
   return Math.max(0, Number(strengths?.[islandId]?.[vector]) || 0);
 }
 
-function islandStable(strengths, islandId) {
+function islandStable(strengths, entryOrId) {
+  const islandId = typeof entryOrId === "string" ? entryOrId : entryOrId?.id;
+  if (!islandId) return false;
+  if (entryOrId?.standalone === false) return islandStrength(strengths, islandId, "recognize") >= 2;
   return islandStrength(strengths, islandId, "produce") >= 2 && islandStrength(strengths, islandId, "scenario") >= 1;
 }
 
@@ -220,16 +223,20 @@ function pickIsland(parentId, islandStrengths = {}) {
   })[0];
 }
 
-function selectRepresentation({ deck, parentId, parentIntroduced, islandStrengths = {}, repCount = 0, repairPending = false }) {
+function selectRepresentation({ deck, parentId, parentIntroduced, islandStrengths = {}, repCount = 0, repairPending = false, avoidKind = null }) {
   const entry = pickIsland(parentId, islandStrengths);
-  if (!entry) return { kind: "parent" };
+  if (!entry) return repairPending
+    ? { kind: "parent", repair: true, vector: "recognize" }
+    : { kind: "parent" };
   if (repairPending) return { kind: "island", island: entry, repair: true };
+  if (avoidKind === "parent") return { kind: "island", island: entry };
+  if (avoidKind === "island" && (deck === "core" || islandStable(islandStrengths, entry))) return { kind: "parent" };
   if (deck === "core") {
     if (!parentIntroduced) return { kind: "parent" };
     if (repCount > 0 && repCount % 4 === 0) return { kind: "island", island: entry };
     return { kind: "parent" };
   }
-  return islandStable(islandStrengths, entry.id) ? { kind: "parent" } : { kind: "island", island: entry };
+  return islandStable(islandStrengths, entry) ? { kind: "parent" } : { kind: "island", island: entry };
 }
 
 function buildIslandIntro(parent, entry) {
@@ -242,6 +249,7 @@ function buildIslandIntro(parent, entry) {
 }
 
 function buildIslandQuestion(parent, entry, vector, alternatives = [], mixedContext = null) {
+  if (entry.standalone === false) vector = "recognize";
   const base = { itemId: parent.id, semanticItemId: parent.id, islandId: entry.id, island: true, vector };
   if (vector === "recognize") {
     return { ...base, stage: 2, label: "ZOOM IN", instruction: "What does this Hawaiian island mean here?", prompt: entry.hawaiian, answer: entry.gloss, answerLabel: "Pidgin meaning", choices: [entry.gloss, ...alternatives.filter((x) => x !== entry.gloss)].slice(0, 4) };
@@ -274,6 +282,7 @@ function validate(items, coreIds) {
       if (!ISLAND_TYPES.has(entry.type)) errors.push(`invalid island type: ${entry.id}`);
       if (entry.parentId !== parentId) errors.push(`parent mismatch: ${entry.id}`);
       if (entry.type === "context" && !entry.mixedExamples?.length) errors.push(`context island missing mixed example: ${entry.id}`);
+      if (entry.type === "context" && !entry.mixedExamples?.some((example) => example.includes(entry.hawaiian))) errors.push(`context island not grounded in example: ${entry.id}`);
       if (entry.hawaiian !== entry.hawaiian.normalize("NFC")) errors.push(`non-NFC Hawaiian: ${entry.id}`);
       if (parent) {
         const parentText = parent.hawaiian.normalize("NFC").toLocaleLowerCase();

@@ -18,6 +18,14 @@ const EXTRA_REPS_PER_UNLOCK = 8;
 const SEALLY_MIN_GAP = 3;
 const SEALLY_SEAL_EVERY = 17;
 
+function deckStartingCount() {
+  return IS_EXTRA_DECK ? EXTRA_STARTING_ACTIVE_COUNT : STARTING_ACTIVE_COUNT;
+}
+
+function deckUnlockPace() {
+  return IS_EXTRA_DECK ? EXTRA_REPS_PER_UNLOCK : REPS_PER_UNLOCK;
+}
+
 const SEALLY_LINES = {
   start: [
     "Eh. We go.",
@@ -118,6 +126,7 @@ let historyCursor = -1;
 let reviewingHistory = false;
 let preferredItemId = null;
 let excludeVectorOnce = null;
+let avoidRepresentationOnce = null;
 let autoRated = false;
 let sessionMisses = {};
 let lastSeallyRep = state.repCount;
@@ -129,6 +138,7 @@ function emptyState() {
     introduced: {},
     lastSeen: {},
     repCount: 0,
+    unlockedCount: Math.min(PARENT_ITEMS.length, deckStartingCount()),
   };
 }
 
@@ -164,11 +174,20 @@ function loadState() {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (raw) {
       const parsed = JSON.parse(raw);
+      const repCount = Number(parsed.repCount) || 0;
+      const legacyUnlocked = Math.min(
+        PARENT_ITEMS.length,
+        deckStartingCount() + Math.floor(repCount / deckUnlockPace()),
+      );
       return {
         vectorStrengths: parsed.vectorStrengths || {},
         introduced: parsed.introduced || {},
         lastSeen: parsed.lastSeen || {},
-        repCount: Number(parsed.repCount) || 0,
+        repCount,
+        unlockedCount: Math.min(
+          PARENT_ITEMS.length,
+          Math.max(deckStartingCount(), Number(parsed.unlockedCount) || legacyUnlocked),
+        ),
       };
     }
   } catch {
@@ -245,14 +264,39 @@ function registerCorrect(itemId) {
 }
 
 function activeCount() {
-  if (IS_EXTRA_DECK) {
-    return Math.min(PARENT_ITEMS.length, EXTRA_STARTING_ACTIVE_COUNT + Math.floor(state.repCount / EXTRA_REPS_PER_UNLOCK));
-  }
-  return Math.min(CORE_ITEMS.length, STARTING_ACTIVE_COUNT + Math.floor(state.repCount / REPS_PER_UNLOCK));
+  return Math.min(
+    PARENT_ITEMS.length,
+    Math.max(deckStartingCount(), Number(state.unlockedCount) || deckStartingCount()),
+  );
 }
 
 function activeItems() {
   return PARENT_ITEMS.slice(0, activeCount());
+}
+
+function itemHasEvidence(itemId) {
+  if (state.introduced[itemId]) return true;
+  if (Object.values(vectorStrengths[itemId] || {}).some((value) => Number(value) > 0)) return true;
+  return ISLANDS.islandsFor(itemId).some((entry) => (
+    islandState.introduced[entry.id]
+    || Object.values(islandStrengths[entry.id] || {}).some((value) => Number(value) > 0)
+  ));
+}
+
+function maybeUnlockNext() {
+  if (activeCount() >= PARENT_ITEMS.length) return false;
+  const current = activeItems();
+  const unlockedBeyondStart = activeCount() - deckStartingCount();
+  const requiredRepCount = (unlockedBeyondStart + 1) * deckUnlockPace();
+  if (state.repCount < requiredRepCount) return false;
+
+  const activeIds = current.map((item) => item.id);
+  const evidenceIds = activeIds.filter(itemHasEvidence);
+  const repeatedMissIds = activeIds.filter((itemId) => (sessionMisses[itemId] || 0) >= 2);
+  if (!ENGINE.canUnlockNext(activeIds, evidenceIds, repeatedMissIds)) return false;
+
+  state.unlockedCount = activeCount() + 1;
+  return true;
 }
 
 function recentIds() {
@@ -284,8 +328,9 @@ function nextItem() {
 }
 
 function pickIslandVector(islandId) {
+  const entry = ISLANDS.islandsFor(currentItem?.id || "").find((candidate) => candidate.id === islandId);
   const strengths = islandStrengths[islandId] || {};
-  if ((strengths.recognize || 0) < 1) return "recognize";
+  if ((strengths.recognize || 0) < 1 || entry?.standalone === false) return "recognize";
   if ((strengths.produce || 0) < 2) return "produce";
   return "scenario";
 }
@@ -310,19 +355,22 @@ function nextQuestion() {
     parentIntroduced: Boolean(state.introduced[item.id]),
     islandStrengths,
     repCount: state.repCount,
-    repairPending: (sessionMisses[item.id] || 0) >= 2,
+    repairPending: (sessionMisses[item.id] || 0) >= 1,
+    avoidKind: avoidRepresentationOnce,
   });
 
   if (representation.kind === "island") {
     const island = representation.island;
-    if (!islandState.introduced[island.id]) return ISLANDS.buildIslandIntro(item, island);
-    return ISLANDS.buildIslandQuestion(
-      item,
-      island,
-      pickIslandVector(island.id),
-      islandAlternatives(activeItems(), island.id),
-      island.mixedExamples?.[state.repCount % Math.max(1, island.mixedExamples?.length || 1)] || null,
-    );
+    const question = !islandState.introduced[island.id]
+      ? ISLANDS.buildIslandIntro(item, island)
+      : ISLANDS.buildIslandQuestion(
+        item,
+        island,
+        pickIslandVector(island.id),
+        islandAlternatives(activeItems(), island.id),
+        island.mixedExamples?.[state.repCount % Math.max(1, island.mixedExamples?.length || 1)] || null,
+      );
+    return representation.repair ? { ...question, repair: true } : question;
   }
 
   if (!state.introduced[item.id]) {
@@ -330,6 +378,13 @@ function nextQuestion() {
   }
 
   const repNumber = state.repCount + 1;
+  if (representation.repair) {
+    return {
+      ...ENGINE.buildQuestion(item, representation.vector || "recognize", activeItems(), CURRICULUM.scenarioFor(item.id)),
+      repair: true,
+    };
+  }
+
   const vector = ENGINE.pickVector(item.id, vectorStrengths, repNumber, excludeVectorOnce);
 
   if (vector === "scenario") {
@@ -337,7 +392,11 @@ function nextQuestion() {
     if (response) {
       const questionItem = ALL_ITEMS.find((candidate) => candidate.id === response.questionId);
       if (questionItem) {
-        const question = repNumber % 2 === 0 ? questionItem.hawaiian : questionItem.pidgin;
+        const question = ENGINE.conversationQuestionText(
+          questionItem,
+          vectorStrengths,
+          sessionMisses[item.id] || 0,
+        );
         return ENGINE.buildResponseQuestion(item, activeItems(), { question, cue: response.cue });
       }
     }
@@ -414,13 +473,14 @@ function recordKnownChoice(correct) {
   rateQuestion(correct ? 1 : -1);
   state.repCount += 1;
   state.lastSeen[currentItem.id] = Date.now();
-  saveState();
   autoRated = true;
 
   if (!correct) preferredItemId = currentItem.id;
 
   if (correct) {
-    renderFeedback("got", "Chee. That one. Say the Hawaiian once before you move.");
+    renderFeedback("got", currentQuestion.repair
+      ? "Got the repair. Now we can build the whole thought back up."
+      : "Chee. That one. Say the Hawaiian once before you move.");
     registerCorrect(currentItem.id);
   } else if (currentQuestion.response) {
     renderFeedback("miss", `😭 Brah. Wrong reply. The line that fits is ${currentQuestion.answer}. Say um once.`);
@@ -433,6 +493,8 @@ function recordKnownChoice(correct) {
     registerMiss(currentItem.id);
   }
 
+  maybeUnlockNext();
+  saveState();
   setRevealed(true);
   els.gotIt.textContent = "Next";
   els.moreLikeThis.disabled = false;
@@ -566,6 +628,7 @@ function renderNextQuestion({ scrollToQuestion = false } = {}) {
   const showWhatYouKnow = !question.intro && state.repCount > 0 && (state.repCount + 1) % ENGINE.SHOW_WHAT_YOU_KNOW_EVERY === 0;
   preferredItemId = null;
   excludeVectorOnce = null;
+  avoidRepresentationOnce = null;
   pushQuestion(question);
 
   if (
@@ -605,6 +668,7 @@ function finishIntro() {
   }
   state.repCount += 1;
   preferredItemId = currentQuestion.itemId;
+  maybeUnlockNext();
   saveState();
   renderFeedback("got", currentQuestion.island
     ? "Got the smaller handle. Now retrieve it without the help."
@@ -628,12 +692,13 @@ function rateCurrent(delta) {
   rateQuestion(delta);
   state.repCount += 1;
   state.lastSeen[item.id] = Date.now();
-  saveState();
 
   if (delta > 0) {
     const message = currentQuestion.vector === "use"
       ? `Used um. ${item.hawaiian} gets real-world credit, which matters more than one tap in here.`
-      : `Got um. ${currentQuestion.label.toLowerCase()} is getting stronger for ${currentQuestion.island ? currentQuestion.answer : item.hawaiian}`;
+      : (currentQuestion.repair
+        ? `Got the smaller repair for ${item.hawaiian}. Now we build the whole thought back up.`
+        : `Got um. ${currentQuestion.label.toLowerCase()} is getting stronger for ${currentQuestion.island ? currentQuestion.answer : item.hawaiian}`);
     renderFeedback("got", message);
     registerCorrect(item.id);
   } else {
@@ -644,6 +709,8 @@ function rateCurrent(delta) {
     registerMiss(item.id);
   }
 
+  maybeUnlockNext();
+  saveState();
   const feedbackText = els.feedback.textContent;
   const feedbackKind = els.feedback.dataset.kind;
   renderNextQuestion({ scrollToQuestion: true });
@@ -654,6 +721,7 @@ function moreLikeThis() {
   if (!currentQuestion || currentQuestion.intro || isReviewingHistory()) return;
   preferredItemId = currentQuestion.itemId;
   excludeVectorOnce = currentQuestion.vector;
+  avoidRepresentationOnce = currentQuestion.island ? "island" : "parent";
   renderFeedback("forward", "Same thought, new angle. This is the point.");
   setSeallyState("replay", currentQuestion.itemId);
   renderNextQuestion({ scrollToQuestion: true });
