@@ -36,6 +36,16 @@ Private/recovery-only projects do not need to appear here. Cross-project recover
 - Status: prototype
 - Purpose: spoken retrieval experiment using familiar Pidgin thoughts as a scaffold into useful ʻōlelo Hawaiʻi production and comprehension
 
+## The Islands
+
+- Category: Games & Experiments
+- Hosting: internal
+- Public route: `alii/`
+- Source: `alii/`
+- Durable state: `alii/PROJECT_STATE.md`
+- Status: prototype
+- Purpose: text-first asynchronous strategy experiment with eight rival island kingdoms, hidden deterministic simulation, natural-language orders, autonomous rulers, imperfect intelligence, and scarce transitional foreign technology
+
 ## Peg-Leg Greg Reader
 
 - Category: Writing & Story Projects
