@@ -1,0 +1,17 @@
+{
+  "image_id": "HAR-IMG-0001",
+  "pipeline": "image-os-v2",
+  "input_stage": "v2-restored",
+  "input_asset": "assets/images/HAR-IMG-0001/v2-restored.jpg",
+  "color_asset": "assets/images/HAR-IMG-0001/v2-artistic-color.jpg",
+  "color_backend": "DDColor-artistic",
+  "upstream_repo": "https://github.com/piddnad/DDColor.git",
+  "upstream_commit": "2adb63f2656ac41cbdf7b894cddd94121a3faf13",
+  "upstream_model": "ddcolor_artistic",
+  "metrics": {
+    "mean_chroma": 14.966775,
+    "luminance_mae": 0.168179
+  },
+  "automated_review": "pass",
+  "publication_gate": "human-review-required"
+}
