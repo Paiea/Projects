@@ -21,6 +21,7 @@ const SEALLY_LINES = {
     "Chee.",
     "Solid.",
     "Eh, that one was clean.",
+    "Okay, okay. No get cocky.",
     "Okay professor. No get nuts.",
     "Look at you.",
   ],
