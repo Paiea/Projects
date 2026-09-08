@@ -116,6 +116,22 @@ class HawaiiArchiveTests(unittest.TestCase):
         self.assertIn("published", script.lower())
         self.assertIn('imageRecord.color_decision === "approved" && imageRecord.color_asset', script)
 
+    def test_reader_context_batch_keeps_media_and_provenance_legible(self):
+        script = (ROOT / "hawaii-archive" / "app.js").read_text(encoding="utf-8")
+        styles = (ROOT / "hawaii-archive" / "styles.css").read_text(encoding="utf-8")
+
+        self.assertIn("imageClassLabel", script)
+        self.assertIn("media-kind", script)
+        self.assertIn("reported", script.lower())
+        self.assertIn("post-lag", script)
+        self.assertIn("media-stage-link", script)
+        self.assertIn("post-carrier", script)
+        self.assertIn("via ${item.publication}", script)
+        self.assertIn(".media-kind", styles)
+        self.assertIn(".post-lag", styles)
+        self.assertIn(".post-carrier", styles)
+        self.assertIn("flex-wrap: wrap", styles)
+
     def test_item_contract_preserves_social_intent_as_derived_evidence(self):
         contract = (ROOT / "hawaii-archive" / "data" / "ITEM_CONTRACT.md").read_text(encoding="utf-8")
         self.assertIn("rhetorical_mode", contract)
