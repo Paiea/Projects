@@ -13,9 +13,9 @@ class MobilePracticeShellTests(unittest.TestCase):
         return path.read_text(encoding="utf-8")
 
     def mobile_css(self) -> str:
-        css = self.read("styles.css") + "\n" + self.read("simplify.css")
+        css = self.read("simplify.css")
         match = re.search(r"@media \(max-width: 640px\) \{(.*?)(?=\n@media \(max-width: 480px\)|\Z)", css, re.S)
-        self.assertIsNotNone(match, "missing 640px mobile rules")
+        self.assertIsNotNone(match, "missing 640px mobile shell rules")
         return match.group(1)
 
     def test_mobile_hides_hero_and_turns_progress_into_compact_practice_bar(self):
