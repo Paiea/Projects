@@ -427,33 +427,6 @@ h1 {
   cursor: pointer;
 }
 
-.more-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  padding: 0 12px 12px;
-}
-
-.more-card {
-  display: block;
-  min-height: 128px;
-  padding: 14px;
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  background: var(--paper);
-  color: var(--ink);
-  text-decoration: none;
-}
-
-.more-card p {
-  margin: 7px 0 0;
-  color: var(--muted);
-  font-size: 0.9rem;
-  line-height: 1.45;
-}
-
-.more-card--link:hover { border-color: var(--accent); }
-
 .flavor-tag {
   display: block;
   margin-bottom: 6px;
@@ -462,6 +435,73 @@ h1 {
   font-weight: 900;
   letter-spacing: 0.05em;
   text-transform: uppercase;
+}
+
+.noeau-widget {
+  margin: 0 12px 12px;
+  padding: 16px;
+  border: 1px dashed rgba(201, 111, 59, 0.45);
+  border-radius: 14px;
+  background: var(--paper);
+}
+
+.noeau-widget-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.noeau-widget-next,
+.noeau-widget-reveal {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--accent);
+  font-weight: 850;
+  cursor: pointer;
+}
+
+.noeau-widget-next {
+  min-height: 36px;
+  padding: 7px 11px;
+  font-size: 0.82rem;
+}
+
+.noeau-widget-saying {
+  margin: 14px 0;
+  font-size: clamp(1.15rem, 4vw, 1.55rem);
+  font-weight: 850;
+  line-height: 1.35;
+}
+
+.noeau-widget-reveal {
+  min-height: 42px;
+  padding: 8px 12px;
+}
+
+.noeau-widget-label {
+  margin: 14px 0 5px;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.noeau-widget-meaning,
+.noeau-widget-hook {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.noeau-widget-hook { font-weight: 850; }
+
+.noeau-widget-note {
+  margin: 9px 0 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.4;
 }
 
 .app-footer {
@@ -479,10 +519,10 @@ h1 {
     padding-top: 18px;
   }
 
-  .mode-switch,
-  .more-grid { grid-template-columns: 1fr; }
+  .mode-switch { grid-template-columns: 1fr; }
 
-  .core-summary {
+  .core-summary,
+  .noeau-widget-topline {
     align-items: flex-start;
     flex-direction: column;
     gap: 10px;
