@@ -216,13 +216,15 @@ function buildIntro(item) {
 }
 
 function buildResponseQuestion(item, pool, response = {}) {
+  const question = response.question || "";
+  const cue = response.cue || item.pidgin;
   return {
     ...commonBase(item, "scenario"),
     vector: "scenario",
     stage: 4,
-    label: "WHAT YOU SAY BACK?",
-    instruction: `${response.cue || item.pidgin} Pick the Hawaiian reply.`,
-    prompt: response.question || "",
+    label: "REPLY BACK",
+    instruction: "This is a conversation, not a translation. Pick the Hawaiian line you say back.",
+    prompt: `Uncle: ${question} · You mean: ${cue} · You: ___`,
     answer: item.hawaiian,
     answerLabel: "Hawaiian reply",
     choices: buildResponseChoiceOptions(item, pool),
