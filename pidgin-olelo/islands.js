@@ -1,165 +1,212 @@
 const CORE_ISLANDS = {
   "how-you": [
-    {
-      id: "how-you:pehea-context",
-      parentId: "how-you",
-      type: "context",
-      hawaiian: "Pehea?",
-      gloss: "How? / How going?",
-      standalone: true,
-      mixedExamples: ["Pehea? Tough day?", "Work was nuts. Pehea?"],
-    },
-    {
-      id: "how-you:oe",
-      parentId: "how-you",
-      type: "word",
-      hawaiian: "ʻoe",
-      gloss: "you",
-      standalone: false,
-      mixedExamples: ["Pehea ʻoe? Zoom in: ʻoe is you."],
-    },
+    { id: "how-you:pehea-context", parentId: "how-you", type: "context", hawaiian: "Pehea?", gloss: "How? / How going?", standalone: true, mixedExamples: ["Pehea? Tough day?", "Work was nuts. Pehea?"] },
+    { id: "how-you:oe", parentId: "how-you", type: "word", hawaiian: "ʻoe", gloss: "you", standalone: false, mixedExamples: ["Pehea ʻoe? Zoom in: ʻoe is you."] },
   ],
   "say-again": [
-    {
-      id: "say-again:olelo",
-      parentId: "say-again",
-      type: "word",
-      hawaiian: "ʻōlelo",
-      gloss: "speak / say / language",
-      standalone: true,
-      mixedExamples: ["Try ʻōlelo um again, slower this time."],
-    },
-    {
-      id: "say-again:hou",
-      parentId: "say-again",
-      type: "word",
-      hawaiian: "hou",
-      gloss: "again / new",
-      standalone: false,
-      mixedExamples: ["E ʻōlelo hou mai. Zoom in: hou carries again here."],
-    },
+    { id: "say-again:olelo", parentId: "say-again", type: "word", hawaiian: "ʻōlelo", gloss: "speak / say / language", standalone: true, mixedExamples: ["Try ʻōlelo um again, slower this time."] },
+    { id: "say-again:hou", parentId: "say-again", type: "word", hawaiian: "hou", gloss: "again / new", standalone: false, mixedExamples: ["E ʻōlelo hou mai. Zoom in: hou carries again here."] },
   ],
   "no-understand": [
-    {
-      id: "no-understand:maopopo",
-      parentId: "no-understand",
-      type: "word",
-      hawaiian: "maopopo",
-      gloss: "clear / understand",
-      standalone: true,
-      mixedExamples: ["Not maopopo yet. Run um one more time."],
-    },
+    { id: "no-understand:maopopo", parentId: "no-understand", type: "word", hawaiian: "maopopo", gloss: "clear / understand", standalone: true, mixedExamples: ["Not maopopo yet. Run um one more time."] },
   ],
   "want-eat-q": [
-    {
-      id: "want-eat-q:makemake",
-      parentId: "want-eat-q",
-      type: "word",
-      hawaiian: "makemake",
-      gloss: "want / like",
-      standalone: true,
-      mixedExamples: ["You makemake grindz or what?"],
-    },
-    {
-      id: "want-eat-q:ai",
-      parentId: "want-eat-q",
-      type: "word",
-      hawaiian: "ʻai",
-      gloss: "eat / food",
-      standalone: true,
-      mixedExamples: ["We going ʻai after this."],
-    },
+    { id: "want-eat-q:makemake", parentId: "want-eat-q", type: "word", hawaiian: "makemake", gloss: "want / like", standalone: true, mixedExamples: ["You makemake grindz or what?"] },
+    { id: "want-eat-q:ai", parentId: "want-eat-q", type: "word", hawaiian: "ʻai", gloss: "eat / food", standalone: true, mixedExamples: ["We going ʻai after this."] },
   ],
   "want-water-q": [
-    {
-      id: "want-water-q:inu",
-      parentId: "want-water-q",
-      type: "word",
-      hawaiian: "inu",
-      gloss: "drink",
-      standalone: true,
-      mixedExamples: ["Go inu water before you complain headache."],
-    },
-    {
-      id: "want-water-q:wai",
-      parentId: "want-water-q",
-      type: "word",
-      hawaiian: "wai",
-      gloss: "water",
-      standalone: true,
-      mixedExamples: ["Grab some wai before we leave."],
-    },
+    { id: "want-water-q:inu", parentId: "want-water-q", type: "word", hawaiian: "inu", gloss: "drink", standalone: true, mixedExamples: ["Go inu water before you complain headache."] },
+    { id: "want-water-q:wai", parentId: "want-water-q", type: "word", hawaiian: "wai", gloss: "water", standalone: true, mixedExamples: ["Grab some wai before we leave."] },
   ],
   "lets-go-all": [
-    {
-      id: "lets-go-all:hele",
-      parentId: "lets-go-all",
-      type: "word",
-      hawaiian: "hele",
-      gloss: "go / travel",
-      standalone: true,
-      mixedExamples: ["Okay everybody, hele already."],
-    },
+    { id: "lets-go-all:hele", parentId: "lets-go-all", type: "word", hawaiian: "hele", gloss: "go / travel", standalone: true, mixedExamples: ["Okay everybody, hele already."] },
   ],
   wait: [
-    {
-      id: "wait:kali",
-      parentId: "wait",
-      type: "word",
-      hawaiian: "kali",
-      gloss: "wait",
-      standalone: true,
-      mixedExamples: ["Kali, I still looking for my keys."],
-    },
+    { id: "wait:kali", parentId: "wait", type: "word", hawaiian: "kali", gloss: "wait", standalone: true, mixedExamples: ["Kali, I still looking for my keys."] },
   ],
   look: [
-    {
-      id: "look:nana",
-      parentId: "look",
-      type: "word",
-      hawaiian: "nānā",
-      gloss: "look / watch",
-      standalone: true,
-      mixedExamples: ["Nānā this real quick."],
-    },
+    { id: "look:nana", parentId: "look", type: "word", hawaiian: "nānā", gloss: "look / watch", standalone: true, mixedExamples: ["Nānā this real quick."] },
   ],
   listen: [
-    {
-      id: "listen:hoolohe",
-      parentId: "listen",
-      type: "word",
-      hawaiian: "hoʻolohe",
-      gloss: "listen",
-      standalone: true,
-      mixedExamples: ["Hoʻolohe, I only saying this once."],
-    },
+    { id: "listen:hoolohe", parentId: "listen", type: "word", hawaiian: "hoʻolohe", gloss: "listen", standalone: true, mixedExamples: ["Hoʻolohe, I only saying this once."] },
   ],
   "help-me": [
-    {
-      id: "help-me:kokua",
-      parentId: "help-me",
-      type: "word",
-      hawaiian: "kōkua",
-      gloss: "help",
-      standalone: true,
-      mixedExamples: ["Need kōkua with these bags or you good?"],
-    },
+    { id: "help-me:kokua", parentId: "help-me", type: "word", hawaiian: "kōkua", gloss: "help", standalone: true, mixedExamples: ["Need kōkua with these bags or you good?"] },
   ],
   "where-thing": [
-    {
-      id: "where-thing:ma-hea",
-      parentId: "where-thing",
-      type: "chunk",
-      hawaiian: "Ma hea",
-      gloss: "where",
-      standalone: true,
-      mixedExamples: ["Ma hea the car stay again?"],
-    },
+    { id: "where-thing:ma-hea", parentId: "where-thing", type: "chunk", hawaiian: "Ma hea", gloss: "where", standalone: true, mixedExamples: ["Ma hea the car stay again?"] },
   ],
 };
 
-const EXTRA_UTILITY_IDS = [];
-const EXTRA_ISLANDS = {};
+const EXTRA_UTILITY_IDS = [
+  "and-you", "no-problem", "me-too", "you-okay", "hungry-q", "hungry-a", "full", "ono", "thirsty", "tired",
+  "ready", "know", "no-know", "come-inside", "over-here", "over-there", "can", "cannot", "please", "talk-slow",
+  "see-you", "take-care", "good-morning", "good-evening", "go-home", "where-food", "eat", "drink", "today", "tomorrow",
+  "now", "who-that", "where-you-guys", "go-slow", "take-this", "get-that", "open-door", "close-door", "sit", "stand",
+  "go-outside", "stay-inside", "look-here", "come-later", "go-kailua-q", "go-store", "happy", "sad", "sick", "beautiful",
+  "hot", "cold", "busy", "ono-loa", "what-problem", "nothing", "help-you", "eat-together", "talk-together", "yesterday",
+  "why", "how-many", "want-this", "want-that", "dont-want", "how-much", "expensive", "book-car", "money-small", "love-big",
+];
+
+const EXTRA_SEEDS = {
+  "and-you": ["chunk", "A ʻo ʻoe?", "and you?", true],
+  "no-problem": ["chunk", "ʻAʻole pilikia", "no problem", true],
+  "me-too": ["chunk", "ʻO wau pū", "me too", true],
+  "you-okay": ["word", "Maikaʻi", "good / okay", true],
+  "hungry-q": ["word", "Pōloli", "hungry", true],
+  "hungry-a": ["word", "Pōloli", "hungry", true],
+  full: ["word", "Māʻona", "full", true],
+  ono: ["word", "ʻOno", "delicious / tasty", true],
+  thirsty: ["word", "Makewai", "thirsty", true],
+  tired: ["word", "Māluhiluhi", "tired", true],
+  ready: ["word", "Mākaukau", "ready", true],
+  know: ["word", "ʻIke", "know / see", true],
+  "no-know": ["chunk", "ʻAʻole au ʻike", "I don't know", true],
+  "come-inside": ["word", "komo", "enter / come inside", true],
+  "over-here": ["chunk", "Ma ʻaneʻi", "over here", true],
+  "over-there": ["chunk", "Ma laila", "over there", true],
+  can: ["word", "Hiki", "can / possible", true],
+  cannot: ["chunk", "ʻAʻole hiki", "cannot", true],
+  please: ["chunk", "Ke ʻoluʻolu", "please", true],
+  "talk-slow": ["word", "mālie", "slowly", true],
+  "see-you": ["chunk", "A hui hou", "see you later", true],
+  "take-care": ["chunk", "Mālama pono", "take care", true],
+  "good-morning": ["chunk", "Aloha kakahiaka", "good morning", true],
+  "good-evening": ["chunk", "Aloha ahiahi", "good evening", true],
+  "go-home": ["word", "hoʻi", "return / go back", true],
+  "where-food": ["chunk", "mea ʻai", "food", true],
+  eat: ["word", "ʻai", "eat", true],
+  drink: ["word", "inu", "drink", true],
+  today: ["chunk", "I kēia lā", "today", true],
+  tomorrow: ["word", "ʻApōpō", "tomorrow", true],
+  now: ["chunk", "I kēia manawa", "right now", true],
+  "who-that": ["chunk", "ʻO wai", "who", true],
+  "where-you-guys": ["chunk", "Ma hea", "where", true],
+  "go-slow": ["word", "mālie", "slowly", true],
+  "take-this": ["word", "lawe", "take / carry", true],
+  "get-that": ["word", "kiʻi", "get / fetch", true],
+  "open-door": ["word", "puka", "door / opening", true],
+  "close-door": ["word", "puka", "door / opening", true],
+  sit: ["word", "noho", "sit / stay", true],
+  stand: ["word", "kū", "stand", true],
+  "go-outside": ["word", "waho", "outside", true],
+  "stay-inside": ["word", "loko", "inside", true],
+  "look-here": ["chunk", "E nānā mai", "look over here", true],
+  "come-later": ["chunk", "E hele mai ma hope", "come later", true],
+  "go-kailua-q": ["chunk", "hele ana", "going", false],
+  "go-store": ["chunk", "hale kūʻai", "store", true],
+  happy: ["word", "Hauʻoli", "happy", true],
+  sad: ["word", "Kaumaha", "sad", true],
+  sick: ["word", "ʻŌmaʻimaʻi", "sick", true],
+  beautiful: ["word", "Nani", "beautiful", true],
+  hot: ["word", "Wela", "hot", true],
+  cold: ["word", "Anuanu", "cold", true],
+  busy: ["word", "Paʻahana", "busy", true],
+  "ono-loa": ["chunk", "ʻOno loa", "really delicious", true],
+  "what-problem": ["word", "pilikia", "problem / trouble", true],
+  nothing: ["chunk", "ʻAʻohe mea", "nothing / none", true],
+  "help-you": ["word", "kōkua", "help", true],
+  "eat-together": ["chunk", "E ʻai kākou", "let's all eat", true],
+  "talk-together": ["word", "kamaʻilio", "talk / converse", true],
+  yesterday: ["chunk", "I nehinei", "yesterday", true],
+  why: ["chunk", "No ke aha?", "why?", true],
+  "how-many": ["context", "ʻEhia?", "how many?", true],
+  "want-this": ["word", "kēia", "this", false],
+  "want-that": ["word", "kēlā", "that", false],
+  "dont-want": ["chunk", "ʻAʻole au makemake", "I don't want / like", true],
+  "how-much": ["chunk", "ʻEhia kālā", "how much money", true],
+  expensive: ["word", "pipiʻi", "expensive", true],
+  "book-car": ["word", "puke", "book", true],
+  "money-small": ["word", "kālā", "money", true],
+  "love-big": ["chunk", "He mea nui ke aloha", "aloha is the big thing", true],
+};
+
+const EXTRA_MIXED = {
+  "and-you": "I good. A ʻo ʻoe?",
+  "no-problem": "No worries. ʻAʻole pilikia.",
+  "me-too": "You tired? ʻO wau pū.",
+  "you-okay": "Maikaʻi? You good or what?",
+  "hungry-q": "Pōloli already? You like eat?",
+  "hungry-a": "Brah, Pōloli already. Need grindz.",
+  full: "Māʻona already. No more plate.",
+  ono: "ʻOno this one. Auntie going make you take more.",
+  thirsty: "After beach, Makewai already.",
+  tired: "H-1 again. Māluhiluhi already.",
+  ready: "Mākaukau already? Everybody waiting.",
+  know: "You ʻIke where the car stay?",
+  "no-know": "Where get parking? ʻAʻole au ʻike.",
+  "come-inside": "Rain sideways. Komo inside already.",
+  "over-here": "Parking Ma ʻaneʻi. Hurry before somebody take um.",
+  "over-there": "Everybody stay Ma laila.",
+  can: "Can help? Hiki.",
+  cannot: "Costco parking Saturday? ʻAʻole hiki.",
+  please: "One more plate, Ke ʻoluʻolu.",
+  "talk-slow": "Brah, mālie. I still learning.",
+  "see-you": "Shoots. A hui hou.",
+  "take-care": "Drive safe. Mālama pono.",
+  "good-morning": "Aloha kakahiaka. Coffee first.",
+  "good-evening": "Aloha ahiahi. Traffic finally pau.",
+  "go-home": "Pau work. Time hoʻi home.",
+  "where-food": "First question at every party: where the mea ʻai stay?",
+  eat: "Food ready. Time ʻai.",
+  drink: "Go inu water before the drive.",
+  today: "I kēia lā stay hot, yeah?",
+  tomorrow: "ʻApōpō we try again.",
+  now: "Need um I kēia manawa, not later.",
+  "who-that": "ʻO wai that guy? Everybody know except me.",
+  "where-you-guys": "Ma hea you guys stay? Costco?",
+  "go-slow": "Road wet. Mālie, bah.",
+  "take-this": "Lawe this before auntie pack three more.",
+  "get-that": "Go kiʻi that slipper before the dog run.",
+  "open-door": "Hands full. Which one the puka?",
+  "close-door": "Rain coming in. Close the puka.",
+  sit: "Noho down. Auntie feeding you anyway.",
+  stand: "Kū up real quick.",
+  "go-outside": "Check outside. Waho still raining?",
+  "stay-inside": "Rain nuts. Stay loko for now.",
+  "look-here": "Eh, E nānā mai. Look over here.",
+  "come-later": "No parking now. E hele mai ma hope.",
+  "go-kailua-q": "You going Kailua? Hear hele ana inside the full phrase.",
+  "go-store": "Need go hale kūʻai before everybody hungry.",
+  happy: "Friday already. Hauʻoli or what?",
+  sad: "No parking. Kaumaha already.",
+  sick: "Staying home. ʻŌmaʻimaʻi today.",
+  beautiful: "Koʻolau after rain. Nani, yeah?",
+  hot: "No wind. Wela today.",
+  cold: "Windward rain. Anuanu today.",
+  busy: "Costco Saturday. Paʻahana already.",
+  "ono-loa": "This one ʻOno loa. Dangerous.",
+  "what-problem": "What happened? Get pilikia?",
+  nothing: "What happened? ʻAʻohe mea.",
+  "help-you": "Need kōkua or you good?",
+  "eat-together": "Food ready. E ʻai kākou.",
+  "talk-together": "Put the phone down. We can kamaʻilio.",
+  yesterday: "I nehinei rain plenty.",
+  why: "No ke aha? Why you bought five?",
+  "how-many": "You need five. ʻEhia you get?",
+  "want-this": "You like this one? Zoom in on kēia inside the Hawaiian.",
+  "want-that": "You like that one? Zoom in on kēlā inside the Hawaiian.",
+  "dont-want": "Too expensive. ʻAʻole au makemake.",
+  "how-much": "ʻEhia kālā this one?",
+  expensive: "Brah, pipiʻi this one.",
+  "book-car": "Forgot the puke in the car again.",
+  "money-small": "No make kālā the whole point.",
+  "love-big": "He mea nui ke aloha. That the big thing.",
+};
+
+const EXTRA_ISLANDS = Object.fromEntries(EXTRA_UTILITY_IDS.map((parentId) => {
+  const [type, hawaiian, gloss, standalone] = EXTRA_SEEDS[parentId];
+  return [parentId, [{
+    id: `${parentId}:entry`,
+    parentId,
+    type,
+    hawaiian,
+    gloss,
+    standalone,
+    mixedExamples: [EXTRA_MIXED[parentId] || `Try ${hawaiian} inside your Pidgin today.`],
+  }]];
+}));
+
 const ISLAND_TYPES = new Set(["word", "chunk", "context"]);
 
 function islandsFor(parentId) {
@@ -186,35 +233,22 @@ function pickIsland(parentId, islandStrengths = {}) {
   const usable = all.filter((island) => island.standalone !== false);
   const candidates = usable.length ? usable : all;
   return [...candidates].sort((a, b) => {
-    const aScore = islandStrength(islandStrengths, a.id, "produce") +
-      islandStrength(islandStrengths, a.id, "scenario");
-    const bScore = islandStrength(islandStrengths, b.id, "produce") +
-      islandStrength(islandStrengths, b.id, "scenario");
+    const aScore = islandStrength(islandStrengths, a.id, "produce") + islandStrength(islandStrengths, a.id, "scenario");
+    const bScore = islandStrength(islandStrengths, b.id, "produce") + islandStrength(islandStrengths, b.id, "scenario");
     return aScore - bScore;
   })[0];
 }
 
-function selectRepresentation({
-  deck,
-  parentId,
-  parentIntroduced,
-  islandStrengths = {},
-  repCount = 0,
-  repairPending = false,
-}) {
+function selectRepresentation({ deck, parentId, parentIntroduced, islandStrengths = {}, repCount = 0, repairPending = false }) {
   const island = pickIsland(parentId, islandStrengths);
   if (!island) return { kind: "parent" };
   if (repairPending) return { kind: "island", island, repair: true };
-
   if (deck === "core") {
     if (!parentIntroduced) return { kind: "parent" };
     if (repCount > 0 && repCount % 4 === 0) return { kind: "island", island };
     return { kind: "parent" };
   }
-
-  if (!islandStable(islandStrengths, island.id)) {
-    return { kind: "island", island };
-  }
+  if (!islandStable(islandStrengths, island.id)) return { kind: "island", island };
   return { kind: "parent" };
 }
 
@@ -237,14 +271,7 @@ function buildIslandIntro(parent, island) {
 }
 
 function buildIslandQuestion(parent, island, vector, alternatives = [], mixedContext = null) {
-  const base = {
-    itemId: parent.id,
-    semanticItemId: parent.id,
-    islandId: island.id,
-    island: true,
-    vector,
-  };
-
+  const base = { itemId: parent.id, semanticItemId: parent.id, islandId: island.id, island: true, vector };
   if (vector === "recognize") {
     return {
       ...base,
@@ -257,7 +284,6 @@ function buildIslandQuestion(parent, island, vector, alternatives = [], mixedCon
       choices: [island.gloss, ...alternatives.filter((x) => x !== island.gloss)].slice(0, 4),
     };
   }
-
   if (vector === "scenario") {
     return {
       ...base,
@@ -270,11 +296,8 @@ function buildIslandQuestion(parent, island, vector, alternatives = [], mixedCon
       choices: [],
     };
   }
-
   const context = mixedContext || island.mixedExamples?.[0] || parent.pidgin;
-  const prompt = context.includes(island.hawaiian)
-    ? context.replace(island.hawaiian, "____")
-    : `${context} · ____`;
+  const prompt = context.includes(island.hawaiian) ? context.replace(island.hawaiian, "____") : `${context} · ____`;
   return {
     ...base,
     vector: "produce",
@@ -290,37 +313,39 @@ function buildIslandQuestion(parent, island, vector, alternatives = [], mixedCon
 
 function validate(items, coreIds) {
   const errors = [];
-  const parentIds = new Set(items.map((item) => item.id));
+  const byId = new Map(items.map((item) => [item.id, item]));
+  const parentIds = new Set(byId.keys());
   const seen = new Set();
   const expectedCore = [
-    "aloha", "how-you", "i-good", "same-same", "yeah", "no", "thanks",
-    "sorry", "no-understand", "say-again", "what-this", "what-that",
-    "your-name", "my-name", "where-you", "where-thing", "where-from",
-    "from-place", "want-eat-q", "want-eat-a", "want-water-q",
-    "want-water-a", "lets-go-all", "lets-go-two", "come", "wait",
-    "look", "listen", "help-me", "pau",
+    "aloha", "how-you", "i-good", "same-same", "yeah", "no", "thanks", "sorry", "no-understand", "say-again",
+    "what-this", "what-that", "your-name", "my-name", "where-you", "where-thing", "where-from", "from-place",
+    "want-eat-q", "want-eat-a", "want-water-q", "want-water-a", "lets-go-all", "lets-go-two", "come", "wait", "look", "listen", "help-me", "pau",
   ];
 
   for (const [parentId, islands] of Object.entries({ ...CORE_ISLANDS, ...EXTRA_ISLANDS })) {
+    const parent = byId.get(parentId);
     if (!parentIds.has(parentId)) errors.push(`missing parent: ${parentId}`);
     for (const island of islands) {
       if (seen.has(island.id)) errors.push(`duplicate island id: ${island.id}`);
       seen.add(island.id);
       if (!ISLAND_TYPES.has(island.type)) errors.push(`invalid island type: ${island.id}`);
       if (island.parentId !== parentId) errors.push(`parent mismatch: ${island.id}`);
-      if (island.type === "context" && !island.mixedExamples?.length) {
-        errors.push(`context island missing mixed example: ${island.id}`);
-      }
-      if (island.hawaiian !== island.hawaiian.normalize("NFC")) {
-        errors.push(`non-NFC Hawaiian: ${island.id}`);
+      if (island.type === "context" && !island.mixedExamples?.length) errors.push(`context island missing mixed example: ${island.id}`);
+      if (island.hawaiian !== island.hawaiian.normalize("NFC")) errors.push(`non-NFC Hawaiian: ${island.id}`);
+      if (parent && !parent.hawaiian.includes(island.hawaiian.replace(/[?.!]$/, ""))) {
+        errors.push(`island not derived from parent Hawaiian: ${island.id}`);
       }
     }
   }
 
-  if (coreIds.join("|") !== expectedCore.join("|")) {
-    errors.push("Core 30 IDs/order changed");
+  if (coreIds.join("|") !== expectedCore.join("|")) errors.push("Core 30 IDs/order changed");
+  if (EXTRA_UTILITY_IDS.length !== 70) errors.push(`expected 70 extra ids, got ${EXTRA_UTILITY_IDS.length}`);
+  if (new Set(EXTRA_UTILITY_IDS).size !== EXTRA_UTILITY_IDS.length) errors.push("duplicate extra utility id");
+  for (const id of EXTRA_UTILITY_IDS) {
+    if (coreIds.includes(id)) errors.push(`extra id overlaps Core 30: ${id}`);
+    if (!parentIds.has(id)) errors.push(`missing extra phrase-bank id: ${id}`);
+    if (!islandsFor(id).length) errors.push(`extra parent missing island: ${id}`);
   }
-
   return errors;
 }
 
@@ -339,10 +364,5 @@ const islandApi = {
   validate,
 };
 
-if (typeof window !== "undefined") {
-  window.PIDGIN_OLELO_ISLANDS = islandApi;
-}
-
-if (typeof module !== "undefined" && module.exports) {
-  module.exports = islandApi;
-}
+if (typeof window !== "undefined") window.PIDGIN_OLELO_ISLANDS = islandApi;
+if (typeof module !== "undefined" && module.exports) module.exports = islandApi;
