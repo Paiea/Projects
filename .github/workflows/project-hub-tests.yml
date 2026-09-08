@@ -11,6 +11,7 @@ on:
       - 'scripts/build_hawaii_image_assets.py'
       - 'scripts/run_image_os_v2_kaulia.py'
       - 'scripts/run_image_os_v2_kaulia_artistic.py'
+      - 'scripts/run_image_os_v2_kaulia_deoldify.py'
       - 'tests/test_project_hub.py'
       - 'tests/test_hawaii_archive.py'
       - 'tests/test_hawaii_image_asset_states.py'
@@ -26,6 +27,7 @@ on:
       - 'scripts/build_hawaii_image_assets.py'
       - 'scripts/run_image_os_v2_kaulia.py'
       - 'scripts/run_image_os_v2_kaulia_artistic.py'
+      - 'scripts/run_image_os_v2_kaulia_deoldify.py'
       - 'tests/test_project_hub.py'
       - 'tests/test_hawaii_archive.py'
       - 'tests/test_hawaii_image_asset_states.py'
@@ -80,6 +82,23 @@ jobs:
             git commit -m "build: generate Kaulia DDColor artistic candidate"
             git push origin HEAD:feature/image-os-v2-pipeline
           fi
+      - name: Generate Kaulia DeOldify candidate
+        if: github.ref == 'refs/heads/feature/image-os-v2-pipeline' && github.actor != 'github-actions[bot]' && hashFiles('hawaii-archive/images/jobs/HAR-IMG-0001/v2-deoldify-run.json') == ''
+        run: |
+          python -m pip install --disable-pip-version-check numpy opencv-python-headless onnxruntime
+          python scripts/run_image_os_v2_kaulia_deoldify.py
+      - name: Commit Kaulia DeOldify candidate
+        if: github.ref == 'refs/heads/feature/image-os-v2-pipeline' && github.actor != 'github-actions[bot]'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add \
+            hawaii-archive/assets/images/HAR-IMG-0001/v2-deoldify-color.jpg \
+            hawaii-archive/images/jobs/HAR-IMG-0001/v2-deoldify-run.json
+          if ! git diff --cached --quiet; then
+            git commit -m "build: generate Kaulia DeOldify candidate"
+            git push origin HEAD:feature/image-os-v2-pipeline
+          fi
       - name: Verify project hub registration
         run: python tests/test_project_hub.py
       - name: Verify Hawaiʻi Archive Revival contracts
@@ -102,5 +121,7 @@ jobs:
             hawaii-archive/assets/images/HAR-IMG-0001/v2-restored.jpg
             hawaii-archive/assets/images/HAR-IMG-0001/v2-color.jpg
             hawaii-archive/assets/images/HAR-IMG-0001/v2-artistic-color.jpg
+            hawaii-archive/assets/images/HAR-IMG-0001/v2-deoldify-color.jpg
             hawaii-archive/images/jobs/HAR-IMG-0001/v2-run.json
             hawaii-archive/images/jobs/HAR-IMG-0001/v2-artistic-run.json
+            hawaii-archive/images/jobs/HAR-IMG-0001/v2-deoldify-run.json
