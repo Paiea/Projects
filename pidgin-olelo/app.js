@@ -8,20 +8,21 @@ const OLD_STORAGE_KEY = "pidgin-olelo-v0-strength";
 const STORAGE_KEY = "pidgin-olelo-core-vectors-v1";
 const STARTING_ACTIVE_COUNT = 5;
 const REPS_PER_UNLOCK = 8;
+const SEALLY_MIN_GAP = 3;
+const SEALLY_SEAL_EVERY = 17;
 
 const SEALLY_LINES = {
   start: [
-    "Eh. Five minutes. No make like you busy.",
     "Eh. We go.",
-    "One quick one. No disappear now.",
-    "I no even get thumbs and I studying harder than you.",
+    "Five minutes. No make like you busy.",
+    "Come. Try one.",
   ],
   correct: [
-    "Chee. Look who went study.",
+    "Chee.",
+    "Solid.",
     "Eh, that one was clean.",
-    "Good. Again.",
-    "Okay, okay. No get cocky.",
-    "Solid. Keep moving.",
+    "Okay professor. No get nuts.",
+    "Look at you.",
   ],
   miss: [
     "Almost. Your mouth knew. Your brain went Costco.",
@@ -31,25 +32,33 @@ const SEALLY_LINES = {
   ],
   repeatMiss: [
     "Ho. This one fighting you personally.",
-    "We not leaving till you get um.",
-    "Same faka again. 😂",
-    "Brah. Same one again? Good thing I get patience. Kinda.",
+    "Same one again? Good thing I get patience. Kinda.",
+    "We not leaving this one yet.",
   ],
   mastered: [
     "Ah. This one yours already.",
-    "Pau. Next.",
     "I no need babysit this phrase anymore.",
-    "Okay professor. No get nuts.",
+    "Pau. Next.",
   ],
   show: [
-    "You supposed to try first, bah.",
-    "Eh. No peek so fast.",
-    "I saw that. Try first next time.",
+    "Brah, at least pretend you tried.",
+    "Try first, complain after.",
+    "No peek, bah.",
   ],
   replay: [
     "Again. This time no mumble.",
-    "Run um back. Clean this time.",
-    "Again. Mouth gotta learn too.",
+    "One more.",
+    "Say um clean.",
+  ],
+  harder: [
+    "Okay. No help this time.",
+    "You know this one already.",
+    "No peek.",
+  ],
+  seal: [
+    "No be loosey goosey, bah.",
+    "Yes, I know I one seal. Mind your business.",
+    "I no even get thumbs and I studying harder than you.",
   ],
 };
 
@@ -97,6 +106,7 @@ let preferredItemId = null;
 let excludeVectorOnce = null;
 let autoRated = false;
 let sessionMisses = {};
+let lastSeallyRep = state.repCount;
 let noeauIndex = NOEAU_ITEMS.length ? Math.floor(Date.now() / 86400000) % NOEAU_ITEMS.length : -1;
 
 function emptyState() {
@@ -162,9 +172,19 @@ function stableLineIndex(kind, itemId = "") {
 }
 
 function setSeallyState(kind, itemId = currentItem?.id || "") {
-  if (!els.seallyLine) return;
+  if (!els.seallyLine) return false;
   const lines = SEALLY_LINES[kind] || SEALLY_LINES.start;
   els.seallyLine.textContent = lines[stableLineIndex(kind, itemId) % lines.length];
+  lastSeallyRep = state.repCount;
+  return true;
+}
+
+function maybeSeallyState(kind, itemId = currentItem?.id || "") {
+  if (state.repCount - lastSeallyRep < SEALLY_MIN_GAP) return false;
+  if (state.repCount > 0 && state.repCount % SEALLY_SEAL_EVERY === 0) {
+    return setSeallyState("seal", itemId);
+  }
+  return setSeallyState(kind, itemId);
 }
 
 function registerMiss(itemId) {
@@ -174,7 +194,11 @@ function registerMiss(itemId) {
 
 function registerCorrect(itemId) {
   sessionMisses[itemId] = 0;
-  setSeallyState(ENGINE.isOwned(vectorStrengths, itemId) ? "mastered" : "correct", itemId);
+  if (ENGINE.isOwned(vectorStrengths, itemId)) {
+    setSeallyState("mastered", itemId);
+    return;
+  }
+  maybeSeallyState("correct", itemId);
 }
 
 function activeCount() {
@@ -392,11 +416,21 @@ function pushQuestion(question) {
 
 function renderNextQuestion({ scrollToQuestion = false } = {}) {
   renderFeedback(null);
+  const previousQuestion = currentQuestion;
   const question = nextQuestion();
   if (!question) return;
+  const showWhatYouKnow = !question.intro && state.repCount > 0 && (state.repCount + 1) % ENGINE.SHOW_WHAT_YOU_KNOW_EVERY === 0;
   preferredItemId = null;
   excludeVectorOnce = null;
   pushQuestion(question);
+
+  if (
+    showWhatYouKnow ||
+    (previousQuestion && question.itemId === previousQuestion.itemId && question.stage > previousQuestion.stage)
+  ) {
+    setSeallyState("harder", question.itemId);
+  }
+
   if (scrollToQuestion) scrollToPracticeCard();
 }
 
@@ -424,7 +458,6 @@ function finishIntro() {
   preferredItemId = itemId;
   saveState();
   renderFeedback("got", "Met um. Now same thought, but you gotta retrieve it.");
-  setSeallyState("start", itemId);
   renderNextQuestion({ scrollToQuestion: true });
 }
 
