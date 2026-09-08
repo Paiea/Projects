@@ -1,9 +1,9 @@
 # Aliʻi Text Strategy Prototype — Design
 
-Status: APPROVED CONCEPT / DESIGN FOR REVIEW
+Status: APPROVED / FIRST PLAYABLE IMPLEMENTED
 Date: 2026-09-07
 Repository: `Paiea/Projects`
-Working route: `alii/`
+Public route when merged: `alii/`
 
 ## Product thesis
 
@@ -11,7 +11,7 @@ Build a persistent asynchronous strategy game whose hidden mechanical skeleton i
 
 The visible game is a nearly bare black screen with text and a prompt.
 
-The player inhabits an aliʻi in a fictional Hawaiian-coded island world. They receive reports, ask questions, give orders, negotiate, travel, wait, and react to events. Other aliʻi are autonomous actors operating under the same hard simulation rules.
+The player inhabits an aliʻi in an alternate-history island world using the real island names Hawaiʻi, Maui, Kahoʻolawe, Lānaʻi, Molokaʻi, Oʻahu, Kauaʻi, and Niʻihau. At game start these are separate kingdoms. Hawaiʻi is one island, not yet the political identity of a unified chain.
 
 The core contrast is deliberate:
 
@@ -19,7 +19,7 @@ The core contrast is deliberate:
 
 **SURFACE = sparse lived-in text world.**
 
-This is not a historical Hawaiʻi simulator. The setting is fictional and Hawaiian-coded so the game can use ecological, geographic, social, and linguistic inspiration without pretending to reproduce a specific historical period or polity exactly.
+The setting uses real island geography and a fictionalized political timeline. It draws from the transitional technological moment in which muskets, cannon, iron/steel goods, foreign-built ships, and foreign specialists are already known but remain scarce and unevenly distributed. It is not a claim to reproduce one exact historical year or polity.
 
 ## Experience north star
 
@@ -28,19 +28,41 @@ The game should feel less like opening a dashboard and more like returning to a 
 A normal session may begin with:
 
 ```text
-KAWAIHOA
+THE ISLANDS
 
-Dawn.
+Eight islands. Eight aliʻi.
 
-Rain fell heavily in the uplands during the night.
+Choose where you rule.
 
-A canoe from Kaʻena arrived before sunrise.
-Its men will not say why they have come.
-
-Your konohiki is waiting.
+Hawaiʻi
+Maui
+Kahoʻolawe
+Lānaʻi
+Molokaʻi
+Oʻahu
+Kauaʻi
+Niʻihau
 
 >
 ```
+
+After selection, the player receives the prophecy through the world rather than through a conventional lore screen:
+
+```text
+Eight fires.
+
+Each burned alone.
+One by one, the wind extinguished them.
+
+Then eight fires became one.
+
+The wind came again.
+The fire remained.
+
+“Eight will become one.”
+```
+
+The prophecy does not say who rules, what political form unification takes, or what name a future unity carries.
 
 The game should avoid conventional HUD elements unless the absence of one creates genuine confusion.
 
@@ -66,39 +88,37 @@ Use a hybrid natural-language interface.
 The player types ordinary instructions such as:
 
 ```text
-> Send someone to Nakoa. Tell him I'll stay out of the valley if he stops feeding Keawe's warriors.
+> Send someone to Maui. I want to know how many warriors they can raise.
 ```
 
-An intent layer converts the request into one or more legal structured actions. The deterministic game engine, not the language model, resolves outcomes.
+An intent layer converts the request into one or more legal structured actions. The deterministic game engine, not the language layer, resolves outcomes.
 
 Example hidden representation:
 
 ```json
 {
-  "action": "diplomatic_offer",
-  "target": "nakoa",
-  "terms": ["player_avoids_valley"],
-  "requests": ["stop_supporting_keawe"]
+  "action": "scout",
+  "target": "Maui"
 }
 ```
 
-The language model may interpret intent and render character-facing text. It may not invent resources, units, victories, treaties, deaths, or other state changes outside engine authority.
+A later model-backed interpreter may replace or augment the prototype parser, but it must remain behind this action boundary. Language generation may not invent resources, units, victories, treaties, deaths, or other state changes outside engine authority.
 
 If a request is too vague for safe execution, the world asks naturally rather than exposing a form.
 
 ```text
 > Prepare for war.
 
-Kaleo looks at you.
+Kaleo waits.
 
-"Against whom?"
+“Against whom?”
 ```
 
 ## Hidden simulation
 
-The first version should retain the addictive logic of a browser strategy game while keeping the exact formulas replaceable.
+The first version retains the addictive logic of a browser strategy game while keeping the exact formulas replaceable.
 
-Hidden state may include:
+Hidden state includes or may include:
 
 - population
 - food and production
@@ -106,19 +126,21 @@ Hidden state may include:
 - attack capability
 - defense capability
 - intelligence capability
-- counterintelligence
-- land / productive capacity
 - social stability
-- named-agent loyalty
-- reputation
-- obligations and debts
-- treaty state
+- prestige
+- relationships and treaties
+- imperfect belief state
 - travel and communication delay
-- action capacity / recovery
+- muskets and powder
+- cannon
+- iron goods
+- foreign specialists
+- foreign ship access
+- foreign-contact pressure
 
 These values are engine state, not presentation state.
 
-The engine owns all mechanical truth and must remain deterministic or auditable for the same inputs and random seed.
+The engine owns mechanical truth and remains deterministic for the same inputs and random seed.
 
 ## Knowledge instead of omniscience
 
@@ -126,52 +148,65 @@ Every major actor has a belief state separate from world truth.
 
 A chief may know their own stores fairly well but only have an outdated estimate of a rival's fighting force. Intelligence operations update beliefs, not global truth access.
 
-NPC decisions must use their own knowledge, including uncertainty and misinformation.
+NPC decisions use their own knowledge, including uncertainty and misinformation.
 
 This enables:
 
 - scouting that matters
-- deception
+- deception later
 - stale intelligence
 - surprise
-- bluffing
+- bluffing later
 - mistaken attacks
-- disagreement between advisers
+- disagreement between advisers later
 
 The player should usually receive qualitative assessments rather than exact hidden values.
 
 Example:
 
 ```text
-> Are we stronger than Nakoa?
+> What do we know about Maui?
 
-"In open ground? Probably."
-
-Kaleo looks toward the ridge.
-
-"In his valley, I would not wager my life on it."
+Your people judge them near our strength.
+Most of what reaches you is still rumor.
 ```
 
 ## Autonomous chiefs
 
 AI chiefs are not quest givers. They are players in the same simulation.
 
-Each chief has compact durable decision state:
+Each chief has compact decision state:
 
-- goals
+- goal
 - temperament
 - relationships
-- obligations
-- fears
 - current beliefs
-- recent relevant memories
-- standing doctrine
+- internal resources and technology
 
-At strategic decision points, an AI decision layer chooses an intent from legal actions using only that chief's available knowledge. The deterministic engine then resolves it.
+The prototype uses deterministic/rules-driven policies with seeded tie-breaking. Later model-backed strategic choice can be introduced only behind legal action options and only if playtesting proves the richer reasoning is worth the cost.
 
-AI may choose poorly. It should not receive hidden omniscient state merely to make it look intelligent.
+AI may choose poorly. It must not receive hidden omniscient state merely to make it look intelligent.
 
-NPC behavior should be sparse enough that actions remain meaningful. Do not run continuous language-model thought loops.
+NPC behavior should remain sparse enough that actions feel meaningful. Do not run continuous language-model thought loops.
+
+## Foreign contact and technology
+
+Foreign presence already exists at game start but is limited and ambiguous.
+
+Possible pressure/opportunity includes:
+
+- muskets
+- powder
+- cannon
+- iron goods
+- foreign specialists
+- foreign-built or foreign-operated ships
+- trade
+- rumors and sightings
+
+Foreign technology must not become a simple universal tech-tree tier. Guns without powder, maintenance knowledge, trained users, and secure supply are constrained assets. A foreign specialist or ship connection can matter as much as owning a weapon.
+
+Do not begin with a visible invasion meter or a single monolithic villain faction. The larger danger is historical pressure arriving while the island kingdoms remain divided and continue using foreign contact against one another.
 
 ## Embodied player
 
@@ -179,74 +214,56 @@ The player inhabits the aliʻi as a person rather than acting as an omnipresent 
 
 Location matters lightly but materially.
 
-If the player travels to meet another chief:
+If the player travels to another island:
 
-- reports from home may arrive late
-- delegates may execute standing instructions
-- the player may witness information unavailable through reports
-- physical danger can become possible
-- face-to-face diplomacy can expose different information
+- time passes
+- rivals continue acting
+- reports from home conceptually become harder to receive
+- arrival becomes a world event
 
-This is not a character-stat RPG. Embodiment exists to create limits, consequences, and perspective.
+This is not a character-stat RPG. Injury, succession, face-to-face scenes, and deeper embodiment are deferred until the core loop proves itself.
 
 ## Time model
 
-The world is asynchronous and persistent.
+The world is asynchronous and persistent in concept.
+
+The prototype uses browser-local persistence and capped offline advancement so the loop can be tested on GitHub Pages without a production backend.
 
 The product should reward returning curiosity rather than constant attendance.
 
-The world can advance in coarse simulation ticks. Important actions may consume time, travel time, preparation, or recovery capacity under the hood.
+The world advances in coarse hidden time. Important actions may consume travel or delivery time. A player returning later may find that rival rulers exchanged messengers, scouted, raided, traded, prepared, or encountered foreign ships.
 
-A player returning later may see:
-
-```text
-KAWAIHOA
-
-Night.
-
-Keawe is dead.
-
->
-```
-
-The world must be allowed to change without the player present.
-
-It must also be allowed for nothing important to happen.
-
-```text
-Six hours have passed.
-
-Nothing requires your attention.
-
->
-```
+The world must also be allowed for nothing important to happen.
 
 ## First playable scope
 
-Build one fictional island with eight ahupuaʻa.
+Build the complete top-level political frame from day one:
 
-- 1 player-controlled aliʻi
-- 7 autonomous chiefs
-- 1 named konohiki/adviser for the player
-- 1 named military/scout adviser for the player
-- a small set of important named supporting actors for AI chiefs only where needed
+- 8 separate island kingdoms
+- 1 player-controlled aliʻi chosen at startup
+- 7 autonomous rival rulers
+- player-facing adviser voice kept intentionally light
+- asymmetric starting population, food, military capability, defensive capability, intelligence, political temperament, and rare foreign technology
 
 The world needs only enough systems to test the thesis:
 
 1. food / productive capacity
-2. population / recruitment
+2. population
 3. military strength and defense
 4. scouting / intelligence
-5. raid or attack
-6. diplomacy / promises / simple treaties
-7. relationships and memory
+5. raid
+6. messages / thin treaty slice
+7. relationships
 8. travel / message delay
 9. world event log translated into player-facing reports
-10. autonomous AI chief decisions
+10. autonomous rival decisions
+11. scarce foreign technology/contact
+12. save/restore and offline advancement
 
 Explicitly defer:
 
 - graphical world map
+- detailed ahupuaʻa simulation
 - inventory system
 - crafting
 - tech trees
@@ -261,21 +278,20 @@ Explicitly defer:
 
 ## Interface
 
-The initial public page should be intentionally severe:
+The initial public page is intentionally severe:
 
 - black background
 - high-contrast text
-- one readable monospaced or restrained text face
+- one restrained monospaced stack
 - one scrolling transcript area
 - one text input line
-- optional tiny project title / connection state only if necessary
-- keyboard-first, mobile-safe
+- keyboard-first and mobile-safe
 
-No fake CRT scanlines, neon cyberpunk decoration, terminal chrome, or nostalgia effects unless later testing proves they add value.
+No fake CRT scanlines, neon cyberpunk decoration, terminal chrome, or nostalgia effects.
 
 This is minimal because the fiction is the interface, not because the design is unfinished.
 
-`help` should return a compact natural-language explanation rather than a command encyclopedia.
+`help` returns a compact natural-language explanation rather than a command encyclopedia.
 
 ## Architecture
 
@@ -289,39 +305,40 @@ Responsibilities:
 
 - render transcript
 - accept player input
-- preserve session identity
-- send actions to the game API
-- never own authoritative world state
+- save/restore prototype state locally
+- never decide mechanical outcomes in prose
 
 ### 2. Game engine
 
-Authoritative simulation.
+Authoritative within the local prototype.
 
 Responsibilities:
 
 - validate legal actions
 - own world truth
 - advance time
-- resolve production, intelligence, raids, combat, treaties, travel, and consequences
+- resolve production, intelligence, raids, treaties, travel, technology changes, and consequences
 - emit structured events
 
-### 3. AI decision / interpretation layer
+For any future shared or multiplayer version, this authority must move server-side.
+
+### 3. Decision / interpretation layer
 
 Non-authoritative reasoning seam.
 
 Responsibilities:
 
 - convert natural player language into proposed structured intent
-- choose NPC intents from legal action options and actor belief state
-- render structured facts/events into sparse character/world prose
+- choose NPC intents from legal options and actor belief state
+- render structured facts/events into sparse world prose
 
-It may not mutate authoritative state directly.
+The prototype uses deterministic pattern matching and rules-driven rival policy. Model-backed interpretation/decision-making is a later replaceable implementation, not a prerequisite for first playtesting.
 
 ### 4. Persistence
 
-Authoritative world snapshots plus append-only or inspectable event history sufficient to reconstruct important outcomes and debug bad AI behavior.
+Prototype persistence is a versioned browser `localStorage` snapshot plus deterministic world time.
 
-The first implementation may use a small serverless backend. API keys and secrets must never be committed to the public repository.
+This is intentionally not tamper-resistant or shared. If the interaction thesis survives playtesting, persistence can be promoted behind an API without changing the visible game contract.
 
 ## AI cost discipline
 
@@ -335,17 +352,16 @@ Use normal code for:
 - timers
 - legal action checks
 - relationship arithmetic
-- belief decay
+- belief decay and updates
 - event routing
+- low-value NPC decisions
 
-Use AI only when language or higher-order choice adds value:
+Use AI later only where language or higher-order choice adds value:
 
-- interpreting flexible player intent
-- choosing among materially different strategic options for important chiefs
-- negotiation wording
-- summarizing significant events into world-facing prose
-
-Minor NPCs should be rules-driven or grouped until they earn individual reasoning.
+- interpreting flexible player intent beyond the bounded parser
+- choosing among materially different strategic options for important rulers
+- negotiation wording and interpretation
+- summarizing significant event clusters
 
 ## Failure behavior
 
@@ -353,26 +369,27 @@ The interface should fail in-world where possible, but never hide real technical
 
 Examples:
 
-- ambiguous action: character asks a natural follow-up
+- ambiguous action: adviser asks a natural follow-up
 - illegal action: adviser explains why it cannot currently be done
-- AI interpretation uncertainty: no state mutation until intent is resolved
-- server/network error: show a small plain technical message and preserve the player's typed command for retry
+- interpretation uncertainty: no state mutation until intent is resolved
+- corrupted local save: fall back to a fresh start rather than inventing continuity
 
-No model-generated result may be committed if the engine did not validate and apply the corresponding structured action.
+No rendered result may create a mechanical fact the engine did not validate and apply.
 
 ## First-playable success criteria
 
 The prototype succeeds if a player can spend roughly 15–30 minutes with it and experience all of the following without needing a visible stat dashboard:
 
-1. understand that they rule a specific place
+1. understand that they rule one of eight separate island kingdoms
 2. ask meaningful questions about their situation
 3. give a natural-language order that becomes a real simulation action
-4. receive imperfect intelligence about another chief
-5. make or reject a diplomatic proposal
-6. experience at least one autonomous rival action not caused by the player
+4. receive imperfect intelligence about another ruler
+5. send a diplomatic message
+6. experience autonomous rival action not caused by the player
 7. see a delayed consequence arrive through the world rather than an immediate result popup
-8. feel that hidden rules constrain outcomes even though those rules are not shown
-9. leave and return to a world that advanced
+8. encounter scarce foreign technology/contact as strategic pressure or opportunity
+9. feel that hidden rules constrain outcomes even though those rules are not shown
+10. leave and return to a world that advanced
 
 The strongest validation question is:
 
@@ -382,28 +399,24 @@ If the answer is no, do not expand the world. Fix or abandon the interaction the
 
 ## Project placement
 
-After design approval and implementation begins:
-
 - source/public route: `alii/`
 - durable state: `alii/PROJECT_STATE.md`
 - registry entry: `state/PROJECT_REGISTRY.md`
-- public Projects hub card: new Games / Experiments category or the lightest existing category structure that remains coherent
+- public Projects hub category: `Games & Experiments`
 
-Do not restructure the whole Projects hub merely to add one prototype. A new category is justified only if the project does not fit the existing categories cleanly.
+The existing Projects hub remains otherwise intact.
 
 ## Implementation order
 
-Implementation should proceed vertically rather than by building every subsystem separately.
-
-First playable slice:
+The completed first vertical slice follows this order:
 
 1. black-screen transcript UI
-2. tiny deterministic island state
-3. one adviser answering from structured state
+2. deterministic eight-kingdom island state
+3. qualitative adviser/report layer
 4. natural-language intent -> validated structured action
-5. one rival chief making autonomous decisions
+5. autonomous rival decisions
 6. time advancement and delayed event delivery
-7. persist/reload
-8. expand from one rival to seven only after the loop feels good
+7. browser-local persist/reload
+8. public project registration and CI
 
-The first implementation plan must preserve this order and should not begin by designing the full eight-chief simulation.
+Next work is playtest-driven. Do not automatically expand the simulation merely because the architecture can support more.
