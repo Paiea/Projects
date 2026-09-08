@@ -23,6 +23,9 @@ This is the smallest durable record shape for the MVP. Historical sources remain
 ## Optional record fields
 
 - `voice_actor` — named speaker/author when the source clearly attributes the words to a person or group. In the social UI, this may be the visible post identity while `publication` remains visible as provenance. Do not infer a speaker when the source does not identify one.
+- `event_date` — date the reported event happened when that is distinct from the issue/publication date.
+- `publication_date` — date the source item was published when materially different from the event date or generic `date` field.
+- `information_lag_note` — short evidence-bounded note when the delay between event, publication, circulation, or receipt matters to how a reader should experience the item. Do not invent a receipt date that the source does not establish.
 
 ## Authority and derivation
 
@@ -33,6 +36,20 @@ Conceptual flow:
 Changing a downstream layer must never mutate the source-facing text.
 
 When a better transcription or stronger source replaces an earlier interpretation, dependent English/feed/voice layers should be treated as stale and re-evaluated. Unrelated records should not rerun.
+
+## Historical attention and information time
+
+**Follow historical attention. Do not manufacture balance. Preserve repetition when the repetition itself shows what people cared about. Preserve multiple voices and places. Add ordinary life wherever the archive gives it to us. Preserve the lag between something happening and people learning about it.**
+
+The goal is not a modern editorial quota across politics, weather, commerce, gossip, travel, celebration, and ordinary life. The goal is to reconstruct the attention field supported by the surviving archive. If a political crisis dominates a week because it dominated the newspapers and public response, that dominance belongs in the feed.
+
+Repetition is not automatically redundancy. Repeated headlines, speeches, organizing notices, reactions, arguments, petitions, or reports may be historically meaningful when they show sustained public attention, geographic spread, competing viewpoints, or continuing coordination. Do not compress that evidence merely to make the feed look more varied.
+
+At the same time, do not mistake one surviving article or one famous speech for the whole world. Prefer multiple publications, speakers, communities, islands, places, genres, and kinds of notice when the archive supports them. Ordinary life belongs wherever it actually appears in the record, but it should not be inserted as artificial counterweight to major events.
+
+Do not collapse event time into publication time. A speech on one day, a newspaper account several days later, and receipt somewhere else later still are different historical moments. Preserve those distinctions when known. When the exact circulation or receipt time is unknown, preserve only the supported event/publication relationship rather than inventing instant transmission.
+
+The social-media analogy is about readability and social presence, not modern network speed. The feed should feel like an information world of its own period.
 
 ## Social intent fidelity
 
@@ -54,7 +71,7 @@ Do not invent slang, jokes, outrage, intimacy, certainty, quotations, or modern 
 
 Use `cheap-pass` when meaning and social intent are straightforward and well-supported.
 
-Use `review` when ambiguity, transcription uncertainty, idiom, cultural context, rhetorical stance, attribution, or source quality can materially change meaning or tone.
+Use `review` when ambiguity, transcription uncertainty, idiom, cultural context, rhetorical stance, attribution, source quality, or event/publication timing can materially change meaning or tone.
 
 Use `high-fidelity` when the item is both difficult and important enough to justify expensive reasoning/research.
 
