@@ -1,32 +1,32 @@
-const VECTORS = ["produce", "meaning", "shape", "example", "choice", "say"];
-const HARD_VECTORS = ["produce", "shape", "example"];
+const VECTORS = ["recognize", "produce", "cloze", "scenario", "say", "use"];
+const HARD_VECTORS = ["produce", "cloze", "scenario", "use"];
 const SHOW_WHAT_YOU_KNOW_EVERY = 6;
 const MAX_VECTOR_STRENGTH = 3;
 
 const VECTOR_META = {
+  recognize: {
+    label: "WHAT'D I SAY?",
+    instruction: "See the Hawaiian. Say the natural Pidgin meaning before you reveal it.",
+  },
   produce: {
-    label: "HOW YOU SAY UM?",
+    label: "QUICK TRANSLATE",
     instruction: "Pidgin → Hawaiian. Say the Hawaiian before you reveal it.",
   },
-  meaning: {
-    label: "WHAT THIS MEAN?",
-    instruction: "Hawaiian → thought. Say the natural Pidgin meaning first.",
+  cloze: {
+    label: "FINISH IT",
+    instruction: "One chunk is missing. Say the whole Hawaiian sentence, not just the missing word.",
   },
-  shape: {
-    label: "BUILD UM",
-    instruction: "Use the Hawaiian-order chunks to rebuild the Hawaiian sentence.",
-  },
-  example: {
-    label: "USE UM",
-    instruction: "Say the whole Hawaiian version of this everyday example.",
-  },
-  choice: {
-    label: "WHICH ONE?",
-    instruction: "Pick the Hawaiian sentence that carries this thought.",
+  scenario: {
+    label: "WHICH ONE FITS?",
+    instruction: "Picture the situation. Pick the Hawaiian line that belongs there, then say it out loud.",
   },
   say: {
-    label: "SAY THIS SENTENCE",
-    instruction: "Say the Hawaiian out loud. Then tell yourself what it means.",
+    label: "SAY IT",
+    instruction: "Read the Hawaiian out loud. Then recover the thought without looking at the answer.",
+  },
+  use: {
+    label: "USE IT",
+    instruction: "Use this Hawaiian sometime in the next 10 minutes. Dinner counts. Texting counts. Talking to the dog technically counts.",
   },
 };
 
@@ -44,9 +44,9 @@ function itemAverage(strengths, itemId) {
 }
 
 function isOwned(strengths, itemId) {
+  const recognize = getStrength(strengths, itemId, "recognize");
   const produce = getStrength(strengths, itemId, "produce");
-  const meaning = getStrength(strengths, itemId, "meaning");
-  return produce >= 2 && meaning >= 2 && itemAverage(strengths, itemId) >= 1.5;
+  return recognize >= 2 && produce >= 2 && itemAverage(strengths, itemId) >= 1.5;
 }
 
 function weakestVectors(itemId, strengths, vectors = VECTORS) {
@@ -54,30 +54,39 @@ function weakestVectors(itemId, strengths, vectors = VECTORS) {
   return vectors.filter((vector) => getStrength(strengths, itemId, vector) === min);
 }
 
-function pickVector(itemId, strengths, repNumber = 1, lens = "mixed", excludeVector = null) {
-  if (lens !== "mixed" && VECTORS.includes(lens) && lens !== excludeVector) return lens;
+function firstUnstartedVector(itemId, strengths) {
+  for (const vector of VECTORS) {
+    if (getStrength(strengths, itemId, vector) === 0) return vector;
+  }
+  return null;
+}
 
+function pickVector(itemId, strengths, repNumber = 1, excludeVector = null) {
   const showWhatYouKnow = repNumber > 0 && repNumber % SHOW_WHAT_YOU_KNOW_EVERY === 0;
+
+  if (!showWhatYouKnow) {
+    const nextStage = firstUnstartedVector(itemId, strengths);
+    if (nextStage && nextStage !== excludeVector) return nextStage;
+  }
+
   let candidates = showWhatYouKnow ? HARD_VECTORS : VECTORS;
   if (excludeVector && candidates.length > 1) {
     candidates = candidates.filter((vector) => vector !== excludeVector);
   }
   const weakest = weakestVectors(itemId, strengths, candidates);
-  return weakest[(repNumber - 1 + weakest.length) % weakest.length];
+  return weakest[(Math.max(1, repNumber) - 1) % weakest.length];
 }
 
-function pickWeakItem(items, strengths, recentIds = [], preferredFamily = null, familyFor = () => null) {
+function pickWeakItem(items, strengths, recentIds = [], preferredItemId = null) {
   if (!items.length) return null;
-
-  let pool = items;
-  if (preferredFamily) {
-    const familyPool = items.filter((item) => familyFor(item.id) === preferredFamily);
-    if (familyPool.length) pool = familyPool;
+  if (preferredItemId) {
+    const preferred = items.find((item) => item.id === preferredItemId);
+    if (preferred) return preferred;
   }
 
   const recent = new Set(recentIds.slice(-2));
-  const notRecent = pool.filter((item) => !recent.has(item.id));
-  if (notRecent.length) pool = notRecent;
+  let pool = items.filter((item) => !recent.has(item.id));
+  if (!pool.length) pool = items;
 
   const minScore = Math.min(...pool.map((item) => itemAverage(strengths, item.id)));
   const weakest = pool.filter((item) => itemAverage(strengths, item.id) === minScore);
@@ -85,12 +94,10 @@ function pickWeakItem(items, strengths, recentIds = [], preferredFamily = null, 
 }
 
 function buildChoiceOptions(item, pool) {
-  const sameFamilyFirst = pool.filter((candidate) => candidate.id !== item.id && candidate.hawaiian !== item.hawaiian);
   const seen = new Set([item.hawaiian]);
   const distractors = [];
-
-  for (const candidate of sameFamilyFirst) {
-    if (seen.has(candidate.hawaiian)) continue;
+  for (const candidate of pool) {
+    if (candidate.id === item.id || seen.has(candidate.hawaiian)) continue;
     seen.add(candidate.hawaiian);
     distractors.push(candidate.hawaiian);
     if (distractors.length === 3) break;
@@ -98,16 +105,22 @@ function buildChoiceOptions(item, pool) {
 
   const choices = [item.hawaiian, ...distractors];
   while (choices.length < 3) choices.push("—");
-
-  // Rotate rather than fully randomize so the correct answer is not always first,
-  // while keeping deterministic behavior easy to test.
   const shift = Math.abs(item.id.split("").reduce((sum, char) => sum + char.charCodeAt(0), 0)) % choices.length;
   return choices.slice(shift).concat(choices.slice(0, shift));
 }
 
-function buildQuestion(item, vector, pool) {
-  const meta = VECTOR_META[vector] || VECTOR_META.produce;
-  const base = {
+function clozePrompt(hawaiian) {
+  const tokens = hawaiian.trim().split(/\s+/);
+  if (tokens.length === 1) return "____";
+  const index = Math.min(tokens.length - 1, Math.max(0, Math.floor(tokens.length / 2)));
+  const clean = tokens[index].replace(/[?.!,]$/u, "");
+  tokens[index] = tokens[index].replace(clean, "____");
+  return tokens.join(" ");
+}
+
+function commonBase(item, vector) {
+  const meta = VECTOR_META[vector] || VECTOR_META.recognize;
+  return {
     itemId: item.id,
     vector,
     label: meta.label,
@@ -116,26 +129,40 @@ function buildQuestion(item, vector, pool) {
     shape: item.shape || "",
     examplePidgin: item.examplePidgin || "",
     exampleHawaiian: item.exampleHawaiian || "",
-    choices: [],
     answerLabel: "Answer",
+    choices: [],
+    intro: false,
   };
+}
 
-  if (vector === "meaning") {
-    return { ...base, prompt: item.hawaiian, answer: item.pidgin, answerLabel: "Meaning" };
+function buildIntro(item) {
+  return {
+    ...commonBase(item, "recognize"),
+    vector: "intro",
+    label: "MEET THIS ONE",
+    instruction: "No test yet. See the thought together first, then say the Hawaiian once.",
+    prompt: item.hawaiian,
+    answer: item.pidgin,
+    answerLabel: "Pidgin thought",
+    intro: true,
+  };
+}
+
+function buildQuestion(item, vector, pool, scenario = { prompt: item.examplePidgin }) {
+  const base = commonBase(item, vector);
+
+  if (vector === "recognize") {
+    return { ...base, prompt: item.hawaiian, answer: item.pidgin, answerLabel: "Pidgin thought" };
   }
 
-  if (vector === "shape") {
-    return { ...base, prompt: item.shape, answer: item.hawaiian, answerLabel: "Hawaiian" };
+  if (vector === "cloze") {
+    return { ...base, prompt: clozePrompt(item.hawaiian), answer: item.hawaiian, answerLabel: "Whole sentence" };
   }
 
-  if (vector === "example") {
-    return { ...base, prompt: item.examplePidgin, answer: item.exampleHawaiian, answerLabel: "Hawaiian" };
-  }
-
-  if (vector === "choice") {
+  if (vector === "scenario") {
     return {
       ...base,
-      prompt: item.pidgin,
+      prompt: scenario.prompt,
       answer: item.hawaiian,
       answerLabel: "Hawaiian",
       choices: buildChoiceOptions(item, pool),
@@ -143,13 +170,24 @@ function buildQuestion(item, vector, pool) {
   }
 
   if (vector === "say") {
-    return { ...base, prompt: item.hawaiian, answer: item.pidgin, answerLabel: "Meaning" };
+    return { ...base, prompt: item.hawaiian, answer: item.pidgin, answerLabel: "Thought you just said" };
+  }
+
+  if (vector === "use") {
+    return {
+      ...base,
+      prompt: item.hawaiian,
+      answer: item.pidgin,
+      answerLabel: "Meaning",
+      mission: true,
+    };
   }
 
   return { ...base, prompt: item.pidgin, answer: item.hawaiian, answerLabel: "Hawaiian" };
 }
 
 function rateVector(strengths, itemId, vector, delta) {
+  if (!VECTORS.includes(vector)) return 0;
   if (!strengths[itemId]) strengths[itemId] = {};
   strengths[itemId][vector] = clampStrength(getStrength(strengths, itemId, vector) + delta);
   return strengths[itemId][vector];
@@ -165,10 +203,13 @@ const api = {
   itemAverage,
   isOwned,
   weakestVectors,
+  firstUnstartedVector,
   pickVector,
   pickWeakItem,
+  buildIntro,
   buildQuestion,
   buildChoiceOptions,
+  clozePrompt,
   rateVector,
 };
 
