@@ -275,7 +275,7 @@ function rateVector(strengths, itemId, vector, delta) {
   return strengths[itemId][vector];
 }
 
-const api = {
+const coreEngineApi = {
   VECTORS,
   HARD_VECTORS,
   STAGE_VECTORS,
@@ -300,9 +300,9 @@ const api = {
 };
 
 if (typeof window !== "undefined") {
-  window.PIDGIN_OLELO_CORE_ENGINE = api;
+  window.PIDGIN_OLELO_CORE_ENGINE = coreEngineApi;
 }
 
 if (typeof module !== "undefined" && module.exports) {
-  module.exports = api;
+  module.exports = coreEngineApi;
 }
