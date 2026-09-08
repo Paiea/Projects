@@ -32,6 +32,20 @@ function formatCountdown(milliseconds) {
   return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
 }
 
+function missionSeallyLine(mission) {
+  if (!mission) return "Go use this before ten minutes pau. No count if you whisper um to yourself in the bathroom.";
+  if (["want-eat-q", "want-eat-a"].includes(mission.itemId)) {
+    return "Ask somebody for real. Preferably somebody get food.";
+  }
+  if (["want-water-q", "want-water-a"].includes(mission.itemId)) {
+    return "Use um on one actual thirsty person. Standing by the fridge counts.";
+  }
+  if (["where-you", "where-thing"].includes(mission.itemId)) {
+    return "Use um before everybody starts yelling from different rooms.";
+  }
+  return "Go use this before ten minutes pau. No count if you whisper um to yourself in the bathroom.";
+}
+
 function giveUseCredit(itemId) {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
@@ -61,6 +75,7 @@ if (typeof module !== "undefined" && module.exports) {
     missionForTime,
     millisecondsToNextBlock,
     formatCountdown,
+    missionSeallyLine,
   };
 }
 
@@ -73,6 +88,7 @@ if (typeof document !== "undefined") {
     answer: document.querySelector("#challenge-answer"),
     used: document.querySelector("#challenge-used"),
     feedback: document.querySelector("#challenge-feedback"),
+    seallyLine: document.querySelector("#challenge-seally-line"),
   };
 
   let renderedBlock = null;
@@ -86,6 +102,7 @@ if (typeof document !== "undefined") {
     els.used.textContent = "I USED IT";
     els.feedback.hidden = true;
     els.feedback.textContent = "";
+    if (els.seallyLine) els.seallyLine.textContent = missionSeallyLine(mission);
     renderedBlock = block;
   }
 
@@ -104,6 +121,7 @@ if (typeof document !== "undefined") {
     els.feedback.textContent = "That counts. Real-world use gets stronger evidence than another quiz tap.";
     els.feedback.dataset.kind = "got";
     els.feedback.hidden = false;
+    if (els.seallyLine) els.seallyLine.textContent = "Chee. That counts. No make fake.";
   });
 
   tick();

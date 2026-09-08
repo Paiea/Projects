@@ -2,295 +2,135 @@
 
 ## Purpose
 
-Test whether familiar Hawaiʻi Pidgin thoughts can act as a retrieval bridge into useful spoken ʻōlelo Hawaiʻi.
+Use familiar Hawaiʻi Pidgin as a trusted retrieval bridge into useful spoken ʻōlelo Hawaiʻi.
 
-The project is intentionally centered on a permanent **Core 30** rather than exposing the whole 100-item bank as equal curriculum.
+**Core 30 is the permanent center.** `phrases.js` still contains 100 items, but the extra 70 are dormant data rather than equal learner-facing curriculum.
 
-The learner-facing model is now ELL-style gradual release:
+The learner-facing progression is ELL-style gradual release:
 
 **MEET IT → RECOGNIZE IT → SUPPORTED PRODUCTION → SITUATION → HAWAIIAN-FIRST → REAL USE**
 
-Pidgin is a trusted scaffold. It is not Hawaiian grammatical authority, and **Pidgin should never be the joke**.
-
-As the learner gets stronger, **Pidgin support fades** rather than disappearing on a fixed schedule.
+Pidgin support fades as the learner gets stronger. Pidgin is never the joke.
 
 ## Authority
 
-- Public route/source: `pidgin-olelo/`
 - Learn: `pidgin-olelo/index.html`
 - 10-Min Mission: `pidgin-olelo/challenge.html`
-- Full ordinary phrase bank: `pidgin-olelo/phrases.js`
-- Core curriculum / scenarios / conservative overrides: `pidgin-olelo/curriculum.js`
-- Core fading / question / scheduling engine: `pidgin-olelo/core-engine.js`
+- Full phrase bank: `pidgin-olelo/phrases.js`
+- Core 30/scenarios/overrides: `pidgin-olelo/curriculum.js`
+- Fading, vectors, spacing: `pidgin-olelo/core-engine.js`
 - Learn runtime: `pidgin-olelo/app.js`
 - Mission runtime: `pidgin-olelo/challenge.js`
-- Curated noʻeau bank: `pidgin-olelo/noeau.js`
-- Shared styling: `pidgin-olelo/styles.css`
-- Regression tests: `tests/test_pidgin_olelo.py`
+- Noʻeau bank: `pidgin-olelo/noeau.js`
+- Responsive shell: `pidgin-olelo/styles.css`
+- Older Uncle Seally portrait: `pidgin-olelo/assets/uncle-seally.webp`
+- Island backdrop: `pidgin-olelo/assets/island-backdrop.svg`
+- Core tests: `tests/test_pidgin_olelo.py`
+- Visual tests: `tests/test_pidgin_olelo_visual.py`
 
-`phrases.js` remains the 100-item data bank, but **Core 30 is the permanent default learning authority**. The other 70 are dormant data for later expansion. They are not advertised in the current Learn interface.
+## Learning Model
 
-## Current Product Shape
+There is one mixed Learn flow. Do not restore separate Hawaiian → Pidgin / Pidgin → Hawaiian mode buttons.
 
-### One Learn flow, not two language buttons
+Each Core thought moves through five invisible stages:
 
-There is no learner-facing Hawaiian → Pidgin / Pidgin → Hawaiian direction toggle.
+1. **MEET THIS ONE** — Hawaiian + Pidgin together, not scored.
+2. **WHAT'D I SAY?** — Hawaiian recognition through Pidgin choices.
+3. **SUPPORTED PRODUCTION** — `FINISH IT` cloze, then `QUICK TRANSLATE` production while Pidgin still supports meaning.
+4. **WHICH ONE FITS?** — local situation → Hawaiian. Pidgin translation disappears from the prompt.
+5. **HAWAIIAN-FIRST** — `SAY IT` and `USE IT` with the bridge increasingly unnecessary.
 
-The engine mixes question types automatically according to the learner state of each Core thought. The learner should feel like one funny local ELL teacher is changing the task, not like they are configuring flashcard modes.
+The six hidden scored vectors are `recognize`, `cloze`, `produce`, `scenario`, `say`, and `use`.
 
-### Core 30 as a permanent little solar system
+Portable WIN contributes the instructional loop: diagnose the weak path, targeted rep, **MORE LIKE THIS**, and periodic **SHOW WHAT YOU KNOW**. The story compiler contributes the architecture: **one thought authority, many derived representations**. A phrase is not a flashcard; it can render as Pidgin cue, Hawaiian target, Hawaiian-order shape, cloze, scenario, oral rehearsal, or real-world mission.
 
-The first 30 items are attacked repeatedly from different angles rather than treated as 30 disposable flashcards.
+Weak paths return sooner. Stronger paths drift farther apart. The learner does not see retention percentages.
 
-Each phrase moves through **five invisible scaffold stages**.
+## Feedback and Humor
 
-#### Stage 1 — MEET THIS ONE
+When the app knows the answer, it recasts instead of throwing a giant WRONG state. Open recall still uses **Got um / Miss** self-assessment.
 
-Both forms are visible together.
+**Uncle Seally** is the commentary channel:
 
-- Hawaiian target
-- familiar Pidgin thought
-- learner says the Hawaiian once
-- not scored
+> Your questionable ʻōlelo coach.
 
-The next interaction immediately retrieves the **same thought** rather than introducing five new cards in a row.
+He reacts to learning state with small reusable line pools: start, correct, miss, repeated miss, mastered, Show Me, and Replay. Examples include `Chee. Look who went study.`, `Almost. Your mouth knew. Your brain went Costco.`, and `Again. This time no mumble.`
 
-#### Stage 2 — WHAT'D I SAY?
+Keep the character compact. Do not write hundreds of phrase-specific jokes. Add a special line only when it is unusually good.
 
-Hawaiian stays visible, but the learner must choose the matching Pidgin thought.
+Humor comes from Dad's familiar world: aunties, fridge uncles, Costco, H-1, Kāneʻohe/Kailua, slippers, food, family, parking, and driving. **The joke is never that Pidgin is broken English.**
 
-This is comprehension/recognition with the trusted language still carrying the meaning.
+## Responsive Visual Shell
 
-#### Stage 3 — supported production
+The learning engine stays independent from the visual shell.
 
-Pidgin remains as support while Hawaiian production gets harder.
+Desktop uses a three-part composition:
 
-- **FINISH IT** — Hawaiian cloze with the Pidgin anchor still visible
-- **QUICK TRANSLATE** — Pidgin → full Hawaiian production
+- older Uncle Seally coach rail on the left
+- Core lesson in the center
+- light side information / Noʻeau on the right
 
-The scaffold is starting to fade, but it is not yanked away prematurely.
+Tablet collapses to one main column with Seally as a horizontal coach banner.
 
-#### Stage 4 — WHICH ONE FITS?
+Phone uses one vertical learning stack with compact Seally above the lesson and a fixed bottom navigation for **Learn / Mission / More**. Explicit responsive checks cover 900px, 640px, 480px, and very narrow phones.
 
-The Pidgin translation disappears from the prompt.
+The visual treatment is intentionally restrained: one local island backdrop behind translucent cream/green cards. Do not turn every surface into illustration.
 
-The learner gets a small real-life situation such as family, food, driving, home, work, or somebody losing the car/slippers and chooses or produces the Hawaiian that belongs there.
+## 10-Min Mission
 
-#### Stage 5 — Hawaiian-first
+Mission is transfer, not another quiz.
 
-The prompt increasingly begins in Hawaiian.
-
-- **SAY IT** — read/say Hawaiian and recover the thought
-- **USE IT** — use the phrase in real life
-
-This is where the bridge should start becoming unnecessary.
-
-### Six scored retrieval/use vectors
-
-The hidden scored vectors are:
-
-1. `recognize`
-2. `cloze`
-3. `produce`
-4. `scenario`
-5. `say`
-6. `use`
-
-The stage model decides which vectors are appropriate. The learner never sees six mode buttons.
-
-### Recasting instead of WRONG
-
-When the app knows the answer, such as a multiple-choice recognition or scenario question, it grades quietly and recasts immediately.
-
-Examples:
-
-- `Chee. That one. Say the Hawaiian once before you move.`
-- `Almost, uncle. ...`
-- `😭 Brah. Wrong scene. The line that fits is ... Say um once.`
-
-The correction gives another exposure to the correct Hawaiian instead of throwing a giant red WRONG banner at the learner.
-
-Open recall still uses learner self-assessment through **Got um / Miss**.
-
-### Humor boundary
-
-Humor is part of memory encoding, but the target of the joke is Dad's familiar world, not the way local people speak.
-
-Good joke territory:
-
-- uncles standing in front of the fridge pretending they are not hungry
-- aunties adding another scoop
-- Costco
-- H-1
-- Kāneʻohe / Kailua driving logic
-- somebody stealing slippers
-- impossible parking
-- sideways rain
-- family members
-- somebody saying “almost there” before leaving the house
-
-Bad joke territory:
-
-- treating Pidgin itself as broken English
-- making the learner's existing language sound stupid
-- using exaggerated eye-dialect as the punchline
-
-The implicit message should remain:
-
-**You already know how to communicate. We are using that trusted language to unlock Hawaiian.**
-
-### WIN-inspired behavior
-
-Portable WIN contributed the useful instructional pattern:
-
-- diagnose the weak path
-- give a targeted rep
-- **MORE LIKE THIS**
-- periodically **SHOW WHAT YOU KNOW**
-- keep proficiency state quiet underneath
-
-Every sixth graded Core rep can become a harder SHOW WHAT YOU KNOW check using an already-unlocked productive vector.
-
-MORE LIKE THIS means:
-
-**same underlying thought, different representation**
-
-not merely another flashcard.
-
-### Compiler-inspired behavior
-
-The long-form story compiler contributed the deeper architecture:
-
-**THOUGHT AUTHORITY = one semantic Core item**
-
-Everything else is a derived performance of that thought:
-
-- Pidgin anchor
-- Hawaiian target
-- Hawaiian-order shape
-- recognition choice
-- cloze reconstruction
-- direct production
-- situation
-- Hawaiian-first oral rehearsal
-- real-world mission
-
-The system learns which representation is weak without confusing the representation with the underlying thought.
-
-### Quiet spacing
-
-The app does not expose retention percentages or a spaced-repetition dashboard.
-
-Internally the practical states are roughly:
-
-- solid
-- getting there
-- needs work
-- not seen lately
-
-Weak/missed paths receive higher priority. Stronger paths receive wider spacing. Missed items can return from a different angle rather than simply repeating the same failed card.
-
-### 10-Min Mission
-
-Mission is the transfer surface, not another quiz mode.
-
-- deterministic one **Core 30** phrase per 10-minute block
+- deterministic one Core 30 phrase per 10-minute block
 - learner uses it outside the app
-- **I USED IT** writes use evidence into the same Core state as Learn
-- dinner counts
-- texting counts
-- talking to family counts
-- saying it to the dog technically counts
+- **I USED IT** writes `use` evidence into the same Core state as Learn
+- Uncle Seally gives short mission-specific commentary
+- refreshing does not reroll the mission
 
-Later, Mission may fade its own hints according to the same Core stage data. Do not create a separate mission curriculum.
+## ʻŌlelo Noʻeau
 
-### ʻŌlelo Noʻeau
+Noʻeau is flavor, not the menu.
 
-Noʻeau is **flavor, not the menu**.
-
-The primary navigation remains:
-
-- Learn
-- 10-Min Mission
-
-Inside Learn, **More** opens a small integrated `Kūpuna side note 🌺` widget.
-
-The widget shows one noʻeau at a time:
+Primary navigation is Learn and 10-Min Mission. **More** opens the integrated `Kūpuna side note 🌺` widget. Each noʻeau keeps three separate layers:
 
 1. actual ʻōlelo noʻeau
-2. tap to reveal sourced established meaning
-3. clearly separate modern local-humor memory hook
-4. `Another` rotates to another saying
+2. sourced established meaning
+3. clearly labeled modern local-humor memory hook
 
-The noʻeau authority remains separate in `noeau.js`. Its cultural text and sourced meaning must never be rewritten by the joke.
+The joke must never replace or distort the historical meaning.
 
-The older standalone `noeau.html` may remain as a dormant development artifact, but it is not part of the primary product navigation.
+## Hawaiian Integrity
 
-## Orthography / Hawaiian Integrity
+ʻOkina and kahakō are data integrity, not decoration. Hawaiian text stays NFC-normalized UTF-8 and uses the real U+02BB `ʻ`, not curly apostrophes.
 
-ʻOkina and kahakō are data integrity, not decoration.
+Regression checks protect representative forms including `Maikaʻi`, `ʻAʻole`, `ʻōlelo`, `ʻoe`, `kāua`, `kākou`, `kōkua`, `iaʻu`, `ʻaneʻi`, `nānā`, and `hoʻolohe`.
 
-Hale Kuamoʻo guidance treats omission of ʻokina/kahakō where they belong as misspelling. The correct Unicode ʻokina is **U+02BB `ʻ`**, not a curly quote/apostrophe. Hawaiian text should remain NFC-normalized UTF-8.
-
-Core regression checks protect representative forms including:
-
-- `Maikaʻi`
-- `ʻAʻole`
-- `ʻōlelo`
-- `ʻoe`
-- `kāua`
-- `kākou`
-- `kōkua`
-- `iaʻu`
-- `ʻaneʻi`
-- `nānā`
-- `hoʻolohe`
-
-The Core language pass also corrected a teaching problem in the generic location card. The old blank form `Ma hea ka ___?` could imply that `ka` is fixed. Core instead teaches the concrete:
+Core deliberately teaches the concrete location example:
 
 **Where the car stay? → Ma hea ke kaʻa?**
 
-The broader `Ma hea ka/ke ...?` article pattern can be generalized later after the learner owns a concrete example.
+rather than implying `ka` is a fixed article through `Ma hea ka ___?`.
 
-Current calibration sources include Hale Kuamoʻo orthography/Unicode guidance, Kamehameha Schools Kulāiwi materials, and Hawaiian Grammar / Kamanā-Wilson-derived examples for common sentence structures and location questions.
+Hawaiian targets/examples should still receive fluent-speaker/kumu review before this becomes curriculum authority.
 
-Hawaiian targets and examples should still get fluent-speaker/kumu review before the app is treated as curriculum authority.
+## Audio Boundary
 
-## Learning-Science Calibration
+Browser/device TTS remains removed. Bad Hawaiian audio is worse than no audio.
 
-The engine is intentionally not dogmatic about one method.
-
-Current evidence supports combining retrieval, spacing, semantic elaboration, and user-generated responses rather than relying on massed L1 → L2 repetition alone. Receptive and productive knowledge are related but not identical, so the Core engine practices both directions without exposing them as separate learner modes.
-
-The Pidgin bridge is consistent with pedagogical translanguaging logic: use the learner's existing linguistic repertoire to make new-language meaning accessible, while gradually shifting more work into the target language.
-
-## Picture / Audio Boundary
-
-Picture support is a promising future scaffold for concrete words/actions, but it is not required for the current Core pass.
-
-Browser/device synthetic speech remains removed after direct prototype feedback that it sounded bad and reduced trust.
-
-A future **hear it** vector should return only with trustworthy fluent-speaker or otherwise reliable Hawaiian audio. Typing is also deliberately not a priority for Dad's current spoken-language goal.
+A future **hear it** vector should return only with trustworthy fluent-speaker or otherwise reliable Hawaiian audio. Spoken comprehension/production matters more than typing for Dad's current goal.
 
 ## NEXT_TASK
 
-Ship and test this Core 30 fading version before adding vocabulary or major modes.
+Use the shipped responsive Core 30 version with Dad before adding vocabulary or major modes. Watch whether:
 
-With Dad, watch for:
-
-- whether MEET THIS ONE → immediate retrieval feels natural
-- whether recognition choices are easy without feeling babyish
-- whether the Pidgin scaffold disappears at the right speed
-- whether cloze makes production easier than jumping straight to translation
-- whether family / home / food / driving scenarios make phrases stick
-- whether humorous recasts make misses feel lighter while still producing another correct repetition
-- whether MORE LIKE THIS actually helps a weak phrase click from another angle
-- whether the 10-Min Mission causes spontaneous Hawaiian outside the app
-- whether the Noʻeau widget feels like cultural flavor rather than another curriculum menu
-- any Hawaiian target, ʻokina, kahakō, particle, article, or example a fluent speaker/kumu flags
-
-Do not expand beyond Core 30 depth until this produces real signal.
+- Seally feels funny without becoming noisy
+- the mobile banner leaves enough room for the actual lesson
+- the Pidgin scaffold fades at the right speed
+- cloze/scenario/recasting make missed thoughts stick
+- MORE LIKE THIS helps from a different angle
+- 10-Min Mission produces Hawaiian outside the app
+- Noʻeau feels like cultural flavor
+- any Hawaiian target, ʻokina, kahakō, particle, article, or example gets flagged by a fluent speaker/kumu
 
 ## RE-PROMPT
 
-> Continue Pidgin → ʻŌlelo from current `Paiea/Projects` GitHub authority. Read root `AGENTS.md`, `state/PROJECT_REGISTRY.md`, `state/HANDSHAKE_PROTOCOL.md`, and `pidgin-olelo/PROJECT_STATE.md`, then inspect current `pidgin-olelo/` source. Treat Core 30 as the permanent default learning set even though `phrases.js` contains 100 items. Preserve the ELL-style fading stages, one mixed Learn flow with no language-direction toggles, six hidden retrieval/use vectors, immediate recasting for known-choice errors, WIN-style MORE LIKE THIS / SHOW WHAT YOU KNOW behavior, compiler-style one-thought-many-representations architecture, quiet spacing, working Back/Replay/Forward navigation, real-world 10-Min Mission use credit, orthography regression checks, and Noʻeau integrated under More as a small flavor widget. Pidgin is the trusted scaffold and should never be the joke. Browser TTS remains deliberately removed. Prefer real Dad testing and fluent-speaker/kumu corrections over feature expansion.
+> Continue Pidgin → ʻŌlelo from current `Paiea/Projects` authority. Read root `AGENTS.md`, `state/PROJECT_REGISTRY.md`, `state/HANDSHAKE_PROTOCOL.md`, and `pidgin-olelo/PROJECT_STATE.md`, then inspect current source. Preserve Core 30 as the permanent default, one mixed Learn flow, ELL-style fading, six hidden vectors, recasting, WIN-style MORE LIKE THIS / SHOW WHAT YOU KNOW, compiler-style one-thought-many-representations, quiet spacing, working Back/Replay/Forward, real-world Mission use credit, orthography checks, Noʻeau under More, and responsive Uncle Seally commentary. Pidgin is the trusted scaffold and never the punchline. Do not restore synthetic audio. Prefer real Dad testing and fluent-speaker/kumu corrections over feature expansion.

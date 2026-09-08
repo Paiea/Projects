@@ -9,6 +9,50 @@ const STORAGE_KEY = "pidgin-olelo-core-vectors-v1";
 const STARTING_ACTIVE_COUNT = 5;
 const REPS_PER_UNLOCK = 8;
 
+const SEALLY_LINES = {
+  start: [
+    "Eh. Five minutes. No make like you busy.",
+    "Eh. We go.",
+    "One quick one. No disappear now.",
+    "I no even get thumbs and I studying harder than you.",
+  ],
+  correct: [
+    "Chee. Look who went study.",
+    "Eh, that one was clean.",
+    "Good. Again.",
+    "Okay, okay. No get cocky.",
+    "Solid. Keep moving.",
+  ],
+  miss: [
+    "Almost. Your mouth knew. Your brain went Costco.",
+    "Almost. Run um again.",
+    "Brah. Your brain went break.",
+    "Good. Now you going remember um.",
+  ],
+  repeatMiss: [
+    "Ho. This one fighting you personally.",
+    "We not leaving till you get um.",
+    "Same faka again. 😂",
+    "Brah. Same one again? Good thing I get patience. Kinda.",
+  ],
+  mastered: [
+    "Ah. This one yours already.",
+    "Pau. Next.",
+    "I no need babysit this phrase anymore.",
+    "Okay professor. No get nuts.",
+  ],
+  show: [
+    "You supposed to try first, bah.",
+    "Eh. No peek so fast.",
+    "I saw that. Try first next time.",
+  ],
+  replay: [
+    "Again. This time no mumble.",
+    "Run um back. Clean this time.",
+    "Again. Mouth gotta learn too.",
+  ],
+};
+
 const els = {
   vectorLabel: document.querySelector("#vector-label"),
   vectorInstruction: document.querySelector("#vector-instruction"),
@@ -31,6 +75,9 @@ const els = {
   forwardCard: document.querySelector("#forward-card"),
   progress: document.querySelector("#progress"),
   morePractice: document.querySelector("#more-practice"),
+  moreLink: document.querySelector("#more-link"),
+  mobileMoreLink: document.querySelector(".mobile-more-link"),
+  seallyLine: document.querySelector("#seally-line"),
   noeauSaying: document.querySelector("#noeau-widget-saying"),
   noeauReveal: document.querySelector("#noeau-widget-reveal"),
   noeauBody: document.querySelector("#noeau-widget-body"),
@@ -48,6 +95,7 @@ let historyCursor = -1;
 let preferredItemId = null;
 let excludeVectorOnce = null;
 let autoRated = false;
+let sessionMisses = {};
 let noeauIndex = NOEAU_ITEMS.length ? Math.floor(Date.now() / 86400000) % NOEAU_ITEMS.length : -1;
 
 function emptyState() {
@@ -105,6 +153,27 @@ function saveState() {
   } catch {
     // Local practice should continue even if persistence is unavailable.
   }
+}
+
+function stableLineIndex(kind, itemId = "") {
+  const seed = `${kind}:${itemId}:${state.repCount}`;
+  return Math.abs(seed.split("").reduce((sum, char) => sum + char.charCodeAt(0), 0));
+}
+
+function setSeallyState(kind, itemId = currentItem?.id || "") {
+  if (!els.seallyLine) return;
+  const lines = SEALLY_LINES[kind] || SEALLY_LINES.start;
+  els.seallyLine.textContent = lines[stableLineIndex(kind, itemId) % lines.length];
+}
+
+function registerMiss(itemId) {
+  sessionMisses[itemId] = (sessionMisses[itemId] || 0) + 1;
+  setSeallyState(sessionMisses[itemId] >= 2 ? "repeatMiss" : "miss", itemId);
+}
+
+function registerCorrect(itemId) {
+  sessionMisses[itemId] = 0;
+  setSeallyState(ENGINE.isOwned(vectorStrengths, itemId) ? "mastered" : "correct", itemId);
 }
 
 function activeCount() {
@@ -199,10 +268,13 @@ function recordKnownChoice(correct) {
 
   if (correct) {
     renderFeedback("got", "Chee. That one. Say the Hawaiian once before you move.");
+    registerCorrect(currentItem.id);
   } else if (currentQuestion.vector === "scenario") {
     renderFeedback("miss", `😭 Brah. Wrong scene. The line that fits is ${currentQuestion.answer}. Say um once.`);
+    registerMiss(currentItem.id);
   } else {
     renderFeedback("miss", `Almost, uncle. ${currentQuestion.answer} is the thought. Say the Hawaiian once more.`);
+    registerMiss(currentItem.id);
   }
 
   setRevealed(true);
@@ -326,6 +398,7 @@ function finishIntro() {
   preferredItemId = itemId;
   saveState();
   renderFeedback("got", "Met um. Now same thought, but you gotta retrieve it.");
+  setSeallyState("start", itemId);
   renderNextQuestion();
 }
 
@@ -352,9 +425,11 @@ function rateCurrent(delta) {
       ? `Used um. ${item.hawaiian} gets real-world credit, which matters more than one tap in here.`
       : `Got um. ${currentQuestion.label.toLowerCase()} is getting stronger for ${item.hawaiian}`;
     renderFeedback("got", message);
+    registerCorrect(item.id);
   } else {
     renderFeedback("miss", `Almost, uncle. ${item.hawaiian}. Say um once. We will bring it back from another angle soon.`);
     preferredItemId = item.id;
+    registerMiss(item.id);
   }
 
   const feedbackText = els.feedback.textContent;
@@ -368,6 +443,7 @@ function moreLikeThis() {
   preferredItemId = currentQuestion.itemId;
   excludeVectorOnce = currentQuestion.vector;
   renderFeedback("forward", "Same thought, new angle. This is the point.");
+  setSeallyState("replay", currentQuestion.itemId);
   renderNextQuestion();
 }
 
@@ -391,7 +467,17 @@ function nextNoeau() {
   renderNoeauWidget();
 }
 
-els.showAnswer.addEventListener("click", () => setRevealed(true));
+function openMore(event) {
+  if (event) event.preventDefault();
+  if (!els.morePractice) return;
+  els.morePractice.open = true;
+  els.morePractice.scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
+els.showAnswer.addEventListener("click", () => {
+  setRevealed(true);
+  setSeallyState("show");
+});
 els.gotIt.addEventListener("click", () => rateCurrent(1));
 els.missIt.addEventListener("click", () => rateCurrent(-1));
 els.moreLikeThis.addEventListener("click", moreLikeThis);
@@ -401,12 +487,16 @@ els.replayCard.addEventListener("click", () => {
   if (!currentQuestion) return;
   drawQuestion(currentQuestion, { preserveReveal: currentQuestion.intro });
   renderFeedback("replay", currentQuestion.intro ? "Read both once more, then say the Hawaiian." : "Replay. No peek. Try the same angle again.");
+  setSeallyState("replay", currentQuestion.itemId);
 });
 els.noeauReveal.addEventListener("click", () => {
   els.noeauBody.hidden = false;
   els.noeauReveal.hidden = true;
 });
 els.noeauNext.addEventListener("click", nextNoeau);
+if (els.moreLink) els.moreLink.addEventListener("click", openMore);
+if (els.mobileMoreLink) els.mobileMoreLink.addEventListener("click", openMore);
 
 renderNoeauWidget();
 renderNextQuestion();
+setSeallyState("start");
