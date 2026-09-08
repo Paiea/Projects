@@ -157,6 +157,11 @@ function buildHawaiianChoiceOptions(item, pool) {
   return rotateChoices(item.hawaiian, distractors, item.id);
 }
 
+function buildResponseChoiceOptions(item, pool) {
+  const statements = pool.filter((candidate) => !candidate.hawaiian?.trim().endsWith("?"));
+  return buildHawaiianChoiceOptions(item, statements.length >= 3 ? statements : pool);
+}
+
 function buildPidginChoiceOptions(item, pool) {
   const seen = new Set([item.pidgin]);
   const distractors = [];
@@ -207,6 +212,21 @@ function buildIntro(item) {
     answer: item.pidgin,
     answerLabel: "Pidgin thought",
     intro: true,
+  };
+}
+
+function buildResponseQuestion(item, pool, response = {}) {
+  return {
+    ...commonBase(item, "scenario"),
+    vector: "scenario",
+    stage: 4,
+    label: "WHAT YOU SAY BACK?",
+    instruction: `${response.cue || item.pidgin} Pick the Hawaiian reply.`,
+    prompt: response.question || "",
+    answer: item.hawaiian,
+    answerLabel: "Hawaiian reply",
+    choices: buildResponseChoiceOptions(item, pool),
+    response: true,
   };
 }
 
@@ -293,7 +313,9 @@ const coreEngineApi = {
   pickWeakItem,
   buildIntro,
   buildQuestion,
+  buildResponseQuestion,
   buildHawaiianChoiceOptions,
+  buildResponseChoiceOptions,
   buildPidginChoiceOptions,
   clozePrompt,
   rateVector,

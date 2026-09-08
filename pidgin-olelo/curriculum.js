@@ -97,6 +97,18 @@ const CORE_SCENARIOS = {
   pau: { prompt: "The work is finished. Say it is done." },
 };
 
+// These are not a new learner-facing mode. They let an existing scenario rep
+// use a Core question as the conversational cue for a Core answer. The Pidgin
+// cue removes ambiguity when more than one reply could be socially plausible.
+const CORE_RESPONSE_PAIRS = {
+  "i-good": { questionId: "how-you", cue: "You feel good. Answer: I good." },
+  "same-same": { questionId: "how-you", cue: "Nothing new. Answer: Same like always." },
+  "my-name": { questionId: "your-name", cue: "Answer with your name: My name ___." },
+  "from-place": { questionId: "where-from", cue: "Answer with your place: I from ___." },
+  "want-eat-a": { questionId: "want-eat-q", cue: "You do. Answer: I like eat." },
+  "want-water-a": { questionId: "want-water-q", cue: "You do. Answer: I like drink water." },
+};
+
 // Core 30 is deliberately more conservative than the larger bank. This
 // correction keeps the beginner target concrete instead of implying that ka
 // is the fixed article in every "Ma hea ka/ke ...?" location question.
@@ -141,10 +153,15 @@ function scenarioFor(itemId) {
   return CORE_SCENARIOS[itemId] || { prompt: "Use this thought in a real situation." };
 }
 
+function responseFor(itemId) {
+  return CORE_RESPONSE_PAIRS[itemId] || null;
+}
+
 const api = {
   CORE_IDS,
   CORE_FAMILIES,
   CORE_SCENARIOS,
+  CORE_RESPONSE_PAIRS,
   CORE_OVERRIDES,
   LEVELS,
   applyCoreOverride,
@@ -152,6 +169,7 @@ const api = {
   coreItems,
   familyFor,
   scenarioFor,
+  responseFor,
 };
 
 if (typeof window !== "undefined") {
