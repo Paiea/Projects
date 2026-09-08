@@ -99,14 +99,15 @@ const CORE_SCENARIOS = {
 
 // These are not a new learner-facing mode. They let an existing scenario rep
 // use a Core question as the conversational cue for a Core answer. The Pidgin
-// cue removes ambiguity when more than one reply could be socially plausible.
+// cue states only the intended reply so it cannot be mistaken for the meaning
+// of the question itself.
 const CORE_RESPONSE_PAIRS = {
-  "i-good": { questionId: "how-you", cue: "You feel good. Answer: I good." },
-  "same-same": { questionId: "how-you", cue: "Nothing new. Answer: Same like always." },
-  "my-name": { questionId: "your-name", cue: "Answer with your name: My name ___." },
-  "from-place": { questionId: "where-from", cue: "Answer with your place: I from ___." },
-  "want-eat-a": { questionId: "want-eat-q", cue: "You do. Answer: I like eat." },
-  "want-water-a": { questionId: "want-water-q", cue: "You do. Answer: I like drink water." },
+  "i-good": { questionId: "how-you", cue: "I good." },
+  "same-same": { questionId: "how-you", cue: "Same like always." },
+  "my-name": { questionId: "your-name", cue: "My name ___." },
+  "from-place": { questionId: "where-from", cue: "I from ___." },
+  "want-eat-a": { questionId: "want-eat-q", cue: "I like eat." },
+  "want-water-a": { questionId: "want-water-q", cue: "I like drink water." },
 };
 
 // Core 30 is deliberately more conservative than the larger bank. This
