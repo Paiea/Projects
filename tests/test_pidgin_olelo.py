@@ -30,17 +30,18 @@ class PidginOleloPrototypeTests(unittest.TestCase):
             self.assertEqual(len(re.findall(rf"\b{field}\s*:\s*['\"]", phrases)), 100)
         self.assertIn("window.PIDGIN_OLELO_ITEMS", phrases)
 
-    def test_curriculum_makes_core_thirty_the_default_and_demotes_the_other_seventy(self):
+    def test_curriculum_makes_core_thirty_the_permanent_default(self):
         curriculum = PROJECT / "curriculum.js"
-        self.read(curriculum)
         result = self.node_json(
             r'''
 const c = require(process.argv[1]);
 console.log(JSON.stringify({
   coreCount: c.CORE_IDS.length,
   uniqueCore: new Set(c.CORE_IDS).size,
-  levels: c.LEVELS,
   familyCount: Object.keys(c.CORE_FAMILIES).length,
+  scenarioCount: Object.keys(c.CORE_SCENARIOS).length,
+  levels: c.LEVELS,
+  car: c.CORE_OVERRIDES["where-thing"],
 }));
 ''',
             curriculum,
@@ -48,16 +49,16 @@ console.log(JSON.stringify({
         self.assertEqual(result["coreCount"], 30)
         self.assertEqual(result["uniqueCore"], 30)
         self.assertEqual(result["familyCount"], 30)
+        self.assertEqual(result["scenarioCount"], 30)
         self.assertEqual(result["levels"]["core"]["start"], 0)
         self.assertEqual(result["levels"]["core"]["end"], 30)
         self.assertEqual(result["levels"]["build"]["start"], 30)
-        self.assertEqual(result["levels"]["build"]["end"], 70)
-        self.assertEqual(result["levels"]["stretch"]["start"], 70)
         self.assertEqual(result["levels"]["stretch"]["end"], 100)
+        self.assertEqual(result["car"]["pidgin"], "Where the car stay?")
+        self.assertEqual(result["car"]["hawaiian"], "Ma hea ke kaʻa?")
 
-    def test_core_engine_attacks_each_thought_through_six_vectors(self):
+    def test_core_engine_has_scaffold_then_six_retrieval_vectors(self):
         engine = PROJECT / "core-engine.js"
-        self.read(engine)
         result = self.node_json(
             r'''
 const e = require(process.argv[1]);
@@ -70,17 +71,19 @@ const item = {
   exampleHawaiian: "Makemake ʻoe e ʻai i ka poi?",
   note: "Keep makemake first."
 };
-const distractors = [
+const pool = [
   item,
-  {id:"where", hawaiian:"Aia i hea ʻoe?"},
-  {id:"name", hawaiian:"ʻO wai kou inoa?"},
-  {id:"go", hawaiian:"E hele kākou."}
+  {id:"where", pidgin:"Where you stay?", hawaiian:"Aia i hea ʻoe?"},
+  {id:"name", pidgin:"What your name?", hawaiian:"ʻO wai kou inoa?"},
+  {id:"go", pidgin:"We go.", hawaiian:"E hele kākou."}
 ];
-const built = Object.fromEntries(e.VECTORS.map(v => [v, e.buildQuestion(item, v, distractors)]));
+const scenario = {prompt: "Keoni walks in hungry. Ask if he wants to eat."};
+const built = Object.fromEntries(e.VECTORS.map(v => [v, e.buildQuestion(item, v, pool, scenario)]));
 console.log(JSON.stringify({
   vectors: e.VECTORS,
   hard: e.HARD_VECTORS,
   showEvery: e.SHOW_WHAT_YOU_KNOW_EVERY,
+  intro: e.buildIntro(item),
   built,
 }));
 ''',
@@ -88,29 +91,42 @@ console.log(JSON.stringify({
         )
         self.assertEqual(
             set(result["vectors"]),
-            {"produce", "meaning", "shape", "example", "choice", "say"},
+            {"recognize", "produce", "cloze", "scenario", "say", "use"},
         )
         self.assertEqual(result["showEvery"], 6)
+        self.assertEqual(result["intro"]["prompt"], "Makemake ʻoe e ʻai?")
+        self.assertEqual(result["intro"]["answer"], "You like eat?")
+        self.assertEqual(result["built"]["recognize"]["prompt"], "Makemake ʻoe e ʻai?")
+        self.assertEqual(result["built"]["recognize"]["answer"], "You like eat?")
         self.assertEqual(result["built"]["produce"]["prompt"], "You like eat?")
         self.assertEqual(result["built"]["produce"]["answer"], "Makemake ʻoe e ʻai?")
-        self.assertEqual(result["built"]["meaning"]["prompt"], "Makemake ʻoe e ʻai?")
-        self.assertEqual(result["built"]["shape"]["prompt"], "want | you | eat")
-        self.assertEqual(result["built"]["example"]["answer"], "Makemake ʻoe e ʻai i ka poi?")
+        self.assertIn("____", result["built"]["cloze"]["prompt"])
+        self.assertEqual(result["built"]["scenario"]["prompt"], scenario["prompt"])
+        self.assertGreaterEqual(len(result["built"]["scenario"]["choices"]), 3)
         self.assertEqual(result["built"]["say"]["prompt"], "Makemake ʻoe e ʻai?")
-        self.assertGreaterEqual(len(result["built"]["choice"]["choices"]), 3)
+        self.assertIn("next 10 minutes", result["built"]["use"]["instruction"].lower())
 
-    def test_every_sixth_mixed_rep_is_show_what_you_know_and_uses_harder_vector(self):
+    def test_progression_starts_with_recognition_before_harder_generation(self):
         engine = PROJECT / "core-engine.js"
         result = self.node_json(
             r'''
 const e = require(process.argv[1]);
-const strengths = {};
-const normal = e.pickVector("x", strengths, 5, "mixed");
-const check = e.pickVector("x", strengths, 6, "mixed");
-console.log(JSON.stringify({normal, check, hard: e.HARD_VECTORS}));
+const empty = {};
+const oneRecognition = { x: { recognize: 1 } };
+const someProduction = { x: { recognize: 1, produce: 1 } };
+console.log(JSON.stringify({
+  first: e.pickVector("x", empty, 1),
+  second: e.pickVector("x", oneRecognition, 2),
+  third: e.pickVector("x", someProduction, 3),
+  check: e.pickVector("x", someProduction, 6),
+  hard: e.HARD_VECTORS,
+}));
 ''',
             engine,
         )
+        self.assertEqual(result["first"], "recognize")
+        self.assertEqual(result["second"], "produce")
+        self.assertEqual(result["third"], "cloze")
         self.assertIn(result["check"], result["hard"])
 
     def test_core_hawaiian_uses_real_okina_unicode_and_normalized_kahako(self):
@@ -128,11 +144,6 @@ console.log(JSON.stringify({normal, check, hard: e.HARD_VECTORS}));
             self.assertIn(expected, sensitive)
         self.assertIn("ʻ", sensitive)
 
-    def test_core_location_generator_does_not_teach_fixed_ka_article(self):
-        phrases = self.read(PROJECT / "phrases.js")
-        self.assertIn('pidgin: "Where the car stay?", hawaiian: "Ma hea ke kaʻa?"', phrases)
-        self.assertNotIn('pidgin: "Where the ___ stay?", hawaiian: "Ma hea ka ___?"', phrases)
-
     def test_main_surface_is_core_first_and_noeau_is_flavor_not_primary_menu(self):
         learn = self.read(PROJECT / "index.html")
         challenge = self.read(PROJECT / "challenge.html")
@@ -141,15 +152,15 @@ console.log(JSON.stringify({normal, check, hard: e.HARD_VECTORS}));
             self.assertIn('class="experience-nav"', html)
             self.assertIn('href="index.html"', html)
             self.assertIn('href="challenge.html"', html)
-            self.assertNotIn('class="experience-nav" aria-label="Pidgin to ʻŌlelo modes">\n      <a href="index.html">Learn</a>\n      <a href="challenge.html">Challenge</a>\n      <a href="noeau.html"', html)
+            self.assertNotIn('>Noʻeau</a>', html)
         self.assertIn("Core 30", learn)
         self.assertIn('id="more-practice"', learn)
         self.assertIn('href="noeau.html"', learn)
         self.assertIn("Flavor", learn)
-        self.assertIn('href="index.html"', noeau)
+        self.assertIn("70 more", learn)
         self.assertIn("Back to Core 30", noeau)
 
-    def test_learn_surface_supports_vector_questions_without_exposing_six_big_modes(self):
+    def test_learn_surface_supports_multiple_question_shapes_without_six_big_modes(self):
         html = self.read(PROJECT / "index.html")
         app = self.read(PROJECT / "app.js")
         for control_id in (
@@ -177,15 +188,16 @@ console.log(JSON.stringify({normal, check, hard: e.HARD_VECTORS}));
         self.assertIn("PIDGIN_OLELO_CORE_ENGINE", app)
         self.assertIn("vectorStrengths", app)
         self.assertIn("moreLikeThis", app)
+        self.assertIn("SHOW WHAT YOU KNOW", app)
         self.assertNotIn("speechSynthesis", app)
         self.assertNotIn("SpeechSynthesisUtterance", app)
 
-    def test_old_two_direction_progress_is_migrated_into_vector_state(self):
+    def test_old_two_direction_progress_is_migrated_into_new_vector_state(self):
         app = self.read(PROJECT / "app.js")
         self.assertIn('"pidgin-olelo-v0-strength"', app)
         self.assertIn('"pidgin-olelo-core-vectors-v1"', app)
+        self.assertIn("recognize", app)
         self.assertIn("produce", app)
-        self.assertIn("meaning", app)
         self.assertIn("migrate", app.lower())
 
     def test_forward_navigation_still_advances_when_history_is_exhausted(self):
@@ -195,39 +207,40 @@ console.log(JSON.stringify({normal, check, hard: e.HARD_VECTORS}));
         self.assertIn("renderNextQuestion", app)
         self.assertIn('els.forwardCard.addEventListener("click", moveForward)', app)
 
-    def test_challenge_uses_only_core_thirty_from_same_shared_bank(self):
+    def test_challenge_is_core_thirty_real_world_mission_and_tracks_use(self):
         html = self.read(PROJECT / "challenge.html")
         js = self.read(PROJECT / "challenge.js")
         self.assertIn('src="phrases.js"', html)
         self.assertIn('src="curriculum.js"', html)
-        self.assertIn("CORE_IDS", js)
-        self.assertIn("coreItems", js)
-        self.assertIn("100 useful thoughts", self.read(PROJECT / "PROJECT_STATE.md"))
         self.assertIn("Core 30", html)
+        self.assertIn("YOUR MISSION", html)
+        self.assertIn('id="challenge-used"', html)
+        self.assertIn("coreItems", js)
+        self.assertIn("I USED IT", html)
+        self.assertIn('"pidgin-olelo-core-vectors-v1"', js)
+        self.assertIn("use", js)
 
-    def test_challenge_engine_remains_deterministic_inside_ten_minute_windows(self):
+    def test_challenge_mission_is_deterministic_inside_ten_minute_windows(self):
         challenge_js = PROJECT / "challenge.js"
         result = self.node_json(
             r'''
 const engine = require(process.argv[1]);
 const items = [
-  {id: "a", pidgin: "P1", hawaiian: "H1", note: "N1", shape: "S1", examplePidgin: "EP1", exampleHawaiian: "EH1"},
-  {id: "b", pidgin: "P2", hawaiian: "H2", note: "N2", shape: "S2", examplePidgin: "EP2", exampleHawaiian: "EH2"},
-  {id: "c", pidgin: "P3", hawaiian: "H3", note: "N3", shape: "S3", examplePidgin: "EP3", exampleHawaiian: "EH3"},
+  {id: "a", pidgin: "P1", hawaiian: "H1"},
+  {id: "b", pidgin: "P2", hawaiian: "H2"},
+  {id: "c", pidgin: "P3", hawaiian: "H3"},
 ];
 const base = 42 * engine.CHALLENGE_WINDOW_MS;
-const first = engine.challengeForTime(base + 1, items);
-const same = engine.challengeForTime(base + engine.CHALLENGE_WINDOW_MS - 1, items);
-const next = engine.challengeForTime(base + engine.CHALLENGE_WINDOW_MS, items);
-const types = [0, 1, 2, 3].map(offset => engine.challengeForBlock(42 + offset, items).type);
-console.log(JSON.stringify({window: engine.CHALLENGE_WINDOW_MS, first, same, next, types}));
+const first = engine.missionForTime(base + 1, items);
+const same = engine.missionForTime(base + engine.CHALLENGE_WINDOW_MS - 1, items);
+const next = engine.missionForTime(base + engine.CHALLENGE_WINDOW_MS, items);
+console.log(JSON.stringify({window: engine.CHALLENGE_WINDOW_MS, first, same, next}));
 ''',
             challenge_js,
         )
         self.assertEqual(result["window"], 10 * 60 * 1000)
         self.assertEqual(result["first"], result["same"])
         self.assertNotEqual(result["first"]["block"], result["next"]["block"])
-        self.assertEqual(set(result["types"]), {"p2h", "h2p", "say", "use"})
 
     def test_noeau_bank_stays_separate_and_sourced(self):
         bank = self.read(PROJECT / "noeau.js")
@@ -236,7 +249,7 @@ console.log(JSON.stringify({window: engine.CHALLENGE_WINDOW_MS, first, same, nex
             self.assertEqual(len(re.findall(rf"\b{field}\s*:\s*['\"]", bank)), 10)
         self.assertIn("window.PIDGIN_OLELO_NOEAU", bank)
 
-    def test_project_state_records_win_and_compiler_learning_model(self):
+    def test_project_state_records_win_compiler_and_orthography_model(self):
         state = self.read(PROJECT / "PROJECT_STATE.md")
         self.assertIn("Core 30", state)
         self.assertIn("six", state.lower())
@@ -247,6 +260,7 @@ console.log(JSON.stringify({window: engine.CHALLENGE_WINDOW_MS, first, same, nex
         self.assertIn("ʻokina", state)
         self.assertIn("kahakō", state)
         self.assertIn("fluent-speaker", state.lower())
+        self.assertIn("audio", state.lower())
 
     def test_static_runtime_has_no_external_dependency_and_audio_stays_removed(self):
         for page_name in ("index.html", "challenge.html", "noeau.html"):
