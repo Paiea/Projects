@@ -31,7 +31,6 @@ const els = {
   forwardCard: document.querySelector("#forward-card"),
   progress: document.querySelector("#progress"),
   morePractice: document.querySelector("#more-practice"),
-  noeauWidget: document.querySelector("#noeau-widget"),
   noeauSaying: document.querySelector("#noeau-widget-saying"),
   noeauReveal: document.querySelector("#noeau-widget-reveal"),
   noeauBody: document.querySelector("#noeau-widget-body"),
@@ -48,6 +47,7 @@ let history = [];
 let historyCursor = -1;
 let preferredItemId = null;
 let excludeVectorOnce = null;
+let autoRated = false;
 let noeauIndex = NOEAU_ITEMS.length ? Math.floor(Date.now() / 86400000) % NOEAU_ITEMS.length : -1;
 
 function emptyState() {
@@ -125,14 +125,19 @@ function findItem(itemId) {
 
 function nextItem() {
   const active = activeItems();
+  if (preferredItemId) {
+    const preferred = active.find((item) => item.id === preferredItemId);
+    if (preferred) return preferred;
+  }
+
   const unintroduced = active.find((item) => !state.introduced[item.id]);
-  if (unintroduced && !preferredItemId) return unintroduced;
+  if (unintroduced) return unintroduced;
 
   return ENGINE.pickWeakItem(
     active,
     vectorStrengths,
     recentIds(),
-    preferredItemId,
+    null,
     state.lastSeen,
     Date.now(),
   );
@@ -173,11 +178,38 @@ function renderFeedback(kind, text = "") {
 }
 
 function resetButtons() {
+  autoRated = false;
   els.gotIt.hidden = false;
   els.missIt.hidden = false;
   els.gotIt.textContent = "Got um";
   els.missIt.textContent = "Miss";
   els.moreLikeThis.textContent = "MORE LIKE THIS · same thought, new angle";
+}
+
+function recordKnownChoice(correct) {
+  if (!currentQuestion || currentQuestion.intro || autoRated || isReviewingHistory()) return;
+
+  ENGINE.rateVector(vectorStrengths, currentItem.id, currentQuestion.vector, correct ? 1 : -1);
+  state.repCount += 1;
+  state.lastSeen[currentItem.id] = Date.now();
+  saveState();
+  autoRated = true;
+
+  if (!correct) preferredItemId = currentItem.id;
+
+  if (correct) {
+    renderFeedback("got", "Chee. That one. Say the Hawaiian once before you move.");
+  } else if (currentQuestion.vector === "scenario") {
+    renderFeedback("miss", `😭 Brah. Wrong scene. The line that fits is ${currentQuestion.answer}. Say um once.`);
+  } else {
+    renderFeedback("miss", `Almost, uncle. ${currentQuestion.answer} is the thought. Say the Hawaiian once more.`);
+  }
+
+  setRevealed(true);
+  els.missIt.hidden = true;
+  els.gotIt.textContent = "Next";
+  els.gotIt.disabled = false;
+  els.moreLikeThis.disabled = false;
 }
 
 function renderChoices(question) {
@@ -193,16 +225,13 @@ function renderChoices(question) {
     button.className = "choice-button";
     button.textContent = choice;
     button.addEventListener("click", () => {
+      if (autoRated) return;
       const correct = choice === question.answer;
       els.choiceWrap.querySelectorAll("button").forEach((candidate) => {
         candidate.disabled = true;
         if (candidate.textContent === question.answer) candidate.dataset.correct = "true";
       });
-      renderFeedback(
-        correct ? "got" : "miss",
-        correct ? "That one. Say it once before you move." : `Almost. The one that fits is ${question.answer}`,
-      );
-      setRevealed(true);
+      recordKnownChoice(correct);
     });
     els.choiceWrap.appendChild(button);
   });
@@ -211,12 +240,12 @@ function renderChoices(question) {
 
 function setRevealed(revealed) {
   const intro = currentQuestion?.intro;
-  const canRate = revealed && !isReviewingHistory();
+  const canRate = revealed && !isReviewingHistory() && !autoRated;
   els.answerWrap.hidden = !revealed;
-  els.showAnswer.hidden = revealed;
-  els.gotIt.disabled = !canRate;
+  els.showAnswer.hidden = revealed || Boolean(currentQuestion?.choices?.length);
+  els.gotIt.disabled = autoRated ? false : !canRate;
   els.missIt.disabled = !canRate || intro;
-  els.moreLikeThis.disabled = !canRate || intro;
+  els.moreLikeThis.disabled = intro ? true : (!revealed && !autoRated);
 }
 
 function drawQuestion(question, { preserveReveal = false } = {}) {
@@ -291,10 +320,12 @@ function moveForward() {
 }
 
 function finishIntro() {
-  state.introduced[currentQuestion.itemId] = true;
+  const itemId = currentQuestion.itemId;
+  state.introduced[itemId] = true;
   state.repCount += 1;
+  preferredItemId = itemId;
   saveState();
-  renderFeedback("got", "Met um. Next time the app makes you retrieve it instead of just showing it.");
+  renderFeedback("got", "Met um. Now same thought, but you gotta retrieve it.");
   renderNextQuestion();
 }
 
@@ -302,6 +333,11 @@ function rateCurrent(delta) {
   if (!currentQuestion || isReviewingHistory()) return;
   if (currentQuestion.intro) {
     finishIntro();
+    return;
+  }
+
+  if (autoRated) {
+    renderNextQuestion();
     return;
   }
 
@@ -317,7 +353,7 @@ function rateCurrent(delta) {
       : `Got um. ${currentQuestion.label.toLowerCase()} is getting stronger for ${item.hawaiian}`;
     renderFeedback("got", message);
   } else {
-    renderFeedback("miss", `Miss. No hide. We will bring ${item.hawaiian} back from another angle soon.`);
+    renderFeedback("miss", `Almost, uncle. ${item.hawaiian}. Say um once. We will bring it back from another angle soon.`);
     preferredItemId = item.id;
   }
 
