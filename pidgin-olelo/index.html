@@ -7,6 +7,7 @@
   <meta name="theme-color" content="#173f4e">
   <title>Pidgin → ʻŌlelo · Core 30</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="simplify.css">
 </head>
 <body class="island-page">
   <div class="site-backdrop" aria-hidden="true"></div>
@@ -23,14 +24,13 @@
       <nav class="experience-nav" aria-label="Pidgin to ʻŌlelo">
         <a href="index.html" aria-current="page">Learn</a>
         <a href="challenge.html">10-Min Mission</a>
-        <a id="more-link" href="#more-practice">More</a>
       </nav>
     </header>
 
     <div class="app-grid">
       <aside class="seally-coach" aria-label="Uncle Seally, your questionable ʻōlelo coach">
         <div class="seally-image-wrap">
-          <img class="seally-image" src="assets/uncle-seally.webp" alt="Older monk seal mascot Uncle Seally wearing a cap">
+          <img class="seally-image" src="assets/characters/uncle-seally@2x.webp" alt="Older monk seal mascot Uncle Seally wearing a cap">
         </div>
         <div class="seally-copy">
           <p class="seally-name">Uncle Seally</p>
@@ -102,30 +102,20 @@
         </section>
       </section>
 
-      <aside class="side-rail">
-        <section class="side-card vibe-card">
-          <span class="side-card-label">Today’s vibe</span>
-          <p>Small steps still get you there.</p>
-        </section>
-
-        <details id="more-practice" class="more-practice side-card">
-          <summary>More</summary>
-          <aside id="noeau-widget" class="noeau-widget" aria-label="Kūpuna side note">
-            <div class="noeau-widget-topline">
-              <span class="flavor-tag">Kūpuna side note 🌺</span>
-              <button id="noeau-widget-next" class="noeau-widget-next" type="button">Another</button>
-            </div>
-            <p id="noeau-widget-saying" class="noeau-widget-saying"></p>
-            <button id="noeau-widget-reveal" class="noeau-widget-reveal" type="button">What that carry?</button>
-            <div id="noeau-widget-body" hidden>
-              <p class="noeau-widget-label">What it carries</p>
-              <p id="noeau-widget-meaning" class="noeau-widget-meaning"></p>
-              <p class="noeau-widget-label">Today maybe</p>
-              <p id="noeau-widget-hook" class="noeau-widget-hook"></p>
-              <p class="noeau-widget-note">Modern memory hook only. Not the historical translation.</p>
-            </div>
-          </aside>
-        </details>
+      <aside id="noeau-widget" class="noeau-widget noeau-inline" aria-label="Kūpuna side note">
+        <div class="noeau-widget-topline">
+          <span class="flavor-tag">Kūpuna side note 🌺</span>
+          <button id="noeau-widget-next" class="noeau-widget-next" type="button">Another</button>
+        </div>
+        <p id="noeau-widget-saying" class="noeau-widget-saying"></p>
+        <button id="noeau-widget-reveal" class="noeau-widget-reveal" type="button">What that carry?</button>
+        <div id="noeau-widget-body" hidden>
+          <p class="noeau-widget-label">What it carries</p>
+          <p id="noeau-widget-meaning" class="noeau-widget-meaning"></p>
+          <p class="noeau-widget-label">Today maybe</p>
+          <p id="noeau-widget-hook" class="noeau-widget-hook"></p>
+          <p class="noeau-widget-note">Modern memory hook only. Not the historical translation.</p>
+        </div>
       </aside>
     </div>
 
@@ -138,7 +128,6 @@
   <nav class="mobile-bottom-nav" aria-label="Mobile navigation">
     <a href="index.html" aria-current="page"><span>⌂</span>Learn</a>
     <a href="challenge.html"><span>⚡</span>Mission</a>
-    <a href="#more-practice" class="mobile-more-link"><span>•••</span>More</a>
   </nav>
 
   <script src="phrases.js"></script>

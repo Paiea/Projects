@@ -1,0 +1,120 @@
+/* Drop-in simplification layer: keep the learning engine, remove dashboard clutter. */
+.site-backdrop {
+  background:
+    linear-gradient(180deg, rgba(255, 249, 237, 0.18), rgba(255, 248, 238, 0.38)),
+    url("assets/bg/hero-bg-desktop.webp") center / cover no-repeat;
+}
+
+.site-backdrop::after {
+  background: linear-gradient(90deg, rgba(255, 250, 241, 0.12), rgba(255, 250, 241, 0.03) 50%, rgba(255, 250, 241, 0.16));
+  backdrop-filter: blur(0.5px);
+}
+
+.app-shell {
+  width: min(1160px, calc(100% - 36px));
+}
+
+.experience-nav {
+  grid-template-columns: repeat(2, minmax(132px, auto));
+}
+
+.app-grid {
+  grid-template-columns: minmax(260px, 0.72fr) minmax(0, 1.72fr);
+  max-width: 1080px;
+  margin: 0 auto;
+  gap: 18px;
+}
+
+.seally-image-wrap {
+  aspect-ratio: 0.92 / 1;
+  background: linear-gradient(180deg, rgba(210, 229, 223, 0.84), rgba(244, 225, 198, 0.88));
+}
+
+.seally-image {
+  object-fit: contain;
+  object-position: center bottom;
+  filter: none;
+}
+
+.noeau-inline {
+  grid-column: 2;
+  margin: 0;
+  padding: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.58);
+  border-radius: 20px;
+  background: rgba(255, 250, 240, 0.92);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+}
+
+.noeau-inline .noeau-widget-saying {
+  font-size: clamp(1.15rem, 2.4vw, 1.6rem);
+}
+
+.mobile-bottom-nav {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (max-width: 900px) {
+  .app-grid {
+    grid-template-columns: 1fr;
+    max-width: 760px;
+  }
+
+  .seally-coach,
+  .lesson-column,
+  .noeau-inline {
+    grid-column: 1;
+  }
+
+  .noeau-inline {
+    order: 3;
+  }
+}
+
+@media (max-width: 640px) {
+  .site-backdrop {
+    background:
+      linear-gradient(180deg, rgba(255, 249, 237, 0.18), rgba(255, 248, 238, 0.36)),
+      url("assets/bg/hero-bg-mobile.webp") center top / cover no-repeat;
+  }
+
+  .app-shell {
+    width: min(100% - 18px, 760px);
+  }
+
+  .seally-coach {
+    display: grid;
+    grid-template-columns: 118px 1fr;
+    min-height: 0;
+  }
+
+  .seally-image-wrap {
+    aspect-ratio: auto;
+    min-height: 142px;
+  }
+
+  .seally-copy {
+    align-self: center;
+  }
+
+  .noeau-inline {
+    padding: 15px;
+    border-radius: 17px;
+  }
+}
+
+@media (max-width: 480px) {
+  .experience-nav {
+    width: 100%;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .seally-coach {
+    grid-template-columns: 96px 1fr;
+  }
+
+  .seally-image-wrap {
+    min-height: 126px;
+  }
+}
