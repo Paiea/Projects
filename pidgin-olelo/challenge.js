@@ -1,66 +1,23 @@
 const CHALLENGE_WINDOW_MS = 10 * 60 * 1000;
-const CHALLENGE_TYPES = ["p2h", "h2p", "say", "use"];
+const STORAGE_KEY = "pidgin-olelo-core-vectors-v1";
 
 function blockForTime(nowMs) {
   return Math.floor(nowMs / CHALLENGE_WINDOW_MS);
 }
 
-function challengeForBlock(block, items) {
-  if (!items.length) throw new Error("Challenge mode needs at least one phrase.");
-
+function missionForBlock(block, items) {
+  if (!items.length) throw new Error("Mission mode needs at least one Core phrase.");
   const item = items[(block * 17 + 11) % items.length];
-  const type = CHALLENGE_TYPES[(block * 3 + 1) % CHALLENGE_TYPES.length];
-  const common = {
+  return {
     block,
     itemId: item.id,
-    type,
-    note: item.note || "",
-    shape: item.shape || "",
-    examplePidgin: item.examplePidgin || "",
-    exampleHawaiian: item.exampleHawaiian || "",
-  };
-
-  if (type === "h2p") {
-    return {
-      ...common,
-      label: "WHAT THIS MEAN?",
-      instruction: "No look back. Say what this means in Pidgin first.",
-      prompt: item.hawaiian,
-      answer: item.pidgin,
-    };
-  }
-
-  if (type === "say") {
-    return {
-      ...common,
-      label: "SAY UM",
-      instruction: "Say this Hawaiian out loud. Then check the thought you just said and notice its shape.",
-      prompt: item.hawaiian,
-      answer: item.pidgin,
-    };
-  }
-
-  if (type === "use") {
-    return {
-      ...common,
-      label: "GO USE UM",
-      instruction: "You get this 10-minute window. Retrieve the Hawaiian, then use it with somebody or say it into the room.",
-      prompt: item.pidgin,
-      answer: item.hawaiian,
-    };
-  }
-
-  return {
-    ...common,
-    label: "HOW YOU SAY UM?",
-    instruction: "No peek. Say this in Hawaiian before you reveal it.",
-    prompt: item.pidgin,
-    answer: item.hawaiian,
+    hawaiian: item.hawaiian,
+    pidgin: item.pidgin,
   };
 }
 
-function challengeForTime(nowMs, items) {
-  return challengeForBlock(blockForTime(nowMs), items);
+function missionForTime(nowMs, items) {
+  return missionForBlock(blockForTime(nowMs), items);
 }
 
 function millisecondsToNextBlock(nowMs) {
@@ -75,60 +32,78 @@ function formatCountdown(milliseconds) {
   return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
 }
 
+function giveUseCredit(itemId) {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    const state = raw ? JSON.parse(raw) : { vectorStrengths: {}, introduced: {}, lastSeen: {}, repCount: 0 };
+    if (!state.vectorStrengths) state.vectorStrengths = {};
+    if (!state.vectorStrengths[itemId]) state.vectorStrengths[itemId] = {};
+    const current = Number(state.vectorStrengths[itemId].use) || 0;
+    state.vectorStrengths[itemId].use = Math.min(3, current + 1);
+    state.introduced = state.introduced || {};
+    state.introduced[itemId] = true;
+    state.lastSeen = state.lastSeen || {};
+    state.lastSeen[itemId] = Date.now();
+    state.repCount = Number(state.repCount) || 0;
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    return state.vectorStrengths[itemId].use;
+  } catch {
+    return null;
+  }
+}
+
 if (typeof module !== "undefined" && module.exports) {
   module.exports = {
     CHALLENGE_WINDOW_MS,
+    STORAGE_KEY,
     blockForTime,
-    challengeForBlock,
-    challengeForTime,
+    missionForBlock,
+    missionForTime,
     millisecondsToNextBlock,
     formatCountdown,
   };
 }
 
 if (typeof document !== "undefined") {
-  const items = window.PIDGIN_OLELO_ITEMS || [];
+  const curriculum = window.PIDGIN_OLELO_CURRICULUM;
+  const coreItems = curriculum.coreItems(window.PIDGIN_OLELO_ITEMS || []);
   const els = {
-    label: document.querySelector("#challenge-label"),
     timer: document.querySelector("#challenge-timer"),
-    instruction: document.querySelector("#challenge-instruction"),
     prompt: document.querySelector("#challenge-prompt"),
-    answerWrap: document.querySelector("#challenge-answer-wrap"),
     answer: document.querySelector("#challenge-answer"),
-    shape: document.querySelector("#challenge-shape"),
-    note: document.querySelector("#challenge-note"),
-    examplePidgin: document.querySelector("#challenge-example-pidgin"),
-    exampleHawaiian: document.querySelector("#challenge-example-hawaiian"),
-    showAnswer: document.querySelector("#challenge-show-answer"),
+    used: document.querySelector("#challenge-used"),
+    feedback: document.querySelector("#challenge-feedback"),
   };
 
   let renderedBlock = null;
+  let mission = null;
+
+  function renderMission(block) {
+    mission = missionForBlock(block, coreItems);
+    els.prompt.textContent = mission.hawaiian;
+    els.answer.textContent = mission.pidgin;
+    els.used.disabled = false;
+    els.used.textContent = "I USED IT";
+    els.feedback.hidden = true;
+    els.feedback.textContent = "";
+    renderedBlock = block;
+  }
 
   function tick() {
     const now = Date.now();
     const block = blockForTime(now);
-
-    if (block !== renderedBlock && items.length) {
-      const challenge = challengeForBlock(block, items);
-      els.label.textContent = challenge.label;
-      els.instruction.textContent = challenge.instruction;
-      els.prompt.textContent = challenge.prompt;
-      els.answer.textContent = challenge.answer;
-      els.shape.textContent = challenge.shape;
-      els.note.textContent = challenge.note;
-      els.examplePidgin.textContent = challenge.examplePidgin;
-      els.exampleHawaiian.textContent = challenge.exampleHawaiian;
-      els.answerWrap.hidden = true;
-      els.showAnswer.hidden = false;
-      renderedBlock = block;
-    }
-
+    if (block !== renderedBlock && coreItems.length) renderMission(block);
     els.timer.textContent = `Next one in ${formatCountdown(millisecondsToNextBlock(now))}`;
   }
 
-  els.showAnswer.addEventListener("click", () => {
-    els.answerWrap.hidden = false;
-    els.showAnswer.hidden = true;
+  els.used.addEventListener("click", () => {
+    if (!mission) return;
+    giveUseCredit(mission.itemId);
+    els.used.disabled = true;
+    els.used.textContent = "USED UM ✓";
+    els.feedback.textContent = "That counts. Real-world use gets stronger evidence than another quiz tap.";
+    els.feedback.dataset.kind = "got";
+    els.feedback.hidden = false;
   });
 
   tick();
