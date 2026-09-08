@@ -26,7 +26,7 @@ Pidgin represents familiar learner thought. Hawaiian remains the language author
 - Noʻeau bank: `pidgin-olelo/noeau.js`
 - Responsive shell: `pidgin-olelo/styles.css` + `pidgin-olelo/simplify.css`
 
-Regression authority includes `tests/test_pidgin_olelo*.py`, especially island, routing, mobile-shell, response, Seally, one-word-cloze, Noʻeau, and More-Phrases coverage.
+Regression authority includes `tests/test_pidgin_olelo*.py`, especially island, routing, mobile-shell, response, Seally, one-word-cloze, Noʻeau, More-Phrases, and mobile-readability coverage.
 
 ## Core Learning Model
 
@@ -140,7 +140,16 @@ Phone Learn remains viewport-first and no-scroll for the primary loop:
 - Next swaps content in place rather than document-scrolling
 - secondary shape/note/example help stays below the primary loop
 
-Treat a future need to scroll merely to reveal the answer or reach Next as a layout regression.
+Readability is now a durable constraint, especially for older learners and low-vision use:
+
+- do not turn instructions, choices, feedback, Seally speech, or Noʻeau into microcopy merely to make the viewport fit
+- primary Hawaiian/Pidgin prompts and revealed answers remain the largest text in the loop
+- learning controls keep a 44px minimum touch target on phone
+- **Show me** is the quieter peek action; recall decisions and auto-scored **Next** carry stronger action hierarchy
+- when vertical space is tight, compress padding/artwork or temporarily hide secondary chrome before shrinking important language
+- active multiple-choice questions may hide Noʻeau, More Like This, and history controls until the choice is resolved so the answer area stays readable
+
+Treat a future need to scroll merely to reveal the answer or reach Next, or a future pass that restores tiny teaching text/tap targets, as a layout regression.
 
 ## 10-Min Mission
 
@@ -185,7 +194,7 @@ Use the current Core + island + More-Phrases system with a real learner before e
 - whether the 10-active + one-per-8-reps pace feels right
 - whether local mixed contexts help retrieval without confusing Hawaiian authority
 - whether parent vs island progress behaves intuitively
-- whether phone Learn still fits the primary loop without scrolling
+- whether the larger phone readability floor still keeps the primary loop comfortably visible without scrolling on Dad's device
 - whether Seally stays funny and sparse
 - any correction from a fluent-speaker/kumu
 
@@ -193,4 +202,4 @@ Do not add another mode until actual use shows the current representation system
 
 ## RE-PROMPT
 
-> Continue Pidgin → ʻŌlelo from current `Paiea/Projects` authority. Read root `AGENTS.md`, `state/PROJECT_REGISTRY.md`, `state/HANDSHAKE_PROTOCOL.md`, and `pidgin-olelo/PROJECT_STATE.md`. Preserve Core 30 as the permanent default, one mixed Learn flow, six hidden vectors, WIN-style MORE LIKE THIS / SHOW WHAT YOU KNOW, compiler-style one-thought-many-representations, strict `learning · solid` mastery, sparse Uncle Seally, inline Noʻeau, orthography checks, no synthetic audio, and the viewport-first mobile practice shell. Preserve Hawaiian islands as derived representations with separate island progress: Core is full-phrase-first with occasional zoom-ins/repair; More Phrases is quiet secondary practice over the existing utility-ranked extra 70, island-first, 10 active then one additional parent per 8 reps, graduating toward full parent phrases only after island retrieval/context evidence. Pidgin is the trusted bridge and never the punchline. Prefer real learner testing and fluent-speaker/kumu corrections over architectural expansion.
+> Continue Pidgin → ʻŌlelo from current `Paiea/Projects` authority. Read root `AGENTS.md`, `state/PROJECT_REGISTRY.md`, `state/HANDSHAKE_PROTOCOL.md`, and `pidgin-olelo/PROJECT_STATE.md`. Preserve Core 30 as the permanent default, one mixed Learn flow, six hidden vectors, WIN-style MORE LIKE THIS / SHOW WHAT YOU KNOW, compiler-style one-thought-many-representations, strict `learning · solid` mastery, sparse Uncle Seally, inline Noʻeau, orthography checks, no synthetic audio, and the viewport-first mobile practice shell. Preserve Hawaiian islands as derived representations with separate island progress: Core is full-phrase-first with occasional zoom-ins/repair; More Phrases is quiet secondary practice over the existing utility-ranked extra 70, island-first, 10 active then one additional parent per 8 reps, graduating toward full parent phrases only after island retrieval/context evidence. Preserve the mobile readability floor: important teaching text stays readable, phone controls keep at least a 44px touch target, Show me remains the quieter peek action, and tight layouts hide/compress secondary chrome before shrinking language. Pidgin is the trusted bridge and never the punchline. Prefer real learner testing and fluent-speaker/kumu corrections over architectural expansion.
