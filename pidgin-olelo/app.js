@@ -74,6 +74,7 @@ const els = {
   replayCard: document.querySelector("#replay-card"),
   forwardCard: document.querySelector("#forward-card"),
   progress: document.querySelector("#progress"),
+  practiceCard: document.querySelector(".practice-card"),
   morePractice: document.querySelector("#more-practice"),
   moreLink: document.querySelector("#more-link"),
   mobileMoreLink: document.querySelector(".mobile-more-link"),
@@ -220,7 +221,20 @@ function nextQuestion() {
     return ENGINE.buildIntro(item);
   }
 
-  const vector = ENGINE.pickVector(item.id, vectorStrengths, state.repCount + 1, excludeVectorOnce);
+  const repNumber = state.repCount + 1;
+  const vector = ENGINE.pickVector(item.id, vectorStrengths, repNumber, excludeVectorOnce);
+
+  if (vector === "scenario") {
+    const response = CURRICULUM.responseFor(item.id);
+    if (response) {
+      const questionItem = findItem(response.questionId);
+      if (questionItem) {
+        const question = repNumber % 2 === 0 ? questionItem.hawaiian : questionItem.pidgin;
+        return ENGINE.buildResponseQuestion(item, activeItems(), { question, cue: response.cue });
+      }
+    }
+  }
+
   const scenario = CURRICULUM.scenarioFor(item.id);
   return ENGINE.buildQuestion(item, vector, activeItems(), scenario);
 }
@@ -232,6 +246,13 @@ function isReviewingHistory() {
 function updateProgress() {
   const solid = CORE_ITEMS.filter((item) => ENGINE.isOwned(vectorStrengths, item.id)).length;
   els.progress.textContent = `${solid} / 30 solid`;
+}
+
+function scrollToPracticeCard() {
+  if (!els.practiceCard) return;
+  requestAnimationFrame(() => {
+    els.practiceCard.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
 }
 
 function updateHistoryControls() {
@@ -269,6 +290,9 @@ function recordKnownChoice(correct) {
   if (correct) {
     renderFeedback("got", "Chee. That one. Say the Hawaiian once before you move.");
     registerCorrect(currentItem.id);
+  } else if (currentQuestion.response) {
+    renderFeedback("miss", `😭 Brah. Wrong reply. The line that fits is ${currentQuestion.answer}. Say um once.`);
+    registerMiss(currentItem.id);
   } else if (currentQuestion.vector === "scenario") {
     renderFeedback("miss", `😭 Brah. Wrong scene. The line that fits is ${currentQuestion.answer}. Say um once.`);
     registerMiss(currentItem.id);
@@ -366,13 +390,14 @@ function pushQuestion(question) {
   drawQuestion(question);
 }
 
-function renderNextQuestion() {
+function renderNextQuestion({ scrollToQuestion = false } = {}) {
   renderFeedback(null);
   const question = nextQuestion();
   if (!question) return;
   preferredItemId = null;
   excludeVectorOnce = null;
   pushQuestion(question);
+  if (scrollToQuestion) scrollToPracticeCard();
 }
 
 function showHistoryItem(nextCursor, kind) {
@@ -386,9 +411,10 @@ function showHistoryItem(nextCursor, kind) {
 function moveForward() {
   if (historyCursor < history.length - 1) {
     showHistoryItem(historyCursor + 1, "forward");
+    scrollToPracticeCard();
     return;
   }
-  renderNextQuestion();
+  renderNextQuestion({ scrollToQuestion: true });
 }
 
 function finishIntro() {
@@ -399,7 +425,7 @@ function finishIntro() {
   saveState();
   renderFeedback("got", "Met um. Now same thought, but you gotta retrieve it.");
   setSeallyState("start", itemId);
-  renderNextQuestion();
+  renderNextQuestion({ scrollToQuestion: true });
 }
 
 function rateCurrent(delta) {
@@ -410,7 +436,7 @@ function rateCurrent(delta) {
   }
 
   if (autoRated) {
-    renderNextQuestion();
+    renderNextQuestion({ scrollToQuestion: true });
     return;
   }
 
@@ -434,7 +460,7 @@ function rateCurrent(delta) {
 
   const feedbackText = els.feedback.textContent;
   const feedbackKind = els.feedback.dataset.kind;
-  renderNextQuestion();
+  renderNextQuestion({ scrollToQuestion: true });
   renderFeedback(feedbackKind, feedbackText);
 }
 
@@ -444,7 +470,7 @@ function moreLikeThis() {
   excludeVectorOnce = currentQuestion.vector;
   renderFeedback("forward", "Same thought, new angle. This is the point.");
   setSeallyState("replay", currentQuestion.itemId);
-  renderNextQuestion();
+  renderNextQuestion({ scrollToQuestion: true });
 }
 
 function renderNoeauWidget() {
