@@ -2,6 +2,7 @@ const ALL_ITEMS = window.PIDGIN_OLELO_ITEMS || [];
 const CURRICULUM = window.PIDGIN_OLELO_CURRICULUM;
 const ENGINE = window.PIDGIN_OLELO_CORE_ENGINE;
 const CORE_ITEMS = CURRICULUM.coreItems(ALL_ITEMS);
+const NOEAU_ITEMS = window.PIDGIN_OLELO_NOEAU || [];
 
 const OLD_STORAGE_KEY = "pidgin-olelo-v0-strength";
 const STORAGE_KEY = "pidgin-olelo-core-vectors-v1";
@@ -29,6 +30,14 @@ const els = {
   replayCard: document.querySelector("#replay-card"),
   forwardCard: document.querySelector("#forward-card"),
   progress: document.querySelector("#progress"),
+  morePractice: document.querySelector("#more-practice"),
+  noeauWidget: document.querySelector("#noeau-widget"),
+  noeauSaying: document.querySelector("#noeau-widget-saying"),
+  noeauReveal: document.querySelector("#noeau-widget-reveal"),
+  noeauBody: document.querySelector("#noeau-widget-body"),
+  noeauMeaning: document.querySelector("#noeau-widget-meaning"),
+  noeauHook: document.querySelector("#noeau-widget-hook"),
+  noeauNext: document.querySelector("#noeau-widget-next"),
 };
 
 let state = loadState();
@@ -39,6 +48,7 @@ let history = [];
 let historyCursor = -1;
 let preferredItemId = null;
 let excludeVectorOnce = null;
+let noeauIndex = NOEAU_ITEMS.length ? Math.floor(Date.now() / 86400000) % NOEAU_ITEMS.length : -1;
 
 function emptyState() {
   return {
@@ -325,6 +335,26 @@ function moreLikeThis() {
   renderNextQuestion();
 }
 
+function renderNoeauWidget() {
+  if (!NOEAU_ITEMS.length || noeauIndex < 0) {
+    if (els.morePractice) els.morePractice.hidden = true;
+    return;
+  }
+
+  const item = NOEAU_ITEMS[noeauIndex % NOEAU_ITEMS.length];
+  els.noeauSaying.textContent = item.hawaiian;
+  els.noeauMeaning.textContent = item.meaning;
+  els.noeauHook.textContent = item.localHook;
+  els.noeauBody.hidden = true;
+  els.noeauReveal.hidden = false;
+}
+
+function nextNoeau() {
+  if (!NOEAU_ITEMS.length) return;
+  noeauIndex = (noeauIndex + 1) % NOEAU_ITEMS.length;
+  renderNoeauWidget();
+}
+
 els.showAnswer.addEventListener("click", () => setRevealed(true));
 els.gotIt.addEventListener("click", () => rateCurrent(1));
 els.missIt.addEventListener("click", () => rateCurrent(-1));
@@ -336,5 +366,11 @@ els.replayCard.addEventListener("click", () => {
   drawQuestion(currentQuestion, { preserveReveal: currentQuestion.intro });
   renderFeedback("replay", currentQuestion.intro ? "Read both once more, then say the Hawaiian." : "Replay. No peek. Try the same angle again.");
 });
+els.noeauReveal.addEventListener("click", () => {
+  els.noeauBody.hidden = false;
+  els.noeauReveal.hidden = true;
+});
+els.noeauNext.addEventListener("click", nextNoeau);
 
+renderNoeauWidget();
 renderNextQuestion();
