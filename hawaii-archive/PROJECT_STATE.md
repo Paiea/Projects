@@ -34,7 +34,9 @@ Historical source material is the evidence ceiling. Derived English, feed wordin
 
 The MVP is a public GitHub Pages pilot built around the historical week **September 6–12, 1897**.
 
-The week fixture contains **13 surfaced text records** centered on the September 6 anti-annexation mass meeting at Palace Square, material published in *Ke Aloha Aina* on September 11, three front-page *Ka Nupepa Kuokoa* items from September 10, and the Hui Aloha ʻĀina petition heading. This is a curated proving week, not a claim that every newspaper item from the week has been ingested.
+The week fixture now contains **23 surfaced text records**. It preserves the September 6 anti-annexation mass meeting at Palace Square, material published in *Ke Aloha Aina* on September 11, three front-page *Ka Nupepa Kuokoa* items from September 10, the Hui Aloha ʻĀina petition heading, and ten directly sourced district petition records showing women and men participating across Hawaiʻi, Maui, Molokaʻi, Oʻahu, and Kauaʻi. This is a curated proving week, not a claim that every newspaper item from the week has been ingested.
+
+Nine Palace Square speech records now distinguish the **September 6 event date** from the **September 11 publication date** and preserve that five-day information lag. The public Voice & source drawer surfaces the lag note when present rather than implying modern instant transmission.
 
 The public experience is finite and social-feed shaped. It defaults to short modern renderings that preserve the source's supported communicative move, then lets the reader open the original Hawaiian, close English meaning, and voice/source evidence.
 
@@ -61,6 +63,8 @@ The project is surfaced as a first-class **History & Culture** card on the main 
 ## Durable Decisions
 
 - **Archive persistent, experience constrained.** Backend material may eventually span years; the default public experience remains one bounded historical week rather than an endless database dump.
+- **Follow historical attention.** Do not manufacture topical balance. Preserve repetition when repetition itself shows sustained attention, organizing, argument, geographic spread, or continuing public response. Ordinary life belongs wherever the archive gives it to us, not as an artificial counterweight to major events.
+- **Preserve information time.** Event date, publication date, circulation, and receipt are different historical moments when evidence distinguishes them. Do not collapse them into modern instant transmission or invent an unknown receipt time.
 - **One public product: the feed.** Text, photographs, newspaper images/illustrations, restored visuals, and color reconstructions converge into the same historical social experience.
 - **Mixed post model.** The feed may contain `text`, `photo`, and `combo` posts. Do not force every record into the same visual shape.
 - **Images support the social-text identity.** The nūpepa/social insight remains the product's center. Visuals strengthen inhabitation, context, people, places, and specific moments without turning the site into a generic old-photo gallery.
@@ -84,16 +88,17 @@ The project is surfaced as a first-class **History & Culture** card on the main 
 
 ## Known Issues / Open Questions
 
-- The 13-item week is curated from several trustworthy archival/scholarly access points rather than produced by a single automated primary-archive ingestion adapter.
+- The 23-item week is still curated rather than a complete ingestion of every source published during September 6–12, 1897. The larger content goal remains roughly 100 grounded atomic posts.
 - Several speech fragments are supported through scholarly transcriptions/reproductions of the historical record rather than direct machine retrieval from the original scan. Those records remain `review` or `high-fidelity` where warranted.
-- The exact best upstream machine-readable nūpepa source still needs a bounded adapter proof, but the mixed-media product should be reviewed first.
+- The exact best upstream machine-readable nūpepa source still needs a bounded adapter proof, but direct issue mining can continue without waiting for a generalized ingestion platform.
 - The current restored/color image states are browser-rendered derived views, not durable pixel assets. If they feel too crude, the next visual upgrade should replace one pilot image with a real pixel-level restoration/color output before scaling.
 - External archival/access-copy image hosting could change. If this becomes a production product, ingest permitted local source copies or another stable asset strategy rather than depending indefinitely on hotlinked access copies.
-- Translation and rhetorical-tone escalation thresholds still need calibration against a broader sample of ordinary observations, notices, gossip, weather, travel, celebrations, and daily-life reports, not only major political material.
+- Translation and rhetorical-tone escalation thresholds still need calibration across a broader source sample. Let the archive determine whether that sample contains politics, ordinary observations, notices, gossip, weather, travel, celebrations, or daily-life reports rather than imposing category quotas.
 
 ## On-Demand References
 
-- `hawaii-archive/data/ITEM_CONTRACT.md` — read when ingesting/changing text archive record structure, speaker attribution, social-intent handling, or routing semantics.
+- `hawaii-archive/data/ITEM_CONTRACT.md` — read when ingesting/changing text archive record structure, speaker attribution, social-intent handling, information-time handling, or routing semantics.
+- `hawaii-archive/data/weeks/1897-09-06.sources.md` — current source ledger and direct extraction order for the proving week.
 - `hawaii-archive/data/images/index.json` — current image records and feed relationship metadata.
 - `hawaii-archive/images/jobs/<id>/review.md` — per-image source/restoration/color review evidence.
 - `systems/image-os/CURRENT.md` — read for the active visual lane and current Image OS execution edge.
@@ -106,6 +111,10 @@ The project is surfaced as a first-class **History & Culture** card on the main 
 
 ## Last Meaningful Changes
 
+- Shipped the text proving week from 13 to 23 grounded records.
+- Added ten directly sourced Hui Aloha ʻĀina district petition records spanning women and men across Hawaiʻi, Maui, Molokaʻi, Oʻahu, and Kauaʻi without inventing individual speaker voices.
+- Added event/publication lag metadata to the September 6 Palace Square speech records and surfaced that lag in the public Voice & source drawer.
+- Added a proving-week source ledger that prioritizes direct archival issue/page authority and forbids filling inaccessible source interiors from expectation.
 - Completed the first Image OS three-image proving set with portrait, place, and daily-life source classes.
 - Added mixed-media combo posts to the September 1897 feed using Kaulia and ʻIolani Palace imagery.
 - Added Original / Restored / Color states with explicit color confidence and exact/near/context relationship labels.
@@ -114,8 +123,10 @@ The project is surfaced as a first-class **History & Culture** card on the main 
 
 ## NEXT_TASK
 
-After merge and Pages verification, **review the live mixed-media experience before scaling**. Judge whether Kaulia and ʻIolani Palace make the feed feel more like living social history, whether Color should remain the default image state, whether the labels feel appropriately light, and whether the browser hand-tint quality is good enough for another 3–5 images. If yes, add the next feed-relevant visual batch using the same job model. If not, improve one pilot image with a real pixel-level restoration/color asset before bulk visual expansion. The queued ordinary-life nūpepa ingestion pass remains the next text-lane experiment after this product review.
+**Text lane:** continue the September 6–12, 1897 proving week toward roughly 100 grounded posts. Mine the September 11 *Ke Aloha Aina* and September 10 *Ka Nupepa Kuokoa* issues directly, following what those issues actually spend attention on rather than a topic quota. Preserve meaningful repetition, multiple voices and places, and event-to-publication lag. Use `hawaii-archive/data/weeks/1897-09-06.sources.md` as the bounded extraction queue.
+
+**Visual lane:** preserve the existing Image OS authority and continue from `systems/image-os/CURRENT.md`; do not infer visual state from this text-lane checkpoint.
 
 ## RE-PROMPT
 
-> Continue Hawaiʻi Archive Revival from current Paiea/Projects GitHub authority. Read root AGENTS.md, state/PROJECT_REGISTRY.md, state/HANDSHAKE_PROTOCOL.md, hawaii-archive/PROJECT_STATE.md, and systems/image-os/CURRENT.md. The first Image OS three-image mixed-media proof is complete. Inspect the live feed and image-pilot page before scaling. Preserve source authority, conditional voice, explicit color confidence, and honest exact/near/context visual relationships. Scale only what the live experience proves useful, then update both owning hot-state files and leave the next handshake.
+> Continue Hawaiʻi Archive Revival from current Paiea/Projects GitHub authority. Read root AGENTS.md, state/PROJECT_REGISTRY.md, state/HANDSHAKE_PROTOCOL.md, hawaii-archive/PROJECT_STATE.md, hawaii-archive/data/ITEM_CONTRACT.md, and systems/image-os/CURRENT.md. The September 6–12, 1897 public feed is at 23 grounded records. Follow historical attention rather than manufacturing topic balance. Preserve meaningful repetition, multiple voices and places, and event/publication information lag. Continue the text lane toward roughly 100 posts by mining the direct Ke Aloha Aina and Ka Nupepa Kuokoa issue lanes in the source ledger, while preserving the separate Image OS authority.
