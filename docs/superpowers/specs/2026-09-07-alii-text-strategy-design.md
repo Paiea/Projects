@@ -19,7 +19,7 @@ The core contrast is deliberate:
 
 **SURFACE = sparse lived-in text world.**
 
-The setting uses real island geography and a fictionalized political timeline. It draws from the transitional technological moment in which muskets, cannon, iron/steel goods, foreign-built ships, and foreign specialists are already known but remain scarce and unevenly distributed. It is not a claim to reproduce one exact historical year or polity.
+The setting uses real island geography and a fictionalized political timeline. It draws from the transitional technological moment in which muskets, cannon, iron goods, rare foreign steel weapons, foreign-built ships, and foreign specialists are already known but remain scarce and unevenly distributed. It is not a claim to reproduce one exact historical year or polity.
 
 ## Experience north star
 
@@ -134,6 +134,7 @@ Hidden state includes or may include:
 - muskets and powder
 - cannon
 - iron goods
+- rare foreign steel weapons
 - foreign specialists
 - foreign ship access
 - foreign-contact pressure
@@ -199,12 +200,13 @@ Possible pressure/opportunity includes:
 - powder
 - cannon
 - iron goods
+- rare steel blades and similar foreign weapons
 - foreign specialists
 - foreign-built or foreign-operated ships
 - trade
 - rumors and sightings
 
-Foreign technology must not become a simple universal tech-tree tier. Guns without powder, maintenance knowledge, trained users, and secure supply are constrained assets. A foreign specialist or ship connection can matter as much as owning a weapon.
+Foreign technology must not become a simple universal tech-tree tier. Guns without powder, maintenance knowledge, trained users, and secure supply are constrained assets. Foreign steel weapons are scarce prizes, not standard arms. A foreign specialist or ship connection can matter as much as owning a weapon.
 
 Do not begin with a visible invasion meter or a single monolithic villain faction. The larger danger is historical pressure arriving while the island kingdoms remain divided and continue using foreign contact against one another.
 
