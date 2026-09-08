@@ -77,7 +77,26 @@ function pickVector(itemId, strengths, repNumber = 1, excludeVector = null) {
   return weakest[(Math.max(1, repNumber) - 1) % weakest.length];
 }
 
-function pickWeakItem(items, strengths, recentIds = [], preferredItemId = null) {
+function spacingIntervalMs(average) {
+  if (average < 0.5) return 60 * 1000;
+  if (average < 1) return 5 * 60 * 1000;
+  if (average < 1.5) return 30 * 60 * 1000;
+  if (average < 2) return 6 * 60 * 60 * 1000;
+  if (average < 2.5) return 24 * 60 * 60 * 1000;
+  return 3 * 24 * 60 * 60 * 1000;
+}
+
+function itemPriority(item, strengths, lastSeen = {}, nowMs = Date.now()) {
+  const average = itemAverage(strengths, item.id);
+  const weakness = MAX_VECTOR_STRENGTH - average;
+  const last = Number(lastSeen[item.id]) || 0;
+  if (!last) return weakness * 10 + 5;
+  const interval = spacingIntervalMs(average);
+  const overdue = Math.min(3, Math.max(0, (nowMs - last) / interval));
+  return weakness * 10 + overdue;
+}
+
+function pickWeakItem(items, strengths, recentIds = [], preferredItemId = null, lastSeen = {}, nowMs = Date.now()) {
   if (!items.length) return null;
   if (preferredItemId) {
     const preferred = items.find((item) => item.id === preferredItemId);
@@ -85,12 +104,16 @@ function pickWeakItem(items, strengths, recentIds = [], preferredItemId = null) 
   }
 
   const recent = new Set(recentIds.slice(-2));
-  let pool = items.filter((item) => !recent.has(item.id));
-  if (!pool.length) pool = items;
+  const ranked = items
+    .map((item) => ({
+      item,
+      priority: itemPriority(item, strengths, lastSeen, nowMs) - (recent.has(item.id) ? 20 : 0),
+    }))
+    .sort((a, b) => b.priority - a.priority);
 
-  const minScore = Math.min(...pool.map((item) => itemAverage(strengths, item.id)));
-  const weakest = pool.filter((item) => itemAverage(strengths, item.id) === minScore);
-  return weakest[Math.floor(Math.random() * weakest.length)];
+  const top = ranked[0]?.priority;
+  const tied = ranked.filter((entry) => Math.abs(entry.priority - top) < 0.001);
+  return (tied[Math.floor(Math.random() * tied.length)] || ranked[0]).item;
 }
 
 function buildChoiceOptions(item, pool) {
@@ -205,6 +228,8 @@ const api = {
   weakestVectors,
   firstUnstartedVector,
   pickVector,
+  spacingIntervalMs,
+  itemPriority,
   pickWeakItem,
   buildIntro,
   buildQuestion,
