@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Practice useful ʻōlelo Hawaiʻi from familiar Pidgin thoughts, one retrieval at a time.">
+  <meta name="description" content="Learn 30 useful ʻōlelo Hawaiʻi thoughts from familiar Pidgin through multiple retrieval angles.">
   <meta name="theme-color" content="#172117">
-  <title>Pidgin → ʻŌlelo</title>
+  <title>Pidgin → ʻŌlelo · Core 30</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -14,32 +14,37 @@
       <a class="back-link" href="../">← Projects</a>
       <p class="eyebrow">PAIEA LANGUAGE LAB</p>
       <h1>Pidgin → ʻŌlelo</h1>
-      <p class="lede">You already know the thought. Train your brain to stack um the Hawaiian way.</p>
+      <p class="lede">Thirty useful thoughts. Learn um deep before we make the pile bigger.</p>
     </header>
 
-    <nav class="experience-nav" aria-label="Pidgin to ʻŌlelo modes">
+    <nav class="experience-nav" aria-label="Pidgin to ʻŌlelo">
       <a href="index.html" aria-current="page">Learn</a>
-      <a href="challenge.html">Challenge</a>
-      <a href="noeau.html">Noʻeau</a>
+      <a href="challenge.html">10-Min Mission</a>
     </nav>
 
-    <section class="mode-switch" aria-label="Practice direction">
-      <button id="direction-pidgin" class="mode-button is-active" type="button" aria-pressed="true">Pidgin → ʻŌlelo</button>
-      <button id="direction-hawaiian" class="mode-button" type="button" aria-pressed="false">ʻŌlelo → Pidgin</button>
+    <section class="core-summary" aria-label="Core 30 progress">
+      <div>
+        <p class="core-kicker">CORE 30</p>
+        <p class="core-copy">Same thoughts. Different angles.</p>
+      </div>
+      <strong id="progress" class="core-progress">0 / 30 solid</strong>
     </section>
 
     <p id="feedback" class="feedback" role="status" aria-live="polite" hidden></p>
 
     <section class="practice-card" aria-live="polite">
       <div class="card-topline">
-        <span id="direction-label" class="card-label">HOW YOU SAY UM?</span>
-        <span id="progress" class="progress">0 owned • 0 seen</span>
+        <span id="vector-label" class="card-label">MEET THIS ONE</span>
+        <span class="progress">Core 30</span>
       </div>
 
+      <p id="vector-instruction" class="challenge-instruction">See the thought together first.</p>
       <p id="prompt" class="prompt"></p>
 
+      <div id="choice-wrap" class="choice-wrap" hidden aria-label="Answer choices"></div>
+
       <div id="answer-wrap" class="answer-wrap" hidden>
-        <p class="answer-label">Answer</p>
+        <p id="answer-label" class="answer-label">Answer</p>
         <p id="answer" class="answer"></p>
 
         <div class="shape-wrap">
@@ -63,24 +68,48 @@
         <button id="got-it" class="rating-button rating-button--strong" type="button" disabled>Got um</button>
       </div>
 
+      <button id="more-like-this" class="more-like-button" type="button" disabled>MORE LIKE THIS · same thought, new angle</button>
+
       <div class="history-actions" aria-label="Review cards">
         <button id="back-card" class="history-button" type="button" disabled>← Back</button>
         <button id="replay-card" class="history-button" type="button">↻ Replay</button>
-        <button id="forward-card" class="history-button" type="button" disabled>Forward →</button>
+        <button id="forward-card" class="history-button" type="button">Forward →</button>
       </div>
     </section>
 
     <section class="quick-rule" aria-label="How to use">
-      <strong>One rule:</strong> say your answer out loud before you tap <em>Show me</em>. Then notice the Hawaiian shape before moving on.
+      <strong>Quiet engine underneath:</strong> easy ones drift away. Missed angles come back. Every few reps you get a harder SHOW WHAT YOU KNOW check.
     </section>
 
+    <details id="more-practice" class="more-practice">
+      <summary>More</summary>
+      <aside id="noeau-widget" class="noeau-widget" aria-label="Kūpuna side note">
+        <div class="noeau-widget-topline">
+          <span class="flavor-tag">Kūpuna side note 🌺</span>
+          <button id="noeau-widget-next" class="noeau-widget-next" type="button">Another</button>
+        </div>
+        <p id="noeau-widget-saying" class="noeau-widget-saying"></p>
+        <button id="noeau-widget-reveal" class="noeau-widget-reveal" type="button">What that carry?</button>
+        <div id="noeau-widget-body" hidden>
+          <p class="noeau-widget-label">What it carries</p>
+          <p id="noeau-widget-meaning" class="noeau-widget-meaning"></p>
+          <p class="noeau-widget-label">Today maybe</p>
+          <p id="noeau-widget-hook" class="noeau-widget-hook"></p>
+          <p class="noeau-widget-note">Modern memory hook only. Not the historical translation.</p>
+        </div>
+      </aside>
+    </details>
+
     <footer class="app-footer">
-      <p><strong>100 useful thoughts.</strong> Same bank as Challenge. Missed ones come back sooner.</p>
-      <p class="small-print">Pidgin is the memory bridge. The Hawaiian-shape line is a memory scaffold kept in Hawaiian order, not a separate correct Pidgin sentence. Local jokes live in examples to make retrieval sticky, not to define Hawaiian grammar. Hawaiian content should get fluent-speaker or kumu review before this grows into curriculum authority.</p>
+      <p><strong>Thirty thoughts, many forms.</strong> Recognition, production, missing-word repair, situations, saying it, and real-world use all strengthen different retrieval paths.</p>
+      <p class="small-print">Pidgin is the memory bridge, not Hawaiian grammar authority. ʻOkina and kahakō are preserved in the Hawaiian targets. Synthetic audio stays off until trustworthy human Hawaiian audio is available.</p>
     </footer>
   </main>
 
   <script src="phrases.js"></script>
+  <script src="curriculum.js"></script>
+  <script src="core-engine.js"></script>
+  <script src="noeau.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

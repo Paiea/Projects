@@ -62,17 +62,7 @@ h1 {
   line-height: 1.5;
 }
 
-.experience-nav {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-  margin-bottom: 12px;
-  padding: 6px;
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  background: rgba(255, 253, 247, 0.75);
-}
-
+.experience-nav,
 .mode-switch {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -111,6 +101,37 @@ h1 {
 .mode-button.is-active {
   background: var(--ink);
   color: white;
+}
+
+.core-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin: 0 0 12px;
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: rgba(255, 253, 247, 0.78);
+}
+
+.core-kicker {
+  margin: 0;
+  color: var(--accent);
+  font-size: 0.76rem;
+  font-weight: 950;
+  letter-spacing: 0.1em;
+}
+
+.core-copy {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.core-progress {
+  white-space: nowrap;
+  font-size: 1.05rem;
 }
 
 .feedback {
@@ -170,7 +191,7 @@ h1 {
 
 .prompt {
   min-height: 5.5rem;
-  margin: 36px 0 32px;
+  margin: 30px 0 26px;
   display: grid;
   align-items: center;
   font-size: clamp(2rem, 8vw, 4rem);
@@ -181,7 +202,7 @@ h1 {
 
 .challenge-instruction {
   max-width: 36rem;
-  margin: 28px 0 0;
+  margin: 22px 0 0;
   color: var(--muted);
   font-size: 1rem;
   font-weight: 700;
@@ -191,6 +212,29 @@ h1 {
 .challenge-prompt {
   min-height: 7rem;
   margin-top: 22px;
+}
+
+.choice-wrap {
+  display: grid;
+  gap: 8px;
+  margin: -8px 0 22px;
+}
+
+.choice-button {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #f8f5ec;
+  color: var(--ink);
+  font-weight: 800;
+  text-align: left;
+  cursor: pointer;
+}
+
+.choice-button[data-correct="true"] {
+  border-color: var(--accent);
+  background: var(--accent-soft);
 }
 
 .noeau-saying {
@@ -293,7 +337,8 @@ h1 {
 
 .primary-button,
 .rating-button,
-.history-button {
+.history-button,
+.more-like-button {
   border-radius: 14px;
   font-weight: 900;
   cursor: pointer;
@@ -327,6 +372,17 @@ h1 {
   color: white;
 }
 
+.more-like-button {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px 12px;
+  border: 1px dashed var(--line);
+  background: transparent;
+  color: var(--accent);
+  font-size: 0.82rem;
+  letter-spacing: 0.035em;
+}
+
 .history-actions {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -334,9 +390,7 @@ h1 {
   margin-top: 10px;
 }
 
-.noeau-card .history-actions {
-  grid-template-columns: 1fr 1fr;
-}
+.noeau-card .history-actions { grid-template-columns: 1fr 1fr; }
 
 .history-button {
   border: 1px solid var(--line);
@@ -345,9 +399,11 @@ h1 {
 }
 
 .rating-button:disabled,
-.history-button:disabled {
+.history-button:disabled,
+.more-like-button:disabled,
+.choice-button:disabled {
   cursor: not-allowed;
-  opacity: 0.4;
+  opacity: 0.48;
 }
 
 .quick-rule {
@@ -356,6 +412,96 @@ h1 {
   border-left: 4px solid var(--warm);
   color: var(--muted);
   line-height: 1.45;
+}
+
+.more-practice {
+  margin-top: 16px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: rgba(255, 253, 247, 0.6);
+}
+
+.more-practice summary {
+  padding: 14px 16px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.flavor-tag {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--warm);
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.noeau-widget {
+  margin: 0 12px 12px;
+  padding: 16px;
+  border: 1px dashed rgba(201, 111, 59, 0.45);
+  border-radius: 14px;
+  background: var(--paper);
+}
+
+.noeau-widget-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.noeau-widget-next,
+.noeau-widget-reveal {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--accent);
+  font-weight: 850;
+  cursor: pointer;
+}
+
+.noeau-widget-next {
+  min-height: 36px;
+  padding: 7px 11px;
+  font-size: 0.82rem;
+}
+
+.noeau-widget-saying {
+  margin: 14px 0;
+  font-size: clamp(1.15rem, 4vw, 1.55rem);
+  font-weight: 850;
+  line-height: 1.35;
+}
+
+.noeau-widget-reveal {
+  min-height: 42px;
+  padding: 8px 12px;
+}
+
+.noeau-widget-label {
+  margin: 14px 0 5px;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.noeau-widget-meaning,
+.noeau-widget-hook {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.noeau-widget-hook { font-weight: 850; }
+
+.noeau-widget-note {
+  margin: 9px 0 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.4;
 }
 
 .app-footer {
@@ -375,6 +521,13 @@ h1 {
 
   .mode-switch { grid-template-columns: 1fr; }
 
+  .core-summary,
+  .noeau-widget-topline {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+  }
+
   .practice-card {
     border-radius: 18px;
     padding: 20px;
@@ -393,9 +546,11 @@ h1 {
 
   .prompt {
     min-height: 7rem;
-    margin: 28px 0 24px;
+    margin: 24px 0 22px;
   }
 
   .challenge-prompt { margin-top: 20px; }
-  .rating-actions, .history-actions, .noeau-card .history-actions { grid-template-columns: 1fr; }
+  .rating-actions,
+  .history-actions,
+  .noeau-card .history-actions { grid-template-columns: 1fr; }
 }

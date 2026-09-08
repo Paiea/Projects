@@ -1,0 +1,46 @@
+name: Pidgin Olelo Tests
+
+on:
+  push:
+    paths:
+      - 'pidgin-olelo/**'
+      - 'tests/test_pidgin_olelo.py'
+      - '.github/workflows/pidgin-olelo-tests.yml'
+  pull_request:
+    paths:
+      - 'pidgin-olelo/**'
+      - 'tests/test_pidgin_olelo.py'
+      - '.github/workflows/pidgin-olelo-tests.yml'
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run Pidgin Olelo regression tests
+        run: |
+          set +e
+          python tests/test_pidgin_olelo.py > test-output.txt 2>&1
+          code=$?
+          cat test-output.txt
+          exit $code
+      - name: Preserve test output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pidgin-olelo-test-output
+          path: test-output.txt
+      - name: Check JavaScript syntax
+        run: |
+          node --check pidgin-olelo/app.js
+          node --check pidgin-olelo/challenge.js
+          node --check pidgin-olelo/core-engine.js
+          node --check pidgin-olelo/curriculum.js
+          node --check pidgin-olelo/noeau.js
+          node --check pidgin-olelo/phrases.js

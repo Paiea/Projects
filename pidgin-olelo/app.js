@@ -1,85 +1,159 @@
-const ITEMS = window.PIDGIN_OLELO_ITEMS;
+const ALL_ITEMS = window.PIDGIN_OLELO_ITEMS || [];
+const CURRICULUM = window.PIDGIN_OLELO_CURRICULUM;
+const ENGINE = window.PIDGIN_OLELO_CORE_ENGINE;
+const CORE_ITEMS = CURRICULUM.coreItems(ALL_ITEMS);
+const NOEAU_ITEMS = window.PIDGIN_OLELO_NOEAU || [];
 
-const STORAGE_KEY = "pidgin-olelo-v0-strength";
-const DIRECTIONS = {
-  P2H: "p2h",
-  H2P: "h2p",
-};
+const OLD_STORAGE_KEY = "pidgin-olelo-v0-strength";
+const STORAGE_KEY = "pidgin-olelo-core-vectors-v1";
+const STARTING_ACTIVE_COUNT = 5;
+const REPS_PER_UNLOCK = 8;
 
 const els = {
-  directionPidgin: document.querySelector("#direction-pidgin"),
-  directionHawaiian: document.querySelector("#direction-hawaiian"),
-  directionLabel: document.querySelector("#direction-label"),
+  vectorLabel: document.querySelector("#vector-label"),
+  vectorInstruction: document.querySelector("#vector-instruction"),
   prompt: document.querySelector("#prompt"),
+  choiceWrap: document.querySelector("#choice-wrap"),
   answerWrap: document.querySelector("#answer-wrap"),
+  answerLabel: document.querySelector("#answer-label"),
   answer: document.querySelector("#answer"),
   shape: document.querySelector("#shape"),
   note: document.querySelector("#note"),
   examplePidgin: document.querySelector("#example-pidgin"),
   exampleHawaiian: document.querySelector("#example-hawaiian"),
   feedback: document.querySelector("#feedback"),
-  backCard: document.querySelector("#back-card"),
-  replayCard: document.querySelector("#replay-card"),
-  forwardCard: document.querySelector("#forward-card"),
   showAnswer: document.querySelector("#show-answer"),
   gotIt: document.querySelector("#got-it"),
   missIt: document.querySelector("#miss-it"),
+  moreLikeThis: document.querySelector("#more-like-this"),
+  backCard: document.querySelector("#back-card"),
+  replayCard: document.querySelector("#replay-card"),
+  forwardCard: document.querySelector("#forward-card"),
   progress: document.querySelector("#progress"),
+  morePractice: document.querySelector("#more-practice"),
+  noeauSaying: document.querySelector("#noeau-widget-saying"),
+  noeauReveal: document.querySelector("#noeau-widget-reveal"),
+  noeauBody: document.querySelector("#noeau-widget-body"),
+  noeauMeaning: document.querySelector("#noeau-widget-meaning"),
+  noeauHook: document.querySelector("#noeau-widget-hook"),
+  noeauNext: document.querySelector("#noeau-widget-next"),
 };
 
-let direction = DIRECTIONS.P2H;
-let queue = [];
-let current = null;
-let seen = new Set();
-let strengths = loadStrengths();
+let state = loadState();
+let vectorStrengths = state.vectorStrengths;
+let currentQuestion = null;
+let currentItem = null;
 let history = [];
 let historyCursor = -1;
+let preferredItemId = null;
+let excludeVectorOnce = null;
+let autoRated = false;
+let noeauIndex = NOEAU_ITEMS.length ? Math.floor(Date.now() / 86400000) % NOEAU_ITEMS.length : -1;
 
-function loadStrengths() {
-  const empty = { p2h: {}, h2p: {} };
+function emptyState() {
+  return {
+    vectorStrengths: {},
+    introduced: {},
+    lastSeen: {},
+    repCount: 0,
+  };
+}
+
+function migrateOldState(next) {
+  try {
+    const raw = localStorage.getItem(OLD_STORAGE_KEY);
+    if (!raw) return next;
+    const old = JSON.parse(raw);
+    for (const item of CORE_ITEMS) {
+      const produce = Math.min(3, Number(old?.p2h?.[item.id]) || 0);
+      const recognize = Math.min(3, Number(old?.h2p?.[item.id]) || 0);
+      if (!produce && !recognize) continue;
+      next.vectorStrengths[item.id] = {
+        ...(next.vectorStrengths[item.id] || {}),
+        produce,
+        recognize,
+      };
+      next.introduced[item.id] = true;
+    }
+  } catch {
+    // Old progress is optional. Fresh Core practice still works.
+  }
+  return next;
+}
+
+function loadState() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return empty;
-    const parsed = JSON.parse(raw);
-    return {
-      p2h: parsed.p2h || {},
-      h2p: parsed.h2p || {},
-    };
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      return {
+        vectorStrengths: parsed.vectorStrengths || {},
+        introduced: parsed.introduced || {},
+        lastSeen: parsed.lastSeen || {},
+        repCount: Number(parsed.repCount) || 0,
+      };
+    }
   } catch {
-    return empty;
+    // Fall through to migration/fresh state.
   }
+  return migrateOldState(emptyState());
 }
 
-function saveStrengths() {
+function saveState() {
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(strengths));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
   } catch {
-    // Practice still works if storage is unavailable.
+    // Local practice should continue even if persistence is unavailable.
   }
 }
 
-function shuffledIds() {
-  const ids = ITEMS.map((item) => item.id);
-  for (let i = ids.length - 1; i > 0; i -= 1) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [ids[i], ids[j]] = [ids[j], ids[i]];
+function activeCount() {
+  return Math.min(CORE_ITEMS.length, STARTING_ACTIVE_COUNT + Math.floor(state.repCount / REPS_PER_UNLOCK));
+}
+
+function activeItems() {
+  return CORE_ITEMS.slice(0, activeCount());
+}
+
+function recentIds() {
+  return history.slice(Math.max(0, history.length - 4)).map((entry) => entry.itemId);
+}
+
+function findItem(itemId) {
+  return CORE_ITEMS.find((item) => item.id === itemId);
+}
+
+function nextItem() {
+  const active = activeItems();
+  if (preferredItemId) {
+    const preferred = active.find((item) => item.id === preferredItemId);
+    if (preferred) return preferred;
   }
-  return ids;
+
+  const unintroduced = active.find((item) => !state.introduced[item.id]);
+  if (unintroduced) return unintroduced;
+
+  return ENGINE.pickWeakItem(
+    active,
+    vectorStrengths,
+    recentIds(),
+    null,
+    state.lastSeen,
+    Date.now(),
+  );
 }
 
-function itemById(id) {
-  return ITEMS.find((item) => item.id === id);
-}
+function nextQuestion() {
+  const item = nextItem();
+  if (!item) return null;
 
-function refillQueue() {
-  queue = shuffledIds();
-  if (current && queue[0] === current.id && queue.length > 1) {
-    [queue[0], queue[1]] = [queue[1], queue[0]];
+  if (!state.introduced[item.id]) {
+    return ENGINE.buildIntro(item);
   }
-}
 
-function getStrength(itemId) {
-  return strengths[direction][itemId] || 0;
+  const vector = ENGINE.pickVector(item.id, vectorStrengths, state.repCount + 1, excludeVectorOnce);
+  const scenario = CURRICULUM.scenarioFor(item.id);
+  return ENGINE.buildQuestion(item, vector, activeItems(), scenario);
 }
 
 function isReviewingHistory() {
@@ -87,78 +161,154 @@ function isReviewingHistory() {
 }
 
 function updateProgress() {
-  const owned = ITEMS.filter((item) => getStrength(item.id) >= 2).length;
-  els.progress.textContent = `${owned} owned • ${seen.size} seen`;
+  const solid = CORE_ITEMS.filter((item) => ENGINE.isOwned(vectorStrengths, item.id)).length;
+  els.progress.textContent = `${solid} / 30 solid`;
 }
 
 function updateHistoryControls() {
   els.backCard.disabled = historyCursor <= 0;
-  els.forwardCard.disabled = !current;
-  els.replayCard.disabled = !current;
+  els.forwardCard.disabled = !currentQuestion;
+  els.replayCard.disabled = !currentQuestion;
 }
 
-function setRevealed(revealed) {
-  const canRate = revealed && !isReviewingHistory();
-  els.answerWrap.hidden = !revealed;
-  els.gotIt.disabled = !canRate;
-  els.missIt.disabled = !canRate;
-  els.showAnswer.hidden = revealed;
-}
-
-function renderFeedback(kind, item = current) {
+function renderFeedback(kind, text = "") {
   els.feedback.dataset.kind = kind || "";
+  els.feedback.textContent = text;
+  els.feedback.hidden = !text;
+}
 
-  if (!kind) {
-    els.feedback.textContent = "";
-    els.feedback.hidden = true;
+function resetButtons() {
+  autoRated = false;
+  els.gotIt.hidden = false;
+  els.missIt.hidden = false;
+  els.gotIt.textContent = "Got um";
+  els.missIt.textContent = "Miss";
+  els.moreLikeThis.textContent = "MORE LIKE THIS · same thought, new angle";
+}
+
+function recordKnownChoice(correct) {
+  if (!currentQuestion || currentQuestion.intro || autoRated || isReviewingHistory()) return;
+
+  ENGINE.rateVector(vectorStrengths, currentItem.id, currentQuestion.vector, correct ? 1 : -1);
+  state.repCount += 1;
+  state.lastSeen[currentItem.id] = Date.now();
+  saveState();
+  autoRated = true;
+
+  if (!correct) preferredItemId = currentItem.id;
+
+  if (correct) {
+    renderFeedback("got", "Chee. That one. Say the Hawaiian once before you move.");
+  } else if (currentQuestion.vector === "scenario") {
+    renderFeedback("miss", `😭 Brah. Wrong scene. The line that fits is ${currentQuestion.answer}. Say um once.`);
+  } else {
+    renderFeedback("miss", `Almost, uncle. ${currentQuestion.answer} is the thought. Say the Hawaiian once more.`);
+  }
+
+  setRevealed(true);
+  els.missIt.hidden = true;
+  els.gotIt.textContent = "Next";
+  els.gotIt.disabled = false;
+  els.moreLikeThis.disabled = false;
+}
+
+function renderChoices(question) {
+  els.choiceWrap.replaceChildren();
+  if (!question.choices?.length) {
+    els.choiceWrap.hidden = true;
     return;
   }
 
-  const messages = {
-    got: `Got um. ${item.hawaiian} can wait longer before it comes back.`,
-    miss: `Miss. No hide. ${item.hawaiian} coming back soon. Use the Hawaiian shape, then try um again.`,
-    back: "Going backwards through cards you already saw.",
-    forward: "Going forward through cards you already saw.",
-    replay: "Replay. No peek. Say um one more time before Show me.",
-  };
-
-  els.feedback.textContent = messages[kind] || "";
-  els.feedback.hidden = !els.feedback.textContent;
+  question.choices.forEach((choice) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "choice-button";
+    button.textContent = choice;
+    button.addEventListener("click", () => {
+      if (autoRated) return;
+      const correct = choice === question.answer;
+      els.choiceWrap.querySelectorAll("button").forEach((candidate) => {
+        candidate.disabled = true;
+        if (candidate.textContent === question.answer) candidate.dataset.correct = "true";
+      });
+      recordKnownChoice(correct);
+    });
+    els.choiceWrap.appendChild(button);
+  });
+  els.choiceWrap.hidden = false;
 }
 
-function drawCurrent() {
-  const pidginFirst = direction === DIRECTIONS.P2H;
-  els.directionLabel.textContent = pidginFirst ? "HOW YOU SAY UM?" : "WHAT THIS MEAN?";
-  els.prompt.textContent = pidginFirst ? current.pidgin : current.hawaiian;
-  els.answer.textContent = pidginFirst ? current.hawaiian : current.pidgin;
-  els.shape.textContent = current.shape;
-  els.note.textContent = current.note || "";
-  els.examplePidgin.textContent = current.examplePidgin;
-  els.exampleHawaiian.textContent = current.exampleHawaiian;
-  setRevealed(false);
+function setRevealed(revealed) {
+  const intro = currentQuestion?.intro;
+  const canRate = revealed && !isReviewingHistory() && !autoRated;
+  els.answerWrap.hidden = !revealed;
+  els.showAnswer.hidden = revealed || Boolean(currentQuestion?.choices?.length);
+  els.gotIt.disabled = autoRated ? false : !canRate;
+  els.missIt.disabled = !canRate || intro;
+  els.moreLikeThis.disabled = intro ? true : (!revealed && !autoRated);
+}
+
+function drawQuestion(question, { preserveReveal = false } = {}) {
+  currentQuestion = question;
+  currentItem = findItem(question.itemId);
+  resetButtons();
+
+  const showWhatYouKnow = !question.intro && state.repCount > 0 && (state.repCount + 1) % ENGINE.SHOW_WHAT_YOU_KNOW_EVERY === 0;
+  els.vectorLabel.textContent = showWhatYouKnow ? `SHOW WHAT YOU KNOW · ${question.label}` : question.label;
+  els.vectorInstruction.textContent = question.instruction;
+  els.prompt.textContent = question.prompt;
+  els.answerLabel.textContent = question.answerLabel || "Answer";
+  els.answer.textContent = question.answer;
+  els.shape.textContent = question.shape || "";
+  els.note.textContent = question.note || "";
+  els.examplePidgin.textContent = question.examplePidgin || "";
+  els.exampleHawaiian.textContent = question.exampleHawaiian || "";
+  renderChoices(question);
+
+  if (question.intro) {
+    els.gotIt.textContent = "Next";
+    els.missIt.hidden = true;
+    els.moreLikeThis.hidden = true;
+    els.answerWrap.hidden = false;
+    els.showAnswer.hidden = true;
+    els.gotIt.disabled = isReviewingHistory();
+  } else {
+    els.moreLikeThis.hidden = false;
+    if (question.vector === "use") {
+      els.gotIt.textContent = "I USED IT";
+      els.missIt.textContent = "Not yet";
+    }
+    setRevealed(preserveReveal);
+  }
+
   updateHistoryControls();
   updateProgress();
 }
 
-function renderNextQueuedItem() {
-  if (!queue.length) refillQueue();
-  current = itemById(queue.shift());
-  seen.add(current.id);
-
-  if (historyCursor < history.length - 1) {
-    history = history.slice(0, historyCursor + 1);
-  }
-  history.push(current.id);
+function pushQuestion(question) {
+  if (historyCursor < history.length - 1) history = history.slice(0, historyCursor + 1);
+  history.push(question);
   historyCursor = history.length - 1;
-  drawCurrent();
+  state.lastSeen[question.itemId] = Date.now();
+  saveState();
+  drawQuestion(question);
 }
 
-function showHistoryItem(nextCursor, feedbackKind) {
+function renderNextQuestion() {
+  renderFeedback(null);
+  const question = nextQuestion();
+  if (!question) return;
+  preferredItemId = null;
+  excludeVectorOnce = null;
+  pushQuestion(question);
+}
+
+function showHistoryItem(nextCursor, kind) {
   if (nextCursor < 0 || nextCursor >= history.length) return;
   historyCursor = nextCursor;
-  current = itemById(history[historyCursor]);
-  drawCurrent();
-  renderFeedback(feedbackKind);
+  const question = history[historyCursor];
+  drawQuestion(question);
+  renderFeedback(kind, kind === "back" ? "Going back through what you already saw." : "Going forward through your session.");
 }
 
 function moveForward() {
@@ -166,63 +316,97 @@ function moveForward() {
     showHistoryItem(historyCursor + 1, "forward");
     return;
   }
+  renderNextQuestion();
+}
 
-  renderFeedback(null);
-  renderNextQueuedItem();
+function finishIntro() {
+  const itemId = currentQuestion.itemId;
+  state.introduced[itemId] = true;
+  state.repCount += 1;
+  preferredItemId = itemId;
+  saveState();
+  renderFeedback("got", "Met um. Now same thought, but you gotta retrieve it.");
+  renderNextQuestion();
 }
 
 function rateCurrent(delta) {
-  if (isReviewingHistory()) return;
+  if (!currentQuestion || isReviewingHistory()) return;
+  if (currentQuestion.intro) {
+    finishIntro();
+    return;
+  }
 
-  const ratedItem = current;
-  const currentStrength = getStrength(ratedItem.id);
-  strengths[direction][ratedItem.id] = Math.max(0, Math.min(5, currentStrength + delta));
-  saveStrengths();
+  if (autoRated) {
+    renderNextQuestion();
+    return;
+  }
 
-  if (delta < 0) {
-    const returnAt = Math.min(queue.length, 2 + Math.floor(Math.random() * 3));
-    queue.splice(returnAt, 0, ratedItem.id);
-    renderFeedback("miss", ratedItem);
+  const item = currentItem;
+  ENGINE.rateVector(vectorStrengths, item.id, currentQuestion.vector, delta);
+  state.repCount += 1;
+  state.lastSeen[item.id] = Date.now();
+  saveState();
+
+  if (delta > 0) {
+    const message = currentQuestion.vector === "use"
+      ? `Used um. ${item.hawaiian} gets real-world credit, which matters more than one tap in here.`
+      : `Got um. ${currentQuestion.label.toLowerCase()} is getting stronger for ${item.hawaiian}`;
+    renderFeedback("got", message);
   } else {
-    queue.push(ratedItem.id);
-    renderFeedback("got", ratedItem);
+    renderFeedback("miss", `Almost, uncle. ${item.hawaiian}. Say um once. We will bring it back from another angle soon.`);
+    preferredItemId = item.id;
   }
 
   const feedbackText = els.feedback.textContent;
   const feedbackKind = els.feedback.dataset.kind;
-  renderNextQueuedItem();
-  els.feedback.textContent = feedbackText;
-  els.feedback.dataset.kind = feedbackKind;
-  els.feedback.hidden = false;
+  renderNextQuestion();
+  renderFeedback(feedbackKind, feedbackText);
 }
 
-function setDirection(nextDirection) {
-  direction = nextDirection;
-  queue = [];
-  seen = new Set();
-  history = [];
-  historyCursor = -1;
-  renderFeedback(null);
+function moreLikeThis() {
+  if (!currentQuestion || currentQuestion.intro) return;
+  preferredItemId = currentQuestion.itemId;
+  excludeVectorOnce = currentQuestion.vector;
+  renderFeedback("forward", "Same thought, new angle. This is the point.");
+  renderNextQuestion();
+}
 
-  const pidginFirst = direction === DIRECTIONS.P2H;
-  els.directionPidgin.classList.toggle("is-active", pidginFirst);
-  els.directionHawaiian.classList.toggle("is-active", !pidginFirst);
-  els.directionPidgin.setAttribute("aria-pressed", String(pidginFirst));
-  els.directionHawaiian.setAttribute("aria-pressed", String(!pidginFirst));
+function renderNoeauWidget() {
+  if (!NOEAU_ITEMS.length || noeauIndex < 0) {
+    if (els.morePractice) els.morePractice.hidden = true;
+    return;
+  }
 
-  renderNextQueuedItem();
+  const item = NOEAU_ITEMS[noeauIndex % NOEAU_ITEMS.length];
+  els.noeauSaying.textContent = item.hawaiian;
+  els.noeauMeaning.textContent = item.meaning;
+  els.noeauHook.textContent = item.localHook;
+  els.noeauBody.hidden = true;
+  els.noeauReveal.hidden = false;
+}
+
+function nextNoeau() {
+  if (!NOEAU_ITEMS.length) return;
+  noeauIndex = (noeauIndex + 1) % NOEAU_ITEMS.length;
+  renderNoeauWidget();
 }
 
 els.showAnswer.addEventListener("click", () => setRevealed(true));
 els.gotIt.addEventListener("click", () => rateCurrent(1));
 els.missIt.addEventListener("click", () => rateCurrent(-1));
+els.moreLikeThis.addEventListener("click", moreLikeThis);
 els.backCard.addEventListener("click", () => showHistoryItem(historyCursor - 1, "back"));
 els.forwardCard.addEventListener("click", moveForward);
 els.replayCard.addEventListener("click", () => {
-  setRevealed(false);
-  renderFeedback("replay");
+  if (!currentQuestion) return;
+  drawQuestion(currentQuestion, { preserveReveal: currentQuestion.intro });
+  renderFeedback("replay", currentQuestion.intro ? "Read both once more, then say the Hawaiian." : "Replay. No peek. Try the same angle again.");
 });
-els.directionPidgin.addEventListener("click", () => setDirection(DIRECTIONS.P2H));
-els.directionHawaiian.addEventListener("click", () => setDirection(DIRECTIONS.H2P));
+els.noeauReveal.addEventListener("click", () => {
+  els.noeauBody.hidden = false;
+  els.noeauReveal.hidden = true;
+});
+els.noeauNext.addEventListener("click", nextNoeau);
 
-renderNextQueuedItem();
+renderNoeauWidget();
+renderNextQuestion();

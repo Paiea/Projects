@@ -2,217 +2,225 @@ from pathlib import Path
 import json
 import re
 import subprocess
+import unicodedata
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 PROJECT = ROOT / "pidgin-olelo"
 
 
-class PidginOleloPrototypeTests(unittest.TestCase):
+class PidginOleloTests(unittest.TestCase):
     def read(self, path: Path) -> str:
         self.assertTrue(path.exists(), f"missing required file: {path.relative_to(ROOT)}")
         return path.read_text(encoding="utf-8")
 
-    def test_shared_bank_has_one_hundred_multi_form_items(self):
-        self.read(PROJECT / "index.html")
-        self.read(PROJECT / "styles.css")
-        app = self.read(PROJECT / "app.js")
-        phrases = self.read(PROJECT / "phrases.js")
-        self.read(PROJECT / "PROJECT_STATE.md")
-        self.assertEqual(len(re.findall(r"\bid\s*:\s*['\"]", phrases)), 100)
-        for field in ("pidgin", "hawaiian", "shape", "examplePidgin", "exampleHawaiian"):
-            self.assertEqual(len(re.findall(rf"\b{field}\s*:\s*['\"]", phrases)), 100)
-        self.assertIn("window.PIDGIN_OLELO_ITEMS", phrases)
-        self.assertIn("window.PIDGIN_OLELO_ITEMS", app)
-
-    def test_learn_reveals_shape_examples_feedback_and_review_navigation(self):
-        html = self.read(PROJECT / "index.html")
-        app = self.read(PROJECT / "app.js")
-        for control_id in (
-            "direction-pidgin",
-            "direction-hawaiian",
-            "prompt",
-            "answer",
-            "shape",
-            "example-pidgin",
-            "example-hawaiian",
-            "feedback",
-            "back-card",
-            "replay-card",
-            "forward-card",
-            "show-answer",
-            "got-it",
-            "miss-it",
-            "progress",
-        ):
-            self.assertIn(f'id="{control_id}"', html)
-        self.assertIn("current.shape", app)
-        self.assertIn("current.examplePidgin", app)
-        self.assertIn("current.exampleHawaiian", app)
-        self.assertIn("history", app)
-        self.assertIn("historyCursor", app)
-        self.assertIn("renderFeedback", app)
-        self.assertNotIn("speechSynthesis", app)
-        self.assertNotIn("SpeechSynthesisUtterance", app)
-
-    def test_forward_navigation_advances_when_history_is_exhausted(self):
-        app = self.read(PROJECT / "app.js")
-        self.assertIn("function moveForward()", app)
-        self.assertIn("historyCursor < history.length - 1", app)
-        self.assertIn("renderNextQueuedItem();", app)
-        self.assertIn('els.forwardCard.addEventListener("click", moveForward)', app)
-        self.assertNotIn("els.forwardCard.disabled = historyCursor < 0 || historyCursor >= history.length - 1", app)
-
-    def test_static_runtime_has_no_external_dependency(self):
-        for page_name in ("index.html", "challenge.html", "noeau.html"):
-            html = self.read(PROJECT / page_name)
-            self.assertNotRegex(html, r'<(?:script|link)[^>]+(?:src|href)=["\']https?://')
-            self.assertIn('href="styles.css"', html)
-        self.assertIn('src="phrases.js"', self.read(PROJECT / "index.html"))
-        self.assertIn('src="phrases.js"', self.read(PROJECT / "challenge.html"))
-        self.assertIn('src="app.js"', self.read(PROJECT / "index.html"))
-        self.assertIn('src="challenge.js"', self.read(PROJECT / "challenge.html"))
-        self.assertIn('src="noeau.js"', self.read(PROJECT / "noeau.html"))
-        self.assertIn('src="noeau-app.js"', self.read(PROJECT / "noeau.html"))
-
-    def test_three_modes_share_one_navigation(self):
-        pages = [
-            self.read(PROJECT / "index.html"),
-            self.read(PROJECT / "challenge.html"),
-            self.read(PROJECT / "noeau.html"),
-        ]
-        for html in pages:
-            self.assertIn('class="experience-nav"', html)
-            self.assertIn('href="index.html"', html)
-            self.assertIn('href="challenge.html"', html)
-            self.assertIn('href="noeau.html"', html)
-            self.assertIn(">Learn<", html)
-            self.assertIn(">Challenge<", html)
-            self.assertIn(">Noʻeau<", html)
-            self.assertIn('aria-current="page"', html)
-
-    def test_challenge_page_reveals_same_shape_and_examples_from_shared_bank(self):
-        html = self.read(PROJECT / "challenge.html")
-        js = self.read(PROJECT / "challenge.js")
-        for control_id in (
-            "challenge-label",
-            "challenge-timer",
-            "challenge-instruction",
-            "challenge-prompt",
-            "challenge-answer-wrap",
-            "challenge-answer",
-            "challenge-shape",
-            "challenge-example-pidgin",
-            "challenge-example-hawaiian",
-            "challenge-note",
-            "challenge-show-answer",
-        ):
-            self.assertIn(f'id="{control_id}"', html)
-        self.assertIn("item.shape", js)
-        self.assertIn("item.examplePidgin", js)
-        self.assertIn("item.exampleHawaiian", js)
-        self.assertNotIn('id="listen"', html)
-        self.assertNotIn("streak", html.lower())
-        self.assertNotIn("score", html.lower())
-
-    def test_challenge_engine_is_deterministic_inside_ten_minute_windows(self):
-        challenge_js = PROJECT / "challenge.js"
-        self.read(challenge_js)
-        script = r'''
-const engine = require(process.argv[1]);
-const items = [
-  {id: "a", pidgin: "P1", hawaiian: "H1", note: "N1", shape: "S1", examplePidgin: "EP1", exampleHawaiian: "EH1"},
-  {id: "b", pidgin: "P2", hawaiian: "H2", note: "N2", shape: "S2", examplePidgin: "EP2", exampleHawaiian: "EH2"},
-  {id: "c", pidgin: "P3", hawaiian: "H3", note: "N3", shape: "S3", examplePidgin: "EP3", exampleHawaiian: "EH3"},
-];
-const base = 42 * engine.CHALLENGE_WINDOW_MS;
-const first = engine.challengeForTime(base + 1, items);
-const same = engine.challengeForTime(base + engine.CHALLENGE_WINDOW_MS - 1, items);
-const next = engine.challengeForTime(base + engine.CHALLENGE_WINDOW_MS, items);
-const types = [0, 1, 2, 3].map(offset => engine.challengeForBlock(42 + offset, items).type);
-console.log(JSON.stringify({
-  window: engine.CHALLENGE_WINDOW_MS,
-  first,
-  same,
-  next,
-  types,
-  countdown: engine.formatCountdown(engine.CHALLENGE_WINDOW_MS - 999),
-}));
-'''
+    def node_json(self, script: str, *paths: Path):
         completed = subprocess.run(
-            ["node", "-e", script, str(challenge_js)],
+            ["node", "-e", script, *map(str, paths)],
             check=True,
             capture_output=True,
             text=True,
         )
-        result = json.loads(completed.stdout)
-        self.assertEqual(result["window"], 10 * 60 * 1000)
-        self.assertEqual(result["first"], result["same"])
-        self.assertNotEqual(result["first"]["block"], result["next"]["block"])
-        self.assertEqual(set(result["types"]), {"p2h", "h2p", "say", "use"})
-        self.assertRegex(result["countdown"], r"^\d{2}:\d{2}$")
+        return json.loads(completed.stdout)
 
-    def test_noeau_bank_keeps_historical_meaning_separate_from_modern_hook(self):
+    def test_shared_bank_still_has_one_hundred_items(self):
+        phrases = self.read(PROJECT / "phrases.js")
+        self.assertEqual(len(re.findall(r"\bid\s*:\s*['\"]", phrases)), 100)
+        for field in ("pidgin", "hawaiian", "shape", "examplePidgin", "exampleHawaiian"):
+            self.assertEqual(len(re.findall(rf"\b{field}\s*:\s*['\"]", phrases)), 100)
+        self.assertIn("window.PIDGIN_OLELO_ITEMS", phrases)
+
+    def test_curriculum_makes_core_thirty_the_permanent_default(self):
+        result = self.node_json(
+            r'''
+const c = require(process.argv[1]);
+console.log(JSON.stringify({
+  coreCount: c.CORE_IDS.length,
+  uniqueCore: new Set(c.CORE_IDS).size,
+  familyCount: Object.keys(c.CORE_FAMILIES).length,
+  scenarioCount: Object.keys(c.CORE_SCENARIOS).length,
+  levels: c.LEVELS,
+  car: c.CORE_OVERRIDES["where-thing"],
+}));
+''',
+            PROJECT / "curriculum.js",
+        )
+        self.assertEqual(result["coreCount"], 30)
+        self.assertEqual(result["uniqueCore"], 30)
+        self.assertEqual(result["familyCount"], 30)
+        self.assertEqual(result["scenarioCount"], 30)
+        self.assertEqual(result["levels"]["core"]["end"], 30)
+        self.assertEqual(result["levels"]["build"]["start"], 30)
+        self.assertEqual(result["levels"]["stretch"]["end"], 100)
+        self.assertEqual(result["car"]["pidgin"], "Where the car stay?")
+        self.assertEqual(result["car"]["hawaiian"], "Ma hea ke kaʻa?")
+
+    def test_core_engine_fades_pidgin_across_five_stages(self):
+        result = self.node_json(
+            r'''
+const e = require(process.argv[1]);
+const item = {
+  id:"want-eat-q", pidgin:"You like eat?", hawaiian:"Makemake ʻoe e ʻai?",
+  shape:"want | you | eat", examplePidgin:"You like eat poi?",
+  exampleHawaiian:"Makemake ʻoe e ʻai i ka poi?", note:"Keep makemake first."
+};
+const pool = [
+  item,
+  {id:"where",pidgin:"Where you stay?",hawaiian:"Aia i hea ʻoe?"},
+  {id:"name",pidgin:"What your name?",hawaiian:"ʻO wai kou inoa?"},
+  {id:"go",pidgin:"We go.",hawaiian:"E hele kākou."}
+];
+const scenario = {prompt:"Keoni walks in hungry. Ask if he wants to eat."};
+const built = Object.fromEntries(e.VECTORS.map(v => [v,e.buildQuestion(item,v,pool,scenario)]));
+const states = {
+  fresh:{},
+  recognized:{x:{recognize:1}},
+  clozed:{x:{recognize:1,cloze:1}},
+  produced:{x:{recognize:1,cloze:1,produce:1}},
+  situated:{x:{recognize:1,cloze:1,produce:1,scenario:1}},
+};
+console.log(JSON.stringify({
+  vectors:e.VECTORS,
+  intro:e.buildIntro(item),
+  built,
+  stages:Object.fromEntries(Object.entries(states).map(([k,s])=>[k,e.stageFor("x",s)])),
+  picks:{
+    fresh:e.pickVector("x",states.fresh,1),
+    recognized:e.pickVector("x",states.recognized,2),
+    clozed:e.pickVector("x",states.clozed,3),
+    produced:e.pickVector("x",states.produced,4),
+    situated:e.pickVector("x",states.situated,5),
+  }
+}));
+''',
+            PROJECT / "core-engine.js",
+        )
+        self.assertEqual(set(result["vectors"]), {"recognize", "cloze", "produce", "scenario", "say", "use"})
+        self.assertEqual(result["intro"]["stage"], 1)
+        self.assertEqual(result["stages"], {"fresh": 2, "recognized": 3, "clozed": 3, "produced": 4, "situated": 5})
+        self.assertEqual(result["picks"], {"fresh": "recognize", "recognized": "cloze", "clozed": "produce", "produced": "scenario", "situated": "say"})
+        self.assertIn("You like eat?", result["built"]["recognize"]["choices"])
+        self.assertIn("____", result["built"]["cloze"]["prompt"])
+        self.assertIn("You like eat?", result["built"]["cloze"]["instruction"])
+        self.assertEqual(result["built"]["produce"]["prompt"], "You like eat?")
+        self.assertEqual(result["built"]["scenario"]["prompt"], "Keoni walks in hungry. Ask if he wants to eat.")
+        self.assertIn("Makemake ʻoe e ʻai?", result["built"]["scenario"]["choices"])
+        self.assertEqual(result["built"]["say"]["prompt"], "Makemake ʻoe e ʻai?")
+        self.assertIn("next 10 minutes", result["built"]["use"]["instruction"].lower())
+
+    def test_core_hawaiian_orthography_is_normalized(self):
+        phrases = self.read(PROJECT / "phrases.js")
+        hawaiian = re.findall(r'\bhawaiian:\s*"([^"]*)"', phrases)[:30]
+        examples = re.findall(r'\bexampleHawaiian:\s*"([^"]*)"', phrases)[:30]
+        self.assertEqual(len(hawaiian), 30)
+        self.assertEqual(len(examples), 30)
+        for text in hawaiian + examples:
+            self.assertEqual(text, unicodedata.normalize("NFC", text))
+            self.assertNotIn("\u2018", text)
+            self.assertNotIn("\u2019", text)
+        sensitive = " ".join(hawaiian + examples)
+        for expected in ("Maikaʻi", "ʻAʻole", "ʻōlelo", "ʻoe", "kāua", "kākou", "kōkua", "iaʻu", "ʻaneʻi", "nānā", "hoʻolohe"):
+            self.assertIn(expected, sensitive)
+
+    def test_learn_is_one_mixed_flow_without_direction_toggles(self):
+        html = self.read(PROJECT / "index.html")
+        app = self.read(PROJECT / "app.js")
+        self.assertIn("Core 30", html)
+        self.assertNotIn('id="direction-pidgin"', html)
+        self.assertNotIn('id="direction-hawaiian"', html)
+        self.assertNotIn("setDirection", app)
+        for control_id in (
+            "vector-label", "vector-instruction", "prompt", "answer-wrap", "answer",
+            "choice-wrap", "feedback", "show-answer", "got-it", "miss-it",
+            "more-like-this", "back-card", "replay-card", "forward-card", "progress",
+        ):
+            self.assertIn(f'id="{control_id}"', html)
+        self.assertIn("preferredItemId = itemId", app)
+        self.assertIn("recordKnownChoice", app)
+        self.assertIn("Almost, uncle", app)
+        self.assertIn("Wrong scene", app)
+
+    def test_more_is_integrated_noeau_widget_not_extra_phrase_menu(self):
+        html = self.read(PROJECT / "index.html")
+        app = self.read(PROJECT / "app.js")
+        self.assertIn('<summary>More</summary>', html)
+        for control_id in (
+            "noeau-widget", "noeau-widget-saying", "noeau-widget-reveal",
+            "noeau-widget-body", "noeau-widget-meaning", "noeau-widget-hook",
+            "noeau-widget-next",
+        ):
+            self.assertIn(f'id="{control_id}"', html)
+        self.assertIn('src="noeau.js"', html)
+        self.assertNotIn('href="noeau.html"', html)
+        self.assertNotIn("70 more phrases", html)
+        self.assertIn("NOEAU_ITEMS", app)
+        self.assertIn("renderNoeauWidget", app)
+
+    def test_noeau_bank_stays_separate_and_sourced(self):
         bank = self.read(PROJECT / "noeau.js")
         self.assertEqual(len(re.findall(r"\bid\s*:\s*['\"]", bank)), 10)
         for field in ("hawaiian", "meaning", "localHook", "sourceLabel", "sourceUrl"):
             self.assertEqual(len(re.findall(rf"\b{field}\s*:\s*['\"]", bank)), 10)
-        self.assertIn("window.PIDGIN_OLELO_NOEAU", bank)
+
+    def test_old_progress_is_migrated(self):
+        app = self.read(PROJECT / "app.js")
+        self.assertIn('"pidgin-olelo-v0-strength"', app)
+        self.assertIn('"pidgin-olelo-core-vectors-v1"', app)
+        self.assertIn("migrate", app.lower())
+
+    def test_forward_navigation_still_advances(self):
+        app = self.read(PROJECT / "app.js")
+        self.assertIn("function moveForward()", app)
+        self.assertIn("historyCursor < history.length - 1", app)
+        self.assertIn("renderNextQuestion", app)
+
+    def test_challenge_is_core_real_world_mission_and_tracks_use(self):
+        html = self.read(PROJECT / "challenge.html")
+        js = self.read(PROJECT / "challenge.js")
+        self.assertIn("Core 30", html)
+        self.assertIn("YOUR MISSION", html)
+        self.assertIn('id="challenge-used"', html)
+        self.assertIn("I USED IT", html)
+        self.assertIn("coreItems", js)
+        self.assertIn('"pidgin-olelo-core-vectors-v1"', js)
+        self.assertIn("vectorStrengths[itemId].use", js)
+
+    def test_challenge_is_deterministic_inside_ten_minute_windows(self):
+        result = self.node_json(
+            r'''
+const e = require(process.argv[1]);
+const items=[{id:"a",pidgin:"P1",hawaiian:"H1"},{id:"b",pidgin:"P2",hawaiian:"H2"},{id:"c",pidgin:"P3",hawaiian:"H3"}];
+const base=42*e.CHALLENGE_WINDOW_MS;
+const first=e.missionForTime(base+1,items);
+const same=e.missionForTime(base+e.CHALLENGE_WINDOW_MS-1,items);
+const next=e.missionForTime(base+e.CHALLENGE_WINDOW_MS,items);
+console.log(JSON.stringify({window:e.CHALLENGE_WINDOW_MS,first,same,next}));
+''',
+            PROJECT / "challenge.js",
+        )
+        self.assertEqual(result["window"], 10 * 60 * 1000)
+        self.assertEqual(result["first"], result["same"])
+        self.assertNotEqual(result["first"]["block"], result["next"]["block"])
+
+    def test_project_state_records_key_boundaries(self):
+        state = self.read(PROJECT / "PROJECT_STATE.md").lower()
         for expected in (
-            "Aia nō i ke au a ka wāwae",
-            "I ʻolaʻolā nō ka huewai i ka piha ʻole",
-            "Pili kau, pili hoʻoilo",
-            "ʻO ka mea ua hala, ua hala ia",
+            "core 30", "show what you know", "more like this", "win", "compiler",
+            "pidgin", "ʻokina", "kahakō", "fluent-speaker", "audio", "fades", "the joke",
         ):
-            self.assertIn(expected, bank)
-        self.assertIn("group chat", bank.lower())
-        self.assertIn("screenshot", bank.lower())
-        self.assertIn("H-1", bank)
+            self.assertIn(expected, state)
 
-    def test_noeau_page_reveals_meaning_then_clearly_labeled_modern_hook(self):
-        html = self.read(PROJECT / "noeau.html")
-        app = self.read(PROJECT / "noeau-app.js")
-        for control_id in (
-            "noeau-saying",
-            "noeau-reveal",
-            "noeau-meaning",
-            "noeau-hook",
-            "noeau-source",
-            "noeau-show",
-            "noeau-prev",
-            "noeau-next",
-        ):
-            self.assertIn(f'id="{control_id}"', html)
-        self.assertIn("Kūpuna said", html)
-        self.assertIn("What it carries", html)
-        self.assertIn("Today maybe", html)
-        self.assertIn("current.meaning", app)
-        self.assertIn("current.localHook", app)
-        self.assertIn("current.sourceUrl", app)
-        self.assertIn("modern memory hook", html.lower())
-
-    def test_local_memory_examples_exist_without_turning_humor_into_authority(self):
-        phrases = self.read(PROJECT / "phrases.js")
-        state = self.read(PROJECT / "PROJECT_STATE.md")
-        for cue in ("H-1", "Costco", "auntie", "parking", "rain"):
-            self.assertIn(cue.lower(), phrases.lower())
-        self.assertIn("memory hook", state.lower())
-        self.assertIn("fluent-speaker", state.lower())
-        self.assertIn("historical meaning", state.lower())
-        self.assertIn("modern local", state.lower())
-
-    def test_phone_layout_remains_and_audio_stays_removed(self):
+    def test_static_runtime_has_no_external_dependency_or_audio(self):
+        for page_name in ("index.html", "challenge.html"):
+            html = self.read(PROJECT / page_name)
+            self.assertNotRegex(html, r'<(?:script|link)[^>]+(?:src|href)=["\']https?://')
+            self.assertIn('href="styles.css"', html)
+        app = self.read(PROJECT / "app.js")
+        self.assertNotIn("speechSynthesis", app)
+        self.assertNotIn("SpeechSynthesisUtterance", app)
         styles = self.read(PROJECT / "styles.css")
-        pages = [
-            self.read(PROJECT / "index.html"),
-            self.read(PROJECT / "challenge.html"),
-            self.read(PROJECT / "noeau.html"),
-        ]
         self.assertIn("@media", styles)
         self.assertIn("480px", styles)
-        for html in pages:
-            self.assertNotIn("device voice", html.lower())
-            self.assertNotIn("pronunciation authority", html.lower())
 
     def test_hub_and_registry_route_to_project(self):
         hub = self.read(ROOT / "index.html")
@@ -220,7 +228,6 @@ console.log(JSON.stringify({
         self.assertIn('href="pidgin-olelo/"', hub)
         self.assertIn("Pidgin → ʻŌlelo", hub)
         self.assertIn("## Pidgin → ʻŌlelo", registry)
-        self.assertIn("pidgin-olelo/PROJECT_STATE.md", registry)
 
 
 if __name__ == "__main__":
