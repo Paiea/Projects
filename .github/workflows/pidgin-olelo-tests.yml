@@ -4,12 +4,12 @@ on:
   push:
     paths:
       - 'pidgin-olelo/**'
-      - 'tests/test_pidgin_olelo.py'
+      - 'tests/test_pidgin_olelo*.py'
       - '.github/workflows/pidgin-olelo-tests.yml'
   pull_request:
     paths:
       - 'pidgin-olelo/**'
-      - 'tests/test_pidgin_olelo.py'
+      - 'tests/test_pidgin_olelo*.py'
       - '.github/workflows/pidgin-olelo-tests.yml'
 
 jobs:
@@ -26,7 +26,7 @@ jobs:
       - name: Run Pidgin Olelo regression tests
         run: |
           set +e
-          python tests/test_pidgin_olelo.py > test-output.txt 2>&1
+          python -m unittest discover -s tests -p 'test_pidgin_olelo*.py' > test-output.txt 2>&1
           code=$?
           cat test-output.txt
           exit $code
