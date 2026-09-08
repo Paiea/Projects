@@ -30,6 +30,7 @@ Pidgin support fades as the learner gets stronger. Pidgin is never the joke.
 - Mobile practice-shell regression: `tests/test_pidgin_olelo_mobile_practice.py`
 - One-word cloze regression: `tests/test_pidgin_olelo_one_word_cloze.py`
 - Noʻeau copy regression: `tests/test_pidgin_olelo_noeau_copy.py`
+- Progress-status regression: `tests/test_pidgin_olelo_progress_status.py`
 
 ## Learning Model
 
@@ -44,6 +45,15 @@ Each Core thought moves through five invisible stages:
 5. **HAWAIIAN-FIRST** — `SAY IT` and `USE IT` with the bridge increasingly unnecessary.
 
 The six hidden scored vectors are `recognize`, `cloze`, `produce`, `scenario`, `say`, and `use`.
+
+### Visible progress
+
+Keep mastery strict underneath, but make the learner-facing progress signal move in a way that makes sense.
+
+- **solid** means a Core thought has crossed the existing `ENGINE.isOwned` mastery threshold
+- **learning** means a currently active Core thought has not crossed that threshold yet
+- show progress as `5 learning · 0 solid`, then e.g. `4 learning · 1 solid`
+- do not weaken the ownership threshold just to make the visible number move
 
 ### Translation is not conversation reply
 
@@ -171,6 +181,7 @@ A future **hear it** vector should return only with trustworthy fluent-speaker o
 
 Use the shipped Core 30 version with Dad before adding vocabulary or major modes. Watch whether:
 
+- the visible `learning · solid` status feels intuitive while mastery remains appropriately hard
 - the full question → reveal → rate → Next loop actually fits common phone viewports without scrolling
 - the separate answer-support block is useful when intentionally opened by scrolling, without getting in the way of the primary loop
 - Seally feels funny without becoming noisy
@@ -184,4 +195,4 @@ Use the shipped Core 30 version with Dad before adding vocabulary or major modes
 
 ## RE-PROMPT
 
-> Continue Pidgin → ʻŌlelo from current `Paiea/Projects` authority. Read root `AGENTS.md`, `state/PROJECT_REGISTRY.md`, `state/HANDSHAKE_PROTOCOL.md`, and `pidgin-olelo/PROJECT_STATE.md`, then inspect current source. Preserve Core 30 as the permanent default, one mixed Learn flow, ELL-style fading, six hidden vectors, recasting, WIN-style MORE LIKE THIS / SHOW WHAT YOU KNOW, compiler-style one-thought-many-representations, quiet spacing, working Back/Replay/Forward, conversational replies as a derived `scenario` representation rather than a new mode, real-world Mission use credit, orthography checks, inline Noʻeau under the lesson, and responsive Uncle Seally commentary. Keep translation meaning distinct from a plausible conversational reply. Keep one-word Hawaiian targets out of bare-blank cloze prompts; use supported Pidgin → Hawaiian retrieval in that existing `cloze` slot instead. Keep Uncle Seally sparse: ordinary correct reactions are throttled, while miss/repeated miss, mastery, Show Me, Replay, and harder scaffold transitions are teacher moments; seal jokes stay rare. On phones, preserve the viewport-first practice shell: no large Learn hero, compact Seally/progress, primary answer/actions inside the viewport, secondary shape/examples below, and no document auto-scroll on Next. Keep the Noʻeau reveal label plain: `Meaning`. Pidgin is the trusted scaffold and never the punchline. Do not restore synthetic audio. Prefer real Dad testing and fluent-speaker/kumu corrections over feature expansion.
+> Continue Pidgin → ʻŌlelo from current `Paiea/Projects` authority. Read root `AGENTS.md`, `state/PROJECT_REGISTRY.md`, `state/HANDSHAKE_PROTOCOL.md`, and `pidgin-olelo/PROJECT_STATE.md`, then inspect current source. Preserve Core 30 as the permanent default, one mixed Learn flow, ELL-style fading, six hidden vectors, recasting, WIN-style MORE LIKE THIS / SHOW WHAT YOU KNOW, compiler-style one-thought-many-representations, quiet spacing, working Back/Replay/Forward, conversational replies as a derived `scenario` representation rather than a new mode, real-world Mission use credit, orthography checks, inline Noʻeau under the lesson, and responsive Uncle Seally commentary. Keep visible progress intuitive as `learning · solid` while keeping the existing `isOwned` mastery threshold strict. Keep translation meaning distinct from a plausible conversational reply. Keep one-word Hawaiian targets out of bare-blank cloze prompts; use supported Pidgin → Hawaiian retrieval in that existing `cloze` slot instead. Keep Uncle Seally sparse: ordinary correct reactions are throttled, while miss/repeated miss, mastery, Show Me, Replay, and harder scaffold transitions are teacher moments; seal jokes stay rare. On phones, preserve the viewport-first practice shell: no large Learn hero, compact Seally/progress, primary answer/actions inside the viewport, secondary shape/examples below, and no document auto-scroll on Next. Keep the Noʻeau reveal label plain: `Meaning`. Pidgin is the trusted scaffold and never the punchline. Do not restore synthetic audio. Prefer real Dad testing and fluent-speaker/kumu corrections over feature expansion.
