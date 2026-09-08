@@ -26,7 +26,7 @@ Pidgin represents familiar learner thought. Hawaiian remains the language author
 - Noʻeau bank: `pidgin-olelo/noeau.js`
 - Responsive shell: `pidgin-olelo/styles.css` + `pidgin-olelo/simplify.css`
 
-Regression authority includes `tests/test_pidgin_olelo*.py`, especially island, routing, mobile-shell, response, Seally, one-word-cloze, Noʻeau, More-Phrases, and mobile-readability coverage.
+Regression authority includes `tests/test_pidgin_olelo*.py`, especially island, routing, mobile-shell, response, Seally, one-word-cloze, Noʻeau, More-Phrases, mobile-readability, and routing-judgment coverage.
 
 ## Core Learning Model
 
@@ -65,9 +65,12 @@ Important boundaries:
 - islands are **representations**, not new semantic curriculum
 - parent progress and island progress are stored separately
 - knowing `Pehea?` must not pretend the learner already owns `Pehea ʻoe?`
-- `standalone: false` islands may be recognized as useful pieces but should not be encouraged as free-standing utterances
-- Core is still full-phrase-first; islands appear lightly after introduction or as a one-shot repair after repeated misses
+- `standalone: false` islands are recognition-only scaffolds and must not become free production/scenario prompts
+- Core is still full-phrase-first; islands appear lightly after introduction or as a one-step repair after a full-parent miss
+- if a missed parent has no useful island, repair falls back to supported parent recognition rather than repeating the same hard card
+- successful repair returns routing toward the fuller parent without erasing parent progress
 - extra material is island-first and only expands back to the full parent after the island earns at least two production wins plus one contextual-use win
+- contextual islands must actually appear inside at least one stored mixed example; do not create a context label that the example never shows
 
 Core island state uses `pidgin-olelo-core-islands-v1`. Extra island state uses `pidgin-olelo-extra-islands-v1`.
 
@@ -86,7 +89,9 @@ Rules:
 - Core reveals the `More phrases` link only after 5 Core thoughts are solid
 - direct `more.html` access is harmless
 - extra practice starts with 10 active parent thoughts
-- one additional parent enters every 8 reps
+- 8 reps remains the minimum cadence before another parent can enter, but rep count alone no longer forces an unlock
+- a new parent enters only when every currently active parent has at least some learning evidence and none is in a repeated-miss state
+- existing users keep already-unlocked material; evidence gating pauses future expansion rather than shrinking their current pool
 - the same `core-engine.js` and `app.js` runtime power both Learn and More
 - do not fork a separate extra learning engine
 
@@ -98,7 +103,7 @@ Current examples include:
 
 - `Pehea? Tough day?`
 - hungry/full/ʻono food situations
-- `You need five. ʻEhia you get?`
+- `You need five. ʻEhia? How many you get?`
 - `Go kiʻi that slipper before the dog run.`
 - Costco/parking situations
 - wet-road / drive-safe situations
@@ -118,6 +123,24 @@ Example:
 - reply cue `Same like always` → **ʻO ia mau nō.**
 
 Response cards remain under the existing `scenario` vector. Do not create a seventh response mode.
+
+Conversation question scaffolding is learner-state driven, not arbitrary rep parity:
+
+- if the paired question thought is still unfamiliar, show the Pidgin question scaffold first
+- once the paired question has recognition evidence, show the Hawaiian question
+- if the learner misses the reply, temporarily fall back to the Pidgin question scaffold for repair
+- the learner-facing response cue stores only the intended Pidgin reply, never a translation/explanation string such as `Answer: ...`
+
+## Routing Judgment
+
+Routing should make the next rep meaningfully different or meaningfully easier, not merely mechanically different.
+
+- **MORE LIKE THIS** keeps the same parent thought but avoids the previous representation once when safe: parent → island or island → parent
+- it also avoids the previous vector when another unlocked vector is available
+- extra material may refuse an island → full-parent jump when the island is not stable yet; scaffold safety outranks novelty
+- one parent miss is enough to request a zoom-down repair
+- repeated misses pause new-parent expansion
+- successful evidence on active material is what earns expansion, with rep cadence acting as a minimum pacing gate
 
 ## Uncle Seally
 
@@ -188,10 +211,13 @@ A future hear-it vector should return only with trustworthy fluent Hawaiian audi
 
 Use the current Core + island + More-Phrases system with a real learner before expanding architecture again. Workshop from observed friction, especially:
 
+- whether strength-aware conversation scaffolding feels natural rather than repetitive
+- whether one-miss zoom-down repair is enough support without becoming annoying
+- whether MORE LIKE THIS now feels genuinely different while preserving the same thought
+- whether evidence-gated unlocking slows the extra 70 at the right moments
 - whether Core islands feel like helpful zoom-ins rather than interruption
 - whether island-first extra practice makes the 70 feel learnable instead of like a vocabulary dump
 - whether the 5-solid gate for `More phrases` feels too early or too late
-- whether the 10-active + one-per-8-reps pace feels right
 - whether local mixed contexts help retrieval without confusing Hawaiian authority
 - whether parent vs island progress behaves intuitively
 - whether the larger phone readability floor still keeps the primary loop comfortably visible without scrolling on Dad's device
@@ -202,4 +228,4 @@ Do not add another mode until actual use shows the current representation system
 
 ## RE-PROMPT
 
-> Continue Pidgin → ʻŌlelo from current `Paiea/Projects` authority. Read root `AGENTS.md`, `state/PROJECT_REGISTRY.md`, `state/HANDSHAKE_PROTOCOL.md`, and `pidgin-olelo/PROJECT_STATE.md`. Preserve Core 30 as the permanent default, one mixed Learn flow, six hidden vectors, WIN-style MORE LIKE THIS / SHOW WHAT YOU KNOW, compiler-style one-thought-many-representations, strict `learning · solid` mastery, sparse Uncle Seally, inline Noʻeau, orthography checks, no synthetic audio, and the viewport-first mobile practice shell. Preserve Hawaiian islands as derived representations with separate island progress: Core is full-phrase-first with occasional zoom-ins/repair; More Phrases is quiet secondary practice over the existing utility-ranked extra 70, island-first, 10 active then one additional parent per 8 reps, graduating toward full parent phrases only after island retrieval/context evidence. Preserve the mobile readability floor: important teaching text stays readable, phone controls keep at least a 44px touch target, Show me remains the quieter peek action, and tight layouts hide/compress secondary chrome before shrinking language. Pidgin is the trusted bridge and never the punchline. Prefer real learner testing and fluent-speaker/kumu corrections over architectural expansion.
+> Continue Pidgin → ʻŌlelo from current `Paiea/Projects` authority. Read root `AGENTS.md`, `state/PROJECT_REGISTRY.md`, `state/HANDSHAKE_PROTOCOL.md`, and `pidgin-olelo/PROJECT_STATE.md`. Preserve Core 30 as the permanent default, one mixed Learn flow, six hidden vectors, WIN-style MORE LIKE THIS / SHOW WHAT YOU KNOW, compiler-style one-thought-many-representations, strict `learning · solid` mastery, sparse Uncle Seally, inline Noʻeau, orthography checks, no synthetic audio, and the viewport-first mobile practice shell. Preserve Hawaiian islands as derived representations with separate island progress. Core is full-phrase-first with occasional zoom-ins and one-miss zoom-down repair; More Phrases is quiet secondary practice over the existing utility-ranked extra 70, island-first, 10 active, with 8 reps as a minimum unlock cadence plus evidence/repeated-miss gating, graduating toward full parent phrases only after island retrieval/context evidence. Preserve strength-aware conversation scaffolding, MORE LIKE THIS representation switching when safe, recognition-only `standalone: false` islands, semantic context grounding, and the mobile readability floor. Pidgin is the trusted bridge and never the punchline. Prefer real learner testing and fluent-speaker/kumu corrections over architectural expansion.
