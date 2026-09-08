@@ -1,0 +1,35 @@
+name: The Islands Tests
+
+on:
+  push:
+    paths:
+      - 'alii/**'
+      - 'index.html'
+      - 'state/PROJECT_REGISTRY.md'
+      - 'tests/alii_*.test.mjs'
+      - 'tests/test_project_hub.py'
+      - '.github/workflows/alii-tests.yml'
+  pull_request:
+    paths:
+      - 'alii/**'
+      - 'index.html'
+      - 'state/PROJECT_REGISTRY.md'
+      - 'tests/alii_*.test.mjs'
+      - 'tests/test_project_hub.py'
+      - '.github/workflows/alii-tests.yml'
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify The Islands simulation and interface
+        run: node --test tests/alii_world.test.mjs tests/alii_language.test.mjs tests/alii_ui.test.mjs
+      - name: Verify project hub registration
+        run: python tests/test_project_hub.py
