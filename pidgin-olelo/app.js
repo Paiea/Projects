@@ -272,7 +272,8 @@ function isReviewingHistory() {
 
 function updateProgress() {
   const solid = CORE_ITEMS.filter((item) => ENGINE.isOwned(vectorStrengths, item.id)).length;
-  els.progress.textContent = `${solid} / 30 solid`;
+  const learning = activeItems().filter((item) => !ENGINE.isOwned(vectorStrengths, item.id)).length;
+  els.progress.textContent = `${learning} learning · ${solid} solid`;
 }
 
 function scrollToPracticeCard() {
