@@ -1,110 +1,133 @@
 # IMAGE OS — CURRENT
 
-> Hot state for reusable visual work. Exact source images and project-local evidence outrank derived restorations, color reconstructions, prompts, reviews, and remembered chat decisions.
+> Hot state for reusable visual work. Exact source images and project-local evidence outrank restorations, color reconstructions, prompts, reviews, and remembered chat decisions.
 
 ## Purpose
 
-Image OS is a reusable, file-based operating layer for image generation and editing. It preserves source authority, job constraints, review findings, approved outputs, and reusable visual learning so image work does not restart from prompt zero every session.
+Image OS is a reusable, file-based operating layer for image generation/editing. It preserves source authority, stage routing, job constraints, review findings, approved outputs, and reusable visual learning so image work does not restart from prompt zero every session.
 
-Image OS does **not** own the public product that consumes an image. Each project owns its own purpose, selection logic, research, and publishing surface.
+Image OS owns **visual process**, not the public product consuming an image. Project-specific selection, historical interpretation, and publishing remain with the project.
 
 ## Current proving ground
 
-**Hawaiʻi Archive Revival** is the first active proving ground for Image OS v1.
+**Hawaiʻi Archive Revival** is the first active proving ground.
 
-The visual lane is not a separate public historical-photo-restoration product. Historical images are selected, restored, color-reconstructed when useful, and published because they improve the finite Hawaiʻi historical social feed.
+Historical images exist to improve the finite Hawaiʻi historical social feed. Public output belongs to `hawaii-archive/`; generic visual process belongs here.
 
-Public output belongs to `hawaii-archive/`. Generic visual process belongs here.
+## V1 result: useful product proof, failed image-processing proof
 
-## V1 status
+The first three-image proof established useful product mechanics:
 
-The first three-image proving run is implemented and verified on `feature/image-os-v1-three-image-pilot`; once merged, `main` becomes accepted authority.
+- stable archival provenance;
+- Original / Restored / Color state UI;
+- honest `exact` / `near` / `context` relationship labels;
+- mixed text/photo/combo feed support.
 
-Pilot records:
+But the image-processing method is now **legacy failed experiment evidence**, not accepted Image OS quality.
 
-1. `HAR-IMG-0001` — **portrait** — James Keauiluna Kaulia, c. 1893, Library of Congress authority; near-match portrait for Kaulia's 1897 feed voice.
-2. `HAR-IMG-0002` — **built environment** — ʻIolani Palace, c. 1889–1890, Hawaiʻi State Archives authority; context image for the Palace Square / stone-walls post.
-3. `HAR-IMG-0003` — **daily life / crowd** — *Pounding poi - preparing dinner, Hawaiian Islands*, 1896, Library of Congress authority; proving-set context image held out of the political feed until a grounded post relationship earns it.
+The v1 restoration was shallow tonal processing and the color pass was tint/overlay based rather than semantic colorization. The Kaulia result exposed the core failure: photographic aging/staining could be carried into the derived view and visually treated like scene color. A visibly different image is not enough.
 
-All three have stable records under `hawaii-archive/data/images/index.json` and job review files under `hawaii-archive/images/jobs/<id>/review.md`.
+Keep v1 files for comparison/history. Do not use the v1 tint approach as the `color_reconstruct` backend going forward.
 
-The public feed now supports image-linked combo posts with **Original / Restored / Color** views. The three-image comparison surface lives at `hawaii-archive/image-pilot.html`.
+## V2 operating model
 
-## V1 execution method
+Image OS v2 is a staged orchestrator around specialist tools:
 
-The current chat runtime could discover archival images but could not pass those web-discovered pixels into the generative image editor as editable source images. The proving run therefore uses a deliberately conservative fallback:
+`SOURCE -> PREFLIGHT -> RESTORE_BW -> DETAIL_OPTIONAL -> FACE_OPTIONAL -> RESTORED_APPROVAL -> SEMANTIC_COLOR -> COLOR_REVIEW -> APPROVED_OUTPUT`
 
-- **Restored** = deterministic in-browser tonal normalization only: grayscale/albumen neutralization, restrained contrast/brightness/sharpness, and presentation crop where declared.
-- **Color** = restrained in-browser best-estimate hand-tint overlays with explicit confidence labels.
+See `systems/image-os/rules/pipeline-v2.md`.
 
-This method has a useful property for the first proof: it cannot redraw faces, architecture, hands, text, or object geometry. It is therefore extremely cheap and preservation-safe.
+### Specialist routing
 
-It also has a clear ceiling: it is not a replacement for a real pixel-level restoration/colorization pass. Do not claim scratch reconstruction, recovered lost detail, or exact object-specific color from this v1 renderer.
+- old-photo/global restoration pattern: conservative damage/tonal normalization first;
+- **Real-ESRGAN**: optional general detail/upscale only when earned;
+- **GFPGAN**: optional face restoration only when the face is materially degraded;
+- **DDColor**: default semantic colorization backend for historical B&W proofs.
 
-## Supported v1 job types
+Image OS does not depend on one magic model. Each stage can be inspected, accepted, rejected, or skipped independently.
+
+## Current v2 proving target
+
+`HAR-IMG-0001` — James Keauiluna Kaulia, c. 1893.
+
+First-run route:
+
+1. source lock;
+2. damage preflight;
+3. conservative restored B&W;
+4. **skip Real-ESRGAN** because the source resolution is already sufficient;
+5. **skip GFPGAN** because facial geometry is legible and identity preservation outranks cosmetic enhancement;
+6. DDColor-tiny ONNX semantic color reconstruction;
+7. automated + visual review;
+8. live replacement only if approved.
+
+Do not process the palace or poi image through v2 until Kaulia proves the route.
+
+## Supported job types
 
 - `restore_bw`
 - `color_reconstruct`
 
-Do not build a database, service, queue, generalized prompt compiler, or automatic multi-model orchestration yet. Files remain sufficient.
-
-## Operating model
-
-`SOURCE AUTHORITY -> PROJECT PROFILE -> JOB -> LOCKS / ALLOWED CHANGES -> EVIDENCE -> EDIT -> REVIEW -> APPROVED RESULT -> REUSABLE LEARNING`
-
-Cheap judgment should happen before expensive image execution.
+Optional stage adapters may be invoked inside those jobs when route evidence justifies them. Do not build a database, queue service, or general multi-model platform yet.
 
 ## Authority rules
 
-- The original archival image and its metadata are the visual evidence ceiling.
-- A restored image is derived and never replaces the original.
-- A color reconstruction is an interpretation and never replaces the restored B&W or original.
-- Color inferred from grayscale alone cannot be presented as known historical fact.
-- Project-local historical research stays with Hawaiʻi Archive Revival, not in global Image OS rules.
-- Reusable process rules may move upward only when genuinely cross-job or cross-project.
+- Original archival source + metadata are the visual evidence ceiling.
+- Derived restoration never replaces source authority.
+- Color reconstruction never becomes recovered historical fact.
+- Color inferred from grayscale alone remains interpretive even when the model output is convincing.
+- Damage must be handled before colorization.
+- A public asset pointer moves only after the relevant derived artifact is approved.
+- Hawaiʻi-specific research stays project-local.
 
-## V1 output states
+## Output states
 
-A historical image may expose:
+Historical-photo jobs may expose:
 
 1. `original`
 2. `restored_bw`
 3. `color_reconstruction`
 
-Approval is per output/version. Approval of a restoration does not automatically prove the color reconstruction historically exact.
+Approval is per state/version.
 
-## Durable learning from the first run
+## Durable learning
 
-- **Cheap preservation-safe restoration is valuable.** When the goal is legibility/presence and the source is already structurally intact, deterministic tonal restoration can be useful without paying generative cost or risking geometry/identity drift.
-- **Color can be worth showing before it is verified.** For a bounded proof of concept, a restrained `plausible` or `supported` best-estimate color reconstruction may improve historical presence enough to justify itself when Original + Restored remain visible and uncertainty is explicit.
-- **The product value matters in escalation.** “Can we prove the exact color?” is not the only question. “Does a clearly labeled reconstruction materially improve the experience?” also matters.
-- **Relationship labels prevent fake history.** `exact`, `near`, and `context` are cheap but important. The Kaulia portrait and palace photograph can strengthen a 1897 post without pretending either was made at that exact event.
-- **Image OS should not force every approved image into the feed.** `HAR-IMG-0003` successfully proves the daily-life lane while remaining off the political week because its post relationship is weak.
+- **The UI proof and the image proof are different.** The v1 UI was useful even though the v1 restoration/color backend was not.
+- **Visual difference is not quality evidence.** A separate output file must still satisfy its actual job semantics.
+- **Restore before color.** Aging, staining, fading, and damage should not be offered to a colorizer as if they were scene semantics.
+- **Semantic colorization is mandatory for the color lane.** CSS, filters, gradients, blanket tinting, and global hue wash are presentation effects, not `color_reconstruct`.
+- **Specialize rather than over-process.** General detail, face restoration, and colorization are separate problems. Route only the stages the source needs.
+- **Identity and geometry are expensive truth.** A prettier result that changes the person/building is a failure.
+- **Best-estimate color is still allowed.** Plausible reconstructed color can improve presence, but only after a real restoration checkpoint and semantic color stage, with uncertainty visible.
+- **Relationship labels prevent fake history.** `exact`, `near`, and `context` remain required when attachment could imply a false event/date relationship.
 
 ## Hot constraints
 
-- Preserve identity and geometry aggressively.
+- Preserve identity, pose, architecture, objects, signage/text, and composition aggressively.
 - Repair damage before beautifying.
-- Do not fabricate objects, people, architecture, text, or event relationships.
-- Best-estimate color is allowed when clearly labeled and useful, but confidence must remain visible.
-- Keep saturation and cinematic stylization restrained by default.
-- A visual can be `exact`, `near`, or `context` relative to a feed post. Never imply an exact event/date relationship when only contextual similarity is known.
-- Do not let the visual lane overwhelm the Hawaiʻi project's social-text identity. Images strengthen the feed; they do not replace it.
+- No invented people, objects, architecture, text, event relationships, weather, or cinematic light.
+- Keep saturation restrained by default.
+- Do not let the visual lane overwhelm the Hawaiʻi social-text identity.
+- Default cheap. Escalate only when uncertainty or value justifies it.
 
 ## On-demand references
 
-- `systems/image-os/PROFILE_CONTRACT.md` — reusable job/profile contract.
-- `systems/image-os/profiles/historical-hawaii.md` — first project profile.
-- `systems/image-os/rules/restore-bw.md` — restoration boundaries.
-- `systems/image-os/rules/color-reconstruct.md` — color reconstruction boundaries, including proof-of-concept best-estimate mode.
-- `systems/image-os/rules/review.md` — result review and approval checks.
-- `hawaii-archive/data/images/index.json` — current project-local image records.
-- `hawaii-archive/PROJECT_STATE.md` — owning product state and current historical-feed purpose.
+- `systems/image-os/PROFILE_CONTRACT.md`
+- `systems/image-os/profiles/historical-hawaii.md`
+- `systems/image-os/rules/pipeline-v2.md`
+- `systems/image-os/rules/restore-bw.md`
+- `systems/image-os/rules/color-reconstruct.md`
+- `systems/image-os/rules/review.md`
+- `hawaii-archive/data/images/index.json`
+- `hawaii-archive/images/jobs/HAR-IMG-0001/`
+- `hawaii-archive/PROJECT_STATE.md`
+- `docs/superpowers/specs/2026-09-08-image-os-v2-staged-pipeline-design.md`
+- `docs/superpowers/plans/2026-09-08-image-os-v2-kaulia.md`
 
 ## NEXT_TASK
 
-After the v1 branch is merged and Pages is verified, **review the live mixed-media feed as a product** before scaling image ingestion. Check whether Kaulia and ʻIolani Palace actually make the posts feel more alive, whether Color is worth defaulting to, and whether the relationship/confidence labels are understandable without feeling museum-heavy. If the mixed-media experience works, use the same record/job model for the next 3–5 feed-relevant archival images. If the hand-tint ceiling is visibly too crude, replace one pilot image with a real pixel-level restoration/color asset before scaling.
+Run the Kaulia v2 proof on `feature/image-os-v2-pipeline`: preflight -> conservative restored B&W -> DDColor semantic color reconstruction -> automated/visual review. Do **not** move live Kaulia `restored_asset` / `color_asset` pointers unless review approves the v2 outputs. If Kaulia passes, the next visual edge is ʻIolani Palace and then the 1896 poi scene using the same staged contract. If Kaulia fails, fix the failing stage first.
 
 ## RE-PROMPT
 
-> Continue Image OS from current Paiea/Projects GitHub authority with Hawaiʻi Archive Revival as the proving ground. Read root AGENTS.md, state/PROJECT_REGISTRY.md, state/HANDSHAKE_PROTOCOL.md, systems/image-os/CURRENT.md, and hawaii-archive/PROJECT_STATE.md. The three-image v1 proof is complete; inspect the actual live feed and Image OS comparison page before adding more machinery. Preserve source authority, strict geometry/identity locks, explicit color confidence, and honest exact/near/context relationships. Scale only what the live experience proves useful.
+> Continue Image OS v2 from current Paiea/Projects GitHub authority with Hawaiʻi Archive Revival as the proving ground. Read root AGENTS.md, state/PROJECT_REGISTRY.md, state/HANDSHAKE_PROTOCOL.md, systems/image-os/CURRENT.md, systems/image-os/rules/pipeline-v2.md, and hawaii-archive/PROJECT_STATE.md. The v1 tint method is legacy failed experiment evidence. Kaulia HAR-IMG-0001 is the only current v2 proving target. Restore damage first, skip optional detail/face stages unless earned, use real semantic colorization, review against source, and replace live assets only if approved.
