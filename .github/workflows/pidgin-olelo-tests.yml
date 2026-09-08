@@ -24,7 +24,18 @@ jobs:
         with:
           node-version: '22'
       - name: Run Pidgin Olelo regression tests
-        run: python tests/test_pidgin_olelo.py
+        run: |
+          set +e
+          python tests/test_pidgin_olelo.py > test-output.txt 2>&1
+          code=$?
+          cat test-output.txt
+          exit $code
+      - name: Preserve test output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pidgin-olelo-test-output
+          path: test-output.txt
       - name: Check JavaScript syntax
         run: |
           node --check pidgin-olelo/app.js
