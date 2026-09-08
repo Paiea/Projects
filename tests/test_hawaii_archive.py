@@ -15,7 +15,7 @@ class HawaiiArchiveTests(unittest.TestCase):
         self.assertIn("## Hawaiʻi Archive Revival", registry)
         self.assertTrue((ROOT / "hawaii-archive" / "PROJECT_STATE.md").exists())
 
-    def test_week_fixture_has_authority_and_routing(self):
+    def test_week_fixture_has_authority_routing_and_voice_evidence(self):
         path = ROOT / "hawaii-archive" / "data" / "weeks" / "1897-09-06.json"
         payload = json.loads(path.read_text(encoding="utf-8"))
         self.assertEqual(payload["week_start"], "1897-09-06")
@@ -27,16 +27,36 @@ class HawaiiArchiveTests(unittest.TestCase):
             self.assertIn("hawaiian", item)
             self.assertIn("english_close", item)
             self.assertIn("feed_rendering", item)
+            self.assertIn("rhetorical_mode", item)
+            self.assertTrue(item["voice_evidence"])
 
-    def test_public_page_exposes_finite_feed_layers(self):
+        energetic = payload["items"][2]
+        self.assertIn("!!", energetic["hawaiian"])
+        self.assertIn("!!", energetic["feed_rendering"])
+
+    def test_public_page_feels_like_social_feed_without_hiding_source(self):
         page = (ROOT / "hawaii-archive" / "index.html").read_text(encoding="utf-8")
         script = (ROOT / "hawaii-archive" / "app.js").read_text(encoding="utf-8")
+        styles = (ROOT / "hawaii-archive" / "styles.css").read_text(encoding="utf-8")
+
         self.assertIn("This Week in Hawaiʻi", page)
-        self.assertIn("feed", page)
+        self.assertIn("What Hawaiʻi was talking about", page)
+        self.assertIn("post-author", script)
+        self.assertIn("post-actions", script)
         self.assertIn("Original Hawaiian", script)
         self.assertIn("Close English", script)
-        self.assertIn("Source", script)
+        self.assertIn("Voice & source", script)
+        self.assertIn(".social-feed", styles)
+        self.assertIn(".post-card", styles)
+        self.assertNotIn("Modern readable rendering", script)
         self.assertNotIn("infinite", script.lower())
+
+    def test_item_contract_preserves_social_intent_as_derived_evidence(self):
+        contract = (ROOT / "hawaii-archive" / "data" / "ITEM_CONTRACT.md").read_text(encoding="utf-8")
+        self.assertIn("rhetorical_mode", contract)
+        self.assertIn("voice_evidence", contract)
+        self.assertIn("social intent", contract.lower())
+        self.assertIn("do not invent", contract.lower())
 
     def test_image_os_contract_is_cross_project(self):
         contract = ROOT / "systems" / "image-os" / "PROFILE_CONTRACT.md"

@@ -3,54 +3,59 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="A finite weekly window into historical Hawaiʻi, grounded in original archival sources.">
+  <meta name="description" content="A finite social-style feed built from real historical Hawaiian-language newspaper records.">
   <title>This Week in Hawaiʻi | Archive Revival</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <main class="shell">
-    <header class="masthead">
-      <a class="back-link" href="../">← Projects</a>
-      <p class="eyebrow">HAWAIʻI ARCHIVE REVIVAL</p>
-      <h1>This Week in Hawaiʻi</h1>
-      <p class="lede">A small window into what people were reading and talking about in historical Hawaiʻi. The readable feed is derived. The Hawaiian source and provenance stay attached.</p>
+    <header class="app-bar">
+      <a class="back-link" href="../" aria-label="Back to Projects">←</a>
+      <div>
+        <p class="app-title">This Week in Hawaiʻi</p>
+        <p class="app-subtitle">Archive Revival</p>
+      </div>
+      <span class="archive-badge">1897</span>
     </header>
 
-    <section class="week-panel" aria-labelledby="week-title">
-      <div>
-        <p class="week-label">Historical week</p>
-        <h2 id="week-title">September 6–12, 1897</h2>
+    <section class="feed-intro" aria-labelledby="page-title">
+      <p class="eyebrow">SEPTEMBER 6–12, 1897</p>
+      <h1 id="page-title">What Hawaiʻi was talking about</h1>
+      <p class="lede">Real nūpepa material, surfaced like a feed. The English post is derived from the archive. Tap through to the Hawaiian, the close meaning, and the evidence behind the tone.</p>
+
+      <div class="week-strip" aria-live="polite">
+        <div>
+          <span id="item-count" class="count-number">0</span>
+          <span class="count-label">posts surfaced</span>
+        </div>
         <p id="scope-note" class="scope-note">Loading this week's source notes…</p>
-      </div>
-      <div class="count-card" aria-live="polite">
-        <span id="item-count" class="count-number">0</span>
-        <span class="count-label">surfaced items</span>
       </div>
     </section>
 
     <section aria-labelledby="feed-title">
       <div class="feed-heading">
         <div>
-          <p class="section-kicker">Finite feed</p>
-          <h2 id="feed-title">What showed up</h2>
+          <p class="section-kicker">THE FEED</p>
+          <h2 id="feed-title">September 1897, one post at a time</h2>
         </div>
-        <p class="feed-note">You can reach the end. History had a day boundary too.</p>
+        <p class="feed-note">Finite on purpose. When the week runs out, the feed stops.</p>
       </div>
 
-      <div id="feed" class="feed" aria-live="polite">
-        <p class="loading">Loading historical records…</p>
+      <div id="feed" class="social-feed" aria-live="polite">
+        <p class="loading">Loading historical posts…</p>
       </div>
     </section>
 
-    <aside class="method-note" aria-labelledby="method-title">
-      <p class="section-kicker">How to read this</p>
-      <h2 id="method-title">Readable first. Source always there.</h2>
-      <p>The short feed wording is a modern accessibility layer, not a quotation from 1897. Open any card to compare the original Hawaiian, the close English meaning, and the source evidence.</p>
-      <p>This first slice intentionally contains only a few records. The project is testing whether archive-scale material becomes more useful when the public experience stays human-scale.</p>
-    </aside>
+    <details class="about-panel">
+      <summary>How real is this?</summary>
+      <div class="about-body">
+        <p>The archival Hawaiian and source provenance are the evidence layer. The short English post is a modern accessibility rendering, not a quotation from 1897.</p>
+        <p>The system tries to preserve the source's communicative move too: announcement, warning, rallying, celebration, argument, direct address, punctuation, and other supported voice signals. It does not invent modern slang or attitudes the source does not support.</p>
+      </div>
+    </details>
 
     <footer>
-      <p>Source authority first. Derived interpretation stays labeled.</p>
+      <p>Archive first. Social layer derived. Source always one tap away.</p>
     </footer>
   </main>
 
