@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Practice more useful ʻōlelo Hawaiʻi thoughts through the same Pidgin-to-Hawaiian retrieval engine.">
+  <meta name="theme-color" content="#173f4e">
+  <title>Pidgin → ʻŌlelo · More phrases</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="simplify.css">
+</head>
+<body class="island-page" data-deck="extra">
+  <div class="site-backdrop" aria-hidden="true"></div>
+
+  <main class="app-shell">
+    <header class="app-header app-header--hero">
+      <div>
+        <a class="back-link" href="index.html">← Core 30</a>
+        <p class="eyebrow">PAIEA LANGUAGE LAB</p>
+        <h1>MORE PHRASES</h1>
+        <p class="lede">Same engine. Smaller Hawaiian handles first.</p>
+      </div>
+
+      <nav class="experience-nav" aria-label="Pidgin to ʻŌlelo">
+        <a href="index.html">Learn</a>
+        <a href="challenge.html">10-Min Mission</a>
+      </nav>
+    </header>
+
+    <div class="app-grid">
+      <aside class="seally-coach" aria-label="Uncle Seally, your questionable ʻōlelo coach">
+        <div class="seally-image-wrap">
+          <img class="seally-image" src="assets/characters/uncle-seally@2x.webp" alt="Older monk seal mascot Uncle Seally wearing a cap">
+        </div>
+        <div class="seally-copy">
+          <p class="seally-name">Uncle Seally</p>
+          <p class="seally-subtitle">More useful stuff. No need swallow the whole sentence first.</p>
+          <div class="seally-bubble">
+            <p id="seally-line">Come. Try one.</p>
+          </div>
+        </div>
+      </aside>
+
+      <section class="lesson-column">
+        <section class="core-summary" aria-label="More phrases progress">
+          <span class="mobile-brand">PIDGIN → ʻŌLELO</span>
+          <div>
+            <p class="core-kicker">MORE PHRASES</p>
+            <p class="core-copy">Useful islands first. Full thought when ready.</p>
+          </div>
+          <strong id="progress" class="core-progress">10 learning · 0 solid</strong>
+        </section>
+
+        <section class="practice-card" data-revealed="false" aria-live="polite">
+          <div class="card-topline">
+            <span id="vector-label" class="card-label">ZOOM IN</span>
+            <span class="progress">More</span>
+          </div>
+
+          <p id="feedback" class="feedback" role="status" aria-live="polite" hidden></p>
+          <p id="vector-instruction" class="challenge-instruction">Same thought, smaller Hawaiian handle.</p>
+          <p id="prompt" class="prompt"></p>
+
+          <div id="choice-wrap" class="choice-wrap" hidden aria-label="Answer choices"></div>
+
+          <div id="answer-wrap" class="answer-wrap" hidden>
+            <p id="answer-label" class="answer-label">Answer</p>
+            <p id="answer" class="answer"></p>
+          </div>
+
+          <button id="show-answer" class="primary-button" type="button">Show me</button>
+
+          <div class="rating-actions" aria-label="Rate recall">
+            <button id="miss-it" class="rating-button" type="button" disabled>Miss</button>
+            <button id="got-it" class="rating-button rating-button--strong" type="button" disabled>Got um</button>
+          </div>
+
+          <button id="more-like-this" class="more-like-button" type="button" disabled>MORE LIKE THIS · same thought, new angle</button>
+
+          <div class="history-actions" aria-label="Review cards">
+            <button id="back-card" class="history-button" type="button" disabled>← Back</button>
+            <button id="replay-card" class="history-button" type="button">↻ Replay</button>
+            <button id="forward-card" class="history-button" type="button">Forward →</button>
+          </div>
+        </section>
+
+        <section id="answer-support" class="answer-support" aria-label="Extra answer help" hidden>
+          <div class="shape-wrap">
+            <p class="shape-label">Hawaiian shape</p>
+            <p id="shape" class="shape"></p>
+          </div>
+          <p id="note" class="note"></p>
+          <div class="example-wrap">
+            <p class="example-label">Use um</p>
+            <p id="example-pidgin" class="example-line"></p>
+            <p id="example-hawaiian" class="example-line example-line--hawaiian"></p>
+          </div>
+        </section>
+
+        <section class="quick-rule" aria-label="How to use">
+          <strong>Quiet progression:</strong> ten useful thoughts start active. One more enters every eight reps. Islands do not count as owning the full phrase.
+        </section>
+      </section>
+    </div>
+
+    <footer class="app-footer">
+      <p><strong>More useful thoughts, same learning system.</strong> The extra deck starts with a small Hawaiian word or chunk, then builds back toward the full phrase.</p>
+      <p class="small-print">Pidgin remains the memory bridge. Hawaiian parent phrases remain the semantic authority. Synthetic audio stays off.</p>
+    </footer>
+  </main>
+
+  <nav class="mobile-bottom-nav" aria-label="Mobile navigation">
+    <a href="index.html"><span>⌂</span>Learn</a>
+    <a href="challenge.html"><span>⚡</span>Mission</a>
+  </nav>
+
+  <script src="phrases.js"></script>
+  <script src="curriculum.js"></script>
+  <script src="core-engine.js"></script>
+  <script src="islands.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
