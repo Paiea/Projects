@@ -284,6 +284,16 @@ h1 {
   transition: filter 180ms ease, transform 180ms ease;
 }
 
+.media-stage.media-portrait {
+  aspect-ratio: 3 / 4;
+  background: #e6e8e6;
+}
+
+.media-stage.media-portrait img {
+  object-fit: contain;
+  object-position: center top;
+}
+
 .media-stage::after {
   position: absolute;
   z-index: 1;
@@ -372,6 +382,20 @@ h1 {
   border-color: #acc7bd;
   background: var(--accent-soft);
   color: var(--accent);
+}
+
+.media-full-link {
+  align-self: center;
+  margin-left: auto;
+  color: var(--accent);
+  font-size: 0.69rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.media-full-link:hover,
+.media-full-link:focus-visible {
+  text-decoration: underline;
 }
 
 .media-context {
