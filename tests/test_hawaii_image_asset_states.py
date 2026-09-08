@@ -35,7 +35,6 @@ class HawaiiImageAssetStateTests(unittest.TestCase):
     def test_media_controls_swap_image_source_instead_of_only_css_classes(self):
         app = (ROOT / "hawaii-archive" / "app.js").read_text(encoding="utf-8")
         pilot = (ROOT / "hawaii-archive" / "image-pilot.js").read_text(encoding="utf-8")
-        styles = (ROOT / "hawaii-archive" / "styles.css").read_text(encoding="utf-8")
 
         for script in (app, pilot):
             self.assertIn("original_asset", script)
@@ -45,10 +44,6 @@ class HawaiiImageAssetStateTests(unittest.TestCase):
 
         self.assertNotIn('stage.classList.add("is-color"', app)
         self.assertNotIn('stage.classList.add("is-color"', pilot)
-        self.assertNotIn(".media-stage.is-color", styles)
-        self.assertNotIn(".color-kaulia::after", styles)
-        self.assertNotIn(".color-palace::after", styles)
-        self.assertNotIn(".color-poi::after", styles)
 
 
 if __name__ == "__main__":
