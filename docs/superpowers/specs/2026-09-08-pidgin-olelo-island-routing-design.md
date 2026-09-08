@@ -22,7 +22,7 @@ Example:
 - parent: `Pehea ʻoe?` → “How you?”
 - contextual island: `Pehea? Tough day?`
 - word island: `pehea` → “how”
-- word recognition: `ʻoe` → “you”
+- recognition support: `ʻoe` → “you”
 - return to parent: `Pehea ʻoe?`
 
 The learner can move among these representations without the system pretending they are unrelated curricula.
@@ -46,6 +46,7 @@ Recommended internal shape:
       type: "context",
       hawaiian: "Pehea?",
       gloss: "How? / How going?",
+      standalone: true,
       mixedExamples: [
         "Pehea? Tough day?",
         "Work was nuts. Pehea?"
@@ -53,9 +54,10 @@ Recommended internal shape:
     },
     {
       id: "how-you:oe",
-      type: "recognize",
+      type: "word",
       hawaiian: "ʻoe",
-      gloss: "you"
+      gloss: "you",
+      standalone: false
     }
   ]
 }
@@ -63,18 +65,19 @@ Recommended internal shape:
 
 The parent phrase remains the full-Hawaiian authority for mastery and public progress.
 
-### 2. Three island types
+### 2. Three island types + one restraint flag
 
 An island must be useful at the zoom level where it is taught. Do not mechanically split every Hawaiian sentence into tokens.
 
-Allowed types:
+Allowed `type` values:
 
 - **word**: a useful lexical item that can be recalled independently, such as `wai`, `ʻai`, `kōkua`, `ʻōlelo`.
 - **chunk**: a short multiword unit best learned together, such as `ma hea`, `he aha`, or `e kala mai` when appropriate.
 - **context**: a shorter Hawaiian utterance whose meaning is made clear by surrounding Pidgin or situation, such as `Pehea? Tough day?`.
-- **recognize** may be used as a restraint flag for forms that are useful to understand but should not be encouraged as standalone speech yet.
 
-The important distinction is pedagogical, not grammatical taxonomy. The system needs enough metadata to decide how to render the island safely.
+`standalone: false` is a restraint flag for islands that are useful to recognize or retrieve inside a parent phrase but should not be encouraged as free-standing speech yet. It is not a fourth island type.
+
+The distinction is pedagogical, not a claim about formal Hawaiian grammatical categories.
 
 ### 3. Bidirectional zoom router
 
@@ -82,12 +85,13 @@ The router chooses the next representation of the same parent meaning.
 
 Rules:
 
-- New Core phrase: usually meet the full Hawaiian phrase first.
-- Familiar Core phrase: occasionally zoom into a useful island for variety, decomposition, or repair.
-- New extra-70 item: usually enter through an island inside familiar Pidgin.
-- Familiar island: retrieve the island without showing it, then reuse it in a new mixed context.
-- Stable island: expose or return to fuller Hawaiian.
-- Full phrase miss: if a useful island is already known, zoom back into that island rather than treating the learner as starting from zero.
+- New Core phrase: meet the full Hawaiian phrase first.
+- Core island reps become eligible only after the parent has been introduced.
+- Core remains phrase-heavy: schedule at most one island rep in any rolling block of four graded Core reps unless an immediate repair is needed after a miss.
+- New extra-70 item: enter through an island inside familiar Pidgin when useful island metadata exists.
+- Extra island progression: meet island → retrieve island → reuse island in context → unlock fuller Hawaiian after at least two successful island-production reps and one successful contextual island rep.
+- Full phrase miss: if a useful island is known, schedule one repair island rep before returning to the fuller phrase.
+- Two consecutive fuller-Hawaiian misses on an extra item force one island repair rep; do not erase full-phrase strengths.
 - Strong full phrase: island reps become occasional maintenance, not mandatory detours.
 
 No seventh vector is created. The existing six vectors remain the scoring vocabulary. Representation routing is separate from vector selection.
@@ -98,7 +102,7 @@ The router should minimize simultaneous novelty.
 
 Prefer one new language problem at a time:
 
-- new parent phrase + known/familiar island context
+- new parent phrase + familiar context
 - new island + familiar Pidgin context
 - known island + new local context
 - known island + fuller Hawaiian phrase
@@ -149,6 +153,8 @@ They differ from Core mainly in entry route:
 
 This is one curriculum getting deeper, not a 70-word deck followed by a separate 70-phrase deck.
 
+The quiet extra deck starts with 10 utility-ranked parent meanings and exposes one additional parent every 8 graded extra-deck reps.
+
 ## Micro-scenes
 
 Micro-scenes remain a representation source, not a mode.
@@ -181,7 +187,7 @@ Preserve what works:
 - Core 30 remains the default Learn screen.
 - Existing `learning · solid` progress remains based on parent phrases, not islands.
 - Islands do not inflate the visible curriculum count.
-- `More phrases` remains low-prominence and can stay gated behind meaningful Core progress.
+- `More phrases` remains low-prominence and hidden until five Core parent meanings are solid; direct `more.html` access may remain available for testing and continuity.
 - No new primary nav tab for islands, vocabulary, scenes, or math.
 - Reuse the current no-scroll phone shell where practical.
 - Reuse Uncle Seally, Noʻeau, and existing answer controls.
@@ -193,8 +199,7 @@ Recommended focused module: `pidgin-olelo/islands.js`.
 Responsibilities:
 
 - parent-to-island metadata
-- island type and gloss
-- mixed-context examples
+- island type, gloss, standalone restraint, and mixed-context examples
 - island validation
 - representation-routing helpers that do not own vector scoring
 
@@ -208,8 +213,9 @@ Validation must fail on:
 
 - island referencing a nonexistent parent
 - duplicate island IDs
-- island Hawaiian string not present in or explicitly derived from an approved parent/approved curriculum entry without an authority note
+- island with an unsupported `type`
 - context island with no mixed-context example
+- island Hawaiian string not present in or explicitly derived from an approved parent/approved curriculum entry without an authority note
 - scene introducing more than two new islands
 - extra utility order with missing/duplicate/nonexistent IDs
 - any change to Core 30 parent IDs/order unless separately approved
@@ -225,9 +231,11 @@ Required regressions:
 - Core 30 IDs/order/storage/mastery threshold unchanged.
 - Public Core count remains 30 regardless of island count.
 - `Pehea ʻoe?` can render as full phrase and as `Pehea?` in a mixed-context rep.
-- island metadata supports word, chunk, context, and recognize-only restraint.
+- island metadata supports word, chunk, context, and `standalone: false` restraint.
+- Core island routing never occurs before parent introduction and stays phrase-heavy outside repair.
 - representation routing can zoom full → island and island → full without erasing parent strengths.
 - extra 70 start island-heavy while Core remains full-phrase-heavy.
+- extra fuller-Hawaiian unlock requires two successful island-production reps plus one successful contextual island rep.
 - islands use existing vector names only.
 - repeated full-phrase failure may schedule a known island repair rep.
 - no duplicate learning engine or separate island mode.
