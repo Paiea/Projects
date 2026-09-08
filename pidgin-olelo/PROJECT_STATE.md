@@ -4,13 +4,13 @@
 
 Test whether familiar Hawaiʻi Pidgin thoughts can act as a retrieval bridge into useful spoken ʻōlelo Hawaiʻi.
 
-The project is now intentionally centered on a permanent **Core 30** rather than exposing the whole 100-item bank as equal curriculum.
+The project is intentionally centered on a permanent **Core 30** rather than exposing the whole 100-item bank as equal curriculum.
 
-The learner-facing idea is simple:
+The learner-facing model is now ELL-style gradual release:
 
-**MEET THE THOUGHT → RECOGNIZE IT → PRODUCE IT → REPAIR IT → USE IT IN CONTEXT → SAY IT → USE IT FOR REAL**
+**MEET IT → RECOGNIZE IT → SUPPORTED PRODUCTION → SITUATION → HAWAIIAN-FIRST → REAL USE**
 
-Pidgin is a scaffold. It is not Hawaiian grammatical authority.
+Pidgin is a trusted scaffold. It is not Hawaiian grammatical authority, and **Pidgin should never be the joke**.
 
 ## Authority
 
@@ -19,54 +19,141 @@ Pidgin is a scaffold. It is not Hawaiian grammatical authority.
 - 10-Min Mission: `pidgin-olelo/challenge.html`
 - Full ordinary phrase bank: `pidgin-olelo/phrases.js`
 - Core curriculum / scenarios / conservative overrides: `pidgin-olelo/curriculum.js`
-- Core question/scheduling engine: `pidgin-olelo/core-engine.js`
+- Core fading / question / scheduling engine: `pidgin-olelo/core-engine.js`
 - Learn runtime: `pidgin-olelo/app.js`
 - Mission runtime: `pidgin-olelo/challenge.js`
-- Noʻeau flavor page: `pidgin-olelo/noeau.html`
 - Curated noʻeau bank: `pidgin-olelo/noeau.js`
 - Shared styling: `pidgin-olelo/styles.css`
+- Regression tests: `tests/test_pidgin_olelo.py`
 
-`phrases.js` remains the 100-item data bank, but **Core 30 is the default learning authority**. The other 70 remain available for later depth/expansion and must not crowd the primary interface.
+`phrases.js` remains the 100-item data bank, but **Core 30 is the permanent default learning authority**. The other 70 are dormant data for later expansion. They are not advertised in the current Learn interface.
 
 ## Current Product Shape
 
-### Core 30
+### One Learn flow, not two language buttons
 
-The first 30 items are the permanent little solar system.
+There is no learner-facing Hawaiian → Pidgin / Pidgin → Hawaiian direction toggle.
 
-Each Core thought is attacked through **six scored vectors** after a scaffolded first exposure:
+The engine mixes question types automatically according to the learner state of each Core thought. The learner should feel like one funny local ELL teacher is changing the task, not like they are configuring flashcard modes.
 
-1. **WHAT'D I SAY?** — Hawaiian → natural Pidgin meaning
-2. **QUICK TRANSLATE** — Pidgin → Hawaiian production
-3. **FINISH IT** — missing-word / missing-chunk reconstruction
-4. **WHICH ONE FITS?** — situation → choose and say the Hawaiian
-5. **SAY IT** — read Hawaiian aloud, then recover the thought
-6. **USE IT** — real-world use evidence
+### Core 30 as a permanent little solar system
 
-Before those, **MEET THIS ONE** shows Hawaiian + familiar thought together. It is deliberately not a test. This protects against turning first exposure into linguistic Dark Souls while still moving toward generation quickly.
+The first 30 items are attacked repeatedly from different angles rather than treated as 30 disposable flashcards.
 
-Trustworthy human audio is still missing, so an audio/hearing vector is intentionally dormant. Do not substitute browser TTS.
+Each phrase moves through **five invisible scaffold stages**.
+
+#### Stage 1 — MEET THIS ONE
+
+Both forms are visible together.
+
+- Hawaiian target
+- familiar Pidgin thought
+- learner says the Hawaiian once
+- not scored
+
+The next interaction immediately retrieves the **same thought** rather than introducing five new cards in a row.
+
+#### Stage 2 — WHAT'D I SAY?
+
+Hawaiian stays visible, but the learner must choose the matching Pidgin thought.
+
+This is comprehension/recognition with the trusted language still carrying the meaning.
+
+#### Stage 3 — supported production
+
+Pidgin remains as support while Hawaiian production gets harder.
+
+- **FINISH IT** — Hawaiian cloze with the Pidgin anchor still visible
+- **QUICK TRANSLATE** — Pidgin → full Hawaiian production
+
+The scaffold is starting to fade, but it is not yanked away prematurely.
+
+#### Stage 4 — WHICH ONE FITS?
+
+The Pidgin translation disappears from the prompt.
+
+The learner gets a small real-life situation such as family, food, driving, home, work, or somebody losing the car/slippers and chooses or produces the Hawaiian that belongs there.
+
+#### Stage 5 — Hawaiian-first
+
+The prompt increasingly begins in Hawaiian.
+
+- **SAY IT** — read/say Hawaiian and recover the thought
+- **USE IT** — use the phrase in real life
+
+This is where the bridge should start becoming unnecessary.
+
+### Six scored retrieval/use vectors
+
+The hidden scored vectors are:
+
+1. `recognize`
+2. `cloze`
+3. `produce`
+4. `scenario`
+5. `say`
+6. `use`
+
+The stage model decides which vectors are appropriate. The learner never sees six mode buttons.
+
+### Recasting instead of WRONG
+
+When the app knows the answer, such as a multiple-choice recognition or scenario question, it grades quietly and recasts immediately.
+
+Examples:
+
+- `Chee. That one. Say the Hawaiian once before you move.`
+- `Almost, uncle. ...`
+- `😭 Brah. Wrong scene. The line that fits is ... Say um once.`
+
+The correction gives another exposure to the correct Hawaiian instead of throwing a giant red WRONG banner at the learner.
+
+Open recall still uses learner self-assessment through **Got um / Miss**.
+
+### Humor boundary
+
+Humor is part of memory encoding, but the target of the joke is Dad's familiar world, not the way local people speak.
+
+Good joke territory:
+
+- uncles standing in front of the fridge pretending they are not hungry
+- aunties adding another scoop
+- Costco
+- H-1
+- Kāneʻohe / Kailua driving logic
+- somebody stealing slippers
+- impossible parking
+- sideways rain
+- family members
+- somebody saying “almost there” before leaving the house
+
+Bad joke territory:
+
+- treating Pidgin itself as broken English
+- making the learner's existing language sound stupid
+- using exaggerated eye-dialect as the punchline
+
+The implicit message should remain:
+
+**You already know how to communicate. We are using that trusted language to unlock Hawaiian.**
 
 ### WIN-inspired behavior
 
-Portable WIN contributed the useful interaction pattern, not its classroom UI:
+Portable WIN contributed the useful instructional pattern:
 
 - diagnose the weak path
 - give a targeted rep
 - **MORE LIKE THIS**
 - periodically **SHOW WHAT YOU KNOW**
-- keep the proficiency state quiet underneath
+- keep proficiency state quiet underneath
 
-Every sixth graded Core rep becomes a harder SHOW WHAT YOU KNOW check. MORE LIKE THIS means **same thought, different representation**, not merely another similar flashcard.
+Every sixth graded Core rep can become a harder SHOW WHAT YOU KNOW check using an already-unlocked productive vector.
 
-The app does not expose retention percentages. The quiet internal model is effectively:
+MORE LIKE THIS means:
 
-- solid
-- getting there
-- needs work
-- not seen lately
+**same underlying thought, different representation**
 
-Missed/weak paths receive higher priority. Stronger paths receive wider spacing and can drift away before returning.
+not merely another flashcard.
 
 ### Compiler-inspired behavior
 
@@ -74,55 +161,68 @@ The long-form story compiler contributed the deeper architecture:
 
 **THOUGHT AUTHORITY = one semantic Core item**
 
-Different questions are derived performances of the same underlying thought:
+Everything else is a derived performance of that thought:
 
-- Pidgin cue
+- Pidgin anchor
 - Hawaiian target
 - Hawaiian-order shape
+- recognition choice
 - cloze reconstruction
-- scenario
-- spoken self-production
+- direct production
+- situation
+- Hawaiian-first oral rehearsal
 - real-world mission
 
-The system should learn which representation is weak without confusing the representation with the underlying thought.
+The system learns which representation is weak without confusing the representation with the underlying thought.
 
-### Gradual Core rollout
+### Quiet spacing
 
-The interface begins with a small active slice of Core 30 instead of dumping all 30 first encounters in a row. More Core thoughts enter as reps accumulate. This keeps early practice concentrated while preserving all 30 as the permanent target set.
+The app does not expose retention percentages or a spaced-repetition dashboard.
+
+Internally the practical states are roughly:
+
+- solid
+- getting there
+- needs work
+- not seen lately
+
+Weak/missed paths receive higher priority. Stronger paths receive wider spacing. Missed items can return from a different angle rather than simply repeating the same failed card.
 
 ### 10-Min Mission
 
-Challenge is no longer a rotating quiz mode.
+Mission is the transfer surface, not another quiz mode.
 
-It is now **YOUR MISSION**:
-
-- deterministic one Core phrase per 10-minute block
-- phrase and Pidgin thought are visible
+- deterministic one **Core 30** phrase per 10-minute block
 - learner uses it outside the app
-- **I USED IT** writes stronger evidence to the same `use` vector state used by Learn
-- dinner, texting, talking to family, or even saying it to the dog counts
+- **I USED IT** writes use evidence into the same Core state as Learn
+- dinner counts
+- texting counts
+- talking to family counts
+- saying it to the dog technically counts
 
-Behavior matters more than app completion.
-
-### 70 more phrases
-
-The remaining 70 stay in `phrases.js` but are demoted behind **More**. Do not make them the default until Core 30 testing shows the depth model is working.
-
-The future split remains available conceptually as Build 40 / Stretch 30, but it is not a primary user-facing progression yet.
+Later, Mission may fade its own hints according to the same Core stage data. Do not create a separate mission curriculum.
 
 ### ʻŌlelo Noʻeau
 
 Noʻeau is **flavor, not the menu**.
 
-It is no longer a primary Learn / Challenge tab. It lives under More as a side path.
+The primary navigation remains:
 
-The noʻeau authority boundary remains strict:
+- Learn
+- 10-Min Mission
+
+Inside Learn, **More** opens a small integrated `Kūpuna side note 🌺` widget.
+
+The widget shows one noʻeau at a time:
 
 1. actual ʻōlelo noʻeau
-2. sourced established meaning
-3. clearly separated modern local-humor memory hook
+2. tap to reveal sourced established meaning
+3. clearly separate modern local-humor memory hook
+4. `Another` rotates to another saying
 
-The joke never becomes the historical translation.
+The noʻeau authority remains separate in `noeau.js`. Its cultural text and sourced meaning must never be rewritten by the joke.
+
+The older standalone `noeau.html` may remain as a dormant development artifact, but it is not part of the primary product navigation.
 
 ## Orthography / Hawaiian Integrity
 
@@ -144,7 +244,7 @@ Core regression checks protect representative forms including:
 - `nānā`
 - `hoʻolohe`
 
-The Core 30 language pass also corrected a teaching problem in the generic location card. The old blank form `Ma hea ka ___?` could imply that `ka` is fixed. Core now teaches the concrete:
+The Core language pass also corrected a teaching problem in the generic location card. The old blank form `Ma hea ka ___?` could imply that `ka` is fixed. Core instead teaches the concrete:
 
 **Where the car stay? → Ma hea ke kaʻa?**
 
@@ -158,37 +258,37 @@ Hawaiian targets and examples should still get fluent-speaker/kumu review before
 
 The engine is intentionally not dogmatic about one method.
 
-Current research supports:
+Current evidence supports combining retrieval, spacing, semantic elaboration, and user-generated responses rather than relying on massed L1 → L2 repetition alone. Receptive and productive knowledge are related but not identical, so the Core engine practices both directions without exposing them as separate learner modes.
 
-- retrieval practice for vocabulary learning
-- receptive and productive retrieval building somewhat different knowledge
-- spacing improving delayed L2 retention relative to cramming in aggregate
-- guessing/pretesting with immediate correct feedback sometimes helping even at low prior knowledge
+The Pidgin bridge is consistent with pedagogical translanguaging logic: use the learner's existing linguistic repertoire to make new-language meaning accessible, while gradually shifting more work into the target language.
 
-So the system uses a scaffolded first exposure, then generation and retrieval, then quiet spacing rather than forcing maximum difficulty immediately.
+## Picture / Audio Boundary
 
-## Audio Boundary
+Picture support is a promising future scaffold for concrete words/actions, but it is not required for the current Core pass.
 
 Browser/device synthetic speech remains removed after direct prototype feedback that it sounded bad and reduced trust.
 
-Future **hear it** practice should return only with trustworthy fluent-speaker or otherwise reliable Hawaiian audio.
+A future **hear it** vector should return only with trustworthy fluent-speaker or otherwise reliable Hawaiian audio. Typing is also deliberately not a priority for Dad's current spoken-language goal.
 
 ## NEXT_TASK
 
-Ship and test the Core 30 multi-vector version before adding vocabulary or additional modes.
+Ship and test this Core 30 fading version before adding vocabulary or major modes.
 
 With Dad, watch for:
 
-- whether MEET THIS ONE feels helpful rather than patronizing
-- whether the same phrase feels meaningfully different across the six vectors
-- whether MORE LIKE THIS makes a missed phrase click from a different angle
-- whether SHOW WHAT YOU KNOW feels like a useful check rather than a test
-- whether the real-world mission actually causes Hawaiian outside the app
-- whether scenarios using family / home / food / driving context feel natural
-- any Hawaiian orthography, target, particle, article, or example that a fluent speaker/kumu flags
+- whether MEET THIS ONE → immediate retrieval feels natural
+- whether recognition choices are easy without feeling babyish
+- whether the Pidgin scaffold disappears at the right speed
+- whether cloze makes production easier than jumping straight to translation
+- whether family / home / food / driving scenarios make phrases stick
+- whether humorous recasts make misses feel lighter while still producing another correct repetition
+- whether MORE LIKE THIS actually helps a weak phrase click from another angle
+- whether the 10-Min Mission causes spontaneous Hawaiian outside the app
+- whether the Noʻeau widget feels like cultural flavor rather than another curriculum menu
+- any Hawaiian target, ʻokina, kahakō, particle, article, or example a fluent speaker/kumu flags
 
-Do not expand beyond Core 30 depth until that produces signal.
+Do not expand beyond Core 30 depth until this produces real signal.
 
 ## RE-PROMPT
 
-> Continue Pidgin → ʻŌlelo from current `Paiea/Projects` GitHub authority. Read root `AGENTS.md`, `state/PROJECT_REGISTRY.md`, `state/HANDSHAKE_PROTOCOL.md`, and `pidgin-olelo/PROJECT_STATE.md`, then inspect current `pidgin-olelo/` source. Treat Core 30 as the permanent default learning set even though `phrases.js` still contains 100 items. Preserve the six-vector Core model, scaffolded first exposure, WIN-style MORE LIKE THIS / SHOW WHAT YOU KNOW behavior, compiler-style one-thought-many-representations architecture, quiet spacing, working Back/Replay/Forward navigation, real-world 10-Min Mission use credit, orthography regression checks, and Noʻeau as flavor under More rather than a primary mode. Browser TTS remains deliberately removed. Prefer real Dad testing and fluent-speaker/kumu corrections over adding features.
+> Continue Pidgin → ʻŌlelo from current `Paiea/Projects` GitHub authority. Read root `AGENTS.md`, `state/PROJECT_REGISTRY.md`, `state/HANDSHAKE_PROTOCOL.md`, and `pidgin-olelo/PROJECT_STATE.md`, then inspect current `pidgin-olelo/` source. Treat Core 30 as the permanent default learning set even though `phrases.js` contains 100 items. Preserve the ELL-style fading stages, one mixed Learn flow with no language-direction toggles, six hidden retrieval/use vectors, immediate recasting for known-choice errors, WIN-style MORE LIKE THIS / SHOW WHAT YOU KNOW behavior, compiler-style one-thought-many-representations architecture, quiet spacing, working Back/Replay/Forward navigation, real-world 10-Min Mission use credit, orthography regression checks, and Noʻeau integrated under More as a small flavor widget. Pidgin is the trusted scaffold and should never be the joke. Browser TTS remains deliberately removed. Prefer real Dad testing and fluent-speaker/kumu corrections over feature expansion.
