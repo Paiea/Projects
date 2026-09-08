@@ -19,19 +19,27 @@ class PidginOleloVisualTests(unittest.TestCase):
         self.assertIn("assets/uncle-seally.webp", self.read("index.html"))
         self.assertIn("assets/uncle-seally.webp", self.read("challenge.html"))
 
-    def test_learn_has_responsive_coach_lesson_and_side_rail(self):
+    def test_learn_keeps_seally_and_lesson_without_dashboard_side_rail(self):
         html = self.read("index.html")
-        for class_name in (
-            "app-grid",
-            "seally-coach",
-            "lesson-column",
-            "side-rail",
-            "mobile-bottom-nav",
-        ):
+        for class_name in ("app-grid", "seally-coach", "lesson-column", "mobile-bottom-nav"):
             self.assertIn(class_name, html)
         self.assertIn('id="seally-line"', html)
-        self.assertIn('id="more-link"', html)
-        self.assertIn('href="#more-practice"', html)
+        self.assertNotIn("side-rail", html)
+        self.assertNotIn("vibe-card", html)
+        self.assertNotIn('id="more-link"', html)
+        self.assertNotIn('class="mobile-more-link"', html)
+        self.assertNotIn("<summary>More</summary>", html)
+
+    def test_noeau_is_always_visible_below_lesson_not_hidden_in_drawer(self):
+        html = self.read("index.html")
+        lesson_end = html.index("</section>\n\n      <aside", html.index('class="lesson-column"'))
+        noeau_start = html.index('id="noeau-widget"')
+        self.assertGreater(noeau_start, lesson_end)
+        self.assertIn('id="noeau-widget-saying"', html)
+        self.assertIn('id="noeau-widget-reveal"', html)
+        self.assertIn('id="noeau-widget-next"', html)
+        self.assertNotIn('id="more-practice"', html)
+        self.assertNotIn("<details", html)
 
     def test_uncle_seally_commentary_responds_to_learning_state(self):
         app = self.read("app.js")
@@ -52,11 +60,13 @@ class PidginOleloVisualTests(unittest.TestCase):
         self.assertIn("No count if you whisper um to yourself in the bathroom", js)
         self.assertIn("Preferably somebody get food", js)
 
-    def test_css_has_distinct_desktop_and_mobile_layouts(self):
+    def test_css_uses_two_column_desktop_and_single_column_mobile(self):
         styles = self.read("styles.css")
-        self.assertIn("grid-template-columns: minmax(210px, 0.7fr) minmax(0, 1.45fr) minmax(250px, 0.85fr)", styles)
+        self.assertIn("grid-template-columns: minmax(210px, 0.7fr) minmax(0, 1.45fr)", styles)
+        self.assertNotIn("minmax(250px, 0.85fr)", styles)
         self.assertIn("@media (max-width: 900px)", styles)
         self.assertIn("@media (max-width: 640px)", styles)
+        self.assertIn("@media (max-width: 480px)", styles)
         self.assertIn("position: fixed", styles)
 
     def test_visual_pass_does_not_restore_synthetic_audio(self):
