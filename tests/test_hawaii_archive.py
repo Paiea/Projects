@@ -19,16 +19,54 @@ class HawaiiArchiveTests(unittest.TestCase):
         path = ROOT / "hawaii-archive" / "data" / "weeks" / "1897-09-06.json"
         payload = json.loads(path.read_text(encoding="utf-8"))
         self.assertEqual(payload["week_start"], "1897-09-06")
-        self.assertGreaterEqual(len(payload["items"]), 12)
+        self.assertGreaterEqual(len(payload["items"]), 100)
+
+        ids = [item["id"] for item in payload["items"]]
+        self.assertEqual(len(ids), len(set(ids)))
+
+        required = {
+            "id",
+            "date",
+            "publication",
+            "place",
+            "kind",
+            "hawaiian",
+            "english_close",
+            "feed_rendering",
+            "rhetorical_mode",
+            "voice_evidence",
+            "source_url",
+            "source_label",
+            "confidence",
+            "route",
+            "status",
+        }
         for item in payload["items"]:
+            self.assertTrue(required.issubset(item))
+            self.assertGreaterEqual(item["date"], payload["week_start"])
+            self.assertLessEqual(item["date"], payload["week_end"])
             self.assertTrue(item["source_url"].startswith("https://"))
             self.assertIn(item["confidence"], {"unknown", "plausible", "supported", "verified"})
             self.assertIn(item["route"], {"cheap-pass", "review", "high-fidelity"})
-            self.assertIn("hawaiian", item)
-            self.assertIn("english_close", item)
-            self.assertIn("feed_rendering", item)
-            self.assertIn("rhetorical_mode", item)
+            self.assertTrue(item["hawaiian"])
+            self.assertTrue(item["english_close"])
+            self.assertTrue(item["feed_rendering"])
             self.assertTrue(item["voice_evidence"])
+
+        # Scale should broaden the surviving attention field without imposing a topic quota.
+        self.assertGreaterEqual(len({item["publication"] for item in payload["items"]}), 3)
+        self.assertGreaterEqual(len({item["place"] for item in payload["items"]}), 4)
+
+        # At least one record must prove that event time and publication time are not collapsed.
+        lagged = [
+            item
+            for item in payload["items"]
+            if item.get("event_date")
+            and item.get("publication_date")
+            and item["event_date"] != item["publication_date"]
+            and item.get("information_lag_note")
+        ]
+        self.assertTrue(lagged)
 
         energetic = [item for item in payload["items"] if "!!" in item["hawaiian"]]
         self.assertTrue(energetic)
@@ -62,6 +100,11 @@ class HawaiiArchiveTests(unittest.TestCase):
         self.assertIn("rhetorical_mode", contract)
         self.assertIn("voice_evidence", contract)
         self.assertIn("voice_actor", contract)
+        self.assertIn("event_date", contract)
+        self.assertIn("publication_date", contract)
+        self.assertIn("information_lag_note", contract)
+        self.assertIn("follow historical attention", contract.lower())
+        self.assertIn("do not manufacture balance", contract.lower())
         self.assertIn("social intent", contract.lower())
         self.assertIn("do not invent", contract.lower())
 
