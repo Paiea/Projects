@@ -115,6 +115,7 @@ let currentQuestion = null;
 let currentItem = null;
 let history = [];
 let historyCursor = -1;
+let reviewingHistory = false;
 let preferredItemId = null;
 let excludeVectorOnce = null;
 let autoRated = false;
@@ -347,7 +348,7 @@ function nextQuestion() {
 }
 
 function isReviewingHistory() {
-  return historyCursor >= 0 && historyCursor < history.length - 1;
+  return reviewingHistory;
 }
 
 function updateProgress() {
@@ -433,9 +434,7 @@ function recordKnownChoice(correct) {
   }
 
   setRevealed(true);
-  els.missIt.hidden = true;
   els.gotIt.textContent = "Next";
-  els.gotIt.disabled = false;
   els.moreLikeThis.disabled = false;
 }
 
@@ -451,8 +450,9 @@ function renderChoices(question) {
     button.type = "button";
     button.className = "choice-button";
     button.textContent = choice;
+    button.disabled = isReviewingHistory();
     button.addEventListener("click", () => {
-      if (autoRated) return;
+      if (autoRated || isReviewingHistory()) return;
       const correct = choice === question.answer;
       els.choiceWrap.querySelectorAll("button").forEach((candidate) => {
         candidate.disabled = true;
@@ -466,14 +466,38 @@ function renderChoices(question) {
 }
 
 function setRevealed(revealed) {
-  const intro = currentQuestion?.intro;
-  const canRate = revealed && !isReviewingHistory() && !autoRated;
+  const intro = Boolean(currentQuestion?.intro);
+  const reviewing = isReviewingHistory();
+  const autoScored = Boolean(currentQuestion?.choices?.length);
+  const canSelfRate = !intro && !autoScored && !reviewing && !autoRated;
+
   els.answerWrap.hidden = !revealed;
   els.answerSupport.hidden = !revealed;
   els.practiceCard.dataset.revealed = revealed ? "true" : "false";
-  els.showAnswer.hidden = revealed || Boolean(currentQuestion?.choices?.length);
-  els.gotIt.disabled = autoRated ? false : !canRate;
-  els.missIt.disabled = !canRate || intro;
+  els.showAnswer.hidden = reviewing || intro || revealed || autoScored;
+
+  if (reviewing) {
+    els.gotIt.hidden = true;
+    els.missIt.hidden = true;
+    els.moreLikeThis.disabled = true;
+    return;
+  }
+
+  if (autoScored && !autoRated) {
+    els.gotIt.hidden = true;
+    els.missIt.hidden = true;
+  } else if (autoScored && autoRated) {
+    els.gotIt.hidden = false;
+    els.gotIt.textContent = "Next";
+    els.gotIt.disabled = false;
+    els.missIt.hidden = true;
+  } else {
+    els.gotIt.hidden = false;
+    els.missIt.hidden = false;
+    els.gotIt.disabled = !canSelfRate;
+    els.missIt.disabled = !canSelfRate;
+  }
+
   els.moreLikeThis.disabled = intro ? true : (!revealed && !autoRated);
 }
 
@@ -482,8 +506,11 @@ function drawQuestion(question, { preserveReveal = false } = {}) {
   currentItem = findItem(question.itemId);
   resetButtons();
 
+  const reviewing = isReviewingHistory();
   const showWhatYouKnow = !question.intro && state.repCount > 0 && (state.repCount + 1) % ENGINE.SHOW_WHAT_YOU_KNOW_EVERY === 0;
-  els.vectorLabel.textContent = showWhatYouKnow ? `SHOW WHAT YOU KNOW · ${question.label}` : question.label;
+  els.vectorLabel.textContent = reviewing
+    ? `REVIEW · ${question.label}`
+    : (showWhatYouKnow ? `SHOW WHAT YOU KNOW · ${question.label}` : question.label);
   els.vectorInstruction.textContent = question.instruction;
   els.prompt.textContent = question.prompt;
   els.answerLabel.textContent = question.answerLabel || "Answer";
@@ -494,7 +521,10 @@ function drawQuestion(question, { preserveReveal = false } = {}) {
   els.exampleHawaiian.textContent = question.exampleHawaiian || "";
   renderChoices(question);
 
-  if (question.intro) {
+  if (reviewing) {
+    els.moreLikeThis.hidden = true;
+    setRevealed(true);
+  } else if (question.intro) {
     els.gotIt.textContent = "Next";
     els.missIt.hidden = true;
     els.moreLikeThis.hidden = true;
@@ -502,7 +532,7 @@ function drawQuestion(question, { preserveReveal = false } = {}) {
     els.answerSupport.hidden = false;
     els.practiceCard.dataset.revealed = "true";
     els.showAnswer.hidden = true;
-    els.gotIt.disabled = isReviewingHistory();
+    els.gotIt.disabled = false;
   } else {
     els.moreLikeThis.hidden = false;
     if (question.vector === "use") {
@@ -528,6 +558,7 @@ function pushQuestion(question) {
 }
 
 function renderNextQuestion({ scrollToQuestion = false } = {}) {
+  reviewingHistory = false;
   renderFeedback(null);
   const previousQuestion = currentQuestion;
   const question = nextQuestion();
@@ -549,10 +580,11 @@ function renderNextQuestion({ scrollToQuestion = false } = {}) {
 
 function showHistoryItem(nextCursor, kind) {
   if (nextCursor < 0 || nextCursor >= history.length) return;
+  reviewingHistory = true;
   historyCursor = nextCursor;
   const question = history[historyCursor];
-  drawQuestion(question);
-  renderFeedback(kind, kind === "back" ? "Going back through what you already saw." : "Going forward through your session.");
+  drawQuestion(question, { preserveReveal: true });
+  renderFeedback(kind, "REVIEW only. No scores change here. Forward returns you to the live lesson.");
 }
 
 function moveForward() {
@@ -619,7 +651,7 @@ function rateCurrent(delta) {
 }
 
 function moreLikeThis() {
-  if (!currentQuestion || currentQuestion.intro) return;
+  if (!currentQuestion || currentQuestion.intro || isReviewingHistory()) return;
   preferredItemId = currentQuestion.itemId;
   excludeVectorOnce = currentQuestion.vector;
   renderFeedback("forward", "Same thought, new angle. This is the point.");
@@ -665,9 +697,11 @@ els.backCard.addEventListener("click", () => showHistoryItem(historyCursor - 1, 
 els.forwardCard.addEventListener("click", moveForward);
 els.replayCard.addEventListener("click", () => {
   if (!currentQuestion) return;
-  drawQuestion(currentQuestion, { preserveReveal: currentQuestion.intro });
-  renderFeedback("replay", currentQuestion.intro ? "Read both once more, then say the Hawaiian." : "Replay. No peek. Try the same angle again.");
-  setSeallyState("replay", currentQuestion.itemId);
+  drawQuestion(currentQuestion, { preserveReveal: currentQuestion.intro || isReviewingHistory() });
+  renderFeedback("replay", isReviewingHistory()
+    ? "REVIEW only. No score changes."
+    : (currentQuestion.intro ? "Read both once more, then say the Hawaiian." : "Replay. No peek. Try the same angle again."));
+  if (!isReviewingHistory()) setSeallyState("replay", currentQuestion.itemId);
 });
 if (els.noeauReveal) els.noeauReveal.addEventListener("click", () => {
   els.noeauBody.hidden = false;
