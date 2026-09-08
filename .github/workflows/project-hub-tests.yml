@@ -12,6 +12,7 @@ on:
       - 'tests/test_project_hub.py'
       - 'tests/test_hawaii_archive.py'
       - 'tests/test_hawaii_image_asset_states.py'
+      - 'tests/test_hawaii_image_os_v2_live.py'
       - '.github/workflows/project-hub-tests.yml'
   pull_request:
     paths:
@@ -24,6 +25,7 @@ on:
       - 'tests/test_project_hub.py'
       - 'tests/test_hawaii_archive.py'
       - 'tests/test_hawaii_image_asset_states.py'
+      - 'tests/test_hawaii_image_os_v2_live.py'
       - '.github/workflows/project-hub-tests.yml'
 
 jobs:
@@ -40,6 +42,8 @@ jobs:
         run: python tests/test_hawaii_archive.py
       - name: Verify distinct Image OS media assets
         run: python tests/test_hawaii_image_asset_states.py
+      - name: Verify Image OS v2 live media states
+        run: python tests/test_hawaii_image_os_v2_live.py
       - name: Check Hawaiʻi Archive JavaScript syntax
         run: |
           node --check hawaii-archive/app.js
