@@ -79,6 +79,31 @@ class HawaiiArchiveTests(unittest.TestCase):
         self.assertTrue(any(item["rhetorical_mode"] == "call-and-response" for item in voiced))
         self.assertTrue(any(item["rhetorical_mode"] == "warning" for item in voiced))
 
+    def test_petition_geography_expansion_is_broad_without_fake_voice(self):
+        path = ROOT / "hawaii-archive" / "data" / "weeks" / "1897-09-06.json"
+        payload = json.loads(path.read_text(encoding="utf-8"))
+        items = payload["items"]
+        petition_pages = [item for item in items if item["kind"] == "petition-district-page"]
+
+        # This is a source-density checkpoint, not a topical quota. The archive earns the count.
+        self.assertGreaterEqual(len(items), 47)
+        self.assertGreaterEqual(len(petition_pages), 34)
+        self.assertGreaterEqual(len({item["place"] for item in petition_pages}), 20)
+        self.assertEqual(
+            len({item["source_url"] for item in petition_pages}),
+            len(petition_pages),
+        )
+        self.assertTrue(all("voice_actor" not in item for item in petition_pages))
+        self.assertTrue(all("libweb.hawaii.edu/digicoll/annexation/petition/" in item["source_url"] for item in petition_pages))
+
+        island_markers = {"Hawaiʻi", "Maui", "Molokaʻi", "Oʻahu", "Kauaʻi"}
+        covered = {
+            island
+            for island in island_markers
+            if any(island in item["place"] for item in petition_pages)
+        }
+        self.assertEqual(covered, island_markers)
+
     def test_public_page_feels_like_social_feed_without_hiding_source(self):
         page = (ROOT / "hawaii-archive" / "index.html").read_text(encoding="utf-8")
         script = (ROOT / "hawaii-archive" / "app.js").read_text(encoding="utf-8")
