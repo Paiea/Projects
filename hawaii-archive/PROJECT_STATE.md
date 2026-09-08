@@ -26,18 +26,21 @@ The MVP is a public GitHub Pages pilot built around the historical week **Septem
 
 The first data fixture uses three real front-page headline records from *Ka Nupepa Kuokoa*, September 10, 1897. The scholarly reproduction/translation evidence for those headline meanings is linked from each item. This is deliberately a tiny proving set, not a claim that the full week has been ingested.
 
-The public experience is finite. It defaults to a readable modern feed rendering and lets the reader expand the original Hawaiian, close English meaning, and source/confidence information.
+The public experience is finite and social-feed shaped. It defaults to a short modern rendering that tries to preserve the source's supported communicative move, then lets the reader open the original Hawaiian, close English meaning, and voice/source evidence.
 
 The project is surfaced as a first-class **History & Culture** card on the main Projects hub.
 
 ## Durable Decisions
 
-- **Archive persistent, experience constrained.** Backend material may eventually span years; the default public experience remains one bounded historical week rather than an infinite database dump.
+- **Archive persistent, experience constrained.** Backend material may eventually span years; the default public experience remains one bounded historical week rather than an endless database dump.
 - **Source remains authority.** A scan/photo and its archival metadata are never overwritten by derived work.
 - **Atomic records over whole-newspaper translation.** Newspaper issues are sources; small grounded historical records are the reusable derived unit.
 - **Multiple language layers.** Preserve original Hawaiian, close English, and optional natural/feed rendering as distinct layers.
 - **Feed rendering is accessibility, not quotation.** Modern wording must never be presented as verbatim historical speech.
-- **Cheap first, escalate intelligently.** Optimize for trustworthy output per unit of usage. Straightforward items may pass cheaply; ambiguity, cultural nuance, damaged source, or high showcase value can route to `review` or `high-fidelity`.
+- **Preserve social intent, not just facts.** The feed layer should retain supported rhetorical energy such as announcement, warning, celebration, rallying, argument, direct address, repetition, questions, and punctuation. Store `rhetorical_mode` plus `voice_evidence` so tone has an evidence trail.
+- **Do not cosplay the source.** Do not invent modern slang, jokes, outrage, intimacy, or cultural references merely to make the feed feel contemporary.
+- **Social-media form is the product analogy.** Publication-as-account, compact post presentation, and one-tap source layers are preferred over museum/exhibit presentation for the public feed.
+- **Cheap first, escalate intelligently.** Optimize for trustworthy output per unit of usage. Straightforward items may pass cheaply; ambiguity, cultural nuance, damaged source, rhetorical uncertainty, or high showcase value can route to `review` or `high-fidelity`.
 - **Confidence ladder:** `unknown` → `plausible` → `supported` → `verified`.
 - **Processing routes:** `cheap-pass`, `review`, `high-fidelity`.
 - **No giant platform yet.** Full crawlers, databases, bulk OCR/translation, maps, accounts, search, and automated image generation are out of MVP scope.
@@ -50,25 +53,25 @@ The project is surfaced as a first-class **History & Culture** card on the main 
 - The first three records are headline-level, not full article translations.
 - The exact best upstream machine-readable nūpepa source still needs a bounded adapter proof. Papakilo/UH Hawaiian Language Newspaper collections are the preferred research direction, but implementation must respect actual access/rights/technical behavior discovered at runtime.
 - Historical-photo acquisition/restoration is not yet implemented. The reusable Image OS contract exists only as a minimal seam.
-- Translation quality thresholds and escalation heuristics need calibration against real Hawaiian snippets before bulk processing.
+- Translation and rhetorical-tone escalation thresholds need calibration against real Hawaiian snippets before bulk processing.
 
 ## On-Demand References
 
-- `hawaii-archive/data/ITEM_CONTRACT.md` — read when ingesting/changing archive record structure or routing semantics.
+- `hawaii-archive/data/ITEM_CONTRACT.md` — read when ingesting/changing archive record structure, social-intent handling, or routing semantics.
 - `systems/image-os/PROFILE_CONTRACT.md` — read for any image restoration, colorization, generation, or visual-profile work.
 - `docs/superpowers/specs/2026-09-08-hawaii-archive-revival-mvp-design.md` — read when changing MVP product boundaries.
 
 ## Last Meaningful Changes
 
+- Shifted the public pilot from museum-card presentation toward a finite historical social feed.
+- Added evidence-backed rhetorical-mode and voice-evidence fields so feed tone does not flatten punctuation or social intent.
 - Shipped the first public pilot on GitHub Pages and surfaced it in the Projects hub under History & Culture.
-- Locked the finite historical-week experience and atomic-record model.
 - Adopted compiler-derived authority, confidence, provenance, staleness-friendly, and cheap→escalate principles.
-- Chose September 6–12, 1897 as the first proving week with *Ka Nupepa Kuokoa* material from September 10.
 
 ## NEXT_TASK
 
-Prove **one automated upstream ingestion path** without widening the public product. Resolve the cheapest reliable way to retrieve one *Ka Nupepa Kuokoa* issue/record from a primary nūpepa archive, normalize 5–10 atomic records into the existing contract, and measure where transcription/translation needs escalation. Preserve original source authority and do not build a general crawler first.
+Prove **one automated upstream ingestion path** without widening the public product. Resolve the cheapest reliable way to retrieve one *Ka Nupepa Kuokoa* issue/record from a primary nūpepa archive, normalize 5–10 atomic records into the existing contract, and measure where transcription, translation, or rhetorical-tone interpretation needs escalation. Preserve original source authority and do not build a general crawler first.
 
 ## RE-PROMPT
 
-> Continue Hawaiʻi Archive Revival from current Paiea/Projects GitHub authority. Read root AGENTS.md, state/PROJECT_REGISTRY.md, state/HANDSHAKE_PROTOCOL.md, and hawaii-archive/PROJECT_STATE.md. Inspect the exact current source/data before changing anything. Execute the durable NEXT_TASK with cheap-first routing, preserve archival authority and uncertainty, keep the public experience finite, validate changes, update project state, and leave the next handshake.
+> Continue Hawaiʻi Archive Revival from current Paiea/Projects GitHub authority. Read root AGENTS.md, state/PROJECT_REGISTRY.md, state/HANDSHAKE_PROTOCOL.md, and hawaii-archive/PROJECT_STATE.md. Inspect the exact current source/data before changing anything. Execute the durable NEXT_TASK with cheap-first routing, preserve archival authority, uncertainty, and supported social intent, keep the public experience finite, validate changes, update project state, and leave the next handshake.
