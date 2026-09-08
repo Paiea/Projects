@@ -26,6 +26,7 @@ Pidgin support fades as the learner gets stronger. Pidgin is never the joke.
 - Core tests: `tests/test_pidgin_olelo.py`
 - Browser runtime regression: `tests/test_pidgin_olelo_browser_runtime.py`
 - Dialogue/scroll regression: `tests/test_pidgin_olelo_response_scroll.py`
+- Uncle Seally behavior regression: `tests/test_pidgin_olelo_seally_behavior.py`
 
 ## Learning Model
 
@@ -67,7 +68,20 @@ When the app knows the answer, it recasts instead of throwing a giant WRONG stat
 
 > Your questionable ʻōlelo coach.
 
-He reacts to learning state with small reusable line pools: start, correct, miss, repeated miss, mastered, Show Me, and Replay. Examples include `Chee. Look who went study.`, `Almost. Your mouth knew. Your brain went Costco.`, and `Again. This time no mumble.`
+He uses small reusable line pools rather than custom jokes for every phrase. He should feel like one adult teacher reacting at meaningful moments, not a mascot responding to every click.
+
+Current behavior:
+
+- session opening gets one short Seally line
+- ordinary correct answers are throttled so several meaningful reps can pass without new commentary
+- miss and repeated miss always get a teacher reaction
+- mastery always gets a teacher reaction
+- Show Me and Replay always get a teacher reaction
+- a harder scaffold transition or **SHOW WHAT YOU KNOW** gets direct teacher language such as `Okay. No help this time.`
+- meeting another phrase does not restart the session-opening speech
+- seal-specific jokes live in a rare pool and should remain uncommon
+
+Examples include `Chee.`, `Almost. Your mouth knew. Your brain went Costco.`, `You supposed to try first, bah.`, and `Again. This time no mumble.`
 
 Keep the character compact. Do not write hundreds of phrase-specific jokes. Add a special line only when it is unusually good.
 
@@ -136,9 +150,7 @@ A future **hear it** vector should return only with trustworthy fluent-speaker o
 
 ## NEXT_TASK
 
-Finish the already-approved small Uncle Seally behavior/personality pass only after the question runtime, dialogue-response distinction, and Next scroll behavior are green on current GitHub authority.
-
-Then use the shipped Core 30 version with Dad before adding vocabulary or major modes. Watch whether:
+Use the shipped Core 30 version with Dad before adding vocabulary or major modes. Watch whether:
 
 - Seally feels funny without becoming noisy
 - the Pidgin scaffold fades at the right speed
@@ -152,4 +164,4 @@ Then use the shipped Core 30 version with Dad before adding vocabulary or major 
 
 ## RE-PROMPT
 
-> Continue Pidgin → ʻŌlelo from current `Paiea/Projects` authority. Read root `AGENTS.md`, `state/PROJECT_REGISTRY.md`, `state/HANDSHAKE_PROTOCOL.md`, and `pidgin-olelo/PROJECT_STATE.md`, then inspect current source. Preserve Core 30 as the permanent default, one mixed Learn flow, ELL-style fading, six hidden vectors, recasting, WIN-style MORE LIKE THIS / SHOW WHAT YOU KNOW, compiler-style one-thought-many-representations, quiet spacing, working Back/Replay/Forward, conversational replies as a derived `scenario` representation rather than a new mode, real-world Mission use credit, orthography checks, inline Noʻeau under the lesson, and responsive Uncle Seally commentary. Keep translation meaning distinct from a plausible conversational reply. Pidgin is the trusted scaffold and never the punchline. Do not restore synthetic audio. Prefer real Dad testing and fluent-speaker/kumu corrections over feature expansion.
+> Continue Pidgin → ʻŌlelo from current `Paiea/Projects` authority. Read root `AGENTS.md`, `state/PROJECT_REGISTRY.md`, `state/HANDSHAKE_PROTOCOL.md`, and `pidgin-olelo/PROJECT_STATE.md`, then inspect current source. Preserve Core 30 as the permanent default, one mixed Learn flow, ELL-style fading, six hidden vectors, recasting, WIN-style MORE LIKE THIS / SHOW WHAT YOU KNOW, compiler-style one-thought-many-representations, quiet spacing, working Back/Replay/Forward, conversational replies as a derived `scenario` representation rather than a new mode, real-world Mission use credit, orthography checks, inline Noʻeau under the lesson, and responsive Uncle Seally commentary. Keep translation meaning distinct from a plausible conversational reply. Keep Uncle Seally sparse: ordinary correct reactions are throttled, while miss/repeated miss, mastery, Show Me, Replay, and harder scaffold transitions are teacher moments; seal jokes stay rare. Pidgin is the trusted scaffold and never the punchline. Do not restore synthetic audio. Prefer real Dad testing and fluent-speaker/kumu corrections over feature expansion.
