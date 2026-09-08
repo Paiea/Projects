@@ -8,8 +8,10 @@ on:
       - 'praxis/**'
       - 'hawaii-archive/**'
       - 'systems/image-os/**'
+      - 'scripts/build_hawaii_image_assets.py'
       - 'tests/test_project_hub.py'
       - 'tests/test_hawaii_archive.py'
+      - 'tests/test_hawaii_image_asset_states.py'
       - '.github/workflows/project-hub-tests.yml'
   pull_request:
     paths:
@@ -18,8 +20,10 @@ on:
       - 'praxis/**'
       - 'hawaii-archive/**'
       - 'systems/image-os/**'
+      - 'scripts/build_hawaii_image_assets.py'
       - 'tests/test_project_hub.py'
       - 'tests/test_hawaii_archive.py'
+      - 'tests/test_hawaii_image_asset_states.py'
       - '.github/workflows/project-hub-tests.yml'
 
 jobs:
@@ -34,5 +38,9 @@ jobs:
         run: python tests/test_project_hub.py
       - name: Verify Hawaiʻi Archive Revival contracts
         run: python tests/test_hawaii_archive.py
+      - name: Verify distinct Image OS media assets
+        run: python tests/test_hawaii_image_asset_states.py
       - name: Check Hawaiʻi Archive JavaScript syntax
-        run: node --check hawaii-archive/app.js
+        run: |
+          node --check hawaii-archive/app.js
+          node --check hawaii-archive/image-pilot.js

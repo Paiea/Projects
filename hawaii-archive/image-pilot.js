@@ -1,26 +1,23 @@
 const IMAGE_DATA_URL = "data/images/index.json";
 const pilot = document.querySelector("#image-pilot");
 
-const RESTORE_CLASSES = new Set(["restore-neutral-albumen", "restore-neutral-bw"]);
-const COLOR_CLASSES = new Set(["color-kaulia", "color-palace", "color-poi"]);
+const STATE_ASSET_FIELDS = {
+  original: "original_asset",
+  restored: "restored_asset",
+  color: "color_asset",
+};
 
-function approvedClass(value, allowed) {
-  return allowed.has(value) ? value : null;
+function assetForState(imageRecord, state) {
+  const field = STATE_ASSET_FIELDS[state];
+  return field ? imageRecord[field] : null;
 }
 
-function applyState(stage, buttons, imageRecord, state) {
-  stage.className = "media-stage pilot-media-stage";
-  if (imageRecord.crop_mode === "stereo-left") stage.classList.add("crop-stereo-left");
+function applyState(image, buttons, imageRecord, state) {
+  const asset = assetForState(imageRecord, state);
+  if (!asset) return;
 
-  if (state === "restored" || state === "color") {
-    const restoration = approvedClass(imageRecord.restoration_class, RESTORE_CLASSES);
-    if (restoration) stage.classList.add(restoration);
-  }
-
-  if (state === "color" && imageRecord.color_decision === "approved") {
-    const color = approvedClass(imageRecord.colorization_class, COLOR_CLASSES);
-    if (color) stage.classList.add("is-color", color);
-  }
+  image.src = asset;
+  image.dataset.state = state;
 
   for (const button of buttons) {
     const active = button.dataset.state === state;
@@ -57,8 +54,10 @@ function renderCard(imageRecord) {
 
   const stage = document.createElement("div");
   stage.className = "media-stage pilot-media-stage";
+  if (imageRecord.crop_mode === "stereo-left") stage.classList.add("crop-stereo-left");
+
   const image = document.createElement("img");
-  image.src = imageRecord.source_image_url;
+  image.src = imageRecord.original_asset;
   image.alt = imageRecord.title;
   image.loading = "lazy";
   image.decoding = "async";
@@ -72,17 +71,17 @@ function renderCard(imageRecord) {
   toolbar.append(original, restored);
   const buttons = [original, restored];
 
-  if (imageRecord.color_decision === "approved") {
+  if (imageRecord.color_decision === "approved" && imageRecord.color_asset) {
     const color = button("Color", "color");
     toolbar.append(color);
     buttons.push(color);
   }
 
   for (const control of buttons) {
-    control.addEventListener("click", () => applyState(stage, buttons, imageRecord, control.dataset.state));
+    control.addEventListener("click", () => applyState(image, buttons, imageRecord, control.dataset.state));
   }
 
-  applyState(stage, buttons, imageRecord, imageRecord.color_decision === "approved" ? "color" : "restored");
+  applyState(image, buttons, imageRecord, imageRecord.color_asset ? "color" : "restored");
   article.append(toolbar);
 
   const meta = document.createElement("div");

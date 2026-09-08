@@ -5,16 +5,11 @@ const feed = document.querySelector("#feed");
 const count = document.querySelector("#item-count");
 const scopeNote = document.querySelector("#scope-note");
 
-const RESTORE_CLASSES = new Set([
-  "restore-neutral-albumen",
-  "restore-neutral-bw",
-]);
-
-const COLOR_CLASSES = new Set([
-  "color-kaulia",
-  "color-palace",
-  "color-poi",
-]);
+const STATE_ASSET_FIELDS = {
+  original: "original_asset",
+  restored: "restored_asset",
+  color: "color_asset",
+};
 
 function formatHistoricalDate(value) {
   const date = new Date(`${value}T12:00:00`);
@@ -97,25 +92,17 @@ function publicationInitial(value) {
   return value.replace(/^Ka\s+/i, "").trim().charAt(0).toUpperCase() || "N";
 }
 
-function approvedClass(value, allowed) {
-  return allowed.has(value) ? value : null;
+function assetForState(imageRecord, state) {
+  const field = STATE_ASSET_FIELDS[state];
+  return field ? imageRecord[field] : null;
 }
 
-function setMediaState(stage, buttons, imageRecord, state) {
-  stage.className = "media-stage";
-  if (imageRecord.crop_mode === "stereo-left") stage.classList.add("crop-stereo-left");
+function setMediaState(image, buttons, imageRecord, state) {
+  const asset = assetForState(imageRecord, state);
+  if (!asset) return;
 
-  if (state === "restored" || state === "color") {
-    const restoreClass = approvedClass(imageRecord.restoration_class, RESTORE_CLASSES);
-    if (restoreClass) stage.classList.add(restoreClass);
-  }
-
-  if (state === "color" && imageRecord.color_decision === "approved") {
-    const colorClass = approvedClass(imageRecord.colorization_class, COLOR_CLASSES);
-    if (colorClass) {
-      stage.classList.add("is-color", colorClass);
-    }
-  }
+  image.src = asset;
+  image.dataset.state = state;
 
   for (const button of buttons) {
     const active = button.dataset.state === state;
@@ -140,9 +127,10 @@ function makePostMedia(imageRecord) {
 
   const stage = document.createElement("div");
   stage.className = "media-stage";
+  if (imageRecord.crop_mode === "stereo-left") stage.classList.add("crop-stereo-left");
 
   const image = document.createElement("img");
-  image.src = imageRecord.source_image_url;
+  image.src = imageRecord.original_asset;
   image.alt = imageRecord.title;
   image.loading = "lazy";
   image.decoding = "async";
@@ -158,7 +146,7 @@ function makePostMedia(imageRecord) {
   toolbar.append(originalButton, restoredButton);
 
   const buttons = [originalButton, restoredButton];
-  if (imageRecord.color_decision === "approved") {
+  if (imageRecord.color_decision === "approved" && imageRecord.color_asset) {
     const colorButton = makeMediaButton("Color", "color");
     toolbar.append(colorButton);
     buttons.push(colorButton);
@@ -166,12 +154,12 @@ function makePostMedia(imageRecord) {
 
   for (const button of buttons) {
     button.addEventListener("click", () => {
-      setMediaState(stage, buttons, imageRecord, button.dataset.state);
+      setMediaState(image, buttons, imageRecord, button.dataset.state);
     });
   }
 
-  const defaultState = imageRecord.color_decision === "approved" ? "color" : "restored";
-  setMediaState(stage, buttons, imageRecord, defaultState);
+  const defaultState = imageRecord.color_asset ? "color" : "restored";
+  setMediaState(image, buttons, imageRecord, defaultState);
   figure.append(toolbar);
 
   const context = document.createElement("div");
@@ -264,7 +252,7 @@ function renderWeek(payload, imagePayload) {
   count.textContent = String(payload.items.length);
   scopeNote.textContent = payload.scope_note;
 
-  const imageMap = new Map(imagePayload.images.map((image) => [image.id, image]));
+  const imageMap = new Map(imagePayload.images.map((imageRecord) => [imageRecord.id, imageRecord]));
   const grouped = new Map();
   for (const item of payload.items) {
     if (!grouped.has(item.date)) grouped.set(item.date, []);
