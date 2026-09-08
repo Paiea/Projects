@@ -57,7 +57,7 @@ console.log(JSON.stringify({
         self.assertEqual(result["car"]["pidgin"], "Where the car stay?")
         self.assertEqual(result["car"]["hawaiian"], "Ma hea ke kaʻa?")
 
-    def test_core_engine_has_scaffold_then_six_retrieval_vectors(self):
+    def test_core_engine_fades_pidgin_across_five_learning_stages(self):
         engine = PROJECT / "core-engine.js"
         result = self.node_json(
             r'''
@@ -79,55 +79,43 @@ const pool = [
 ];
 const scenario = {prompt: "Keoni walks in hungry. Ask if he wants to eat."};
 const built = Object.fromEntries(e.VECTORS.map(v => [v, e.buildQuestion(item, v, pool, scenario)]));
+const states = {
+  fresh: {},
+  recognized: {x:{recognize:1}},
+  clozed: {x:{recognize:1,cloze:1}},
+  produced: {x:{recognize:1,cloze:1,produce:1}},
+  situated: {x:{recognize:1,cloze:1,produce:1,scenario:1}},
+};
 console.log(JSON.stringify({
   vectors: e.VECTORS,
-  hard: e.HARD_VECTORS,
-  showEvery: e.SHOW_WHAT_YOU_KNOW_EVERY,
   intro: e.buildIntro(item),
   built,
+  stages: Object.fromEntries(Object.entries(states).map(([k,s]) => [k,e.stageFor("x",s)])),
+  picks: {
+    fresh:e.pickVector("x",states.fresh,1),
+    recognized:e.pickVector("x",states.recognized,2),
+    clozed:e.pickVector("x",states.clozed,3),
+    produced:e.pickVector("x",states.produced,4),
+    situated:e.pickVector("x",states.situated,5),
+  }
 }));
 ''',
             engine,
         )
-        self.assertEqual(
-            set(result["vectors"]),
-            {"recognize", "produce", "cloze", "scenario", "say", "use"},
-        )
-        self.assertEqual(result["showEvery"], 6)
+        self.assertEqual(set(result["vectors"]), {"recognize", "cloze", "produce", "scenario", "say", "use"})
+        self.assertEqual(result["intro"]["stage"], 1)
         self.assertEqual(result["intro"]["prompt"], "Makemake ʻoe e ʻai?")
         self.assertEqual(result["intro"]["answer"], "You like eat?")
-        self.assertEqual(result["built"]["recognize"]["prompt"], "Makemake ʻoe e ʻai?")
-        self.assertEqual(result["built"]["recognize"]["answer"], "You like eat?")
-        self.assertEqual(result["built"]["produce"]["prompt"], "You like eat?")
-        self.assertEqual(result["built"]["produce"]["answer"], "Makemake ʻoe e ʻai?")
+        self.assertEqual(result["stages"], {"fresh": 2, "recognized": 3, "clozed": 3, "produced": 4, "situated": 5})
+        self.assertEqual(result["picks"], {"fresh": "recognize", "recognized": "cloze", "clozed": "produce", "produced": "scenario", "situated": "say"})
+        self.assertIn("You like eat?", result["built"]["recognize"]["choices"])
         self.assertIn("____", result["built"]["cloze"]["prompt"])
+        self.assertIn("You like eat?", result["built"]["cloze"]["instruction"])
+        self.assertEqual(result["built"]["produce"]["prompt"], "You like eat?")
         self.assertEqual(result["built"]["scenario"]["prompt"], scenario["prompt"])
-        self.assertGreaterEqual(len(result["built"]["scenario"]["choices"]), 3)
+        self.assertIn("Makemake ʻoe e ʻai?", result["built"]["scenario"]["choices"])
         self.assertEqual(result["built"]["say"]["prompt"], "Makemake ʻoe e ʻai?")
         self.assertIn("next 10 minutes", result["built"]["use"]["instruction"].lower())
-
-    def test_progression_starts_with_recognition_before_harder_generation(self):
-        engine = PROJECT / "core-engine.js"
-        result = self.node_json(
-            r'''
-const e = require(process.argv[1]);
-const empty = {};
-const oneRecognition = { x: { recognize: 1 } };
-const someProduction = { x: { recognize: 1, produce: 1 } };
-console.log(JSON.stringify({
-  first: e.pickVector("x", empty, 1),
-  second: e.pickVector("x", oneRecognition, 2),
-  third: e.pickVector("x", someProduction, 3),
-  check: e.pickVector("x", someProduction, 6),
-  hard: e.HARD_VECTORS,
-}));
-''',
-            engine,
-        )
-        self.assertEqual(result["first"], "recognize")
-        self.assertEqual(result["second"], "produce")
-        self.assertEqual(result["third"], "cloze")
-        self.assertIn(result["check"], result["hard"])
 
     def test_core_hawaiian_uses_real_okina_unicode_and_normalized_kahako(self):
         phrases = self.read(PROJECT / "phrases.js")
@@ -144,25 +132,13 @@ console.log(JSON.stringify({
             self.assertIn(expected, sensitive)
         self.assertIn("ʻ", sensitive)
 
-    def test_main_surface_is_core_first_and_noeau_is_flavor_not_primary_menu(self):
-        learn = self.read(PROJECT / "index.html")
-        challenge = self.read(PROJECT / "challenge.html")
-        noeau = self.read(PROJECT / "noeau.html")
-        for html in (learn, challenge):
-            self.assertIn('class="experience-nav"', html)
-            self.assertIn('href="index.html"', html)
-            self.assertIn('href="challenge.html"', html)
-            self.assertNotIn('>Noʻeau</a>', html)
-        self.assertIn("Core 30", learn)
-        self.assertIn('id="more-practice"', learn)
-        self.assertIn('href="noeau.html"', learn)
-        self.assertIn("Flavor", learn)
-        self.assertIn("70 more", learn)
-        self.assertIn("Back to Core 30", noeau)
-
-    def test_learn_surface_supports_multiple_question_shapes_without_six_big_modes(self):
+    def test_learn_surface_has_one_mixed_flow_not_direction_toggles(self):
         html = self.read(PROJECT / "index.html")
         app = self.read(PROJECT / "app.js")
+        self.assertIn("Core 30", html)
+        self.assertNotIn('id="direction-pidgin"', html)
+        self.assertNotIn('id="direction-hawaiian"', html)
+        self.assertNotIn("setDirection", app)
         for control_id in (
             "vector-label",
             "vector-instruction",
@@ -184,15 +160,40 @@ console.log(JSON.stringify({
             self.assertIn(f'id="{control_id}"', html)
         self.assertIn('src="curriculum.js"', html)
         self.assertIn('src="core-engine.js"', html)
-        self.assertIn("PIDGIN_OLELO_CURRICULUM", app)
-        self.assertIn("PIDGIN_OLELO_CORE_ENGINE", app)
-        self.assertIn("vectorStrengths", app)
-        self.assertIn("moreLikeThis", app)
         self.assertIn("SHOW WHAT YOU KNOW", app)
-        self.assertNotIn("speechSynthesis", app)
-        self.assertNotIn("SpeechSynthesisUtterance", app)
+        self.assertIn("preferredItemId = itemId", app)
+        self.assertIn("recordKnownChoice", app)
+        self.assertIn("Almost, uncle", app)
+        self.assertIn("Wrong scene", app)
 
-    def test_old_two_direction_progress_is_migrated_into_new_vector_state(self):
+    def test_more_is_integrated_noeau_widget_not_extra_phrase_menu(self):
+        html = self.read(PROJECT / "index.html")
+        app = self.read(PROJECT / "app.js")
+        self.assertIn('<summary>More</summary>', html)
+        for control_id in (
+            "noeau-widget",
+            "noeau-widget-saying",
+            "noeau-widget-reveal",
+            "noeau-widget-body",
+            "noeau-widget-meaning",
+            "noeau-widget-hook",
+            "noeau-widget-next",
+        ):
+            self.assertIn(f'id="{control_id}"', html)
+        self.assertIn('src="noeau.js"', html)
+        self.assertNotIn('href="noeau.html"', html)
+        self.assertNotIn("70 more phrases", html)
+        self.assertIn("NOEAU_ITEMS", app)
+        self.assertIn("renderNoeauWidget", app)
+
+    def test_noeau_bank_stays_separate_and_sourced(self):
+        bank = self.read(PROJECT / "noeau.js")
+        self.assertEqual(len(re.findall(r"\bid\s*:\s*['\"]", bank)), 10)
+        for field in ("hawaiian", "meaning", "localHook", "sourceLabel", "sourceUrl"):
+            self.assertEqual(len(re.findall(rf"\b{field}\s*:\s*['\"]", bank)), 10)
+        self.assertIn("window.PIDGIN_OLELO_NOEAU", bank)
+
+    def test_old_two_direction_progress_is_migrated_into_new_state(self):
         app = self.read(PROJECT / "app.js")
         self.assertIn('"pidgin-olelo-v0-strength"', app)
         self.assertIn('"pidgin-olelo-core-vectors-v1"', app)
@@ -218,7 +219,7 @@ console.log(JSON.stringify({
         self.assertIn("coreItems", js)
         self.assertIn("I USED IT", html)
         self.assertIn('"pidgin-olelo-core-vectors-v1"', js)
-        self.assertIn("use", js)
+        self.assertIn("vectorStrengths[itemId].use", js)
 
     def test_challenge_mission_is_deterministic_inside_ten_minute_windows(self):
         challenge_js = PROJECT / "challenge.js"
@@ -242,33 +243,34 @@ console.log(JSON.stringify({window: engine.CHALLENGE_WINDOW_MS, first, same, nex
         self.assertEqual(result["first"], result["same"])
         self.assertNotEqual(result["first"]["block"], result["next"]["block"])
 
-    def test_noeau_bank_stays_separate_and_sourced(self):
-        bank = self.read(PROJECT / "noeau.js")
-        self.assertEqual(len(re.findall(r"\bid\s*:\s*['\"]", bank)), 10)
-        for field in ("hawaiian", "meaning", "localHook", "sourceLabel", "sourceUrl"):
-            self.assertEqual(len(re.findall(rf"\b{field}\s*:\s*['\"]", bank)), 10)
-        self.assertIn("window.PIDGIN_OLELO_NOEAU", bank)
-
-    def test_project_state_records_win_compiler_and_orthography_model(self):
+    def test_project_state_records_fading_win_compiler_humor_and_orthography_boundaries(self):
         state = self.read(PROJECT / "PROJECT_STATE.md")
-        self.assertIn("Core 30", state)
-        self.assertIn("six", state.lower())
-        self.assertIn("SHOW WHAT YOU KNOW", state)
-        self.assertIn("MORE LIKE THIS", state)
-        self.assertIn("WIN", state)
-        self.assertIn("compiler", state.lower())
-        self.assertIn("ʻokina", state)
-        self.assertIn("kahakō", state)
-        self.assertIn("fluent-speaker", state.lower())
-        self.assertIn("audio", state.lower())
+        for expected in (
+            "Core 30",
+            "SHOW WHAT YOU KNOW",
+            "MORE LIKE THIS",
+            "WIN",
+            "compiler",
+            "Pidgin",
+            "ʻokina",
+            "kahakō",
+            "fluent-speaker",
+            "audio",
+            "fades",
+            "the joke",
+        ):
+            self.assertIn(expected.lower(), state.lower())
 
     def test_static_runtime_has_no_external_dependency_and_audio_stays_removed(self):
-        for page_name in ("index.html", "challenge.html", "noeau.html"):
+        for page_name in ("index.html", "challenge.html"):
             html = self.read(PROJECT / page_name)
             self.assertNotRegex(html, r'<(?:script|link)[^>]+(?:src|href)=["\']https?://')
             self.assertIn('href="styles.css"', html)
             self.assertNotIn("device voice", html.lower())
             self.assertNotIn("pronunciation authority", html.lower())
+        app = self.read(PROJECT / "app.js")
+        self.assertNotIn("speechSynthesis", app)
+        self.assertNotIn("SpeechSynthesisUtterance", app)
         styles = self.read(PROJECT / "styles.css")
         self.assertIn("@media", styles)
         self.assertIn("480px", styles)
