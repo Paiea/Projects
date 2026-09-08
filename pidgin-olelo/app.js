@@ -70,6 +70,7 @@ const els = {
   prompt: document.querySelector("#prompt"),
   choiceWrap: document.querySelector("#choice-wrap"),
   answerWrap: document.querySelector("#answer-wrap"),
+  answerSupport: document.querySelector("#answer-support"),
   answerLabel: document.querySelector("#answer-label"),
   answer: document.querySelector("#answer"),
   shape: document.querySelector("#shape"),
@@ -276,6 +277,7 @@ function updateProgress() {
 
 function scrollToPracticeCard() {
   if (!els.practiceCard) return;
+  if (window.matchMedia("(max-width: 640px)").matches) return;
   requestAnimationFrame(() => {
     els.practiceCard.scrollIntoView({ behavior: "smooth", block: "start" });
   });
@@ -364,6 +366,8 @@ function setRevealed(revealed) {
   const intro = currentQuestion?.intro;
   const canRate = revealed && !isReviewingHistory() && !autoRated;
   els.answerWrap.hidden = !revealed;
+  els.answerSupport.hidden = !revealed;
+  els.practiceCard.dataset.revealed = revealed ? "true" : "false";
   els.showAnswer.hidden = revealed || Boolean(currentQuestion?.choices?.length);
   els.gotIt.disabled = autoRated ? false : !canRate;
   els.missIt.disabled = !canRate || intro;
@@ -392,6 +396,8 @@ function drawQuestion(question, { preserveReveal = false } = {}) {
     els.missIt.hidden = true;
     els.moreLikeThis.hidden = true;
     els.answerWrap.hidden = false;
+    els.answerSupport.hidden = false;
+    els.practiceCard.dataset.revealed = "true";
     els.showAnswer.hidden = true;
     els.gotIt.disabled = isReviewingHistory();
   } else {
