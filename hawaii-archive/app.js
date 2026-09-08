@@ -106,12 +106,13 @@ function assetForState(imageRecord, state) {
   return field ? imageRecord[field] : null;
 }
 
-function setMediaState(image, buttons, imageRecord, state) {
+function setMediaState(image, buttons, imageRecord, state, fullImageLink = null) {
   const asset = assetForState(imageRecord, state);
   if (!asset) return;
 
   image.src = asset;
   image.dataset.state = state;
+  if (fullImageLink) fullImageLink.href = asset;
 
   for (const button of buttons) {
     const active = button.dataset.state === state;
@@ -136,6 +137,7 @@ function makePostMedia(imageRecord) {
 
   const stage = document.createElement("div");
   stage.className = "media-stage";
+  if (imageRecord.image_class) stage.classList.add(`media-${imageRecord.image_class}`);
   if (imageRecord.crop_mode === "stereo-left") stage.classList.add("crop-stereo-left");
 
   const image = document.createElement("img");
@@ -161,14 +163,23 @@ function makePostMedia(imageRecord) {
     buttons.push(colorButton);
   }
 
+  const fullImageLink = document.createElement("a");
+  fullImageLink.className = "media-full-link";
+  fullImageLink.target = "_blank";
+  fullImageLink.rel = "noopener noreferrer";
+  fullImageLink.textContent = "View full image";
+  toolbar.append(fullImageLink);
+
   for (const button of buttons) {
     button.addEventListener("click", () => {
-      setMediaState(image, buttons, imageRecord, button.dataset.state);
+      setMediaState(image, buttons, imageRecord, button.dataset.state, fullImageLink);
     });
   }
 
-  const defaultState = imageRecord.color_asset ? "color" : "restored";
-  setMediaState(image, buttons, imageRecord, defaultState);
+  const defaultState = imageRecord.color_decision === "approved" && imageRecord.color_asset
+    ? "color"
+    : "restored";
+  setMediaState(image, buttons, imageRecord, defaultState, fullImageLink);
   figure.append(toolbar);
 
   const context = document.createElement("div");
@@ -231,7 +242,13 @@ function renderPost(item, imageMap) {
   const meta = document.createElement("p");
   meta.className = "post-meta";
   const sourceIdentity = item.voice_actor ? `${item.publication} · ` : "";
-  meta.textContent = `${sourceIdentity}${item.place} · ${formatPostDate(item.date)}`;
+  const hasPublicationLag = item.event_date
+    && item.publication_date
+    && item.event_date !== item.publication_date;
+  const dateContext = hasPublicationLag
+    ? `event ${formatPostDate(item.event_date)} · published ${formatPostDate(item.publication_date)}`
+    : formatPostDate(item.date);
+  meta.textContent = `${sourceIdentity}${item.place} · ${dateContext}`;
   identity.append(meta);
   header.append(identity);
 
