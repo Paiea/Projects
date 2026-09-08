@@ -21,7 +21,8 @@
       "translation_basis": "Kamakakoʻi provides the Hawaiian excerpt and an English translation by Jacob Bryan Kaʻomakaokalā Aki and Noelani Goodyear-Kaʻopua.",
       "confidence": "supported",
       "route": "review",
-      "status": "pilot"
+      "status": "pilot",
+      "image_ref": "HAR-IMG-0001"
     },
     {
       "id": "HAR-1897-09-06-ALOHA-002",
@@ -78,7 +79,8 @@
       "translation_basis": "The scholarly source quotes the historical Hawaiian text and provides an English translation.",
       "confidence": "supported",
       "route": "review",
-      "status": "pilot"
+      "status": "pilot",
+      "image_ref": "HAR-IMG-0002"
     },
     {
       "id": "HAR-1897-09-06-ALOHA-005",
