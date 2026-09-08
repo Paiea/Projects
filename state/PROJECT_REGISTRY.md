@@ -16,6 +16,16 @@ Private/recovery-only projects do not need to appear here. Cross-project recover
 - Status: active
 - Purpose: lightweight classroom instruction, WIN grouping, quick checks, proficiency evidence, and reusable teacher-led activities
 
+## Praxis 5001 Study Tool
+
+- Category: Classroom Tools
+- Hosting: internal
+- Public route: `praxis/`
+- Source: `praxis/`
+- Durable state: `praxis/PROJECT_STATE.md`
+- Status: active
+- Purpose: local-first Praxis Elementary Education 5001 study engine covering 5002 RLA, 5003 Mathematics, 5004 Social Studies, and 5005 Science with targeted practice, full-test study feedback, and exam simulation
+
 ## Pidgin → ʻŌlelo
 
 - Category: Language Learning
