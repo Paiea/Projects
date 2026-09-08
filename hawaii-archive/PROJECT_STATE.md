@@ -15,9 +15,12 @@ Primary source lanes:
 
 ## Authority
 
-- Accepted project authority: `main` in `Paiea/Projects`.
+- Accepted project authority after merge: `main` in `Paiea/Projects`.
 - Source/build entry: `hawaii-archive/index.html`
 - Weekly public data: `hawaii-archive/data/weeks/`
+- Image records: `hawaii-archive/data/images/index.json`
+- Image job reviews: `hawaii-archive/images/jobs/`
+- Image OS comparison page: `hawaii-archive/image-pilot.html`
 - Human-facing route: `https://paiea.github.io/Projects/hawaii-archive/`
 - Projects hub route: `https://paiea.github.io/Projects/`
 - MVP design: `docs/superpowers/specs/2026-09-08-hawaii-archive-revival-mvp-design.md`
@@ -37,14 +40,28 @@ The public experience is finite and social-feed shaped. It defaults to short mod
 
 When a historical record clearly attributes words to a speaker, optional `voice_actor` lets that person or group occupy the visible social-post identity while the publication remains attached as provenance. Plain notices and unattributed newspaper items remain publication-authored and can remain low-voice.
 
-**Image OS v1 is now the immediate next production lane.** The earlier standalone historical-photo-restoration idea has been absorbed into Hawaiʻi Archive Revival. Images are selected and processed because they improve this feed, not because a separate public restoration gallery needs content.
+### First mixed-media proof
+
+The first Image OS v1 proving run is implemented on `feature/image-os-v1-three-image-pilot` and should become accepted authority after merge/Pages verification.
+
+Three real archival image records now exist:
+
+1. `HAR-IMG-0001` — James Keauiluna Kaulia, c. 1893, Library of Congress authority — portrait / `near` relationship.
+2. `HAR-IMG-0002` — ʻIolani Palace, c. 1889–1890, Hawaiʻi State Archives authority — built environment / `context` relationship.
+3. `HAR-IMG-0003` — *Pounding poi - preparing dinner, Hawaiian Islands*, 1896, Library of Congress authority — daily-life proving image / `context` relationship.
+
+The Kaulia portrait is attached to Kaulia's opening feed post. The palace image is attached to the post invoking the stone walls of ʻIolani Palace. Both render as combo posts with **Original / Restored / Color** controls and visible relationship/color-confidence labels.
+
+The poi image is intentionally **not** forced into the political week. It is inspectable in the Image OS proving page and remains ready for a future daily-life post or week where its relationship is grounded.
+
+The current visual proof uses deterministic in-browser tonal restoration plus restrained best-estimate hand-tint overlays. This is cheap, reversible, and geometry-safe, but it is not a full pixel-level restoration pipeline and must not be described as recovered detail or historically exact color.
 
 The project is surfaced as a first-class **History & Culture** card on the main Projects hub.
 
 ## Durable Decisions
 
 - **Archive persistent, experience constrained.** Backend material may eventually span years; the default public experience remains one bounded historical week rather than an endless database dump.
-- **One public product: the feed.** Text, photographs, newspaper images/illustrations, restored visuals, and historically informed color reconstructions all converge into the same historical social experience.
+- **One public product: the feed.** Text, photographs, newspaper images/illustrations, restored visuals, and color reconstructions converge into the same historical social experience.
 - **Mixed post model.** The feed may contain `text`, `photo`, and `combo` posts. Do not force every record into the same visual shape.
 - **Images support the social-text identity.** The nūpepa/social insight remains the product's center. Visuals strengthen inhabitation, context, people, places, and specific moments without turning the site into a generic old-photo gallery.
 - **Source remains authority.** A scan/photo and its archival metadata are never overwritten by derived work.
@@ -58,43 +75,47 @@ The project is surfaced as a first-class **History & Culture** card on the main 
 - **Social-media form is the product analogy.** Compact post presentation and one-tap source layers are preferred over museum/exhibit presentation for the public feed.
 - **Image relationships must be honest.** A visual attached to a post/week is `exact`, `near`, or `context`. Never imply that a contextual period image depicts the exact event or date.
 - **Original visual remains accessible.** A processed image may expose `original`, `restored_bw`, and `color_reconstruction` states. A derived version never replaces the source.
+- **Best-estimate color is allowed.** For this prototype, a restrained plausible/supportable reconstruction can be worth showing because color improves historical presence. It must remain labeled as an estimate/reconstruction and Original + Restored B&W must stay accessible.
 - **Image OS owns process, Hawaiʻi owns meaning.** Generic visual locks/review/approval live under `systems/image-os/`; Hawaiʻi-specific source research, historical interpretation, post matching, selection, and publication live here.
 - **Cheap first, escalate intelligently.** Optimize for trustworthy output per unit of usage. Straightforward items may pass cheaply; ambiguity, cultural nuance, damaged source, rhetorical uncertainty, attribution uncertainty, difficult restoration, uncertain color, or high showcase value can route to review/high-fidelity work.
 - **Confidence ladder:** `unknown` → `plausible` → `supported` → `verified`.
-- **No giant platform yet.** Full crawlers, databases, bulk OCR/translation, maps, accounts, search, and generalized image orchestration are out of MVP scope.
+- **No giant platform yet.** Full crawlers, databases, bulk OCR/translation, maps, accounts, search, and generalized image orchestration remain out of MVP scope.
 - **Move-later seam.** Keep this internal while small. If it materially grows, move authority to a dedicated repo and change the root registry pointer without changing stable record IDs or source provenance.
 
 ## Known Issues / Open Questions
 
 - The 13-item week is curated from several trustworthy archival/scholarly access points rather than produced by a single automated primary-archive ingestion adapter.
 - Several speech fragments are supported through scholarly transcriptions/reproductions of the historical record rather than direct machine retrieval from the original scan. Those records remain `review` or `high-fidelity` where warranted.
-- The exact best upstream machine-readable nūpepa source still needs a bounded adapter proof, but that work is queued **after the Image OS three-image proving set** unless it becomes necessary to resolve a visual/source relationship.
-- No historical image has yet completed the new Image OS v1 loop. The reusable hot state, profile, restoration rules, color rules, and review rules now exist.
-- The first image pilot must prove whether a mixed `text` / `photo` / `combo` feed actually improves the experience before mass visual ingestion.
+- The exact best upstream machine-readable nūpepa source still needs a bounded adapter proof, but the mixed-media product should be reviewed first.
+- The current restored/color image states are browser-rendered derived views, not durable pixel assets. If they feel too crude, the next visual upgrade should replace one pilot image with a real pixel-level restoration/color output before scaling.
+- External archival/access-copy image hosting could change. If this becomes a production product, ingest permitted local source copies or another stable asset strategy rather than depending indefinitely on hotlinked access copies.
 - Translation and rhetorical-tone escalation thresholds still need calibration against a broader sample of ordinary observations, notices, gossip, weather, travel, celebrations, and daily-life reports, not only major political material.
 
 ## On-Demand References
 
 - `hawaii-archive/data/ITEM_CONTRACT.md` — read when ingesting/changing text archive record structure, speaker attribution, social-intent handling, or routing semantics.
+- `hawaii-archive/data/images/index.json` — current image records and feed relationship metadata.
+- `hawaii-archive/images/jobs/<id>/review.md` — per-image source/restoration/color review evidence.
 - `systems/image-os/CURRENT.md` — read for the active visual lane and current Image OS execution edge.
 - `systems/image-os/PROFILE_CONTRACT.md` — read when defining/reviewing an image job.
 - `systems/image-os/profiles/historical-hawaii.md` — load for Hawaiʻi visual preferences/evidence discipline.
 - `systems/image-os/rules/restore-bw.md` — load for restoration jobs.
-- `systems/image-os/rules/color-reconstruct.md` — load only when color reconstruction is being considered.
+- `systems/image-os/rules/color-reconstruct.md` — load when color reconstruction is being considered.
 - `systems/image-os/rules/review.md` — load when reviewing/approving an output.
 - `docs/superpowers/specs/2026-09-08-hawaii-archive-revival-mvp-design.md` — read when changing broad MVP product boundaries.
 
 ## Last Meaningful Changes
 
-- Absorbed the standalone historical image-restoration idea into Hawaiʻi Archive Revival: visual work now exists to support the historical social feed.
-- Established Image OS v1 as a reusable system with Hawaiʻi Archive Revival as its first proving ground.
-- Locked the future mixed-feed shape: `text`, `photo`, and `combo` posts with honest `exact` / `near` / `context` visual relationships.
-- Expanded the first historical week from 3 to 13 sourced text items with conditional source-supported voice.
+- Completed the first Image OS three-image proving set with portrait, place, and daily-life source classes.
+- Added mixed-media combo posts to the September 1897 feed using Kaulia and ʻIolani Palace imagery.
+- Added Original / Restored / Color states with explicit color confidence and exact/near/context relationship labels.
+- Added a three-image Image OS comparison page so every pilot image is inspectable without forcing every image into the feed.
+- Adopted proof-of-concept best-estimate color as an acceptable derived layer when uncertainty remains visible.
 
 ## NEXT_TASK
 
-Execute the **Image OS v1 three-image proving set before further bulk nūpepa expansion**. Select one archival portrait, one built-environment image, and one daily-life/crowd image based on usefulness to the Hawaiʻi feed. Preserve exact source/provenance, create stable image/job records, run conservative `restore_bw`, review against source locks, and attempt `color_reconstruct` only where evidence/value justify it. Then attach at least one approved visual to the pilot as a `photo` or `combo` post with an honest `exact`, `near`, or `context` relationship. Do not mass-process images and do not build a generalized image runtime first.
+After merge and Pages verification, **review the live mixed-media experience before scaling**. Judge whether Kaulia and ʻIolani Palace make the feed feel more like living social history, whether Color should remain the default image state, whether the labels feel appropriately light, and whether the browser hand-tint quality is good enough for another 3–5 images. If yes, add the next feed-relevant visual batch using the same job model. If not, improve one pilot image with a real pixel-level restoration/color asset before bulk visual expansion. The queued ordinary-life nūpepa ingestion pass remains the next text-lane experiment after this product review.
 
 ## RE-PROMPT
 
-> Continue Hawaiʻi Archive Revival from current Paiea/Projects GitHub authority. Read root AGENTS.md, state/PROJECT_REGISTRY.md, state/HANDSHAKE_PROTOCOL.md, hawaii-archive/PROJECT_STATE.md, and systems/image-os/CURRENT.md. The immediate lane is the Image OS v1 three-image proving set for the historical social feed. Load the historical Hawaiʻi profile and restoration/color/review rules only as needed. Preserve source authority, uncertainty, conditional voice, and honest image-to-post relationships. Validate results, update both owning hot-state files, and leave the next handshake.
+> Continue Hawaiʻi Archive Revival from current Paiea/Projects GitHub authority. Read root AGENTS.md, state/PROJECT_REGISTRY.md, state/HANDSHAKE_PROTOCOL.md, hawaii-archive/PROJECT_STATE.md, and systems/image-os/CURRENT.md. The first Image OS three-image mixed-media proof is complete. Inspect the live feed and image-pilot page before scaling. Preserve source authority, conditional voice, explicit color confidence, and honest exact/near/context visual relationships. Scale only what the live experience proves useful, then update both owning hot-state files and leave the next handshake.

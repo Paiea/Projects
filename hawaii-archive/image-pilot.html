@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Image OS v1 proof comparing original, restored, and best-estimate color reconstructions of archival Hawaiʻi photographs.">
+  <title>Image OS v1 | Hawaiʻi Archive Revival</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="image-pilot.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="app-bar">
+      <a class="back-link" href="./" aria-label="Back to This Week in Hawaiʻi">←</a>
+      <div>
+        <p class="app-title">Image OS v1</p>
+        <p class="app-subtitle">Hawaiʻi Archive Revival proving set</p>
+      </div>
+      <span class="archive-badge">3 images</span>
+    </header>
+
+    <section class="feed-intro" aria-labelledby="page-title">
+      <p class="eyebrow">Original → Restored → Color</p>
+      <h1 id="page-title">Can we make the archive feel closer without lying?</h1>
+      <p class="lede">Three materially different archival images test the visual pipeline. Restoration is deliberately conservative. Color is a labeled best estimate, never a claim that the original photograph recorded those hues.</p>
+    </section>
+
+    <section class="pilot-section" aria-labelledby="pilot-title">
+      <div class="feed-heading">
+        <div>
+          <p class="section-kicker">THE PROVING SET</p>
+          <h2 id="pilot-title">Portrait. Place. Daily life.</h2>
+        </div>
+        <p class="feed-note">Every card keeps the archive source and confidence visible.</p>
+      </div>
+      <div id="image-pilot" class="pilot-grid" aria-live="polite">
+        <p class="loading">Loading Image OS records…</p>
+      </div>
+    </section>
+
+    <footer>
+      <p>Source image remains authority. Restored and color views are derived.</p>
+    </footer>
+  </main>
+
+  <script src="image-pilot.js" defer></script>
+</body>
+</html>

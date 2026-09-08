@@ -73,6 +73,70 @@ class HawaiiArchiveTests(unittest.TestCase):
         self.assertIn("Locked Elements", text)
         self.assertIn("Reusable Learning", text)
 
+    def test_image_os_three_image_pilot_is_grounded_reviewed_and_feed_ready(self):
+        image_index = ROOT / "hawaii-archive" / "data" / "images" / "index.json"
+        self.assertTrue(image_index.exists())
+        payload = json.loads(image_index.read_text(encoding="utf-8"))
+        images = payload["images"]
+        self.assertEqual(len(images), 3)
+        self.assertEqual(
+            {image["image_class"] for image in images},
+            {"portrait", "built-environment", "daily-life-crowd"},
+        )
+
+        for image in images:
+            self.assertTrue(image["source_authority_url"].startswith("https://"))
+            self.assertTrue(image["source_image_url"].startswith("https://"))
+            self.assertIn(image["relationship_default"], {"exact", "near", "context"})
+            self.assertEqual(image["restore_method"], "deterministic-tonal")
+            self.assertTrue(image["restoration_class"].startswith("restore-"))
+            self.assertIn(image["review_status"], {"approved", "hold", "rejected"})
+            self.assertIn(image["color_decision"], {"skipped", "approved"})
+            self.assertTrue(image["color_reason"])
+            review = ROOT / "hawaii-archive" / "images" / "jobs" / image["id"] / "review.md"
+            self.assertTrue(review.exists())
+            review_text = review.read_text(encoding="utf-8")
+            self.assertIn("Source authority", review_text)
+            self.assertIn("Color decision", review_text)
+
+        approved_color = [image for image in images if image["color_decision"] == "approved"]
+        self.assertGreaterEqual(len(approved_color), 2)
+        self.assertTrue(all(image.get("colorization_class") for image in approved_color))
+        self.assertTrue(all(image.get("color_confidence") in {"plausible", "supported", "verified"} for image in approved_color))
+
+        week = json.loads(
+            (ROOT / "hawaii-archive" / "data" / "weeks" / "1897-09-06.json").read_text(encoding="utf-8")
+        )
+        image_refs = [item.get("image_ref") for item in week["items"] if item.get("image_ref")]
+        self.assertGreaterEqual(len(image_refs), 1)
+        self.assertTrue(set(image_refs).issubset({image["id"] for image in images}))
+
+        script = (ROOT / "hawaii-archive" / "app.js").read_text(encoding="utf-8")
+        styles = (ROOT / "hawaii-archive" / "styles.css").read_text(encoding="utf-8")
+        self.assertIn("IMAGE_DATA_URL", script)
+        self.assertIn("Original", script)
+        self.assertIn("Restored", script)
+        self.assertIn("Color", script)
+        self.assertIn("relationship_label", script)
+        self.assertIn(".post-media", styles)
+        self.assertIn(".restore-neutral-albumen", styles)
+        self.assertIn(".restore-neutral-bw", styles)
+        self.assertIn(".color-kaulia", styles)
+        self.assertIn(".color-palace", styles)
+
+    def test_image_os_pilot_comparison_view_is_live_and_reachable(self):
+        page = (ROOT / "hawaii-archive" / "index.html").read_text(encoding="utf-8")
+        pilot_page = ROOT / "hawaii-archive" / "image-pilot.html"
+        pilot_script = ROOT / "hawaii-archive" / "image-pilot.js"
+        self.assertTrue(pilot_page.exists())
+        self.assertTrue(pilot_script.exists())
+        self.assertIn('href="image-pilot.html"', page)
+        pilot_text = pilot_page.read_text(encoding="utf-8")
+        script_text = pilot_script.read_text(encoding="utf-8")
+        self.assertIn("Original → Restored → Color", pilot_text)
+        self.assertIn("imageRecord.id", script_text)
+        self.assertIn("Color", script_text)
+
 
 if __name__ == "__main__":
     unittest.main()

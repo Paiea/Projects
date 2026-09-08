@@ -1,0 +1,64 @@
+.pilot-section {
+  padding-bottom: 12px;
+}
+
+.pilot-grid {
+  display: grid;
+  gap: 18px;
+  margin: 0 12px;
+}
+
+.pilot-card {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--surface);
+}
+
+.pilot-card-heading {
+  padding: 18px 18px 13px;
+}
+
+.pilot-card-heading h2 {
+  margin: 6px 0 0;
+  font-size: 1.2rem;
+  letter-spacing: -0.025em;
+}
+
+.pilot-media-stage {
+  aspect-ratio: 4 / 3;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.pilot-toolbar {
+  padding: 11px 18px 5px;
+}
+
+.pilot-meta {
+  padding: 5px 18px 18px;
+  color: #46514d;
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.pilot-meta p {
+  margin: 0 0 9px;
+}
+
+.pilot-meta a {
+  color: var(--accent);
+  font-weight: 800;
+}
+
+@media (max-width: 560px) {
+  .pilot-grid {
+    margin: 0;
+  }
+
+  .pilot-card {
+    border-right: 0;
+    border-left: 0;
+    border-radius: 0;
+  }
+}

@@ -37,6 +37,19 @@ Examples of stronger evidence include direct period descriptions, known uniforms
 
 Common natural colors such as sky, vegetation, skin, wood, stone, and ocean may often be plausible, but plausible is still not verified.
 
+## Proof-of-concept best-estimate mode
+
+A project may deliberately approve a **plausible best-estimate color reconstruction** even when exact historical hues are unavailable when all of these are true:
+
+- color materially improves presence, comprehension, or engagement for the current product;
+- the estimate is restrained and based on reasonable subject/material/context knowledge rather than arbitrary palette choice;
+- uncertainty is explicit in the record and public presentation;
+- Original and Restored B&W remain directly accessible;
+- the color state is labeled as a reconstruction/estimate, never an original color photograph or verified historical palette;
+- any color that would materially change historical interpretation remains conservative or is held for stronger evidence.
+
+This mode is especially appropriate for bounded prototypes where learning the product value of color is itself part of the experiment. It does not lower the evidence ceiling; it changes the threshold for whether an explicitly interpretive derived view is worth showing.
+
 ## Default rendering behavior
 
 - restrained saturation
@@ -57,4 +70,4 @@ Common natural colors such as sky, vegetation, skin, wood, stone, and ocean may 
 
 ## Public labeling
 
-Prefer language such as **historically informed color reconstruction** or **color reconstruction** rather than claiming recovered/historically accurate color unless evidence truly warrants that claim.
+Prefer language such as **historically informed color reconstruction**, **best-estimate color reconstruction**, or **color reconstruction** rather than claiming recovered/historically accurate color unless evidence truly warrants that claim.

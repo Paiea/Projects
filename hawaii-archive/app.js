@@ -1,8 +1,20 @@
 const WEEK_DATA_URL = "data/weeks/1897-09-06.json";
+const IMAGE_DATA_URL = "data/images/index.json";
 
 const feed = document.querySelector("#feed");
 const count = document.querySelector("#item-count");
 const scopeNote = document.querySelector("#scope-note");
+
+const RESTORE_CLASSES = new Set([
+  "restore-neutral-albumen",
+  "restore-neutral-bw",
+]);
+
+const COLOR_CLASSES = new Set([
+  "color-kaulia",
+  "color-palace",
+  "color-poi",
+]);
 
 function formatHistoricalDate(value) {
   const date = new Date(`${value}T12:00:00`);
@@ -85,7 +97,118 @@ function publicationInitial(value) {
   return value.replace(/^Ka\s+/i, "").trim().charAt(0).toUpperCase() || "N";
 }
 
-function renderPost(item) {
+function approvedClass(value, allowed) {
+  return allowed.has(value) ? value : null;
+}
+
+function setMediaState(stage, buttons, imageRecord, state) {
+  stage.className = "media-stage";
+  if (imageRecord.crop_mode === "stereo-left") stage.classList.add("crop-stereo-left");
+
+  if (state === "restored" || state === "color") {
+    const restoreClass = approvedClass(imageRecord.restoration_class, RESTORE_CLASSES);
+    if (restoreClass) stage.classList.add(restoreClass);
+  }
+
+  if (state === "color" && imageRecord.color_decision === "approved") {
+    const colorClass = approvedClass(imageRecord.colorization_class, COLOR_CLASSES);
+    if (colorClass) {
+      stage.classList.add("is-color", colorClass);
+    }
+  }
+
+  for (const button of buttons) {
+    const active = button.dataset.state === state;
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-pressed", String(active));
+  }
+}
+
+function makeMediaButton(label, state) {
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = "media-toggle";
+  button.dataset.state = state;
+  button.textContent = label;
+  button.setAttribute("aria-pressed", "false");
+  return button;
+}
+
+function makePostMedia(imageRecord) {
+  const figure = document.createElement("figure");
+  figure.className = "post-media";
+
+  const stage = document.createElement("div");
+  stage.className = "media-stage";
+
+  const image = document.createElement("img");
+  image.src = imageRecord.source_image_url;
+  image.alt = imageRecord.title;
+  image.loading = "lazy";
+  image.decoding = "async";
+  stage.append(image);
+  figure.append(stage);
+
+  const toolbar = document.createElement("div");
+  toolbar.className = "media-toolbar";
+  toolbar.setAttribute("aria-label", "Image view");
+
+  const originalButton = makeMediaButton("Original", "original");
+  const restoredButton = makeMediaButton("Restored", "restored");
+  toolbar.append(originalButton, restoredButton);
+
+  const buttons = [originalButton, restoredButton];
+  if (imageRecord.color_decision === "approved") {
+    const colorButton = makeMediaButton("Color", "color");
+    toolbar.append(colorButton);
+    buttons.push(colorButton);
+  }
+
+  for (const button of buttons) {
+    button.addEventListener("click", () => {
+      setMediaState(stage, buttons, imageRecord, button.dataset.state);
+    });
+  }
+
+  const defaultState = imageRecord.color_decision === "approved" ? "color" : "restored";
+  setMediaState(stage, buttons, imageRecord, defaultState);
+  figure.append(toolbar);
+
+  const context = document.createElement("div");
+  context.className = "media-context";
+
+  const relationship = document.createElement("span");
+  relationship.className = "media-relationship";
+  relationship.textContent = imageRecord.relationship_label;
+  context.append(relationship);
+
+  if (imageRecord.color_decision === "approved") {
+    const colorConfidence = document.createElement("span");
+    colorConfidence.className = "media-color-confidence";
+    colorConfidence.textContent = `Color reconstruction · ${imageRecord.color_confidence}`;
+    context.append(colorConfidence);
+  }
+  figure.append(context);
+
+  const caption = document.createElement("figcaption");
+  caption.className = "media-caption";
+  caption.textContent = imageRecord.caption;
+  figure.append(caption);
+
+  const sourceLine = document.createElement("p");
+  sourceLine.className = "media-source";
+  const source = document.createElement("a");
+  source.href = imageRecord.source_authority_url;
+  source.target = "_blank";
+  source.rel = "noopener noreferrer";
+  source.textContent = `Archive source · ${imageRecord.display_date}`;
+  sourceLine.append(source);
+  figure.append(sourceLine);
+
+  return figure;
+}
+
+function renderPost(item, imageMap) {
   const article = document.createElement("article");
   article.className = "post-card";
 
@@ -122,6 +245,10 @@ function renderPost(item) {
   rendering.textContent = item.feed_rendering;
   article.append(rendering);
 
+  if (item.image_ref && imageMap.has(item.image_ref)) {
+    article.append(makePostMedia(imageMap.get(item.image_ref)));
+  }
+
   const actions = document.createElement("div");
   actions.className = "post-actions";
   actions.append(makeActionDetail("Original Hawaiian", item.hawaiian));
@@ -132,11 +259,12 @@ function renderPost(item) {
   return article;
 }
 
-function renderWeek(payload) {
+function renderWeek(payload, imagePayload) {
   feed.replaceChildren();
   count.textContent = String(payload.items.length);
   scopeNote.textContent = payload.scope_note;
 
+  const imageMap = new Map(imagePayload.images.map((image) => [image.id, image]));
   const grouped = new Map();
   for (const item of payload.items) {
     if (!grouped.has(item.date)) grouped.set(item.date, []);
@@ -154,7 +282,7 @@ function renderWeek(payload) {
     heading.append(label);
     day.append(heading);
 
-    for (const item of items) day.append(renderPost(item));
+    for (const item of items) day.append(renderPost(item, imageMap));
     feed.append(day);
   }
 
@@ -179,10 +307,15 @@ function renderError(error) {
   feed.append(message);
 }
 
-fetch(WEEK_DATA_URL)
-  .then((response) => {
+Promise.all([
+  fetch(WEEK_DATA_URL).then((response) => {
     if (!response.ok) throw new Error(`Week data returned ${response.status}`);
     return response.json();
-  })
-  .then(renderWeek)
+  }),
+  fetch(IMAGE_DATA_URL).then((response) => {
+    if (!response.ok) throw new Error(`Image data returned ${response.status}`);
+    return response.json();
+  }),
+])
+  .then(([weekPayload, imagePayload]) => renderWeek(weekPayload, imagePayload))
   .catch(renderError);
