@@ -19,18 +19,28 @@ class HawaiiArchiveTests(unittest.TestCase):
         path = ROOT / "hawaii-archive" / "data" / "weeks" / "1897-09-06.json"
         payload = json.loads(path.read_text(encoding="utf-8"))
         self.assertEqual(payload["week_start"], "1897-09-06")
-        self.assertGreaterEqual(len(payload["items"]), 12)
+        self.assertEqual(len(payload["items"]), 100)
+
+        ids = [item["id"] for item in payload["items"]]
+        renderings = [item["feed_rendering"] for item in payload["items"]]
+        self.assertEqual(len(ids), len(set(ids)))
+        self.assertEqual(len(renderings), len(set(renderings)))
+
         for item in payload["items"]:
+            self.assertGreaterEqual(item["date"], payload["week_start"])
+            self.assertLessEqual(item["date"], payload["week_end"])
             self.assertTrue(item["source_url"].startswith("https://"))
             self.assertIn(item["confidence"], {"unknown", "plausible", "supported", "verified"})
             self.assertIn(item["route"], {"cheap-pass", "review", "high-fidelity"})
-            self.assertIn("hawaiian", item)
+            self.assertTrue(item.get("source_text") or item.get("hawaiian"))
             self.assertIn("english_close", item)
             self.assertIn("feed_rendering", item)
             self.assertIn("rhetorical_mode", item)
             self.assertTrue(item["voice_evidence"])
+            if item.get("source_text"):
+                self.assertIn(item.get("source_language"), {"en", "haw"})
 
-        energetic = [item for item in payload["items"] if "!!" in item["hawaiian"]]
+        energetic = [item for item in payload["items"] if "!!" in (item.get("source_text") or item.get("hawaiian", ""))]
         self.assertTrue(energetic)
         self.assertTrue(any("!!" in item["feed_rendering"] for item in energetic))
 
@@ -38,6 +48,24 @@ class HawaiiArchiveTests(unittest.TestCase):
         self.assertGreaterEqual(len(voiced), 6)
         self.assertTrue(any(item["rhetorical_mode"] == "call-and-response" for item in voiced))
         self.assertTrue(any(item["rhetorical_mode"] == "warning" for item in voiced))
+
+        daily_life_kinds = {
+            "local-notice",
+            "shipping-update",
+            "weather-note",
+            "commerce-notice",
+            "social-event",
+            "personal-notice",
+            "oddity",
+            "sports-update",
+            "community-update",
+            "crime-report",
+            "public-health",
+            "education-notice",
+        }
+        daily_life = [item for item in payload["items"] if item["kind"] in daily_life_kinds]
+        self.assertGreaterEqual(len(daily_life), 60)
+        self.assertGreaterEqual(len({item["kind"] for item in daily_life}), 6)
 
     def test_public_page_feels_like_social_feed_without_hiding_source(self):
         page = (ROOT / "hawaii-archive" / "index.html").read_text(encoding="utf-8")
@@ -49,7 +77,8 @@ class HawaiiArchiveTests(unittest.TestCase):
         self.assertIn("post-author", script)
         self.assertIn("post-actions", script)
         self.assertIn("voice_actor", script)
-        self.assertIn("Original Hawaiian", script)
+        self.assertIn("source_text", script)
+        self.assertIn("Original source", script)
         self.assertIn("Close English", script)
         self.assertIn("Voice & source", script)
         self.assertIn(".social-feed", styles)
@@ -62,6 +91,8 @@ class HawaiiArchiveTests(unittest.TestCase):
         self.assertIn("rhetorical_mode", contract)
         self.assertIn("voice_evidence", contract)
         self.assertIn("voice_actor", contract)
+        self.assertIn("source_text", contract)
+        self.assertIn("source_language", contract)
         self.assertIn("social intent", contract.lower())
         self.assertIn("do not invent", contract.lower())
 
