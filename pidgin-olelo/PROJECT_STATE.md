@@ -17,16 +17,15 @@ Pidgin support fades as the learner gets stronger. Pidgin is never the joke.
 - Learn: `pidgin-olelo/index.html`
 - 10-Min Mission: `pidgin-olelo/challenge.html`
 - Full phrase bank: `pidgin-olelo/phrases.js`
-- Core 30/scenarios/overrides: `pidgin-olelo/curriculum.js`
-- Fading, vectors, spacing: `pidgin-olelo/core-engine.js`
+- Core 30/scenarios/response pairs/overrides: `pidgin-olelo/curriculum.js`
+- Fading, vectors, spacing, derived question builders: `pidgin-olelo/core-engine.js`
 - Learn runtime: `pidgin-olelo/app.js`
 - Mission runtime: `pidgin-olelo/challenge.js`
 - Noʻeau bank: `pidgin-olelo/noeau.js`
-- Responsive shell: `pidgin-olelo/styles.css`
-- Older Uncle Seally portrait: `pidgin-olelo/assets/uncle-seally.webp`
-- Island backdrop: `pidgin-olelo/assets/island-backdrop.svg`
+- Responsive shell: `pidgin-olelo/styles.css` + `pidgin-olelo/simplify.css`
 - Core tests: `tests/test_pidgin_olelo.py`
-- Visual tests: `tests/test_pidgin_olelo_visual.py`
+- Browser runtime regression: `tests/test_pidgin_olelo_browser_runtime.py`
+- Dialogue/scroll regression: `tests/test_pidgin_olelo_response_scroll.py`
 
 ## Learning Model
 
@@ -37,12 +36,26 @@ Each Core thought moves through five invisible stages:
 1. **MEET THIS ONE** — Hawaiian + Pidgin together, not scored.
 2. **WHAT'D I SAY?** — Hawaiian recognition through Pidgin choices.
 3. **SUPPORTED PRODUCTION** — `FINISH IT` cloze, then `QUICK TRANSLATE` production while Pidgin still supports meaning.
-4. **WHICH ONE FITS?** — local situation → Hawaiian. Pidgin translation disappears from the prompt.
+4. **SITUATION** — local situation or a paired conversational cue → Hawaiian.
 5. **HAWAIIAN-FIRST** — `SAY IT` and `USE IT` with the bridge increasingly unnecessary.
 
 The six hidden scored vectors are `recognize`, `cloze`, `produce`, `scenario`, `say`, and `use`.
 
-Portable WIN contributes the instructional loop: diagnose the weak path, targeted rep, **MORE LIKE THIS**, and periodic **SHOW WHAT YOU KNOW**. The story compiler contributes the architecture: **one thought authority, many derived representations**. A phrase is not a flashcard; it can render as Pidgin cue, Hawaiian target, Hawaiian-order shape, cloze, scenario, oral rehearsal, or real-world mission.
+### Translation is not conversation reply
+
+Keep these as different derived tasks.
+
+Example:
+
+- recognition: `Pehea ʻoe?` → **How you?**
+- conversational response: `Pehea ʻoe?` + cue **I good** → **Maikaʻi au.**
+- conversational response: `Pehea ʻoe?` + cue **Same like always** → **ʻO ia mau nō.**
+
+A socially plausible reply must not be accepted as the translation of the question. Response cards remain inside the existing `scenario` vector rather than becoming a seventh mode. The Pidgin cue states the intended reply so multiple-choice questions have one clear winner. Paired question cues may appear in Pidgin or Hawaiian while the target reply remains Hawaiian.
+
+Current Core response pairs are deliberately small and use only existing Core 30 material: wellbeing, name, origin, eating, and water question/answer pairs. Do not expand the Core to support this behavior.
+
+Portable WIN contributes the instructional loop: diagnose the weak path, targeted rep, **MORE LIKE THIS**, and periodic **SHOW WHAT YOU KNOW**. The story compiler contributes the architecture: **one thought authority, many derived representations**. A phrase is not a flashcard; it can render as Pidgin cue, Hawaiian target, Hawaiian-order shape, cloze, scenario, conversational reply, oral rehearsal, or real-world mission.
 
 Weak paths return sooner. Stronger paths drift farther apart. The learner does not see retention percentages.
 
@@ -64,15 +77,16 @@ Humor comes from Dad's familiar world: aunties, fridge uncles, Costco, H-1, Kān
 
 The learning engine stays independent from the visual shell.
 
-Desktop uses a three-part composition:
+Current shell is intentionally simple:
 
-- older Uncle Seally coach rail on the left
-- Core lesson in the center
-- light side information / Noʻeau on the right
+- desktop: Uncle Seally beside the main lesson area
+- Noʻeau sits inline underneath the lesson rather than in a More drawer/right rail
+- tablet/mobile: one vertical learning stack with compact Seally above the lesson
+- mobile navigation is **Learn / Mission** only
 
-Tablet collapses to one main column with Seally as a horizontal coach banner.
+Do not restore a dashboard-style right rail or a More control just to house Noʻeau.
 
-Phone uses one vertical learning stack with compact Seally above the lesson and a fixed bottom navigation for **Learn / Mission / More**. Explicit responsive checks cover 900px, 640px, 480px, and very narrow phones.
+When a true Next/new-question transition replaces a taller revealed card with a shorter fresh prompt, the runtime brings the practice card back into view. It does not reload the page. Initial page load does not auto-scroll into the lesson.
 
 The visual treatment is intentionally restrained: one local island backdrop behind translucent cream/green cards. Do not turn every surface into illustration.
 
@@ -90,13 +104,15 @@ Mission is transfer, not another quiz.
 
 Noʻeau is flavor, not the menu.
 
-Primary navigation is Learn and 10-Min Mission. **More** opens the integrated `Kūpuna side note 🌺` widget. Each noʻeau keeps three separate layers:
+Primary navigation is Learn and 10-Min Mission. The `Kūpuna side note 🌺` widget is always available underneath the lesson. It does not need a **More** control.
+
+Each noʻeau keeps three separate layers:
 
 1. actual ʻōlelo noʻeau
 2. sourced established meaning
-3. clearly labeled modern local-humor memory hook
+3. clearly separated modern local-humor memory hook
 
-The joke must never replace or distort the historical meaning.
+The reveal no longer needs extra `What it carries` / `Today maybe` headings. The joke must never replace or distort the historical meaning.
 
 ## Hawaiian Integrity
 
@@ -120,17 +136,20 @@ A future **hear it** vector should return only with trustworthy fluent-speaker o
 
 ## NEXT_TASK
 
-Use the shipped responsive Core 30 version with Dad before adding vocabulary or major modes. Watch whether:
+Finish the already-approved small Uncle Seally behavior/personality pass only after the question runtime, dialogue-response distinction, and Next scroll behavior are green on current GitHub authority.
+
+Then use the shipped Core 30 version with Dad before adding vocabulary or major modes. Watch whether:
 
 - Seally feels funny without becoming noisy
-- the mobile banner leaves enough room for the actual lesson
 - the Pidgin scaffold fades at the right speed
-- cloze/scenario/recasting make missed thoughts stick
+- translation questions and response questions feel clearly different
+- cloze/scenario/conversational response/recasting make missed thoughts stick
 - MORE LIKE THIS helps from a different angle
+- Next keeps the fresh prompt visible on mobile and desktop
 - 10-Min Mission produces Hawaiian outside the app
 - Noʻeau feels like cultural flavor
 - any Hawaiian target, ʻokina, kahakō, particle, article, or example gets flagged by a fluent speaker/kumu
 
 ## RE-PROMPT
 
-> Continue Pidgin → ʻŌlelo from current `Paiea/Projects` authority. Read root `AGENTS.md`, `state/PROJECT_REGISTRY.md`, `state/HANDSHAKE_PROTOCOL.md`, and `pidgin-olelo/PROJECT_STATE.md`, then inspect current source. Preserve Core 30 as the permanent default, one mixed Learn flow, ELL-style fading, six hidden vectors, recasting, WIN-style MORE LIKE THIS / SHOW WHAT YOU KNOW, compiler-style one-thought-many-representations, quiet spacing, working Back/Replay/Forward, real-world Mission use credit, orthography checks, Noʻeau under More, and responsive Uncle Seally commentary. Pidgin is the trusted scaffold and never the punchline. Do not restore synthetic audio. Prefer real Dad testing and fluent-speaker/kumu corrections over feature expansion.
+> Continue Pidgin → ʻŌlelo from current `Paiea/Projects` authority. Read root `AGENTS.md`, `state/PROJECT_REGISTRY.md`, `state/HANDSHAKE_PROTOCOL.md`, and `pidgin-olelo/PROJECT_STATE.md`, then inspect current source. Preserve Core 30 as the permanent default, one mixed Learn flow, ELL-style fading, six hidden vectors, recasting, WIN-style MORE LIKE THIS / SHOW WHAT YOU KNOW, compiler-style one-thought-many-representations, quiet spacing, working Back/Replay/Forward, conversational replies as a derived `scenario` representation rather than a new mode, real-world Mission use credit, orthography checks, inline Noʻeau under the lesson, and responsive Uncle Seally commentary. Keep translation meaning distinct from a plausible conversational reply. Pidgin is the trusted scaffold and never the punchline. Do not restore synthetic audio. Prefer real Dad testing and fluent-speaker/kumu corrections over feature expansion.
