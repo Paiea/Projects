@@ -36,6 +36,16 @@ Private/recovery-only projects do not need to appear here. Cross-project recover
 - Status: prototype
 - Purpose: spoken retrieval experiment using familiar Pidgin thoughts as a scaffold into useful ʻōlelo Hawaiʻi production and comprehension
 
+## Hawaiʻi Archive Revival
+
+- Category: History & Culture
+- Hosting: internal
+- Public route: `hawaii-archive/`
+- Source: `hawaii-archive/`
+- Durable state: `hawaii-archive/PROJECT_STATE.md`
+- Status: prototype
+- Purpose: archive-grounded historical Hawaiʻi experience that preserves source authority while turning nūpepa and photographs into finite, accessible, higher-value derived views
+
 ## Peg-Leg Greg Reader
 
 - Category: Writing & Story Projects
