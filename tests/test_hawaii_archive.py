@@ -99,6 +99,11 @@ class HawaiiArchiveTests(unittest.TestCase):
             self.assertIn("Source authority", review_text)
             self.assertIn("Color decision", review_text)
 
+        approved_color = [image for image in images if image["color_decision"] == "approved"]
+        self.assertGreaterEqual(len(approved_color), 2)
+        self.assertTrue(all(image.get("colorization_class") for image in approved_color))
+        self.assertTrue(all(image.get("color_confidence") in {"plausible", "supported", "verified"} for image in approved_color))
+
         week = json.loads(
             (ROOT / "hawaii-archive" / "data" / "weeks" / "1897-09-06.json").read_text(encoding="utf-8")
         )
@@ -111,10 +116,13 @@ class HawaiiArchiveTests(unittest.TestCase):
         self.assertIn("IMAGE_DATA_URL", script)
         self.assertIn("Original", script)
         self.assertIn("Restored", script)
+        self.assertIn("Color", script)
         self.assertIn("relationship_label", script)
         self.assertIn(".post-media", styles)
         self.assertIn(".restore-neutral-albumen", styles)
         self.assertIn(".restore-neutral-bw", styles)
+        self.assertIn(".color-kaulia", styles)
+        self.assertIn(".color-palace", styles)
 
 
 if __name__ == "__main__":
