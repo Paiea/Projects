@@ -10,6 +10,7 @@ The mechanical inspiration is the compact competitive loop of old browser strate
 
 - Repository: `Paiea/Projects`
 - Accepted authority: `main`
+- Current first-playable candidate: draft PR #16 on `design/alii-text-strategy-prototype`
 - Source/public route: `alii/`
 - Design: `docs/superpowers/specs/2026-09-07-alii-text-strategy-design.md`
 - Implementation plan: `docs/superpowers/plans/2026-09-07-alii-text-strategy-implementation.md`
@@ -23,7 +24,7 @@ The mechanical inspiration is the compact competitive loop of old browser strate
 - Language shape: player gives ordinary-language orders; interpretation resolves to legal structured actions before state can change.
 - World shape: eight top-level island kingdoms named `Hawaiʻi`, `Maui`, `Kahoʻolawe`, `Lānaʻi`, `Molokaʻi`, `Oʻahu`, `Kauaʻi`, and `Niʻihau`.
 - Identity rule: at game start `Hawaiʻi` means Hawaiʻi Island only. The game does not assume a unified political identity for the island chain.
-- Setting: alternate-history / fictionalized political development using real island geography and a late-eighteenth-century-style transition where muskets, cannon, iron/steel goods, foreign ships, and foreign specialists exist but remain scarce and unevenly distributed.
+- Setting: alternate-history / fictionalized political development using real island geography and a late-eighteenth-century-style transition where muskets, cannon, iron goods, rare foreign steel weapons, foreign ships, and foreign specialists exist but remain scarce and unevenly distributed.
 - Prophecy: eight fires burn separately and are extinguished; eight fires become one and survive the wind. The prophecy says the islands will become one but does not establish who rules or what name a future unity carries.
 - Foreign contact: already present in small, ambiguous ways through ships, trade, weapons, specialists, and rumor. Do not reduce this to a simple visible invasion countdown or a cartoonishly uniform enemy faction.
 - Other aliʻi: autonomous competitors operating under the same simulation constraints and partial knowledge. They may scout, negotiate, prepare, trade, raid, misjudge, and change the world without the player.
@@ -59,6 +60,7 @@ Normal player-facing output should translate those into statements such as:
 - another island appears stronger or weaker based on imperfect intelligence;
 - a messenger has not yet returned;
 - foreign guns exist but powder, training, and maintenance are limiting factors;
+- rare steel weapons exist as prestigious scarce arms rather than standard equipment;
 - another ruler has moved men or exchanged messengers.
 
 Do not add ordinary resource meters, numeric win probabilities, relationship bars, global power rankings, or omniscient opponent statistics unless later evidence shows the hiddenness itself is harming play.
@@ -72,9 +74,13 @@ Do not add ordinary resource meters, numeric win probabilities, relationship bar
 - Foreign contact is pressure and opportunity, not yet a developed external polity simulation.
 - The player is lightly embodied through location/travel, but injury, succession, and deeper personal scenes are deferred.
 
+## Verification
+
+The exact first-playable branch head is covered by `The Islands Tests`, which runs the engine, language, UI/source, and project-hub registration checks. The branch remains a candidate until merged to `main`.
+
 ## NEXT_TASK
 
-PLAYTEST / OBSERVE.
+PLAYTEST / OBSERVE after the first playable reaches `main`.
 
 Use the current first playable as a chief without looking at source or hidden state. Test whether the black-screen interaction is compelling enough to justify deeper simulation.
 
