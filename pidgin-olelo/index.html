@@ -4,107 +4,142 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Learn 30 useful ʻōlelo Hawaiʻi thoughts from familiar Pidgin through multiple retrieval angles.">
-  <meta name="theme-color" content="#172117">
+  <meta name="theme-color" content="#173f4e">
   <title>Pidgin → ʻŌlelo · Core 30</title>
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="island-page">
+  <div class="site-backdrop" aria-hidden="true"></div>
+
   <main class="app-shell">
-    <header class="app-header">
-      <a class="back-link" href="../">← Projects</a>
-      <p class="eyebrow">PAIEA LANGUAGE LAB</p>
-      <h1>Pidgin → ʻŌlelo</h1>
-      <p class="lede">Thirty useful thoughts. Learn um deep before we make the pile bigger.</p>
+    <header class="app-header app-header--hero">
+      <div>
+        <a class="back-link" href="../">← Projects</a>
+        <p class="eyebrow">PAIEA LANGUAGE LAB</p>
+        <h1>PIDGIN → ʻŌLELO</h1>
+        <p class="lede">Same people. More ways to say.</p>
+      </div>
+
+      <nav class="experience-nav" aria-label="Pidgin to ʻŌlelo">
+        <a href="index.html" aria-current="page">Learn</a>
+        <a href="challenge.html">10-Min Mission</a>
+        <a id="more-link" href="#more-practice">More</a>
+      </nav>
     </header>
 
-    <nav class="experience-nav" aria-label="Pidgin to ʻŌlelo">
-      <a href="index.html" aria-current="page">Learn</a>
-      <a href="challenge.html">10-Min Mission</a>
-    </nav>
-
-    <section class="core-summary" aria-label="Core 30 progress">
-      <div>
-        <p class="core-kicker">CORE 30</p>
-        <p class="core-copy">Same thoughts. Different angles.</p>
-      </div>
-      <strong id="progress" class="core-progress">0 / 30 solid</strong>
-    </section>
-
-    <p id="feedback" class="feedback" role="status" aria-live="polite" hidden></p>
-
-    <section class="practice-card" aria-live="polite">
-      <div class="card-topline">
-        <span id="vector-label" class="card-label">MEET THIS ONE</span>
-        <span class="progress">Core 30</span>
-      </div>
-
-      <p id="vector-instruction" class="challenge-instruction">See the thought together first.</p>
-      <p id="prompt" class="prompt"></p>
-
-      <div id="choice-wrap" class="choice-wrap" hidden aria-label="Answer choices"></div>
-
-      <div id="answer-wrap" class="answer-wrap" hidden>
-        <p id="answer-label" class="answer-label">Answer</p>
-        <p id="answer" class="answer"></p>
-
-        <div class="shape-wrap">
-          <p class="shape-label">Hawaiian shape</p>
-          <p id="shape" class="shape"></p>
+    <div class="app-grid">
+      <aside class="seally-coach" aria-label="Uncle Seally, your questionable ʻōlelo coach">
+        <div class="seally-image-wrap">
+          <img class="seally-image" src="assets/uncle-seally.webp" alt="Older monk seal mascot Uncle Seally wearing a cap">
         </div>
-
-        <p id="note" class="note"></p>
-
-        <div class="example-wrap">
-          <p class="example-label">Use um</p>
-          <p id="example-pidgin" class="example-line"></p>
-          <p id="example-hawaiian" class="example-line example-line--hawaiian"></p>
-        </div>
-      </div>
-
-      <button id="show-answer" class="primary-button" type="button">Show me</button>
-
-      <div class="rating-actions" aria-label="Rate recall">
-        <button id="miss-it" class="rating-button" type="button" disabled>Miss</button>
-        <button id="got-it" class="rating-button rating-button--strong" type="button" disabled>Got um</button>
-      </div>
-
-      <button id="more-like-this" class="more-like-button" type="button" disabled>MORE LIKE THIS · same thought, new angle</button>
-
-      <div class="history-actions" aria-label="Review cards">
-        <button id="back-card" class="history-button" type="button" disabled>← Back</button>
-        <button id="replay-card" class="history-button" type="button">↻ Replay</button>
-        <button id="forward-card" class="history-button" type="button">Forward →</button>
-      </div>
-    </section>
-
-    <section class="quick-rule" aria-label="How to use">
-      <strong>Quiet engine underneath:</strong> easy ones drift away. Missed angles come back. Every few reps you get a harder SHOW WHAT YOU KNOW check.
-    </section>
-
-    <details id="more-practice" class="more-practice">
-      <summary>More</summary>
-      <aside id="noeau-widget" class="noeau-widget" aria-label="Kūpuna side note">
-        <div class="noeau-widget-topline">
-          <span class="flavor-tag">Kūpuna side note 🌺</span>
-          <button id="noeau-widget-next" class="noeau-widget-next" type="button">Another</button>
-        </div>
-        <p id="noeau-widget-saying" class="noeau-widget-saying"></p>
-        <button id="noeau-widget-reveal" class="noeau-widget-reveal" type="button">What that carry?</button>
-        <div id="noeau-widget-body" hidden>
-          <p class="noeau-widget-label">What it carries</p>
-          <p id="noeau-widget-meaning" class="noeau-widget-meaning"></p>
-          <p class="noeau-widget-label">Today maybe</p>
-          <p id="noeau-widget-hook" class="noeau-widget-hook"></p>
-          <p class="noeau-widget-note">Modern memory hook only. Not the historical translation.</p>
+        <div class="seally-copy">
+          <p class="seally-name">Uncle Seally</p>
+          <p class="seally-subtitle">Your questionable ʻōlelo coach.</p>
+          <div class="seally-bubble">
+            <p id="seally-line">Eh. Five minutes. No make like you busy.</p>
+          </div>
         </div>
       </aside>
-    </details>
+
+      <section class="lesson-column">
+        <section class="core-summary" aria-label="Core 30 progress">
+          <div>
+            <p class="core-kicker">CORE 30</p>
+            <p class="core-copy">Same thoughts. Different angles.</p>
+          </div>
+          <strong id="progress" class="core-progress">0 / 30 solid</strong>
+        </section>
+
+        <p id="feedback" class="feedback" role="status" aria-live="polite" hidden></p>
+
+        <section class="practice-card" aria-live="polite">
+          <div class="card-topline">
+            <span id="vector-label" class="card-label">MEET THIS ONE</span>
+            <span class="progress">Core 30</span>
+          </div>
+
+          <p id="vector-instruction" class="challenge-instruction">See the thought together first.</p>
+          <p id="prompt" class="prompt"></p>
+
+          <div id="choice-wrap" class="choice-wrap" hidden aria-label="Answer choices"></div>
+
+          <div id="answer-wrap" class="answer-wrap" hidden>
+            <p id="answer-label" class="answer-label">Answer</p>
+            <p id="answer" class="answer"></p>
+
+            <div class="shape-wrap">
+              <p class="shape-label">Hawaiian shape</p>
+              <p id="shape" class="shape"></p>
+            </div>
+
+            <p id="note" class="note"></p>
+
+            <div class="example-wrap">
+              <p class="example-label">Use um</p>
+              <p id="example-pidgin" class="example-line"></p>
+              <p id="example-hawaiian" class="example-line example-line--hawaiian"></p>
+            </div>
+          </div>
+
+          <button id="show-answer" class="primary-button" type="button">Show me</button>
+
+          <div class="rating-actions" aria-label="Rate recall">
+            <button id="miss-it" class="rating-button" type="button" disabled>Miss</button>
+            <button id="got-it" class="rating-button rating-button--strong" type="button" disabled>Got um</button>
+          </div>
+
+          <button id="more-like-this" class="more-like-button" type="button" disabled>MORE LIKE THIS · same thought, new angle</button>
+
+          <div class="history-actions" aria-label="Review cards">
+            <button id="back-card" class="history-button" type="button" disabled>← Back</button>
+            <button id="replay-card" class="history-button" type="button">↻ Replay</button>
+            <button id="forward-card" class="history-button" type="button">Forward →</button>
+          </div>
+        </section>
+
+        <section class="quick-rule" aria-label="How to use">
+          <strong>Quiet engine underneath:</strong> easy ones drift away. Missed angles come back. Every few reps you get a harder SHOW WHAT YOU KNOW check.
+        </section>
+      </section>
+
+      <aside class="side-rail">
+        <section class="side-card vibe-card">
+          <span class="side-card-label">Today’s vibe</span>
+          <p>Small steps still get you there.</p>
+        </section>
+
+        <details id="more-practice" class="more-practice side-card">
+          <summary>More</summary>
+          <aside id="noeau-widget" class="noeau-widget" aria-label="Kūpuna side note">
+            <div class="noeau-widget-topline">
+              <span class="flavor-tag">Kūpuna side note 🌺</span>
+              <button id="noeau-widget-next" class="noeau-widget-next" type="button">Another</button>
+            </div>
+            <p id="noeau-widget-saying" class="noeau-widget-saying"></p>
+            <button id="noeau-widget-reveal" class="noeau-widget-reveal" type="button">What that carry?</button>
+            <div id="noeau-widget-body" hidden>
+              <p class="noeau-widget-label">What it carries</p>
+              <p id="noeau-widget-meaning" class="noeau-widget-meaning"></p>
+              <p class="noeau-widget-label">Today maybe</p>
+              <p id="noeau-widget-hook" class="noeau-widget-hook"></p>
+              <p class="noeau-widget-note">Modern memory hook only. Not the historical translation.</p>
+            </div>
+          </aside>
+        </details>
+      </aside>
+    </div>
 
     <footer class="app-footer">
       <p><strong>Thirty thoughts, many forms.</strong> Recognition, production, missing-word repair, situations, saying it, and real-world use all strengthen different retrieval paths.</p>
       <p class="small-print">Pidgin is the memory bridge, not Hawaiian grammar authority. ʻOkina and kahakō are preserved in the Hawaiian targets. Synthetic audio stays off until trustworthy human Hawaiian audio is available.</p>
     </footer>
   </main>
+
+  <nav class="mobile-bottom-nav" aria-label="Mobile navigation">
+    <a href="index.html" aria-current="page"><span>⌂</span>Learn</a>
+    <a href="challenge.html"><span>⚡</span>Mission</a>
+    <a href="#more-practice" class="mobile-more-link"><span>•••</span>More</a>
+  </nav>
 
   <script src="phrases.js"></script>
   <script src="curriculum.js"></script>
