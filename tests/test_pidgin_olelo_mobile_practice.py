@@ -38,6 +38,18 @@ class MobilePracticeShellTests(unittest.TestCase):
         self.assertLess(answer, got)
         self.assertGreater(support, got)
 
+    def test_noeau_sits_inside_practice_flow_below_answer_controls(self):
+        html = self.read("index.html")
+        practice = html.index('class="practice-card"')
+        ratings = html.index('class="rating-actions"')
+        noeau = html.index('id="noeau-widget"')
+        more_like = html.index('id="more-like-this"')
+        support = html.index('id="answer-support"')
+        self.assertLess(practice, ratings)
+        self.assertLess(ratings, noeau)
+        self.assertLess(noeau, more_like)
+        self.assertLess(noeau, support)
+
     def test_mobile_reveal_collapses_old_choices_and_keeps_practice_viewport_sized(self):
         app = self.read("app.js")
         mobile = self.mobile_css()
@@ -45,6 +57,22 @@ class MobilePracticeShellTests(unittest.TestCase):
         self.assertRegex(mobile, r"\.practice-card\[data-revealed=\"true\"\]\s+\.choice-wrap\s*\{[^}]*display:\s*none")
         self.assertIn("100dvh", mobile)
         self.assertIn(".practice-card", mobile)
+
+    def test_mobile_learn_is_a_fixed_no_scroll_screen(self):
+        mobile = self.mobile_css()
+        self.assertRegex(mobile, r"html,\s*body\s*\{[^}]*overflow:\s*hidden")
+        self.assertRegex(mobile, r"\.island-page\s*\{[^}]*height:\s*100dvh[^}]*overflow:\s*hidden")
+        self.assertRegex(mobile, r"\.app-footer,\s*\.quick-rule,\s*\.answer-support\s*\{[^}]*display:\s*none")
+        self.assertNotIn("overflow-y: auto", mobile)
+
+    def test_mobile_noeau_reveal_swaps_content_in_place(self):
+        mobile = self.mobile_css()
+        self.assertIn('.noeau-inline', mobile)
+        self.assertIn(':has(#noeau-widget-body:not([hidden]))', mobile)
+        self.assertRegex(
+            mobile,
+            r"\.noeau-inline:has\(#noeau-widget-body:not\(\[hidden\]\)\)\s+\.noeau-widget-saying\s*\{[^}]*display:\s*none",
+        )
 
     def test_next_does_not_auto_scroll_the_document_on_phone(self):
         app = self.read("app.js")

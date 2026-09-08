@@ -59,18 +59,17 @@
 }
 
 .noeau-inline {
-  grid-column: 2;
-  margin: 0;
-  padding: 18px;
-  border: 1px solid rgba(255, 255, 255, 0.58);
-  border-radius: 20px;
-  background: rgba(255, 250, 240, 0.92);
-  box-shadow: var(--shadow);
-  backdrop-filter: blur(10px);
+  margin: 10px 0 0;
+  padding: 12px 14px;
+  border: 1px dashed rgba(200, 121, 67, 0.43);
+  border-radius: 14px;
+  background: rgba(255, 253, 247, 0.68);
+  box-shadow: none;
+  backdrop-filter: none;
 }
 
 .noeau-inline .noeau-widget-saying {
-  font-size: clamp(1.15rem, 2.4vw, 1.6rem);
+  font-size: clamp(1rem, 2vw, 1.3rem);
 }
 
 .mobile-bottom-nav {
@@ -84,17 +83,28 @@
   }
 
   .seally-coach,
-  .lesson-column,
-  .noeau-inline {
+  .lesson-column {
     grid-column: 1;
-  }
-
-  .noeau-inline {
-    order: 3;
   }
 }
 
 @media (max-width: 640px) {
+  html,
+  body {
+    overflow: hidden;
+    height: 100%;
+  }
+
+  body {
+    padding-bottom: 0;
+  }
+
+  .island-page {
+    height: 100dvh;
+    min-height: 100dvh;
+    overflow: hidden;
+  }
+
   .site-backdrop {
     background:
       linear-gradient(180deg, rgba(255, 249, 237, 0.18), rgba(255, 248, 238, 0.36)),
@@ -107,11 +117,23 @@
 
   .app-shell {
     width: min(100% - 12px, 640px);
-    padding-top: 6px;
+    height: calc(100dvh - 70px - env(safe-area-inset-bottom));
+    padding: 6px 0 0;
+    overflow: hidden;
   }
 
   .app-grid {
+    height: 100%;
+    grid-template-rows: 74px minmax(0, 1fr);
     gap: 6px;
+    overflow: hidden;
+  }
+
+  .lesson-column {
+    display: flex;
+    min-height: 0;
+    flex-direction: column;
+    overflow: hidden;
   }
 
   .seally-coach {
@@ -159,6 +181,7 @@
   }
 
   .core-summary {
+    flex: 0 0 auto;
     min-height: 36px;
     margin-bottom: 6px;
     padding: 6px 10px;
@@ -193,11 +216,12 @@
   .practice-card {
     position: relative;
     display: flex;
+    flex: 1 1 auto;
     flex-direction: column;
-    height: calc(100dvh - 206px);
+    height: auto;
     min-height: 0;
     overflow: hidden;
-    padding: 12px;
+    padding: 10px 12px;
     border-radius: 16px;
   }
 
@@ -212,27 +236,27 @@
   }
 
   .challenge-instruction {
-    margin-top: 7px;
-    font-size: 0.78rem;
-    line-height: 1.25;
+    margin-top: 6px;
+    font-size: 0.76rem;
+    line-height: 1.2;
   }
 
   .prompt {
     min-height: 0;
-    margin: 9px 0;
-    font-size: clamp(1.6rem, 9vw, 2.35rem);
-    line-height: 1.04;
+    margin: 7px 0;
+    font-size: clamp(1.5rem, 8.5vw, 2.25rem);
+    line-height: 1.02;
   }
 
   .choice-wrap {
-    gap: 6px;
-    margin: 0 0 7px;
+    gap: 5px;
+    margin: 0 0 6px;
   }
 
   .choice-button {
-    min-height: 38px;
-    padding: 8px 10px;
-    font-size: 0.86rem;
+    min-height: 36px;
+    padding: 7px 9px;
+    font-size: 0.82rem;
   }
 
   .practice-card[data-revealed="true"] .choice-wrap {
@@ -240,90 +264,115 @@
   }
 
   .feedback {
-    margin: 6px 0 0;
-    padding: 7px 9px;
-    border-radius: 10px;
-    font-size: 0.74rem;
-    line-height: 1.22;
+    margin: 5px 0 0;
+    padding: 6px 8px;
+    border-radius: 9px;
+    font-size: 0.7rem;
+    line-height: 1.18;
     box-shadow: none;
   }
 
   .answer-wrap {
-    margin: 0 0 7px;
-    padding: 9px 11px;
-    border-radius: 11px;
+    margin: 0 0 6px;
+    padding: 8px 10px;
+    border-radius: 10px;
   }
 
   .answer-label {
-    margin-bottom: 4px;
+    margin-bottom: 3px;
   }
 
   .answer {
-    font-size: clamp(1.25rem, 7vw, 1.65rem);
-    line-height: 1.1;
+    font-size: clamp(1.2rem, 6.5vw, 1.6rem);
+    line-height: 1.08;
   }
 
   .primary-button {
-    min-height: 40px;
-    padding: 9px 12px;
-    font-size: 0.92rem;
+    min-height: 38px;
+    padding: 8px 11px;
+    font-size: 0.9rem;
   }
 
   .rating-actions {
-    gap: 7px;
-    margin-top: 7px;
+    gap: 6px;
+    margin-top: 6px;
   }
 
   .rating-button {
-    min-height: 39px;
+    min-height: 37px;
+  }
+
+  .noeau-inline {
+    flex: 0 0 auto;
+    margin: 6px 0 0;
+    padding: 6px 8px;
+    border-radius: 10px;
+  }
+
+  .noeau-widget-topline {
+    align-items: center;
+    gap: 6px;
+  }
+
+  .noeau-inline .flavor-tag {
+    margin: 0;
+    font-size: 0.58rem;
+  }
+
+  .noeau-inline .noeau-widget-saying {
+    margin: 3px 0 4px;
+    font-size: 0.78rem;
+    line-height: 1.15;
+  }
+
+  .noeau-inline .noeau-widget-next,
+  .noeau-inline .noeau-widget-reveal {
+    min-height: 25px;
+    padding: 2px 7px;
+    font-size: 0.62rem;
+  }
+
+  .noeau-inline #noeau-widget-body p {
+    margin: 3px 0;
+    font-size: 0.69rem;
+    line-height: 1.18;
+  }
+
+  .noeau-inline .noeau-widget-note {
+    font-size: 0.56rem !important;
+    line-height: 1.12 !important;
+  }
+
+  .noeau-inline:has(#noeau-widget-body:not([hidden])) .noeau-widget-saying {
+    display: none;
+  }
+
+  .practice-card:has(#noeau-widget-body:not([hidden])) .more-like-button,
+  .practice-card:has(#noeau-widget-body:not([hidden])) .history-actions {
+    display: none;
   }
 
   .more-like-button {
-    min-height: 32px;
-    margin-top: 6px;
-    padding: 5px 8px;
-    font-size: 0.67rem;
+    min-height: 30px;
+    margin-top: 5px;
+    padding: 4px 7px;
+    font-size: 0.64rem;
   }
 
   .history-actions {
     gap: 5px;
-    margin-top: 6px;
+    margin-top: 5px;
   }
 
   .history-button {
-    min-height: 32px;
-    font-size: 0.7rem;
+    min-height: 30px;
+    font-size: 0.68rem;
   }
 
+  .app-footer,
+  .quick-rule,
   .answer-support {
-    margin-top: 6px;
-    padding: 10px 12px;
-    border-radius: 14px;
-  }
-
-  .answer-support .shape-wrap {
-    padding: 9px 10px;
-  }
-
-  .answer-support .example-wrap {
-    margin-top: 9px;
-    padding-top: 9px;
-  }
-
-  .answer-support .note,
-  .answer-support .example-line,
-  .answer-support .shape {
-    font-size: 0.86rem;
-    line-height: 1.3;
-  }
-
-  .quick-rule {
-    margin-top: 6px;
-  }
-
-  .noeau-inline {
-    padding: 15px;
-    border-radius: 17px;
+    display: none !important;
   }
 }
 
@@ -339,9 +388,5 @@
 
   .seally-image-wrap {
     min-height: 66px;
-  }
-
-  .practice-card {
-    height: calc(100dvh - 196px);
   }
 }
