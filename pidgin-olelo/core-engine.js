@@ -1,20 +1,20 @@
-const VECTORS = ["recognize", "produce", "cloze", "scenario", "say", "use"];
-const HARD_VECTORS = ["produce", "cloze", "scenario", "use"];
+const VECTORS = ["recognize", "cloze", "produce", "scenario", "say", "use"];
+const HARD_VECTORS = ["cloze", "produce", "scenario", "use"];
 const SHOW_WHAT_YOU_KNOW_EVERY = 6;
 const MAX_VECTOR_STRENGTH = 3;
 
 const VECTOR_META = {
   recognize: {
     label: "WHAT'D I SAY?",
-    instruction: "See the Hawaiian. Say the natural Pidgin meaning before you reveal it.",
-  },
-  produce: {
-    label: "QUICK TRANSLATE",
-    instruction: "Pidgin → Hawaiian. Say the Hawaiian before you reveal it.",
+    instruction: "See the Hawaiian. Pick the Pidgin thought that matches.",
   },
   cloze: {
     label: "FINISH IT",
-    instruction: "One chunk is missing. Say the whole Hawaiian sentence, not just the missing word.",
+    instruction: "Use the Pidgin anchor, fill the missing Hawaiian chunk, then say the whole sentence.",
+  },
+  produce: {
+    label: "QUICK TRANSLATE",
+    instruction: "Pidgin → Hawaiian. Say the whole Hawaiian before you reveal it.",
   },
   scenario: {
     label: "WHICH ONE FITS?",
@@ -22,12 +22,19 @@ const VECTOR_META = {
   },
   say: {
     label: "SAY IT",
-    instruction: "Read the Hawaiian out loud. Then recover the thought without looking at the answer.",
+    instruction: "Hawaiian first now. Say it out loud, then recover the thought.",
   },
   use: {
     label: "USE IT",
     instruction: "Use this Hawaiian sometime in the next 10 minutes. Dinner counts. Texting counts. Talking to the dog technically counts.",
   },
+};
+
+const STAGE_VECTORS = {
+  2: ["recognize"],
+  3: ["cloze", "produce"],
+  4: ["scenario"],
+  5: ["say", "use"],
 };
 
 function clampStrength(value) {
@@ -46,7 +53,15 @@ function itemAverage(strengths, itemId) {
 function isOwned(strengths, itemId) {
   const recognize = getStrength(strengths, itemId, "recognize");
   const produce = getStrength(strengths, itemId, "produce");
-  return recognize >= 2 && produce >= 2 && itemAverage(strengths, itemId) >= 1.5;
+  const scenario = getStrength(strengths, itemId, "scenario");
+  return recognize >= 2 && produce >= 2 && scenario >= 1 && itemAverage(strengths, itemId) >= 1.5;
+}
+
+function stageFor(itemId, strengths) {
+  if (getStrength(strengths, itemId, "recognize") < 1) return 2;
+  if (getStrength(strengths, itemId, "cloze") < 1 || getStrength(strengths, itemId, "produce") < 1) return 3;
+  if (getStrength(strengths, itemId, "scenario") < 1) return 4;
+  return 5;
 }
 
 function weakestVectors(itemId, strengths, vectors = VECTORS) {
@@ -54,25 +69,32 @@ function weakestVectors(itemId, strengths, vectors = VECTORS) {
   return vectors.filter((vector) => getStrength(strengths, itemId, vector) === min);
 }
 
-function firstUnstartedVector(itemId, strengths) {
-  for (const vector of VECTORS) {
-    if (getStrength(strengths, itemId, vector) === 0) return vector;
-  }
-  return null;
-}
-
 function pickVector(itemId, strengths, repNumber = 1, excludeVector = null) {
-  const showWhatYouKnow = repNumber > 0 && repNumber % SHOW_WHAT_YOU_KNOW_EVERY === 0;
+  const stage = stageFor(itemId, strengths);
+  let candidates = STAGE_VECTORS[stage];
 
-  if (!showWhatYouKnow) {
-    const nextStage = firstUnstartedVector(itemId, strengths);
-    if (nextStage && nextStage !== excludeVector) return nextStage;
+  if (stage === 3 && getStrength(strengths, itemId, "cloze") === 0) {
+    candidates = ["cloze"];
+  } else if (stage === 3 && getStrength(strengths, itemId, "produce") === 0) {
+    candidates = ["produce"];
   }
 
-  let candidates = showWhatYouKnow ? HARD_VECTORS : VECTORS;
+  const showWhatYouKnow = repNumber > 0 && repNumber % SHOW_WHAT_YOU_KNOW_EVERY === 0;
+  if (showWhatYouKnow && stage >= 3) {
+    const unlocked = VECTORS.filter((vector) => {
+      if (vector === "recognize") return true;
+      if (["cloze", "produce"].includes(vector)) return stage >= 3;
+      if (vector === "scenario") return stage >= 4;
+      return stage >= 5;
+    });
+    const harder = unlocked.filter((vector) => HARD_VECTORS.includes(vector));
+    if (harder.length) candidates = harder;
+  }
+
   if (excludeVector && candidates.length > 1) {
     candidates = candidates.filter((vector) => vector !== excludeVector);
   }
+
   const weakest = weakestVectors(itemId, strengths, candidates);
   return weakest[(Math.max(1, repNumber) - 1) % weakest.length];
 }
@@ -116,7 +138,14 @@ function pickWeakItem(items, strengths, recentIds = [], preferredItemId = null, 
   return (tied[Math.floor(Math.random() * tied.length)] || ranked[0]).item;
 }
 
-function buildChoiceOptions(item, pool) {
+function rotateChoices(correct, distractors, seedText) {
+  const choices = [correct, ...distractors];
+  while (choices.length < 3) choices.push("—");
+  const shift = Math.abs(seedText.split("").reduce((sum, char) => sum + char.charCodeAt(0), 0)) % choices.length;
+  return choices.slice(shift).concat(choices.slice(0, shift));
+}
+
+function buildHawaiianChoiceOptions(item, pool) {
   const seen = new Set([item.hawaiian]);
   const distractors = [];
   for (const candidate of pool) {
@@ -125,11 +154,19 @@ function buildChoiceOptions(item, pool) {
     distractors.push(candidate.hawaiian);
     if (distractors.length === 3) break;
   }
+  return rotateChoices(item.hawaiian, distractors, item.id);
+}
 
-  const choices = [item.hawaiian, ...distractors];
-  while (choices.length < 3) choices.push("—");
-  const shift = Math.abs(item.id.split("").reduce((sum, char) => sum + char.charCodeAt(0), 0)) % choices.length;
-  return choices.slice(shift).concat(choices.slice(0, shift));
+function buildPidginChoiceOptions(item, pool) {
+  const seen = new Set([item.pidgin]);
+  const distractors = [];
+  for (const candidate of pool) {
+    if (candidate.id === item.id || seen.has(candidate.pidgin)) continue;
+    seen.add(candidate.pidgin);
+    distractors.push(candidate.pidgin);
+    if (distractors.length === 3) break;
+  }
+  return rotateChoices(item.pidgin, distractors, `${item.id}-pidgin`);
 }
 
 function clozePrompt(hawaiian) {
@@ -146,6 +183,7 @@ function commonBase(item, vector) {
   return {
     itemId: item.id,
     vector,
+    stage: null,
     label: meta.label,
     instruction: meta.instruction,
     note: item.note || "",
@@ -162,6 +200,7 @@ function buildIntro(item) {
   return {
     ...commonBase(item, "recognize"),
     vector: "intro",
+    stage: 1,
     label: "MEET THIS ONE",
     instruction: "No test yet. See the thought together first, then say the Hawaiian once.",
     prompt: item.hawaiian,
@@ -172,33 +211,53 @@ function buildIntro(item) {
 }
 
 function buildQuestion(item, vector, pool, scenario = { prompt: item.examplePidgin }) {
-  const base = commonBase(item, vector);
+  const base = { ...commonBase(item, vector), stage: stageFor(item.id, {}) };
 
   if (vector === "recognize") {
-    return { ...base, prompt: item.hawaiian, answer: item.pidgin, answerLabel: "Pidgin thought" };
+    return {
+      ...base,
+      stage: 2,
+      prompt: item.hawaiian,
+      answer: item.pidgin,
+      answerLabel: "Pidgin thought",
+      choices: buildPidginChoiceOptions(item, pool),
+    };
   }
 
   if (vector === "cloze") {
-    return { ...base, prompt: clozePrompt(item.hawaiian), answer: item.hawaiian, answerLabel: "Whole sentence" };
+    return {
+      ...base,
+      stage: 3,
+      instruction: `${item.pidgin} · Fill the blank, then say the whole Hawaiian sentence.`,
+      prompt: clozePrompt(item.hawaiian),
+      answer: item.hawaiian,
+      answerLabel: "Whole sentence",
+    };
+  }
+
+  if (vector === "produce") {
+    return { ...base, stage: 3, prompt: item.pidgin, answer: item.hawaiian, answerLabel: "Hawaiian" };
   }
 
   if (vector === "scenario") {
     return {
       ...base,
+      stage: 4,
       prompt: scenario.prompt,
       answer: item.hawaiian,
       answerLabel: "Hawaiian",
-      choices: buildChoiceOptions(item, pool),
+      choices: buildHawaiianChoiceOptions(item, pool),
     };
   }
 
   if (vector === "say") {
-    return { ...base, prompt: item.hawaiian, answer: item.pidgin, answerLabel: "Thought you just said" };
+    return { ...base, stage: 5, prompt: item.hawaiian, answer: item.pidgin, answerLabel: "Thought you just said" };
   }
 
   if (vector === "use") {
     return {
       ...base,
+      stage: 5,
       prompt: item.hawaiian,
       answer: item.pidgin,
       answerLabel: "Meaning",
@@ -219,21 +278,23 @@ function rateVector(strengths, itemId, vector, delta) {
 const api = {
   VECTORS,
   HARD_VECTORS,
+  STAGE_VECTORS,
   SHOW_WHAT_YOU_KNOW_EVERY,
   MAX_VECTOR_STRENGTH,
   VECTOR_META,
   getStrength,
   itemAverage,
   isOwned,
+  stageFor,
   weakestVectors,
-  firstUnstartedVector,
   pickVector,
   spacingIntervalMs,
   itemPriority,
   pickWeakItem,
   buildIntro,
   buildQuestion,
-  buildChoiceOptions,
+  buildHawaiianChoiceOptions,
+  buildPidginChoiceOptions,
   clozePrompt,
   rateVector,
 };
