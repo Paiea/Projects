@@ -60,24 +60,26 @@
   - browser export `window.PIDGIN_OLELO_EXTRA_CURRICULUM`
   - CommonJS export for Node-backed tests.
 
-`ExtraMeta` shape for the first implementation slice:
+Use a compact metadata shape that derives mixed Pidgin/Hawaiian text from the existing phrase-bank line instead of duplicating full sentences:
 
 ```js
 {
   nudgeChunk: "mea ʻai",
   nudgeGloss: "food",
-  nudgeText: "Eh, where the mea ʻai stay? I starving already.",
-  nudgePrompt: "Eh, where the ____ stay? I starving already.",
+  pidginNeedle: "food",
   utilityTier: "common",
-  sceneIds: ["food-five-left"]
+  sceneIds: ["food-five-left"],
+  // Optional only when a direct replacement would read badly:
+  nudgeTextOverride: null,
+  nudgePromptOverride: null,
 }
 ```
 
-Items whose existing full phrase is itself the useful zoomed-in chunk may use that whole Hawaiian string as `nudgeChunk`; do not invent new Hawaiian merely to force every item into the same template.
+Derive `nudgeText` by replacing the first exact `pidginNeedle` occurrence in `item.pidgin` with `nudgeChunk`. Derive `nudgePrompt` by replacing the same occurrence with `____`. If no safe direct replacement exists, require both explicit overrides. The surrounding sentence is learner Pidgin, not Hawaiian grammar authority.
 
 - [ ] **Step 1: Write the failing extra-authority tests**
 
-Create `tests/test_pidgin_olelo_extra_curriculum.py` with Node probes that assert:
+Create `tests/test_pidgin_olelo_extra_curriculum.py` with a shared `run_node()` helper and Node probes that assert:
 
 ```python
 def test_extra_curriculum_is_exactly_70_unique_non_core_items():
@@ -95,6 +97,12 @@ def test_extra_utility_order_starts_with_adult_high_use_items():
     ]
 
 
+def test_every_extra_item_has_complete_nudge_metadata():
+    data = run_node(EXTRA_PROBE)
+    assert data["missingMeta"] == []
+    assert data["invalidNudge"] == []
+
+
 def test_extra_validation_rejects_missing_or_duplicate_ids():
     data = run_node(VALIDATION_PROBE)
     assert data["clean"] == []
@@ -102,7 +110,7 @@ def test_extra_validation_rejects_missing_or_duplicate_ids():
     assert any("missing" in error.lower() for error in data["missingErrors"])
 ```
 
-Also assert the Core 30 list from `curriculum.js` is byte-for-byte unchanged from current `main` using the existing Core regression style.
+Also assert the Core 30 IDs/order from `curriculum.js` are unchanged from current `main` using the existing Core regression style.
 
 - [ ] **Step 2: Run the new tests and verify RED**
 
@@ -114,29 +122,109 @@ python -m unittest tests.test_pidgin_olelo_extra_curriculum -v
 
 Expected: FAIL because `extra-curriculum.js` and its exports do not exist.
 
-- [ ] **Step 3: Implement the minimal extra authority**
+- [ ] **Step 3: Implement the exact utility order**
 
-Create `pidgin-olelo/extra-curriculum.js` with:
+Create `pidgin-olelo/extra-curriculum.js` with this exact deterministic order, salvaged from the superseded utility branch because it already matches the approved adult-usefulness direction:
 
 ```js
 const EXTRA_UTILITY_IDS = [
   "and-you", "no-problem", "me-too", "you-okay", "hungry-q",
-  "hungry-a", "full", "ono", "thirsty", "tired",
-  // continue explicitly until all 70 non-Core IDs are present exactly once
+  "hungry-a", "full", "ono", "thirsty", "tired", "ready", "know",
+  "no-know", "come-inside", "over-here", "over-there", "can", "cannot",
+  "please", "talk-slow", "see-you", "take-care", "good-morning",
+  "good-evening", "go-home", "where-food", "eat", "drink", "today",
+  "tomorrow", "now", "who-that", "where-you-guys", "go-slow",
+  "take-this", "get-that", "open-door", "close-door", "sit", "stand",
+  "go-outside", "stay-inside", "look-here", "come-later", "go-kailua-q",
+  "go-store", "happy", "sad", "sick", "beautiful", "hot", "cold",
+  "busy", "ono-loa", "what-problem", "nothing", "help-you",
+  "eat-together", "talk-together", "yesterday", "why", "how-many",
+  "want-this", "want-that", "dont-want", "how-much", "expensive",
+  "book-car", "money-small", "love-big",
 ];
+```
 
+Do not import the old branch file wholesale. Only reuse this validated order.
+
+- [ ] **Step 4: Populate NUDGE metadata for all 70 IDs in the same commit**
+
+For every ID in `EXTRA_UTILITY_IDS`, choose the smallest useful Hawaiian word/chunk already present verbatim in that item’s existing `hawaiian` field whenever possible. Set:
+
+- `nudgeChunk` to that verbatim chunk;
+- `nudgeGloss` to the narrow English/Pidgin meaning of that chunk;
+- `pidginNeedle` to the exact substring of the existing `pidgin` field that the chunk replaces;
+- `nudgeTextOverride` + `nudgePromptOverride` only when literal replacement would be awkward or misleading.
+
+Representative required entries:
+
+```js
 const EXTRA_META = {
-  "and-you": {
-    nudgeChunk: "A ʻo ʻoe?",
-    nudgeGloss: "And you?",
-    nudgeText: "I good. A ʻo ʻoe?",
-    nudgePrompt: "I good. ____",
+  "no-problem": {
+    nudgeChunk: "pilikia",
+    nudgeGloss: "problem",
+    pidginNeedle: "problem",
     utilityTier: "common",
     sceneIds: [],
   },
-  // Populate all 70 with conservative NUDGE metadata derived from existing phrase-bank authority.
+  "hungry-q": {
+    nudgeChunk: "Pōloli",
+    nudgeGloss: "hungry",
+    pidginNeedle: "hungry",
+    utilityTier: "common",
+    sceneIds: ["food-five-left"],
+  },
+  "hungry-a": {
+    nudgeChunk: "Pōloli",
+    nudgeGloss: "hungry",
+    pidginNeedle: "hungry",
+    utilityTier: "common",
+    sceneIds: ["food-five-left"],
+  },
+  "full": {
+    nudgeChunk: "Māʻona",
+    nudgeGloss: "full",
+    pidginNeedle: "full",
+    utilityTier: "common",
+    sceneIds: [],
+  },
+  "where-food": {
+    nudgeChunk: "mea ʻai",
+    nudgeGloss: "food",
+    pidginNeedle: "food",
+    utilityTier: "common",
+    sceneIds: ["food-five-left"],
+  },
+  "how-many": {
+    nudgeChunk: "ʻEhia",
+    nudgeGloss: "how many",
+    pidginNeedle: "How many",
+    utilityTier: "useful",
+    sceneIds: ["food-five-left"],
+  },
+  "book-car": {
+    nudgeChunk: "puke",
+    nudgeGloss: "book",
+    pidginNeedle: "book",
+    utilityTier: "later",
+    sceneIds: ["book-in-car"],
+  },
+  "how-much": {
+    nudgeChunk: "kālā",
+    nudgeGloss: "money / dollars",
+    pidginNeedle: "this",
+    utilityTier: "useful",
+    sceneIds: ["store-price"],
+    nudgeTextOverride: "How much kālā this?",
+    nudgePromptOverride: "How much ____ this?",
+  },
 };
+```
 
+`validate()` must fail if any of the 70 IDs lacks metadata or if a metadata entry has neither a usable `pidginNeedle` nor both overrides. Do not commit a partial metadata bank.
+
+- [ ] **Step 5: Implement derivation and validation helpers**
+
+```js
 function extraItems(items) {
   const byId = new Map(items.map((item) => [item.id, item]));
   return EXTRA_UTILITY_IDS.map((id) => byId.get(id)).filter(Boolean);
@@ -144,6 +232,16 @@ function extraItems(items) {
 
 function metaFor(itemId) {
   return EXTRA_META[itemId] || null;
+}
+
+function nudgeTextFor(item, meta) {
+  if (meta.nudgeTextOverride) return meta.nudgeTextOverride;
+  return item.pidgin.replace(meta.pidginNeedle, meta.nudgeChunk);
+}
+
+function nudgePromptFor(item, meta) {
+  if (meta.nudgePromptOverride) return meta.nudgePromptOverride;
+  return item.pidgin.replace(meta.pidginNeedle, "____");
 }
 
 function validate(items, coreIds) {
@@ -155,16 +253,24 @@ function validate(items, coreIds) {
     seen.add(id);
     if (!ids.has(id)) errors.push(`missing phrase-bank id: ${id}`);
     if (coreIds.includes(id)) errors.push(`extra id overlaps Core 30: ${id}`);
-    if (!EXTRA_META[id]) errors.push(`missing NUDGE metadata: ${id}`);
+    const meta = EXTRA_META[id];
+    if (!meta) {
+      errors.push(`missing NUDGE metadata: ${id}`);
+      continue;
+    }
+    if (!meta.nudgeChunk || !meta.nudgeGloss) errors.push(`incomplete NUDGE metadata: ${id}`);
+    const hasNeedle = Boolean(meta.pidginNeedle);
+    const hasOverrides = Boolean(meta.nudgeTextOverride && meta.nudgePromptOverride);
+    if (!hasNeedle && !hasOverrides) errors.push(`no NUDGE replacement rule: ${id}`);
   }
   if (EXTRA_UTILITY_IDS.length !== 70) errors.push(`expected 70 extra ids, got ${EXTRA_UTILITY_IDS.length}`);
   return errors;
 }
 ```
 
-Use the existing phrase bank as full-Hawaiian authority. Do not duplicate `hawaiian`, `note`, or examples in `EXTRA_META` unless a NUDGE-specific representation requires it.
+Use the existing phrase bank as full-Hawaiian authority. Do not duplicate `hawaiian`, `note`, or examples in `EXTRA_META`.
 
-- [ ] **Step 4: Add syntax checking**
+- [ ] **Step 6: Add syntax checking**
 
 Add:
 
@@ -174,9 +280,7 @@ node --check pidgin-olelo/extra-curriculum.js
 
 to `.github/workflows/pidgin-olelo-tests.yml` beside the other JS syntax checks.
 
-- [ ] **Step 5: Run focused and full tests**
-
-Run:
+- [ ] **Step 7: Run focused and full tests**
 
 ```bash
 python -m unittest tests.test_pidgin_olelo_extra_curriculum -v
@@ -186,7 +290,7 @@ node --check pidgin-olelo/extra-curriculum.js
 
 Expected: all PASS.
 
-- [ ] **Step 6: Commit**
+- [ ] **Step 8: Commit**
 
 ```bash
 git add pidgin-olelo/extra-curriculum.js tests/test_pidgin_olelo_extra_curriculum.py .github/workflows/pidgin-olelo-tests.yml
@@ -202,15 +306,15 @@ git commit -m "feat: define utility-first NUDGE extra curriculum"
 - Create: `tests/test_pidgin_olelo_nudge_router.py`
 
 **Interfaces:**
-- Consumes: `ENGINE.getStrength`, `ENGINE.buildQuestion`, existing phrase item + `ExtraMeta`.
+- Consumes: `ENGINE.getStrength`, existing phrase item + `ExtraMeta`.
 - Produces:
-  - `nudgePhase(nudgeStrengths, itemId): "meet" | "retrieve" | "context" | "full"`
+  - `nudgePhase(nudgeStrengths, itemId): "recognize" | "retrieve" | "context" | "full"`
   - `shouldUseFull(nudgeStrengths, itemId): boolean`
+  - `buildNudgeIntro(item, meta): Question`
   - `buildNudgeQuestion(item, meta, vector, pool, scene): Question`
-  - `routeRepresentation({ item, meta, nudgeStrengths, fullMissStreak, fallbackPending }): { kind, item, strengthsKey }`
-  - `recordFullMiss(routeState, itemId, missed): void` semantics documented by tests.
+  - `routeRepresentation({ item, nudgeStrengths, fullMissStreak, fallbackPending }): { kind, item, fallback? }`
 
-The router must not add a seventh score vector. NUDGE uses only the existing `recognize`, `produce`, and `scenario` vector names. Fuller Hawaiian uses all existing vectors through `core-engine.js` exactly as Core does.
+The router must not add a seventh score vector. NUDGE uses only existing `recognize`, `produce`, and `scenario` vector names. Fuller Hawaiian uses all existing vectors through `core-engine.js` exactly as Core does.
 
 - [ ] **Step 1: Write RED tests for NUDGE progression**
 
@@ -218,21 +322,29 @@ Create `tests/test_pidgin_olelo_nudge_router.py` with Node assertions equivalent
 
 ```js
 const none = {};
-assert.equal(extra.nudgePhase(none, "hungry-q"), "meet");
+assert.equal(extra.nudgePhase(none, "hungry-q"), "recognize");
 
-const retrievedOnce = {"hungry-q": {produce: 1}};
+const recognized = {"hungry-q": {recognize: 1}};
+assert.equal(extra.nudgePhase(recognized, "hungry-q"), "retrieve");
+
+const retrievedOnce = {"hungry-q": {recognize: 1, produce: 1}};
 assert.equal(extra.nudgePhase(retrievedOnce, "hungry-q"), "retrieve");
 
-const readyForContext = {"hungry-q": {produce: 2}};
+const readyForContext = {"hungry-q": {recognize: 1, produce: 2}};
 assert.equal(extra.nudgePhase(readyForContext, "hungry-q"), "context");
 
-const fullReady = {"hungry-q": {produce: 2, scenario: 1}};
+const fullReady = {"hungry-q": {recognize: 1, produce: 2, scenario: 1}};
 assert.equal(extra.shouldUseFull(fullReady, "hungry-q"), true);
 ```
 
 Also assert:
 
 ```js
+const intro = extra.buildNudgeIntro(item, meta);
+assert.equal(intro.intro, true);
+assert.equal(intro.nudge, true);
+assert.ok(intro.prompt.includes(meta.nudgeChunk));
+
 const q = extra.buildNudgeQuestion(item, meta, "produce", pool, scene);
 assert.equal(q.vector, "produce");
 assert.equal(q.answer, meta.nudgeChunk);
@@ -244,9 +356,9 @@ assert.equal(q.nudge, true);
 And fallback routing:
 
 ```js
-assert.equal(routeAfterOneFullMiss.kind, "full");
-assert.equal(routeAfterTwoFullMisses.kind, "nudge");
-assert.equal(routeAfterFallbackConsumed.kind, "full");
+assert.equal(extra.routeRepresentation({item, nudgeStrengths: fullReady, fullMissStreak: 1, fallbackPending: false}).kind, "full");
+assert.equal(extra.routeRepresentation({item, nudgeStrengths: fullReady, fullMissStreak: 2, fallbackPending: false}).kind, "nudge");
+assert.equal(extra.routeRepresentation({item, nudgeStrengths: fullReady, fullMissStreak: 0, fallbackPending: false}).kind, "full");
 ```
 
 - [ ] **Step 2: Run and verify RED**
@@ -259,17 +371,12 @@ Expected: FAIL because the router/builders are absent.
 
 - [ ] **Step 3: Implement NUDGE phase judgment**
 
-Add:
-
 ```js
-function strength(map, itemId, vector) {
-  return Math.max(0, Number(map?.[itemId]?.[vector]) || 0);
-}
-
 function nudgePhase(nudgeStrengths, itemId) {
-  const produce = strength(nudgeStrengths, itemId, "produce");
-  const scenario = strength(nudgeStrengths, itemId, "scenario");
-  if (produce === 0) return "meet";
+  const recognize = ENGINE.getStrength(nudgeStrengths, itemId, "recognize");
+  const produce = ENGINE.getStrength(nudgeStrengths, itemId, "produce");
+  const scenario = ENGINE.getStrength(nudgeStrengths, itemId, "scenario");
+  if (recognize < 1) return "recognize";
   if (produce < 2) return "retrieve";
   if (scenario < 1) return "context";
   return "full";
@@ -280,17 +387,49 @@ function shouldUseFull(nudgeStrengths, itemId) {
 }
 ```
 
-- [ ] **Step 4: Implement NUDGE questions without inventing a new mode**
+`ENGINE` is passed into the module at runtime through a `setEngine(engine)` initializer or captured from `window.PIDGIN_OLELO_CORE_ENGINE` after script load. In CommonJS tests, call `extra.setEngine(require("./pidgin-olelo/core-engine.js"))` before phase tests.
 
-Use existing vector names and question shape:
+- [ ] **Step 4: Implement NUDGE intro and question builders**
 
 ```js
+function buildNudgeIntro(item, meta) {
+  return {
+    itemId: item.id,
+    semanticItemId: item.id,
+    vector: "intro",
+    stage: 1,
+    label: "MEET THE ISLAND",
+    instruction: "Pidgin stays. Zoom in on the Hawaiian part.",
+    prompt: nudgeTextFor(item, meta),
+    answer: `${meta.nudgeChunk} = ${meta.nudgeGloss}`,
+    answerLabel: "Hawaiian island",
+    choices: [],
+    intro: true,
+    nudge: true,
+  };
+}
+
+function nudgeGlossChoices(itemId, pool) {
+  const correct = metaFor(itemId).nudgeGloss;
+  const distractors = [];
+  const seen = new Set([correct]);
+  for (const candidate of pool) {
+    const gloss = metaFor(candidate.id)?.nudgeGloss;
+    if (!gloss || seen.has(gloss)) continue;
+    seen.add(gloss);
+    distractors.push(gloss);
+    if (distractors.length === 3) break;
+  }
+  return [correct, ...distractors];
+}
+
 function buildNudgeQuestion(item, meta, vector, pool, scene = null) {
   if (vector === "recognize") {
     return {
       itemId: item.id,
       semanticItemId: item.id,
       vector: "recognize",
+      stage: 2,
       label: "WHAT THAT WORD?",
       instruction: "Zoom in on the Hawaiian island. Pick the Pidgin meaning.",
       prompt: meta.nudgeChunk,
@@ -306,9 +445,10 @@ function buildNudgeQuestion(item, meta, vector, pool, scene = null) {
       itemId: item.id,
       semanticItemId: item.id,
       vector: "scenario",
+      stage: 4,
       label: "DROP UM IN",
       instruction: "Same Hawaiian island, new local situation.",
-      prompt: scene?.prompt || meta.nudgePrompt,
+      prompt: scene?.prompt || nudgePromptFor(item, meta),
       answer: meta.nudgeChunk,
       answerLabel: "Hawaiian island",
       choices: [],
@@ -320,9 +460,10 @@ function buildNudgeQuestion(item, meta, vector, pool, scene = null) {
     itemId: item.id,
     semanticItemId: item.id,
     vector: "produce",
+    stage: 3,
     label: "FILL THE ISLAND",
     instruction: "Keep the Pidgin. Supply just the Hawaiian part.",
-    prompt: meta.nudgePrompt,
+    prompt: nudgePromptFor(item, meta),
     answer: meta.nudgeChunk,
     answerLabel: "Hawaiian island",
     choices: [],
@@ -331,21 +472,46 @@ function buildNudgeQuestion(item, meta, vector, pool, scene = null) {
 }
 ```
 
-For the meet phase, expose `meta.nudgeText` and `meta.nudgeGloss` together and do not score it.
+The runtime maps phase to vector exactly:
+
+- `recognize` → `recognize`
+- `retrieve` → `produce`
+- `context` → `scenario`
+
+The meet/intro step is controlled by the existing `introduced` map before phase routing.
 
 - [ ] **Step 5: Implement one-shot full-miss fallback policy**
 
-Keep fallback bookkeeping outside vector strength so no progress is erased:
-
 ```js
-function routeRepresentation({ item, meta, nudgeStrengths, fullMissStreak = 0, fallbackPending = false }) {
+function routeRepresentation({ item, nudgeStrengths, fullMissStreak = 0, fallbackPending = false }) {
   if (!shouldUseFull(nudgeStrengths, item.id)) return { kind: "nudge", item };
   if (fallbackPending || fullMissStreak >= 2) return { kind: "nudge", item, fallback: true };
   return { kind: "full", item };
 }
 ```
 
-The runtime will consume `fallback: true` once, reset the miss streak, and return to `full` next time. Do not decrement full strengths.
+The runtime, not this pure router, updates miss bookkeeping:
+
+```js
+function recordFullResult(itemId, delta) {
+  if (!IS_EXTRA_DECK || currentQuestion?.nudge) return;
+  if (delta > 0) {
+    state.fullMissStreak[itemId] = 0;
+    return;
+  }
+  state.fullMissStreak[itemId] = (state.fullMissStreak[itemId] || 0) + 1;
+  if (state.fullMissStreak[itemId] >= 2) state.fallbackPending[itemId] = true;
+}
+```
+
+When a route returns `fallback: true`, render exactly one NUDGE question for that semantic item, then set:
+
+```js
+state.fallbackPending[item.id] = false;
+state.fullMissStreak[item.id] = 0;
+```
+
+Do not decrement or clear full `vectorStrengths`.
 
 - [ ] **Step 6: Run focused and full tests**
 
@@ -380,7 +546,8 @@ git commit -m "feat: route extra meanings from NUDGE to fuller Hawaiian"
 - Produces runtime constants:
   - `IS_EXTRA_DECK = document.body.dataset.deck === "extra"`
   - `PRACTICE_ITEMS`
-  - `STORAGE_KEY = IS_EXTRA_DECK ? "pidgin-olelo-extra-v2" : "pidgin-olelo-core-vectors-v1"`
+  - `CORE_STORAGE_KEY = "pidgin-olelo-core-vectors-v1"`
+  - `EXTRA_STORAGE_KEY = "pidgin-olelo-extra-v2"`
   - `CORE_MORE_UNLOCK_SOLID = 5`
   - `EXTRA_STARTING_ACTIVE_COUNT = 10`
   - `EXTRA_REPS_PER_UNLOCK = 8`
@@ -398,7 +565,7 @@ git commit -m "feat: route extra meanings from NUDGE to fuller Hawaiian"
 }
 ```
 
-Core state must remain exactly the current shape and storage key.
+Core state remains the current shape and remains stored under `pidgin-olelo-core-vectors-v1`.
 
 - [ ] **Step 1: Write RED shared-surface tests**
 
@@ -423,13 +590,17 @@ def test_more_is_not_a_primary_nav_tab():
     assert 'more.html' not in primary_nav
 
 
+def test_core_storage_key_is_preserved_and_extra_state_is_separate():
+    app = APP.read_text()
+    assert 'const CORE_STORAGE_KEY = "pidgin-olelo-core-vectors-v1";' in app
+    assert 'const EXTRA_STORAGE_KEY = "pidgin-olelo-extra-v2";' in app
+
+
 def test_extra_pool_starts_at_ten_and_grows_every_eight_reps():
     app = APP.read_text()
     assert 'EXTRA_STARTING_ACTIVE_COUNT = 10' in app
     assert 'EXTRA_REPS_PER_UNLOCK = 8' in app
 ```
-
-Also assert Core storage key remains `pidgin-olelo-core-vectors-v1`.
 
 - [ ] **Step 2: Run and verify RED**
 
@@ -453,13 +624,15 @@ Copy the structural shell from `index.html`, then make only deck-specific text c
 ...
 <script src="phrases.js"></script>
 <script src="curriculum.js"></script>
-<script src="extra-curriculum.js"></script>
 <script src="core-engine.js"></script>
+<script src="extra-curriculum.js"></script>
 <script src="noeau.js"></script>
 <script src="app.js"></script>
 ```
 
-Keep primary mobile navigation Learn / Mission only. `more.html` can use a small `← Core 30` link inside the page rather than a third bottom-nav item.
+`core-engine.js` must load before `extra-curriculum.js` so the extra module can call `setEngine(window.PIDGIN_OLELO_CORE_ENGINE)` during initialization.
+
+Keep primary mobile navigation Learn / Mission only. `more.html` uses a small `← Core 30` link inside the page rather than a third bottom-nav item.
 
 - [ ] **Step 4: Add the quiet Core unlock link**
 
@@ -492,14 +665,11 @@ const EXTRA = window.PIDGIN_OLELO_EXTRA_CURRICULUM;
 const IS_EXTRA_DECK = document.body.dataset.deck === "extra";
 const CORE_ITEMS = CURRICULUM.coreItems(ALL_ITEMS);
 const PRACTICE_ITEMS = IS_EXTRA_DECK ? EXTRA.extraItems(ALL_ITEMS) : CORE_ITEMS;
-const STORAGE_KEY = IS_EXTRA_DECK ? "pidgin-olelo-extra-v2" : "pidgin-olelo-core-vectors-v1";
-const STARTING_ACTIVE_COUNT = IS_EXTRA_DECK ? 10 : 5;
+const CORE_STORAGE_KEY = "pidgin-olelo-core-vectors-v1";
+const EXTRA_STORAGE_KEY = "pidgin-olelo-extra-v2";
+const STORAGE_KEY = IS_EXTRA_DECK ? EXTRA_STORAGE_KEY : CORE_STORAGE_KEY;
+const STARTING_ACTIVE_COUNT = 5;
 const REPS_PER_UNLOCK = 8;
-```
-
-Keep the literal constants required by tests:
-
-```js
 const EXTRA_STARTING_ACTIVE_COUNT = 10;
 const EXTRA_REPS_PER_UNLOCK = 8;
 ```
@@ -522,32 +692,38 @@ function findItem(itemId) {
 }
 ```
 
-Core migration must still iterate `CORE_ITEMS` and must not run for the extra deck.
+Core migration still iterates `CORE_ITEMS` and does not run for the extra deck.
 
 - [ ] **Step 6: Add separate NUDGE/full maps for the extra deck**
 
-Extend only extra state loading:
+`emptyState()` returns the current Core shape. Add an extra-state decorator instead of changing Core state:
 
 ```js
-if (IS_EXTRA_DECK) {
-  next.nudgeStrengths = parsed.nudgeStrengths || {};
-  next.fullMissStreak = parsed.fullMissStreak || {};
-  next.fallbackPending = parsed.fallbackPending || {};
+function ensureExtraState(next) {
+  if (!IS_EXTRA_DECK) return next;
+  return {
+    ...next,
+    nudgeStrengths: next.nudgeStrengths || {},
+    fullMissStreak: next.fullMissStreak || {},
+    fallbackPending: next.fallbackPending || {},
+  };
 }
 ```
 
-Core state must not be rewritten into this expanded schema.
+Call it only after parsing/loading the extra storage key.
 
 When `IS_EXTRA_DECK`, `nextQuestion()` must:
 
 1. select the semantic item from `PRACTICE_ITEMS`;
-2. ask `EXTRA.routeRepresentation(...)` for `nudge` or `full`;
-3. use `state.nudgeStrengths` for NUDGE vector picking/rating;
-4. use `state.vectorStrengths` for fuller Hawaiian;
-5. consume a one-shot fallback after it renders;
-6. preserve the same history/back/replay/forward shell.
+2. if `!state.introduced[item.id]`, return `EXTRA.buildNudgeIntro(item, meta)`;
+3. ask `EXTRA.routeRepresentation(...)` for `nudge` or `full`;
+4. for NUDGE, map `EXTRA.nudgePhase(...)` to vector `recognize` / `produce` / `scenario` and call `EXTRA.buildNudgeQuestion(...)`;
+5. for full, use `ENGINE.pickVector(item.id, state.vectorStrengths, repNumber, excludeVectorOnce)` and existing `ENGINE.buildQuestion(...)`;
+6. use `state.nudgeStrengths` when rating a NUDGE question and `state.vectorStrengths` when rating a full question;
+7. consume one-shot fallback after it renders;
+8. preserve the same history/back/replay/forward shell.
 
-Add a helper:
+Add:
 
 ```js
 function currentStrengthMap() {
@@ -555,7 +731,9 @@ function currentStrengthMap() {
 }
 ```
 
-Use it in rating paths instead of directly mutating `vectorStrengths` for every question.
+Both `recordKnownChoice()` and `rateCurrent()` must call `ENGINE.rateVector(currentStrengthMap(), ...)` rather than unconditionally mutating `vectorStrengths`.
+
+Call `recordFullResult(item.id, delta)` only for full extra-deck questions.
 
 - [ ] **Step 7: Keep phone UI stable**
 
@@ -599,6 +777,7 @@ git commit -m "feat: add quiet shared-runtime extra phrase practice"
 
 **Files:**
 - Modify: `pidgin-olelo/extra-curriculum.js`
+- Modify: `pidgin-olelo/app.js`
 - Create: `tests/test_pidgin_olelo_micro_scenes.py`
 
 **Interfaces:**
@@ -615,11 +794,11 @@ git commit -m "feat: add quiet shared-runtime extra phrase practice"
   prompt: "Hungry already. Uncle get five left. Ask about the mea ʻai before somebody wipe um out.",
   itemIds: ["where-food", "how-many"],
   newChunks: ["mea ʻai"],
-  outcome: "retrieve food/location language"
+  outcome: "food and quantity retrieval"
 }
 ```
 
-The first eight scenes should cover these content areas without becoming separate modes: food, quantity, object, animal, place/bathroom, errand/shopping, time, and driving/movement.
+The first eight scenes cover food, quantity, object, animal, place/bathroom, errand/shopping, time, and driving/movement. Arithmetic may appear only as context; it is not scored as math.
 
 - [ ] **Step 1: Write RED scene validation tests**
 
@@ -655,7 +834,7 @@ Expected: FAIL because the scene bank does not exist.
 
 - [ ] **Step 3: Add exactly eight seed scenes**
 
-Keep them compact and adult-facing. Representative seeds:
+Use these eight IDs and content areas so the first release is bounded and deterministic:
 
 ```js
 const MICRO_SCENES = {
@@ -671,23 +850,69 @@ const MICRO_SCENES = {
     prompt: "The ʻīlio grab your slipper and walking away proud. What word you just used for dog?",
     itemIds: ["take-this", "get-that"],
     newChunks: ["ʻīlio"],
-    outcome: "animal/object vocabulary in context",
+    outcome: "animal and object retrieval",
   },
   "bathroom-emergency": {
     id: "bathroom-emergency",
     prompt: "Should've gone before you left. Ask where the lumi hoʻopau pilikia stay.",
-    itemIds: ["where-thing"],
+    itemIds: ["where-you-guys"],
     newChunks: ["lumi hoʻopau pilikia"],
     outcome: "place chunk retrieval",
+  },
+  "store-price": {
+    id: "store-price",
+    prompt: "You like this one until you see the price. Ask how much kālā this thing going cost you.",
+    itemIds: ["how-much", "expensive"],
+    newChunks: ["kālā"],
+    outcome: "shopping and money retrieval",
+  },
+  "book-in-car": {
+    id: "book-in-car",
+    prompt: "Everybody looking for the book. Of course the puke stay in the car.",
+    itemIds: ["book-car", "over-there"],
+    newChunks: ["puke"],
+    outcome: "object and location retrieval",
+  },
+  "tomorrow-again": {
+    id: "tomorrow-again",
+    prompt: "Today no can. ʻApōpō we try again before somebody make another plan.",
+    itemIds: ["tomorrow", "today"],
+    newChunks: ["ʻApōpō"],
+    outcome: "time retrieval",
+  },
+  "drive-slow": {
+    id: "drive-slow",
+    prompt: "Road wet and everybody suddenly driving like tourists. Go mālie.",
+    itemIds: ["go-slow", "go-home"],
+    newChunks: ["mālie"],
+    outcome: "movement and manner retrieval",
+  },
+  "auntie-plate": {
+    id: "auntie-plate",
+    prompt: "Auntie said one plate. Somehow you leaving with three. At least tell her mahalo.",
+    itemIds: ["full", "eat-together"],
+    newChunks: ["mahalo"],
+    outcome: "food and social-language reuse",
   },
 };
 ```
 
-Add five more for shopping/money, time, driving/movement, an everyday object, and food/drink. Keep humor in the Pidgin setup, not in Hawaiian correctness.
+`mahalo` is already Core-known Hawaiian and therefore does not count as a genuinely new curriculum word; keeping it in `newChunks` still exercises the same scene validation path.
 
-- [ ] **Step 4: Route scenario-phase NUDGE reps through scenes**
+- [ ] **Step 4: Extend validation for scenes**
 
-`sceneFor(itemId, repNumber)` should choose deterministically from scenes containing the item ID:
+For each scene:
+
+```js
+for (const scene of Object.values(MICRO_SCENES)) {
+  if (scene.newChunks.length > 2) errors.push(`scene ${scene.id} has more than two new chunks`);
+  for (const itemId of scene.itemIds) {
+    if (!EXTRA_UTILITY_IDS.includes(itemId)) errors.push(`scene ${scene.id} references missing extra item ${itemId}`);
+  }
+}
+```
+
+- [ ] **Step 5: Route scenario-phase NUDGE reps through scenes**
 
 ```js
 function sceneFor(itemId, repNumber = 0) {
@@ -697,9 +922,9 @@ function sceneFor(itemId, repNumber = 0) {
 }
 ```
 
-`app.js` should pass the selected scene into `buildNudgeQuestion` for NUDGE `scenario` reps.
+`app.js` passes the selected scene into `buildNudgeQuestion` for NUDGE `scenario` reps.
 
-- [ ] **Step 5: Run focused and full tests**
+- [ ] **Step 6: Run focused and full tests**
 
 ```bash
 python -m unittest tests.test_pidgin_olelo_micro_scenes -v
@@ -709,7 +934,7 @@ python -m unittest discover -s tests -p 'test_pidgin_olelo*.py'
 
 Expected: PASS.
 
-- [ ] **Step 6: Commit**
+- [ ] **Step 7: Commit**
 
 ```bash
 git add pidgin-olelo/extra-curriculum.js pidgin-olelo/app.js tests/test_pidgin_olelo_micro_scenes.py
@@ -737,7 +962,7 @@ Add tests that assert:
 ```python
 def test_core_contract_remains_unchanged():
     assert core_ids == EXPECTED_CORE_30
-    assert 'const STORAGE_KEY = "pidgin-olelo-core-vectors-v1"' in core_runtime_contract
+    assert 'const CORE_STORAGE_KEY = "pidgin-olelo-core-vectors-v1";' in app_source
     assert ownership_threshold_signature == EXPECTED_SIGNATURE
 
 
@@ -745,11 +970,13 @@ def test_extra_page_does_not_add_primary_navigation_mode():
     assert "More phrases" not in extract_primary_nav(index_html)
 
 
-def test_nudge_copy_is_not_labeled_as_hawaiian_sentence_authority():
-    assert "Pidgin context" in extra_curriculum_source or "learner Pidgin" in extra_curriculum_source
+def test_nudge_copy_is_explicitly_learner_pidgin_not_hawaiian_authority():
+    source = extra_curriculum_source.lower()
+    assert "learner pidgin" in source
+    assert "not hawaiian grammar authority" in source
 ```
 
-- [ ] **Step 2: Run and verify the new guardrail tests fail where documentation/labels are missing**
+- [ ] **Step 2: Run and verify the new guardrail tests fail where explicit labeling/state is missing**
 
 ```bash
 python -m unittest tests.test_pidgin_olelo_extra_curriculum tests.test_pidgin_olelo_more_page -v
@@ -759,7 +986,7 @@ Expected: at least the newly added explicit labeling/state assertions FAIL befor
 
 - [ ] **Step 3: Update `PROJECT_STATE.md` to current authority**
 
-Replace the stale “extra 70 dormant” language with a concise authoritative section:
+Replace the stale “extra 70 dormant” language with:
 
 ```markdown
 ## Extra 70: NUDGE progression
@@ -773,11 +1000,9 @@ The existing non-Core 70 are a quiet second layer ordered by adult usefulness. T
 NUDGE surrounding text is learner Pidgin, not Hawaiian grammar authority. Fuller Hawaiian remains the phrase-bank target. Two successful NUDGE retrievals plus one contextual use unlock fuller Hawaiian. Two consecutive fuller-Hawaiian misses cause one temporary NUDGE fallback without erasing full progress.
 ```
 
-Update `NEXT_TASK` to real-device testing of the new extra page plus fluent-speaker/kumu review of NUDGE chunks and the eight seed scenes. Remove stale instructions saying the extra 70 are dormant.
+Update `NEXT_TASK` to real-device testing of `more.html` plus fluent-speaker/kumu review of NUDGE chunks and the eight seed scenes. Remove stale instructions saying the extra 70 are dormant.
 
 - [ ] **Step 4: Run complete verification**
-
-Run:
 
 ```bash
 python -m unittest discover -s tests -p 'test_pidgin_olelo*.py'
@@ -793,8 +1018,6 @@ node --check pidgin-olelo/phrases.js
 Expected: all tests PASS and all syntax checks exit 0.
 
 - [ ] **Step 5: Inspect the final diff for accidental Core changes**
-
-Run:
 
 ```bash
 git diff main...HEAD -- pidgin-olelo/curriculum.js pidgin-olelo/core-engine.js pidgin-olelo/challenge.js
@@ -817,7 +1040,7 @@ PR title:
 Add NUDGE progression for the extra 70
 ```
 
-PR body must state:
+PR body:
 
 ```text
 Core 30 is unchanged. The existing extra 70 now enter through Pidgin-with-Hawaiian NUDGE representations, then graduate to fuller Hawaiian through the same practice runtime. Includes explicit utility order, reversible routing, eight bounded local micro-scenes, quiet unlock after five Core solid meanings, and regression coverage.
