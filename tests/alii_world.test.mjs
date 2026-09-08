@@ -38,4 +38,6 @@ test('foreign technology exists but remains scarce and asymmetric', () => {
   assert.ok(Math.max(...tech.map(t => t.muskets)) > 0);
   assert.ok(tech.filter(t => t.muskets > 0).length < 8);
   assert.ok(tech.some(t => t.cannon > 0 || t.foreignSpecialists > 0 || t.foreignShipAccess));
+  assert.ok(tech.some(t => t.steelBlades > 0));
+  assert.ok(tech.filter(t => t.steelBlades > 0).length < 8);
 });
