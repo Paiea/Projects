@@ -6,14 +6,20 @@ on:
       - 'index.html'
       - 'state/PROJECT_REGISTRY.md'
       - 'praxis/**'
+      - 'hawaii-archive/**'
+      - 'systems/image-os/**'
       - 'tests/test_project_hub.py'
+      - 'tests/test_hawaii_archive.py'
       - '.github/workflows/project-hub-tests.yml'
   pull_request:
     paths:
       - 'index.html'
       - 'state/PROJECT_REGISTRY.md'
       - 'praxis/**'
+      - 'hawaii-archive/**'
+      - 'systems/image-os/**'
       - 'tests/test_project_hub.py'
+      - 'tests/test_hawaii_archive.py'
       - '.github/workflows/project-hub-tests.yml'
 
 jobs:
@@ -26,3 +32,7 @@ jobs:
           python-version: '3.12'
       - name: Verify project hub registration
         run: python tests/test_project_hub.py
+      - name: Verify Hawaiʻi Archive Revival contracts
+        run: python tests/test_hawaii_archive.py
+      - name: Check Hawaiʻi Archive JavaScript syntax
+        run: node --check hawaii-archive/app.js
