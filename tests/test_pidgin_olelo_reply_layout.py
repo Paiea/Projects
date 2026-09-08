@@ -38,7 +38,8 @@ console.log(JSON.stringify(reply));
         )
 
     def test_prompt_css_preserves_newlines_on_desktop_and_phone(self):
-        css = (PROJECT / "styles.css").read_text(encoding="utf-8")
+        css = (PROJECT / "simplify.css").read_text(encoding="utf-8")
+        self.assertIn(".prompt", css)
         self.assertIn("white-space: pre-line", css)
 
 
