@@ -43,6 +43,7 @@
 
       <section class="lesson-column">
         <section class="core-summary" aria-label="Core 30 progress">
+          <span class="mobile-brand">PIDGIN → ʻŌLELO</span>
           <div>
             <p class="core-kicker">CORE 30</p>
             <p class="core-copy">Same thoughts. Different angles.</p>
@@ -50,13 +51,13 @@
           <strong id="progress" class="core-progress">0 / 30 solid</strong>
         </section>
 
-        <p id="feedback" class="feedback" role="status" aria-live="polite" hidden></p>
-
-        <section class="practice-card" aria-live="polite">
+        <section class="practice-card" data-revealed="false" aria-live="polite">
           <div class="card-topline">
             <span id="vector-label" class="card-label">MEET THIS ONE</span>
             <span class="progress">Core 30</span>
           </div>
+
+          <p id="feedback" class="feedback" role="status" aria-live="polite" hidden></p>
 
           <p id="vector-instruction" class="challenge-instruction">See the thought together first.</p>
           <p id="prompt" class="prompt"></p>
@@ -66,19 +67,6 @@
           <div id="answer-wrap" class="answer-wrap" hidden>
             <p id="answer-label" class="answer-label">Answer</p>
             <p id="answer" class="answer"></p>
-
-            <div class="shape-wrap">
-              <p class="shape-label">Hawaiian shape</p>
-              <p id="shape" class="shape"></p>
-            </div>
-
-            <p id="note" class="note"></p>
-
-            <div class="example-wrap">
-              <p class="example-label">Use um</p>
-              <p id="example-pidgin" class="example-line"></p>
-              <p id="example-hawaiian" class="example-line example-line--hawaiian"></p>
-            </div>
           </div>
 
           <button id="show-answer" class="primary-button" type="button">Show me</button>
@@ -94,6 +82,21 @@
             <button id="back-card" class="history-button" type="button" disabled>← Back</button>
             <button id="replay-card" class="history-button" type="button">↻ Replay</button>
             <button id="forward-card" class="history-button" type="button">Forward →</button>
+          </div>
+        </section>
+
+        <section id="answer-support" class="answer-support" aria-label="Extra answer help" hidden>
+          <div class="shape-wrap">
+            <p class="shape-label">Hawaiian shape</p>
+            <p id="shape" class="shape"></p>
+          </div>
+
+          <p id="note" class="note"></p>
+
+          <div class="example-wrap">
+            <p class="example-label">Use um</p>
+            <p id="example-pidgin" class="example-line"></p>
+            <p id="example-hawaiian" class="example-line example-line--hawaiian"></p>
           </div>
         </section>
 
