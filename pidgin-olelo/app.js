@@ -42,6 +42,7 @@ const SEALLY_LINES = {
     "Pau. Next.",
   ],
   show: [
+    "You supposed to try first, bah.",
     "Brah, at least pretend you tried.",
     "Try first, complain after.",
     "No peek, bah.",
