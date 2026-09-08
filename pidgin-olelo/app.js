@@ -1,13 +1,20 @@
 const ALL_ITEMS = window.PIDGIN_OLELO_ITEMS || [];
 const CURRICULUM = window.PIDGIN_OLELO_CURRICULUM;
 const ENGINE = window.PIDGIN_OLELO_CORE_ENGINE;
+const ISLANDS = window.PIDGIN_OLELO_ISLANDS;
 const CORE_ITEMS = CURRICULUM.coreItems(ALL_ITEMS);
+const IS_EXTRA_DECK = document.body.dataset.deck === "extra";
+const PARENT_ITEMS = IS_EXTRA_DECK ? ISLANDS.extraItems(ALL_ITEMS) : CORE_ITEMS;
 const NOEAU_ITEMS = window.PIDGIN_OLELO_NOEAU || [];
 
 const OLD_STORAGE_KEY = "pidgin-olelo-v0-strength";
-const STORAGE_KEY = "pidgin-olelo-core-vectors-v1";
+const STORAGE_KEY = IS_EXTRA_DECK ? "pidgin-olelo-extra-vectors-v1" : "pidgin-olelo-core-vectors-v1";
+const ISLAND_STORAGE_KEY = IS_EXTRA_DECK ? "pidgin-olelo-extra-islands-v1" : "pidgin-olelo-core-islands-v1";
 const STARTING_ACTIVE_COUNT = 5;
 const REPS_PER_UNLOCK = 8;
+const MORE_PHRASES_UNLOCK_SOLID = 5;
+const EXTRA_STARTING_ACTIVE_COUNT = 10;
+const EXTRA_REPS_PER_UNLOCK = 8;
 const SEALLY_MIN_GAP = 3;
 const SEALLY_SEAL_EVERY = 17;
 
@@ -87,6 +94,7 @@ const els = {
   forwardCard: document.querySelector("#forward-card"),
   progress: document.querySelector("#progress"),
   practiceCard: document.querySelector(".practice-card"),
+  morePhrasesLink: document.querySelector("#more-phrases-link"),
   morePractice: document.querySelector("#more-practice"),
   moreLink: document.querySelector("#more-link"),
   mobileMoreLink: document.querySelector(".mobile-more-link"),
@@ -101,6 +109,8 @@ const els = {
 
 let state = loadState();
 let vectorStrengths = state.vectorStrengths;
+let islandState = loadIslandState();
+let islandStrengths = islandState.strengths;
 let currentQuestion = null;
 let currentItem = null;
 let history = [];
@@ -121,7 +131,12 @@ function emptyState() {
   };
 }
 
+function emptyIslandState() {
+  return { strengths: {}, introduced: {} };
+}
+
 function migrateOldState(next) {
+  if (IS_EXTRA_DECK) return next;
   try {
     const raw = localStorage.getItem(OLD_STORAGE_KEY);
     if (!raw) return next;
@@ -161,11 +176,35 @@ function loadState() {
   return migrateOldState(emptyState());
 }
 
+function loadIslandState() {
+  try {
+    const raw = localStorage.getItem(ISLAND_STORAGE_KEY);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      return {
+        strengths: parsed.strengths || {},
+        introduced: parsed.introduced || {},
+      };
+    }
+  } catch {
+    // Islands are optional reinforcement. Fresh island state is safe.
+  }
+  return emptyIslandState();
+}
+
 function saveState() {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
   } catch {
     // Local practice should continue even if persistence is unavailable.
+  }
+}
+
+function saveIslandState() {
+  try {
+    localStorage.setItem(ISLAND_STORAGE_KEY, JSON.stringify(islandState));
+  } catch {
+    // Parent practice should continue even if island persistence is unavailable.
   }
 }
 
@@ -197,7 +236,7 @@ function registerMiss(itemId) {
 
 function registerCorrect(itemId) {
   sessionMisses[itemId] = 0;
-  if (ENGINE.isOwned(vectorStrengths, itemId)) {
+  if (!currentQuestion?.island && ENGINE.isOwned(vectorStrengths, itemId)) {
     setSeallyState("mastered", itemId);
     return;
   }
@@ -205,11 +244,14 @@ function registerCorrect(itemId) {
 }
 
 function activeCount() {
+  if (IS_EXTRA_DECK) {
+    return Math.min(PARENT_ITEMS.length, EXTRA_STARTING_ACTIVE_COUNT + Math.floor(state.repCount / EXTRA_REPS_PER_UNLOCK));
+  }
   return Math.min(CORE_ITEMS.length, STARTING_ACTIVE_COUNT + Math.floor(state.repCount / REPS_PER_UNLOCK));
 }
 
 function activeItems() {
-  return CORE_ITEMS.slice(0, activeCount());
+  return PARENT_ITEMS.slice(0, activeCount());
 }
 
 function recentIds() {
@@ -217,7 +259,7 @@ function recentIds() {
 }
 
 function findItem(itemId) {
-  return CORE_ITEMS.find((item) => item.id === itemId);
+  return PARENT_ITEMS.find((item) => item.id === itemId);
 }
 
 function nextItem() {
@@ -228,7 +270,7 @@ function nextItem() {
   }
 
   const unintroduced = active.find((item) => !state.introduced[item.id]);
-  if (unintroduced) return unintroduced;
+  if (unintroduced && !IS_EXTRA_DECK) return unintroduced;
 
   return ENGINE.pickWeakItem(
     active,
@@ -240,9 +282,47 @@ function nextItem() {
   );
 }
 
+function pickIslandVector(islandId) {
+  const strengths = islandStrengths[islandId] || {};
+  if ((strengths.recognize || 0) < 1) return "recognize";
+  if ((strengths.produce || 0) < 2) return "produce";
+  return "scenario";
+}
+
+function islandAlternatives(active, islandId) {
+  const glosses = [];
+  for (const parent of active) {
+    for (const island of ISLANDS.islandsFor(parent.id)) {
+      if (island.id !== islandId && island.gloss && !glosses.includes(island.gloss)) glosses.push(island.gloss);
+    }
+  }
+  return glosses.slice(0, 3);
+}
+
 function nextQuestion() {
   const item = nextItem();
   if (!item) return null;
+
+  const representation = ISLANDS.selectRepresentation({
+    deck: IS_EXTRA_DECK ? "extra" : "core",
+    parentId: item.id,
+    parentIntroduced: Boolean(state.introduced[item.id]),
+    islandStrengths,
+    repCount: state.repCount,
+    repairPending: (sessionMisses[item.id] || 0) >= 2,
+  });
+
+  if (representation.kind === "island") {
+    const island = representation.island;
+    if (!islandState.introduced[island.id]) return ISLANDS.buildIslandIntro(item, island);
+    return ISLANDS.buildIslandQuestion(
+      item,
+      island,
+      pickIslandVector(island.id),
+      islandAlternatives(activeItems(), island.id),
+      island.mixedExamples?.[state.repCount % Math.max(1, island.mixedExamples?.length || 1)] || null,
+    );
+  }
 
   if (!state.introduced[item.id]) {
     return ENGINE.buildIntro(item);
@@ -254,7 +334,7 @@ function nextQuestion() {
   if (vector === "scenario") {
     const response = CURRICULUM.responseFor(item.id);
     if (response) {
-      const questionItem = findItem(response.questionId);
+      const questionItem = ALL_ITEMS.find((candidate) => candidate.id === response.questionId);
       if (questionItem) {
         const question = repNumber % 2 === 0 ? questionItem.hawaiian : questionItem.pidgin;
         return ENGINE.buildResponseQuestion(item, activeItems(), { question, cue: response.cue });
@@ -274,6 +354,19 @@ function updateProgress() {
   const solid = CORE_ITEMS.filter((item) => ENGINE.isOwned(vectorStrengths, item.id)).length;
   const learning = activeItems().filter((item) => !ENGINE.isOwned(vectorStrengths, item.id)).length;
   els.progress.textContent = `${learning} learning · ${solid} solid`;
+}
+
+function updateExtraProgress() {
+  if (!IS_EXTRA_DECK || !els.progress) return;
+  const active = activeItems();
+  const solid = active.filter((item) => ENGINE.isOwned(vectorStrengths, item.id)).length;
+  els.progress.textContent = `${active.length - solid} learning · ${solid} solid`;
+}
+
+function updateMorePhrasesAccess() {
+  if (IS_EXTRA_DECK || !els.morePhrasesLink) return;
+  const solid = CORE_ITEMS.filter((item) => ENGINE.isOwned(vectorStrengths, item.id)).length;
+  els.morePhrasesLink.hidden = solid < MORE_PHRASES_UNLOCK_SOLID;
 }
 
 function scrollToPracticeCard() {
@@ -305,10 +398,19 @@ function resetButtons() {
   els.moreLikeThis.textContent = "MORE LIKE THIS · same thought, new angle";
 }
 
+function rateQuestion(delta) {
+  if (currentQuestion?.island) {
+    ENGINE.rateVector(islandStrengths, currentQuestion.islandId, currentQuestion.vector, delta);
+    saveIslandState();
+    return;
+  }
+  ENGINE.rateVector(vectorStrengths, currentItem.id, currentQuestion.vector, delta);
+}
+
 function recordKnownChoice(correct) {
   if (!currentQuestion || currentQuestion.intro || autoRated || isReviewingHistory()) return;
 
-  ENGINE.rateVector(vectorStrengths, currentItem.id, currentQuestion.vector, correct ? 1 : -1);
+  rateQuestion(correct ? 1 : -1);
   state.repCount += 1;
   state.lastSeen[currentItem.id] = Date.now();
   saveState();
@@ -412,6 +514,8 @@ function drawQuestion(question, { preserveReveal = false } = {}) {
 
   updateHistoryControls();
   updateProgress();
+  updateExtraProgress();
+  updateMorePhrasesAccess();
 }
 
 function pushQuestion(question) {
@@ -461,12 +565,18 @@ function moveForward() {
 }
 
 function finishIntro() {
-  const itemId = currentQuestion.itemId;
-  state.introduced[itemId] = true;
+  if (currentQuestion.island) {
+    islandState.introduced[currentQuestion.islandId] = true;
+    saveIslandState();
+  } else {
+    state.introduced[currentQuestion.itemId] = true;
+  }
   state.repCount += 1;
-  preferredItemId = itemId;
+  preferredItemId = currentQuestion.itemId;
   saveState();
-  renderFeedback("got", "Met um. Now same thought, but you gotta retrieve it.");
+  renderFeedback("got", currentQuestion.island
+    ? "Got the smaller handle. Now retrieve it without the help."
+    : "Met um. Now same thought, but you gotta retrieve it.");
   renderNextQuestion({ scrollToQuestion: true });
 }
 
@@ -483,7 +593,7 @@ function rateCurrent(delta) {
   }
 
   const item = currentItem;
-  ENGINE.rateVector(vectorStrengths, item.id, currentQuestion.vector, delta);
+  rateQuestion(delta);
   state.repCount += 1;
   state.lastSeen[item.id] = Date.now();
   saveState();
@@ -491,11 +601,13 @@ function rateCurrent(delta) {
   if (delta > 0) {
     const message = currentQuestion.vector === "use"
       ? `Used um. ${item.hawaiian} gets real-world credit, which matters more than one tap in here.`
-      : `Got um. ${currentQuestion.label.toLowerCase()} is getting stronger for ${item.hawaiian}`;
+      : `Got um. ${currentQuestion.label.toLowerCase()} is getting stronger for ${currentQuestion.island ? currentQuestion.answer : item.hawaiian}`;
     renderFeedback("got", message);
     registerCorrect(item.id);
   } else {
-    renderFeedback("miss", `Almost, uncle. ${item.hawaiian}. Say um once. We will bring it back from another angle soon.`);
+    renderFeedback("miss", currentQuestion.island
+      ? `Almost. ${currentQuestion.answer}. Get that smaller handle clean and we build back up.`
+      : `Almost, uncle. ${item.hawaiian}. Say um once. We will bring it back from another angle soon.`);
     preferredItemId = item.id;
     registerMiss(item.id);
   }
@@ -516,7 +628,7 @@ function moreLikeThis() {
 }
 
 function renderNoeauWidget() {
-  if (!NOEAU_ITEMS.length || noeauIndex < 0) {
+  if (!NOEAU_ITEMS.length || noeauIndex < 0 || !els.noeauSaying) {
     if (els.morePractice) els.morePractice.hidden = true;
     return;
   }
@@ -557,11 +669,11 @@ els.replayCard.addEventListener("click", () => {
   renderFeedback("replay", currentQuestion.intro ? "Read both once more, then say the Hawaiian." : "Replay. No peek. Try the same angle again.");
   setSeallyState("replay", currentQuestion.itemId);
 });
-els.noeauReveal.addEventListener("click", () => {
+if (els.noeauReveal) els.noeauReveal.addEventListener("click", () => {
   els.noeauBody.hidden = false;
   els.noeauReveal.hidden = true;
 });
-els.noeauNext.addEventListener("click", nextNoeau);
+if (els.noeauNext) els.noeauNext.addEventListener("click", nextNoeau);
 if (els.moreLink) els.moreLink.addEventListener("click", openMore);
 if (els.mobileMoreLink) els.mobileMoreLink.addEventListener("click", openMore);
 
