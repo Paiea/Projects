@@ -110,12 +110,13 @@ class PidginOleloMoreIslandTests(unittest.TestCase):
         self.assertIn('ISLANDS.selectRepresentation', app)
         self.assertIn('ENGINE.rateVector(islandStrengths', app)
 
-    def test_extra_active_pool_expands_ten_then_one_per_eight_reps(self):
+    def test_extra_active_pool_keeps_ten_start_and_eight_rep_minimum(self):
         app = (APP / "app.js").read_text(encoding="utf-8")
-        self.assertIn(
-            'EXTRA_STARTING_ACTIVE_COUNT + Math.floor(state.repCount / EXTRA_REPS_PER_UNLOCK)',
-            app,
-        )
+        self.assertIn('EXTRA_STARTING_ACTIVE_COUNT = 10', app)
+        self.assertIn('EXTRA_REPS_PER_UNLOCK = 8', app)
+        self.assertIn('unlockedCount', app)
+        self.assertIn('requiredRepCount = (unlockedBeyondStart + 1) * deckUnlockPace()', app)
+        self.assertIn('ENGINE.canUnlockNext', app)
 
 
 if __name__ == "__main__":
