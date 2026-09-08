@@ -29,6 +29,10 @@
   display: none;
 }
 
+.prompt {
+  white-space: pre-line;
+}
+
 .seally-image-wrap {
   aspect-ratio: 0.92 / 1;
   background: linear-gradient(180deg, rgba(210, 229, 223, 0.84), rgba(244, 225, 198, 0.88));
