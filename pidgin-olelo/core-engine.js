@@ -224,7 +224,7 @@ function buildResponseQuestion(item, pool, response = {}) {
     stage: 4,
     label: "REPLY BACK",
     instruction: "This is a conversation, not a translation. Pick the Hawaiian line you say back.",
-    prompt: `Uncle: ${question} · You mean: ${cue} · You: ___`,
+    prompt: `Uncle: ${question}\nYou mean: ${cue}\nYou: ___`,
     answer: item.hawaiian,
     answerLabel: "Hawaiian reply",
     choices: buildResponseChoiceOptions(item, pool),
