@@ -19,9 +19,9 @@ class HawaiiArchiveTests(unittest.TestCase):
         path = ROOT / "hawaii-archive" / "data" / "weeks" / "1897-09-06.json"
         payload = json.loads(path.read_text(encoding="utf-8"))
         self.assertEqual(payload["week_start"], "1897-09-06")
-        # The currently shipped checkpoint is 23 records. The 100-post expansion remains a target,
+        # The current grounded checkpoint is 47 records. The 100-post expansion remains a target,
         # not a reason to keep already-grounded material off the public site.
-        self.assertGreaterEqual(len(payload["items"]), 23)
+        self.assertGreaterEqual(len(payload["items"]), 47)
 
         ids = [item["id"] for item in payload["items"]]
         self.assertEqual(len(ids), len(set(ids)))
