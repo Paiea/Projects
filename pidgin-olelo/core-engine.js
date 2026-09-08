@@ -176,7 +176,7 @@ function buildPidginChoiceOptions(item, pool) {
 
 function clozePrompt(hawaiian) {
   const tokens = hawaiian.trim().split(/\s+/);
-  if (tokens.length === 1) return "____";
+  if (tokens.length === 1) return null;
   const index = Math.min(tokens.length - 1, Math.max(0, Math.floor(tokens.length / 2)));
   const clean = tokens[index].replace(/[?.!,]$/u, "");
   tokens[index] = tokens[index].replace(clean, "____");
@@ -245,11 +245,23 @@ function buildQuestion(item, vector, pool, scenario = { prompt: item.examplePidg
   }
 
   if (vector === "cloze") {
+    const prompt = clozePrompt(item.hawaiian);
+    if (!prompt) {
+      return {
+        ...base,
+        stage: 3,
+        label: "SAY IT IN HAWAIIAN",
+        instruction: "Say it in Hawaiian, then reveal it.",
+        prompt: item.pidgin,
+        answer: item.hawaiian,
+        answerLabel: "Hawaiian",
+      };
+    }
     return {
       ...base,
       stage: 3,
       instruction: `${item.pidgin} · Fill the blank, then say the whole Hawaiian sentence.`,
-      prompt: clozePrompt(item.hawaiian),
+      prompt,
       answer: item.hawaiian,
       answerLabel: "Whole sentence",
     };
