@@ -140,10 +140,9 @@ console.log(JSON.stringify({
         self.assertIn("Almost, uncle", app)
         self.assertIn("Wrong scene", app)
 
-    def test_more_is_integrated_noeau_widget_not_extra_phrase_menu(self):
+    def test_noeau_is_integrated_under_lesson_without_more_menu(self):
         html = self.read(PROJECT / "index.html")
         app = self.read(PROJECT / "app.js")
-        self.assertIn('<summary>More</summary>', html)
         for control_id in (
             "noeau-widget", "noeau-widget-saying", "noeau-widget-reveal",
             "noeau-widget-body", "noeau-widget-meaning", "noeau-widget-hook",
@@ -151,7 +150,10 @@ console.log(JSON.stringify({
         ):
             self.assertIn(f'id="{control_id}"', html)
         self.assertIn('src="noeau.js"', html)
-        self.assertNotIn('href="noeau.html"', html)
+        self.assertIn("noeau-inline", html)
+        self.assertNotIn('<summary>More</summary>', html)
+        self.assertNotIn('id="more-link"', html)
+        self.assertNotIn('class="mobile-more-link"', html)
         self.assertNotIn("70 more phrases", html)
         self.assertIn("NOEAU_ITEMS", app)
         self.assertIn("renderNoeauWidget", app)
