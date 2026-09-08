@@ -1,8 +1,10 @@
 # Image OS — Profile Contract
 
+> Boot from `systems/image-os/CURRENT.md` first. This file is the reusable contract loaded on demand when defining or reviewing an image job/profile.
+
 Image OS is a reusable state wrapper around image generation/editing. It exists so visual judgment, constraints, provenance, and successful corrections do not disappear between one-off prompts.
 
-This file defines the minimum contract only. It is not yet an image-generation runtime.
+The current v1 proving ground is Hawaiʻi Archive Revival, but this contract remains cross-project. Hawaiʻi-specific historical research, image selection, and public feed decisions stay project-local.
 
 ## Source Authority
 
@@ -12,15 +14,34 @@ A derived restoration, color reconstruction, style pass, or generated variant ne
 
 ## Profile / Job Type
 
-Examples:
+Current Image OS v1 supports:
 
-- historical restoration
-- historical color reconstruction
-- book illustration
-- character reference
-- UI/brand asset
+- `restore_bw`
+- `color_reconstruct`
+
+Future profiles may include book illustration, character reference, UI/brand assets, and other generation lanes only after a real use case earns them.
 
 Project-specific taste belongs in the project profile, not in one universal mega-prompt.
+
+## Minimum Job Record
+
+A durable image job should be able to identify:
+
+- stable image/job ID
+- project owner
+- exact source/provenance
+- job type
+- profile
+- locked elements
+- allowed changes
+- evidence/confidence notes that materially affect the edit
+- edit instructions
+- result/version
+- review outcome
+- approved result when one exists
+- reusable learning residue when one is earned
+
+Do not add fields merely because they might someday be useful.
 
 ## Locked Elements
 
@@ -74,9 +95,13 @@ Review the result against the locked source, including:
 - historically unsupported details
 - over-smoothing or loss of source character
 
+Use `systems/image-os/rules/review.md` for the v1 review order/outcomes.
+
 ## Approved Result
 
 An approved result points to the exact output artifact and records which job/version produced it. Approval does not promote every job choice into a global rule.
+
+For Hawaiʻi Archive Revival, publication as a feed `photo`/`combo` item remains a project decision. Image OS approval only says the visual output passed its image job review.
 
 ## Reusable Learning
 
@@ -94,10 +119,10 @@ Use three scopes:
 
 Job-specific luck must not become global visual policy.
 
-## Future runtime shape
+## Runtime boundary
 
-A future implementation may persist records like:
+Current implementation remains file-based:
 
 `source → profile → locks → allowed edits → evidence → instructions → result → review → approved residue`
 
-Do not build a database or orchestration service until repeated real image jobs demonstrate that files/contracts are no longer sufficient.
+Do not build a database, orchestration service, generalized prompt compiler, or automatic multi-model queue until repeated real jobs demonstrate that files/contracts are no longer sufficient.
