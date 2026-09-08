@@ -1,0 +1,17 @@
+{
+  "image_id": "HAR-IMG-0001",
+  "pipeline": "image-os-v2",
+  "input_stage": "v2-restored",
+  "input_asset": "assets/images/HAR-IMG-0001/v2-restored.jpg",
+  "color_asset": "assets/images/HAR-IMG-0001/v2-deoldify-color.jpg",
+  "color_backend": "DeOldify-artistic-ONNX",
+  "model_release": "instant-high/deoldify-onnx@deoldify-onnx:deoldify.onnx",
+  "model_sha256": "b3ca930ad42b58eaf30c77ff2fca3319f34088524d0240983c44a1a94156a3c5",
+  "luminance_lock": true,
+  "metrics": {
+    "mean_chroma": 15.544378,
+    "luminance_mae": 0.120337
+  },
+  "automated_review": "pass",
+  "publication_gate": "human-review-required"
+}
