@@ -10,11 +10,11 @@ A second lane will use the same authority/evidence discipline for historical pho
 
 ## Authority
 
-- Accepted project authority: `main` in `Paiea/Projects` after merge.
-- Current WIP authority: `feature/hawaii-archive-revival-mvp` while PR #21 is open.
+- Accepted project authority: `main` in `Paiea/Projects`.
 - Source/build entry: `hawaii-archive/index.html`
 - Weekly public data: `hawaii-archive/data/weeks/`
-- Human-facing route: `hawaii-archive/`
+- Human-facing route: `https://paiea.github.io/Projects/hawaii-archive/`
+- Projects hub route: `https://paiea.github.io/Projects/`
 - MVP design: `docs/superpowers/specs/2026-09-08-hawaii-archive-revival-mvp-design.md`
 - Reusable image-job contract: `systems/image-os/PROFILE_CONTRACT.md`
 
@@ -22,11 +22,13 @@ Historical source material is the evidence ceiling. Derived English, feed wordin
 
 ## Current State
 
-The MVP is a static GitHub Pages vertical slice built around the historical week **September 6–12, 1897**.
+The MVP is a public GitHub Pages pilot built around the historical week **September 6–12, 1897**.
 
 The first data fixture uses three real front-page headline records from *Ka Nupepa Kuokoa*, September 10, 1897. The scholarly reproduction/translation evidence for those headline meanings is linked from each item. This is deliberately a tiny proving set, not a claim that the full week has been ingested.
 
 The public experience is finite. It defaults to a readable modern feed rendering and lets the reader expand the original Hawaiian, close English meaning, and source/confidence information.
+
+The project is surfaced as a first-class **History & Culture** card on the main Projects hub.
 
 ## Durable Decisions
 
@@ -58,14 +60,14 @@ The public experience is finite. It defaults to a readable modern feed rendering
 
 ## Last Meaningful Changes
 
-- Established the project as a bounded internal prototype rather than a new standalone repo.
+- Shipped the first public pilot on GitHub Pages and surfaced it in the Projects hub under History & Culture.
 - Locked the finite historical-week experience and atomic-record model.
 - Adopted compiler-derived authority, confidence, provenance, staleness-friendly, and cheap→escalate principles.
 - Chose September 6–12, 1897 as the first proving week with *Ka Nupepa Kuokoa* material from September 10.
 
 ## NEXT_TASK
 
-After this MVP branch is verified, prove **one automated upstream ingestion path** without widening the public product. Resolve the cheapest reliable way to retrieve one *Ka Nupepa Kuokoa* issue/record from a primary nūpepa archive, normalize 5–10 atomic records into the existing contract, and measure where transcription/translation needs escalation. Preserve original source authority and do not build a general crawler first.
+Prove **one automated upstream ingestion path** without widening the public product. Resolve the cheapest reliable way to retrieve one *Ka Nupepa Kuokoa* issue/record from a primary nūpepa archive, normalize 5–10 atomic records into the existing contract, and measure where transcription/translation needs escalation. Preserve original source authority and do not build a general crawler first.
 
 ## RE-PROMPT
 
