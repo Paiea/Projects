@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#000000">
+  <meta name="description" content="A text-first island strategy experiment.">
+  <title>The Islands</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="terminal" aria-label="The Islands">
+    <div id="transcript" class="transcript" role="log" aria-live="polite" aria-relevant="additions text"></div>
+    <form id="command-form" class="command-form" autocomplete="off">
+      <label class="prompt" for="command" aria-label="Command">&gt;</label>
+      <input id="command" name="command" type="text" inputmode="text" autocapitalize="sentences" autocomplete="off" spellcheck="true" aria-label="What will you do?">
+    </form>
+  </main>
+  <script type="module" src="game.js"></script>
+</body>
+</html>
