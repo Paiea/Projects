@@ -1,0 +1,56 @@
+{
+  "week_start": "1897-09-06",
+  "week_end": "1897-09-12",
+  "title": "September 6–12, 1897",
+  "scope_note": "Pilot slice: three surfaced front-page items from the September 10 issue. This is not yet a complete ingestion of the week.",
+  "items": [
+    {
+      "id": "HAR-1897-09-10-KUOKOA-001",
+      "date": "1897-09-10",
+      "publication": "Ka Nupepa Kuokoa",
+      "place": "Honolulu",
+      "kind": "nupepa-headline",
+      "hawaiian": "KAU KIKAWA O KA AHA SENATE, 1897.",
+      "english_close": "Special Session of the Senate, 1897.",
+      "feed_rendering": "The Senate is meeting in a special session.",
+      "source_url": "https://uplopen.com/books/9853/files/11ff92ec-62c6-419a-b1fc-8f2361073644.pdf",
+      "source_label": "University of Hawaiʻi Press scholarly reproduction, Fig. 4.2: Ka Nupepa Kuokoa front page, Sept. 10, 1897",
+      "translation_basis": "The figure caption supplies the English headline meaning.",
+      "confidence": "supported",
+      "route": "cheap-pass",
+      "status": "pilot"
+    },
+    {
+      "id": "HAR-1897-09-10-KUOKOA-002",
+      "date": "1897-09-10",
+      "publication": "Ka Nupepa Kuokoa",
+      "place": "Honolulu",
+      "kind": "nupepa-headline",
+      "hawaiian": "KE KINO O KE KUIKAHI.",
+      "english_close": "Text of the Annexation Treaty.",
+      "feed_rendering": "The paper put the text of the annexation treaty in front of readers.",
+      "source_url": "https://uplopen.com/books/9853/files/11ff92ec-62c6-419a-b1fc-8f2361073644.pdf",
+      "source_label": "University of Hawaiʻi Press scholarly reproduction, Fig. 4.2: Ka Nupepa Kuokoa front page, Sept. 10, 1897",
+      "translation_basis": "The figure caption supplies the English headline meaning; feed wording is a derived accessibility layer.",
+      "confidence": "supported",
+      "route": "cheap-pass",
+      "status": "pilot"
+    },
+    {
+      "id": "HAR-1897-09-10-KUOKOA-003",
+      "date": "1897-09-10",
+      "publication": "Ka Nupepa Kuokoa",
+      "place": "Honolulu",
+      "kind": "nupepa-headline",
+      "hawaiian": "Hawaii Makemakeia no Roinia? He Kaeo Hoolewa Ki-paa!!",
+      "english_close": "Mass Meeting of the Royalists.",
+      "feed_rendering": "Royalists were organizing a mass meeting.",
+      "source_url": "https://uplopen.com/books/9853/files/11ff92ec-62c6-419a-b1fc-8f2361073644.pdf",
+      "source_label": "University of Hawaiʻi Press scholarly reproduction, Fig. 4.2: Ka Nupepa Kuokoa front page, Sept. 10, 1897",
+      "translation_basis": "The figure caption identifies the right-side headline as a mass meeting of royalists. Exact headline transcription should be checked against the primary scan before promotion beyond pilot status.",
+      "confidence": "supported",
+      "route": "review",
+      "status": "pilot"
+    }
+  ]
+}
