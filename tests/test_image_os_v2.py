@@ -58,6 +58,22 @@ class ImageOSV2Tests(unittest.TestCase):
         self.assertIn("luminance_mae", run["metrics"])
         self.assertIn(run["automated_review"], {"pass", "hold"})
 
+    def test_kaulia_artistic_escalation_records_a_reviewable_candidate(self):
+        asset = ROOT / "hawaii-archive" / "assets" / "images" / "HAR-IMG-0001" / "v2-artistic-color.jpg"
+        run_path = ROOT / "hawaii-archive" / "images" / "jobs" / "HAR-IMG-0001" / "v2-artistic-run.json"
+        self.assertTrue(asset.exists(), "DDColor artistic candidate has not been generated")
+        self.assertGreater(asset.stat().st_size, 1000)
+        self.assertTrue(run_path.exists(), "DDColor artistic review metrics are missing")
+
+        run = json.loads(run_path.read_text(encoding="utf-8"))
+        self.assertEqual(run["image_id"], "HAR-IMG-0001")
+        self.assertEqual(run["color_backend"], "DDColor-artistic")
+        self.assertEqual(run["input_stage"], "v2-restored")
+        self.assertIn("mean_chroma", run["metrics"])
+        self.assertIn("luminance_mae", run["metrics"])
+        self.assertIn(run["automated_review"], {"pass", "hold"})
+        self.assertEqual(run["publication_gate"], "human-review-required")
+
 
 if __name__ == "__main__":
     unittest.main()
