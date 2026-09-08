@@ -31,6 +31,84 @@ const CORE_IDS = [
   "pau",
 ];
 
+// Existing phrases 31–100, deliberately reordered by practical adult usefulness
+// rather than by source-file position or fake grammar difficulty.
+const EXTRA_PRIORITY_IDS = [
+  // Common everyday replies, wellbeing, food, and immediate conversation.
+  "and-you",
+  "no-problem",
+  "me-too",
+  "you-okay",
+  "hungry-q",
+  "hungry-a",
+  "full",
+  "ono",
+  "thirsty",
+  "tired",
+  "ready",
+  "know",
+  "no-know",
+  "come-inside",
+  "over-here",
+  "over-there",
+  "can",
+  "cannot",
+  "please",
+  "talk-slow",
+  "see-you",
+  "take-care",
+  "good-morning",
+  "good-evening",
+  "go-home",
+  "where-food",
+  "eat",
+  "drink",
+  "today",
+  "tomorrow",
+  // Useful movement, household, people, and common description.
+  "now",
+  "who-that",
+  "where-you-guys",
+  "go-slow",
+  "take-this",
+  "get-that",
+  "open-door",
+  "close-door",
+  "sit",
+  "stand",
+  "go-outside",
+  "stay-inside",
+  "look-here",
+  "come-later",
+  "go-kailua-q",
+  "go-store",
+  "happy",
+  "sad",
+  "sick",
+  "beautiful",
+  "hot",
+  "cold",
+  "busy",
+  "ono-loa",
+  "what-problem",
+  "nothing",
+  "help-you",
+  "eat-together",
+  "talk-together",
+  "yesterday",
+  // Useful but less urgent / more situational chunks.
+  "why",
+  "how-many",
+  "want-this",
+  "want-that",
+  "dont-want",
+  "how-much",
+  "expensive",
+  "book-car",
+  "money-small",
+  "love-big",
+];
+
 const CORE_FAMILIES = {
   aloha: "greeting",
   "how-you": "wellbeing",
@@ -139,6 +217,11 @@ function coreItems(items) {
   return CORE_IDS.map((id) => applyCoreOverride(byId.get(id))).filter(Boolean);
 }
 
+function extraItems(items) {
+  const byId = new Map(items.map((item) => [item.id, item]));
+  return EXTRA_PRIORITY_IDS.map((id) => byId.get(id)).filter(Boolean);
+}
+
 function itemsForLevel(items, levelId = "core") {
   if (levelId === "core") return coreItems(items);
   const level = LEVELS[levelId] || LEVELS.core;
@@ -157,8 +240,9 @@ function responseFor(itemId) {
   return CORE_RESPONSE_PAIRS[itemId] || null;
 }
 
-const api = {
+const curriculumApi = {
   CORE_IDS,
+  EXTRA_PRIORITY_IDS,
   CORE_FAMILIES,
   CORE_SCENARIOS,
   CORE_RESPONSE_PAIRS,
@@ -167,15 +251,16 @@ const api = {
   applyCoreOverride,
   itemsForLevel,
   coreItems,
+  extraItems,
   familyFor,
   scenarioFor,
   responseFor,
 };
 
 if (typeof window !== "undefined") {
-  window.PIDGIN_OLELO_CURRICULUM = api;
+  window.PIDGIN_OLELO_CURRICULUM = curriculumApi;
 }
 
 if (typeof module !== "undefined" && module.exports) {
-  module.exports = api;
+  module.exports = curriculumApi;
 }
