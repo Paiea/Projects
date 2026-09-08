@@ -99,6 +99,23 @@ class HawaiiArchiveTests(unittest.TestCase):
         self.assertNotIn("Modern readable rendering", script)
         self.assertNotIn("infinite", script.lower())
 
+    def test_feed_media_preserves_portraits_and_full_image_access(self):
+        script = (ROOT / "hawaii-archive" / "app.js").read_text(encoding="utf-8")
+        styles = (ROOT / "hawaii-archive" / "styles.css").read_text(encoding="utf-8")
+
+        self.assertIn("imageRecord.image_class", script)
+        self.assertIn("media-portrait", styles)
+        self.assertIn("object-fit: contain", styles)
+        self.assertIn("View full image", script)
+
+    def test_feed_exposes_information_time_and_never_defaults_to_unapproved_color(self):
+        script = (ROOT / "hawaii-archive" / "app.js").read_text(encoding="utf-8")
+
+        self.assertIn("item.event_date", script)
+        self.assertIn("item.publication_date", script)
+        self.assertIn("published", script.lower())
+        self.assertIn('imageRecord.color_decision === "approved" && imageRecord.color_asset', script)
+
     def test_item_contract_preserves_social_intent_as_derived_evidence(self):
         contract = (ROOT / "hawaii-archive" / "data" / "ITEM_CONTRACT.md").read_text(encoding="utf-8")
         self.assertIn("rhetorical_mode", contract)
