@@ -30,6 +30,21 @@ function formatPostDate(value) {
   }).format(date);
 }
 
+function daysBetween(start, end) {
+  const startDate = new Date(`${start}T00:00:00Z`);
+  const endDate = new Date(`${end}T00:00:00Z`);
+  return Math.round((endDate - startDate) / 86400000);
+}
+
+function imageClassLabel(value) {
+  const labels = {
+    portrait: "Portrait",
+    "built-environment": "Place",
+    "daily-life-crowd": "Daily life",
+  };
+  return labels[value] || "Archive image";
+}
+
 function makeActionDetail(label, body) {
   const details = document.createElement("details");
   details.className = "post-action";
@@ -106,13 +121,13 @@ function assetForState(imageRecord, state) {
   return field ? imageRecord[field] : null;
 }
 
-function setMediaState(image, buttons, imageRecord, state, fullImageLink = null) {
+function setMediaState(image, buttons, imageRecord, state, fullImageLinks = []) {
   const asset = assetForState(imageRecord, state);
   if (!asset) return;
 
   image.src = asset;
   image.dataset.state = state;
-  if (fullImageLink) fullImageLink.href = asset;
+  for (const link of fullImageLinks) link.href = asset;
 
   for (const button of buttons) {
     const active = button.dataset.state === state;
@@ -140,12 +155,19 @@ function makePostMedia(imageRecord) {
   if (imageRecord.image_class) stage.classList.add(`media-${imageRecord.image_class}`);
   if (imageRecord.crop_mode === "stereo-left") stage.classList.add("crop-stereo-left");
 
+  const stageLink = document.createElement("a");
+  stageLink.className = "media-stage-link";
+  stageLink.target = "_blank";
+  stageLink.rel = "noopener noreferrer";
+  stageLink.setAttribute("aria-label", `View full ${imageRecord.title}`);
+
   const image = document.createElement("img");
   image.src = imageRecord.original_asset;
   image.alt = imageRecord.title;
   image.loading = "lazy";
   image.decoding = "async";
-  stage.append(image);
+  stageLink.append(image);
+  stage.append(stageLink);
   figure.append(stage);
 
   const toolbar = document.createElement("div");
@@ -170,20 +192,26 @@ function makePostMedia(imageRecord) {
   fullImageLink.textContent = "View full image";
   toolbar.append(fullImageLink);
 
+  const fullImageLinks = [stageLink, fullImageLink];
   for (const button of buttons) {
     button.addEventListener("click", () => {
-      setMediaState(image, buttons, imageRecord, button.dataset.state, fullImageLink);
+      setMediaState(image, buttons, imageRecord, button.dataset.state, fullImageLinks);
     });
   }
 
   const defaultState = imageRecord.color_decision === "approved" && imageRecord.color_asset
     ? "color"
     : "restored";
-  setMediaState(image, buttons, imageRecord, defaultState, fullImageLink);
+  setMediaState(image, buttons, imageRecord, defaultState, fullImageLinks);
   figure.append(toolbar);
 
   const context = document.createElement("div");
   context.className = "media-context";
+
+  const kind = document.createElement("span");
+  kind.className = "media-kind";
+  kind.textContent = imageClassLabel(imageRecord.image_class);
+  context.append(kind);
 
   const relationship = document.createElement("span");
   relationship.className = "media-relationship";
@@ -239,19 +267,33 @@ function renderPost(item, imageMap) {
   author.textContent = displayAuthor;
   identity.append(author);
 
-  const meta = document.createElement("p");
-  meta.className = "post-meta";
-  const sourceIdentity = item.voice_actor ? `${item.publication} · ` : "";
+  if (item.voice_actor) {
+    const carrier = document.createElement("p");
+    carrier.className = "post-carrier";
+    carrier.textContent = `via ${item.publication}`;
+    identity.append(carrier);
+  }
+
   const hasPublicationLag = item.event_date
     && item.publication_date
     && item.event_date !== item.publication_date;
+  const meta = document.createElement("p");
+  meta.className = "post-meta";
   const dateContext = hasPublicationLag
     ? `event ${formatPostDate(item.event_date)} · published ${formatPostDate(item.publication_date)}`
     : formatPostDate(item.date);
-  meta.textContent = `${sourceIdentity}${item.place} · ${dateContext}`;
+  meta.textContent = `${item.place} · ${dateContext}`;
   identity.append(meta);
-  header.append(identity);
 
+  if (hasPublicationLag) {
+    const lagDays = daysBetween(item.event_date, item.publication_date);
+    const lag = document.createElement("span");
+    lag.className = "post-lag";
+    lag.textContent = lagDays === 1 ? "reported 1 day later" : `reported ${lagDays} days later`;
+    identity.append(lag);
+  }
+
+  header.append(identity);
   article.append(header);
 
   const rendering = document.createElement("p");
