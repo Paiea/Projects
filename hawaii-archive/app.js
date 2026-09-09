@@ -202,6 +202,20 @@ function setMediaState(image, buttons, imageRecord, state, fullImageLinks = []) 
   }
 }
 
+function setMediaView(image, buttons, view, fullImageLinks = []) {
+  if (!view?.asset) return;
+
+  image.src = view.asset;
+  image.dataset.state = view.id;
+  for (const link of fullImageLinks) link.href = view.asset;
+
+  for (const button of buttons) {
+    const active = button.dataset.state === view.id;
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-pressed", String(active));
+  }
+}
+
 function makeMediaButton(label, state) {
   const button = document.createElement("button");
   button.type = "button";
@@ -227,12 +241,18 @@ function makePostMedia(imageRecord) {
   stageLink.rel = "noopener noreferrer";
   stageLink.setAttribute("aria-label", `View full ${imageRecord.title}`);
 
+  const configuredViews = Array.isArray(imageRecord.views)
+    ? imageRecord.views.filter((view) => view?.asset)
+    : [];
+  const usesConfiguredViews = configuredViews.length > 0;
   const reconstructedAsset = publicReconstructedAsset(imageRecord);
   const image = document.createElement("img");
-  image.src = reconstructedAsset
-    || (imageRecord.color_decision === "approved" && imageRecord.color_asset ? imageRecord.color_asset : null)
-    || imageRecord.restored_asset
-    || imageRecord.original_asset;
+  image.src = usesConfiguredViews
+    ? configuredViews[0].asset
+    : reconstructedAsset
+      || (imageRecord.color_decision === "approved" && imageRecord.color_asset ? imageRecord.color_asset : null)
+      || imageRecord.restored_asset
+      || imageRecord.original_asset;
   image.alt = imageRecord.title;
   image.loading = "lazy";
   image.decoding = "async";
@@ -245,25 +265,33 @@ function makePostMedia(imageRecord) {
   toolbar.setAttribute("aria-label", "Image view");
 
   const buttons = [];
-  if (imageRecord.reconstruction_decision === "approved" && imageRecord.reconstructed_asset) {
-    const reconstructedButton = makeMediaButton("Reconstructed", "reconstructed");
-    toolbar.append(reconstructedButton);
-    buttons.push(reconstructedButton);
-  }
-  if (imageRecord.color_decision === "approved" && imageRecord.color_asset) {
-    const colorButton = makeMediaButton("Color", "color");
-    toolbar.append(colorButton);
-    buttons.push(colorButton);
-  }
-  if (imageRecord.restored_asset) {
-    const restoredButton = makeMediaButton("Restored", "restored");
-    toolbar.append(restoredButton);
-    buttons.push(restoredButton);
-  }
-  if (imageRecord.original_asset) {
-    const originalButton = makeMediaButton(imageRecord.original_label || "Original", "original");
-    toolbar.append(originalButton);
-    buttons.push(originalButton);
+  if (usesConfiguredViews) {
+    for (const view of configuredViews) {
+      const viewButton = makeMediaButton(view.label, view.id);
+      toolbar.append(viewButton);
+      buttons.push(viewButton);
+    }
+  } else {
+    if (imageRecord.reconstruction_decision === "approved" && imageRecord.reconstructed_asset) {
+      const reconstructedButton = makeMediaButton("Reconstructed", "reconstructed");
+      toolbar.append(reconstructedButton);
+      buttons.push(reconstructedButton);
+    }
+    if (imageRecord.color_decision === "approved" && imageRecord.color_asset) {
+      const colorButton = makeMediaButton("Color", "color");
+      toolbar.append(colorButton);
+      buttons.push(colorButton);
+    }
+    if (imageRecord.restored_asset) {
+      const restoredButton = makeMediaButton("Restored", "restored");
+      toolbar.append(restoredButton);
+      buttons.push(restoredButton);
+    }
+    if (imageRecord.original_asset) {
+      const originalButton = makeMediaButton(imageRecord.original_label || "Original", "original");
+      toolbar.append(originalButton);
+      buttons.push(originalButton);
+    }
   }
 
   const fullImageLink = document.createElement("a");
@@ -276,15 +304,24 @@ function makePostMedia(imageRecord) {
   const fullImageLinks = [stageLink, fullImageLink];
   for (const button of buttons) {
     button.addEventListener("click", () => {
-      setMediaState(image, buttons, imageRecord, button.dataset.state, fullImageLinks);
+      if (usesConfiguredViews) {
+        const view = configuredViews.find((candidate) => candidate.id === button.dataset.state);
+        setMediaView(image, buttons, view, fullImageLinks);
+      } else {
+        setMediaState(image, buttons, imageRecord, button.dataset.state, fullImageLinks);
+      }
     });
   }
 
-  const defaultState = reconstructedAsset ? "reconstructed"
-    : imageRecord.color_decision === "approved" && imageRecord.color_asset ? "color"
-      : imageRecord.restored_asset ? "restored"
-        : "original";
-  setMediaState(image, buttons, imageRecord, defaultState, fullImageLinks);
+  if (usesConfiguredViews) {
+    setMediaView(image, buttons, configuredViews[0], fullImageLinks);
+  } else {
+    const defaultState = reconstructedAsset ? "reconstructed"
+      : imageRecord.color_decision === "approved" && imageRecord.color_asset ? "color"
+        : imageRecord.restored_asset ? "restored"
+          : "original";
+    setMediaState(image, buttons, imageRecord, defaultState, fullImageLinks);
+  }
   figure.append(toolbar);
 
   const context = document.createElement("div");
@@ -408,6 +445,61 @@ function renderPost(item, imageMap, resourceMap, attachmentMap) {
   return article;
 }
 
+function renderPhotoPost(photoPost, imageMap) {
+  const article = document.createElement("article");
+  article.className = "post-card photo-post";
+
+  const header = document.createElement("header");
+  header.className = "post-header";
+
+  const avatar = document.createElement("div");
+  avatar.className = "post-avatar";
+  avatar.setAttribute("aria-hidden", "true");
+  avatar.textContent = "H";
+  header.append(avatar);
+
+  const identity = document.createElement("div");
+  identity.className = "post-identity";
+
+  const author = document.createElement("p");
+  author.className = "post-author";
+  author.textContent = "Hawaiʻi Archive";
+  identity.append(author);
+
+  const meta = document.createElement("p");
+  meta.className = "post-meta";
+  meta.textContent = `${photoPost.place} · ${photoPost.display_date} · Visual context`;
+  identity.append(meta);
+
+  header.append(identity);
+  article.append(header);
+
+  const rendering = document.createElement("p");
+  rendering.className = "post-text";
+  const [headline, ...bodyLines] = photoPost.feed_rendering.split("\n");
+  const title = document.createElement("strong");
+  title.textContent = headline;
+  rendering.append(title);
+  if (bodyLines.length) {
+    rendering.append(document.createElement("br"));
+    rendering.append(document.createTextNode(bodyLines.join(" ")));
+  }
+  article.append(rendering);
+
+  if (photoPost.media_ref && imageMap.has(photoPost.media_ref)) {
+    article.append(makePostMedia(imageMap.get(photoPost.media_ref)));
+  }
+
+  if (photoPost.relationship_note) {
+    const note = document.createElement("p");
+    note.className = "media-caption";
+    note.textContent = photoPost.relationship_note;
+    article.append(note);
+  }
+
+  return article;
+}
+
 function renderWeek(payload, imagePayload, resourcePayload, artifactPayload) {
   feed.replaceChildren();
   count.textContent = String(payload.items.length);
@@ -426,6 +518,12 @@ function renderWeek(payload, imagePayload, resourcePayload, artifactPayload) {
   const artifactAttachmentMap = new Map(
     (artifactPayload.attachments || []).map((entry) => [entry.item_id, entry.media_ref]),
   );
+  const photoPostsByAnchor = new Map();
+  for (const photoPost of imagePayload.photo_posts || []) {
+    if (!photoPostsByAnchor.has(photoPost.anchor_after)) photoPostsByAnchor.set(photoPost.anchor_after, []);
+    photoPostsByAnchor.get(photoPost.anchor_after).push(photoPost);
+  }
+
   const grouped = new Map();
   for (const item of payload.items) {
     if (!grouped.has(item.date)) grouped.set(item.date, []);
@@ -443,7 +541,12 @@ function renderWeek(payload, imagePayload, resourcePayload, artifactPayload) {
     heading.append(label);
     day.append(heading);
 
-    for (const item of items) day.append(renderPost(item, imageMap, resourceMap, artifactAttachmentMap));
+    for (const item of items) {
+      day.append(renderPost(item, imageMap, resourceMap, artifactAttachmentMap));
+      for (const photoPost of photoPostsByAnchor.get(item.id) || []) {
+        day.append(renderPhotoPost(photoPost, imageMap));
+      }
+    }
     feed.append(day);
   }
 
