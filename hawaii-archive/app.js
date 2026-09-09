@@ -122,6 +122,12 @@ function assetForState(imageRecord, state) {
   return field ? imageRecord[field] : null;
 }
 
+function publicReconstructedAsset(imageRecord) {
+  return imageRecord.reconstruction_decision === "approved"
+    ? imageRecord.reconstructed_asset
+    : null;
+}
+
 function setMediaState(image, buttons, imageRecord, state, fullImageLinks = []) {
   const asset = assetForState(imageRecord, state);
   if (!asset) return;
@@ -162,8 +168,9 @@ function makePostMedia(imageRecord) {
   stageLink.rel = "noopener noreferrer";
   stageLink.setAttribute("aria-label", `View full ${imageRecord.title}`);
 
+  const reconstructedAsset = publicReconstructedAsset(imageRecord);
   const image = document.createElement("img");
-  image.src = imageRecord.reconstructed_asset
+  image.src = reconstructedAsset
     || (imageRecord.color_decision === "approved" && imageRecord.color_asset ? imageRecord.color_asset : null)
     || imageRecord.restored_asset
     || imageRecord.original_asset;
@@ -179,7 +186,7 @@ function makePostMedia(imageRecord) {
   toolbar.setAttribute("aria-label", "Image view");
 
   const buttons = [];
-  if (imageRecord.reconstructed_asset) {
+  if (imageRecord.reconstruction_decision === "approved" && imageRecord.reconstructed_asset) {
     const reconstructedButton = makeMediaButton("Reconstructed", "reconstructed");
     toolbar.append(reconstructedButton);
     buttons.push(reconstructedButton);
@@ -195,7 +202,7 @@ function makePostMedia(imageRecord) {
     buttons.push(restoredButton);
   }
   if (imageRecord.original_asset) {
-    const originalButton = makeMediaButton("Original", "original");
+    const originalButton = makeMediaButton(imageRecord.original_label || "Original", "original");
     toolbar.append(originalButton);
     buttons.push(originalButton);
   }
@@ -214,7 +221,7 @@ function makePostMedia(imageRecord) {
     });
   }
 
-  const defaultState = imageRecord.reconstructed_asset ? "reconstructed"
+  const defaultState = reconstructedAsset ? "reconstructed"
     : imageRecord.color_decision === "approved" && imageRecord.color_asset ? "color"
       : imageRecord.restored_asset ? "restored"
         : "original";
@@ -234,11 +241,16 @@ function makePostMedia(imageRecord) {
   relationship.textContent = imageRecord.relationship_label;
   context.append(relationship);
 
-  if (imageRecord.reconstructed_asset) {
+  if (reconstructedAsset) {
     const reconstructedConfidence = document.createElement("span");
     reconstructedConfidence.className = "media-color-confidence";
     reconstructedConfidence.textContent = `Reconstructed view · ${imageRecord.reconstruction_confidence || "derived"}`;
     context.append(reconstructedConfidence);
+  } else if (imageRecord.reconstruction_decision === "hold") {
+    const held = document.createElement("span");
+    held.className = "media-color-confidence";
+    held.textContent = "Reconstruction held · archive reference shown";
+    context.append(held);
   } else if (imageRecord.color_decision === "approved") {
     const colorConfidence = document.createElement("span");
     colorConfidence.className = "media-color-confidence";
@@ -322,8 +334,9 @@ function renderPost(item, imageMap) {
   rendering.textContent = item.feed_rendering;
   article.append(rendering);
 
-  if (item.image_ref && imageMap.has(item.image_ref)) {
-    article.append(makePostMedia(imageMap.get(item.image_ref)));
+  const mediaRef = item.media_ref || item.image_ref;
+  if (mediaRef && imageMap.has(mediaRef)) {
+    article.append(makePostMedia(imageMap.get(mediaRef)));
   }
 
   const actions = document.createElement("div");
@@ -344,7 +357,11 @@ function renderWeek(payload, imagePayload) {
     `${payload.items.length} sourced items`,
   );
 
-  const imageMap = new Map(imagePayload.images.map((imageRecord) => [imageRecord.id, imageRecord]));
+  const allImages = [
+    ...(imagePayload.images || []),
+    ...(imagePayload.feed_images || []),
+  ];
+  const imageMap = new Map(allImages.map((imageRecord) => [imageRecord.id, imageRecord]));
   const grouped = new Map();
   for (const item of payload.items) {
     if (!grouped.has(item.date)) grouped.set(item.date, []);
