@@ -40,7 +40,8 @@ class HawaiiArchiveSourceDensityBatchTests(unittest.TestCase):
         payload = json.loads(
             (ARCHIVE / "data" / "artifacts" / "index.json").read_text(encoding="utf-8")
         )
-        self.assertEqual(payload["batch_id"], "artifact-receipts-002")
+        self.assertTrue(payload["batch_id"].startswith("artifact-receipts-"))
+        self.assertGreaterEqual(int(payload["batch_id"].rsplit("-", 1)[1]), 2)
 
         images = {image["id"]: image for image in payload["images"]}
         attachments = {entry["item_id"]: entry["media_ref"] for entry in payload["attachments"]}

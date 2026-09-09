@@ -1,5 +1,5 @@
 {
-  "batch_id": "artifact-receipts-002",
+  "batch_id": "artifact-receipts-003",
   "images": [
     {
       "id": "HAR-ART-0001",
@@ -181,6 +181,126 @@
       "review_status": "approved",
       "color_decision": "skipped",
       "reconstruction_decision": "skipped"
+    },
+    {
+      "id": "HAR-ART-0010",
+      "image_class": "newspaper",
+      "title": "The Independent, July 1, 1897",
+      "display_date": "July 1, 1897",
+      "caption": "The exact July 1, 1897 page of The Independent carrying the 'SAVED.' editorial alongside the Mariposa harbor update, the Maunakea Street fire report, and other same-day Honolulu material.",
+      "source_authority_url": "https://www.loc.gov/resource/sn85047097/1897-07-01/ed-1/?sp=3&st=text",
+      "source_record_label": "The Independent, July 1, 1897, p. 3; Library of Congress Chronicling America",
+      "source_image_url": "https://tile.loc.gov/image-services/iiif/service:ndnp:hihouml:batch_hihouml_eel_ver01:data:sn85047097:00211100370:1897070101:0012/full/2000,/0/default.jpg",
+      "source_image_access_note": "Library of Congress IIIF image derivative generated directly from the exact NDNP page image. The LOC newspaper record remains source authority.",
+      "rights_note": "The Library of Congress states that newspapers in Chronicling America published more than 95 years ago are in the public domain in their entirety.",
+      "original_asset": "https://tile.loc.gov/image-services/iiif/service:ndnp:hihouml:batch_hihouml_eel_ver01:data:sn85047097:00211100370:1897070101:0012/full/2000,/0/default.jpg",
+      "original_label": "Original newspaper page",
+      "relationship_default": "exact",
+      "relationship_label": "Exact publication artifact · July 1 page",
+      "crop_mode": "none",
+      "review_status": "approved",
+      "color_decision": "skipped",
+      "reconstruction_decision": "skipped"
+    },
+    {
+      "id": "HAR-ART-0011",
+      "image_class": "document",
+      "title": "Hui Aloha ʻĀina petition, Lahaina women",
+      "display_date": "September 11, 1897",
+      "caption": "An exact Hui Aloha ʻĀina petition sheet for women in Lahaina, Maui, dated September 11, 1897. The district's own sheet makes Maui's petition geography visible in the feed.",
+      "source_authority_url": "https://libweb.hawaii.edu/digicoll/annexation/petition/pet099.php",
+      "source_record_label": "UH Mānoa Library, Kue petition, Lahaina, Maui, Women, Sept. 11, 1897",
+      "source_image_url": "https://libweb.hawaii.edu/digicoll/annexation/petition/pet099.gif",
+      "source_image_access_note": "UH Mānoa access scan linked directly from the Lahaina women's petition record.",
+      "rights_note": "Historical petition scan shown with UH Mānoa provenance; the collection record remains authority.",
+      "original_asset": "https://libweb.hawaii.edu/digicoll/annexation/petition/pet099.gif",
+      "original_label": "Original petition sheet",
+      "relationship_default": "exact",
+      "relationship_label": "Exact document · Lahaina women",
+      "crop_mode": "none",
+      "review_status": "approved",
+      "color_decision": "skipped",
+      "reconstruction_decision": "skipped"
+    },
+    {
+      "id": "HAR-ART-0012",
+      "image_class": "document",
+      "title": "Hui Aloha ʻĀina petition, Hāna women",
+      "display_date": "September 11, 1897",
+      "caption": "An exact Hui Aloha ʻĀina petition sheet for women in Hāna, Maui, dated September 11, 1897. Showing Hāna separately keeps Maui from collapsing into one generic island-level record.",
+      "source_authority_url": "https://libweb.hawaii.edu/digicoll/annexation/petition/pet146.php",
+      "source_record_label": "UH Mānoa Library, Kue petition, Hāna, Maui, Women, Sept. 11, 1897",
+      "source_image_url": "https://libweb.hawaii.edu/digicoll/annexation/petition/pet146.gif",
+      "source_image_access_note": "UH Mānoa access scan linked directly from the Hāna women's petition record.",
+      "rights_note": "Historical petition scan shown with UH Mānoa provenance; the collection record remains authority.",
+      "original_asset": "https://libweb.hawaii.edu/digicoll/annexation/petition/pet146.gif",
+      "original_label": "Original petition sheet",
+      "relationship_default": "exact",
+      "relationship_label": "Exact document · Hāna women",
+      "crop_mode": "none",
+      "review_status": "approved",
+      "color_decision": "skipped",
+      "reconstruction_decision": "skipped"
+    },
+    {
+      "id": "HAR-ART-0013",
+      "image_class": "document",
+      "title": "Hui Aloha ʻĀina petition, Kalawao men",
+      "display_date": "September 11, 1897",
+      "caption": "An exact Hui Aloha ʻĀina petition sheet for men in Kalawao, Molokaʻi, dated September 11, 1897. Its presence is important geographic evidence and is shown without inventing individual signer testimony.",
+      "source_authority_url": "https://libweb.hawaii.edu/digicoll/annexation/petition/pet699.php",
+      "source_record_label": "UH Mānoa Library, Kue petition, Kalawao, Molokaʻi, Men, Sept. 11, 1897",
+      "source_image_url": "https://libweb.hawaii.edu/digicoll/annexation/petition/pet699.gif",
+      "source_image_access_note": "UH Mānoa access scan linked directly from the Kalawao men's petition record.",
+      "rights_note": "Historical petition scan shown with UH Mānoa provenance; the collection record remains authority.",
+      "original_asset": "https://libweb.hawaii.edu/digicoll/annexation/petition/pet699.gif",
+      "original_label": "Original petition sheet",
+      "relationship_default": "exact",
+      "relationship_label": "Exact document · Kalawao men",
+      "crop_mode": "none",
+      "review_status": "approved",
+      "color_decision": "skipped",
+      "reconstruction_decision": "skipped"
+    },
+    {
+      "id": "HAR-ART-0014",
+      "image_class": "document",
+      "title": "Hui Aloha ʻĀina petition, Līhuʻe women",
+      "display_date": "September 11, 1897",
+      "caption": "An exact Hui Aloha ʻĀina petition sheet for women in Līhuʻe, Kauaʻi, dated September 11, 1897. The actual district sheet makes Kauaʻi's participation visible as an object, not only a label.",
+      "source_authority_url": "https://libweb.hawaii.edu/digicoll/annexation/petition/pet084.php",
+      "source_record_label": "UH Mānoa Library, Kue petition, Līhuʻe, Kauaʻi, Women, Sept. 11, 1897",
+      "source_image_url": "https://libweb.hawaii.edu/digicoll/annexation/petition/pet084.gif",
+      "source_image_access_note": "UH Mānoa access scan linked directly from the Līhuʻe women's petition record.",
+      "rights_note": "Historical petition scan shown with UH Mānoa provenance; the collection record remains authority.",
+      "original_asset": "https://libweb.hawaii.edu/digicoll/annexation/petition/pet084.gif",
+      "original_label": "Original petition sheet",
+      "relationship_default": "exact",
+      "relationship_label": "Exact document · Līhuʻe women",
+      "crop_mode": "none",
+      "review_status": "approved",
+      "color_decision": "skipped",
+      "reconstruction_decision": "skipped"
+    },
+    {
+      "id": "HAR-ART-0015",
+      "image_class": "document",
+      "title": "Hui Aloha ʻĀina petition, Kawaihau men",
+      "display_date": "September 11, 1897",
+      "caption": "An exact Hui Aloha ʻĀina petition sheet for men in Kawaihau, Kauaʻi, dated September 11, 1897. It adds another distinct Kauaʻi district to the visible petition network.",
+      "source_authority_url": "https://libweb.hawaii.edu/digicoll/annexation/petition/pet611.php",
+      "source_record_label": "UH Mānoa Library, Kue petition, Kawaihau, Kauaʻi, Men, Sept. 11, 1897",
+      "source_image_url": "https://libweb.hawaii.edu/digicoll/annexation/petition/pet611.gif",
+      "source_image_access_note": "UH Mānoa access scan linked directly from the Kawaihau men's petition record.",
+      "rights_note": "Historical petition scan shown with UH Mānoa provenance; the collection record remains authority.",
+      "original_asset": "https://libweb.hawaii.edu/digicoll/annexation/petition/pet611.gif",
+      "original_label": "Original petition sheet",
+      "relationship_default": "exact",
+      "relationship_label": "Exact document · Kawaihau men",
+      "crop_mode": "none",
+      "review_status": "approved",
+      "color_decision": "skipped",
+      "reconstruction_decision": "skipped"
     }
   ],
   "attachments": [
@@ -219,6 +339,30 @@
     {
       "item_id": "HAR-1897-07-16-IND-SURF-001",
       "media_ref": "HAR-ART-0009"
+    },
+    {
+      "item_id": "HAR-1897-07-01-IND-SAVED-001",
+      "media_ref": "HAR-ART-0010"
+    },
+    {
+      "item_id": "HAR-1897-09-11-PETITION-MAUI-W-001",
+      "media_ref": "HAR-ART-0011"
+    },
+    {
+      "item_id": "HAR-1897-09-11-PETITION-MAUI-HANA-W-001",
+      "media_ref": "HAR-ART-0012"
+    },
+    {
+      "item_id": "HAR-1897-09-11-PETITION-MOLOKAI-KALAWAO-M-001",
+      "media_ref": "HAR-ART-0013"
+    },
+    {
+      "item_id": "HAR-1897-09-11-PETITION-KAUAI-W-001",
+      "media_ref": "HAR-ART-0014"
+    },
+    {
+      "item_id": "HAR-1897-09-11-PETITION-KAUAI-KAWAIHAU-M-001",
+      "media_ref": "HAR-ART-0015"
     }
   ]
 }
