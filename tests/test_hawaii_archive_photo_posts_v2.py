@@ -23,46 +23,36 @@ class HawaiiArchivePhotoPostsV2Tests(unittest.TestCase):
         images = {item["id"]: item for item in payload["images"]}
 
         palace = images["HAR-IMG-0002"]
-        self.assertEqual(
-            palace["reconstructed_asset"],
-            "assets/images/HAR-IMG-0002/reconstructed.png",
-        )
+        self.assertEqual(palace["reconstructed_asset"], "assets/images/HAR-IMG-0002/reconstructed.png")
         self.assertEqual(palace["reconstruction_decision"], "approved")
 
         poi = images["HAR-IMG-0003"]
-        self.assertEqual(
-            poi["reconstructed_asset"],
-            "assets/images/HAR-IMG-0003/reconstructed.png",
-        )
+        self.assertEqual(poi["reconstructed_asset"], "assets/images/HAR-IMG-0003/reconstructed.png")
         self.assertEqual(poi["reconstruction_decision"], "approved")
 
     def test_new_feed_visuals_preserve_real_old_source_and_reconstruction(self):
         payload = json.loads(IMAGE_INDEX.read_text(encoding="utf-8"))
         feed_images = {item["id"]: item for item in payload["feed_images"]}
-        expected = {
-            "HAR-IMG-0011",
-            "HAR-IMG-0012",
-            "HAR-IMG-0013",
-            "HAR-IMG-0014",
-            "HAR-IMG-0015",
-            "HAR-IMG-0016",
-        }
+        expected = {f"HAR-IMG-{number:04d}" for number in range(11, 17)}
         self.assertEqual(set(feed_images), expected)
+
         for image_id in expected:
             item = feed_images[image_id]
             self.assertTrue(item["original_asset"].startswith("https://"))
-            self.assertEqual(
-                item["reconstructed_asset"],
-                f"assets/images/{image_id}/reconstructed.png",
-            )
+            self.assertEqual(item["reconstructed_asset"], f"assets/images/{image_id}/reconstructed.png")
             self.assertTrue(item["source_authority_url"].startswith("https://"))
-            self.assertEqual(item["reconstruction_decision"], "approved")
+            self.assertIn(item["reconstruction_decision"], {"approved", "hold"})
             self.assertIn(item["relationship_default"], {"near", "context"})
+
+        self.assertEqual(feed_images["HAR-IMG-0015"]["reconstruction_decision"], "hold")
+        self.assertEqual(feed_images["HAR-IMG-0016"]["reconstruction_decision"], "hold")
+        self.assertEqual(feed_images["HAR-IMG-0016"]["original_label"], "Archive reference")
 
     def test_strongest_visuals_are_routed_into_grounded_feed_posts(self):
         _, items = load_chain("1897-06-01.json")
         by_id = {item["id"]: item for item in items}
         self.assertEqual(by_id["HAR-1897-06-17-LILIU-001"]["media_ref"], "HAR-IMG-0011")
+        self.assertEqual(by_id["HAR-1897-09-10-KUOKOA-001"]["media_ref"], "HAR-IMG-0012")
         self.assertEqual(by_id["HAR-1897-09-06-ALOHA-003"]["media_ref"], "HAR-IMG-0016")
         self.assertEqual(by_id["HAR-1897-09-06-ALOHA-004"]["image_ref"], "HAR-IMG-0002")
 
@@ -71,6 +61,8 @@ class HawaiiArchivePhotoPostsV2Tests(unittest.TestCase):
         pilot = (ARCHIVE / "image-pilot.js").read_text(encoding="utf-8")
         self.assertIn("imagePayload.feed_images", app)
         self.assertIn("item.media_ref || item.image_ref", app)
+        self.assertIn("imageRecord.reconstruction_decision === \"approved\"", app)
+        self.assertIn("imageRecord.original_label || \"Original\"", app)
         self.assertIn('reconstructed: "reconstructed_asset"', pilot)
         self.assertIn('button("Reconstructed", "reconstructed")', pilot)
         self.assertIn("if (imageRecord.original_asset)", pilot)
