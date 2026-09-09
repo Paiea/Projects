@@ -6,9 +6,10 @@ const count = document.querySelector("#item-count");
 const scopeNote = document.querySelector("#scope-note");
 
 const STATE_ASSET_FIELDS = {
-  original: "original_asset",
-  restored: "restored_asset",
+  reconstructed: "reconstructed_asset",
   color: "color_asset",
+  restored: "restored_asset",
+  original: "original_asset",
 };
 
 function formatHistoricalDate(value) {
@@ -162,7 +163,10 @@ function makePostMedia(imageRecord) {
   stageLink.setAttribute("aria-label", `View full ${imageRecord.title}`);
 
   const image = document.createElement("img");
-  image.src = imageRecord.original_asset;
+  image.src = imageRecord.reconstructed_asset
+    || (imageRecord.color_decision === "approved" && imageRecord.color_asset ? imageRecord.color_asset : null)
+    || imageRecord.restored_asset
+    || imageRecord.original_asset;
   image.alt = imageRecord.title;
   image.loading = "lazy";
   image.decoding = "async";
@@ -174,15 +178,26 @@ function makePostMedia(imageRecord) {
   toolbar.className = "media-toolbar";
   toolbar.setAttribute("aria-label", "Image view");
 
-  const originalButton = makeMediaButton("Original", "original");
-  const restoredButton = makeMediaButton("Restored", "restored");
-  toolbar.append(originalButton, restoredButton);
-
-  const buttons = [originalButton, restoredButton];
+  const buttons = [];
+  if (imageRecord.reconstructed_asset) {
+    const reconstructedButton = makeMediaButton("Reconstructed", "reconstructed");
+    toolbar.append(reconstructedButton);
+    buttons.push(reconstructedButton);
+  }
   if (imageRecord.color_decision === "approved" && imageRecord.color_asset) {
     const colorButton = makeMediaButton("Color", "color");
     toolbar.append(colorButton);
     buttons.push(colorButton);
+  }
+  if (imageRecord.restored_asset) {
+    const restoredButton = makeMediaButton("Restored", "restored");
+    toolbar.append(restoredButton);
+    buttons.push(restoredButton);
+  }
+  if (imageRecord.original_asset) {
+    const originalButton = makeMediaButton("Original", "original");
+    toolbar.append(originalButton);
+    buttons.push(originalButton);
   }
 
   const fullImageLink = document.createElement("a");
@@ -199,9 +214,10 @@ function makePostMedia(imageRecord) {
     });
   }
 
-  const defaultState = imageRecord.color_decision === "approved" && imageRecord.color_asset
-    ? "color"
-    : "restored";
+  const defaultState = imageRecord.reconstructed_asset ? "reconstructed"
+    : imageRecord.color_decision === "approved" && imageRecord.color_asset ? "color"
+      : imageRecord.restored_asset ? "restored"
+        : "original";
   setMediaState(image, buttons, imageRecord, defaultState, fullImageLinks);
   figure.append(toolbar);
 
@@ -218,7 +234,12 @@ function makePostMedia(imageRecord) {
   relationship.textContent = imageRecord.relationship_label;
   context.append(relationship);
 
-  if (imageRecord.color_decision === "approved") {
+  if (imageRecord.reconstructed_asset) {
+    const reconstructedConfidence = document.createElement("span");
+    reconstructedConfidence.className = "media-color-confidence";
+    reconstructedConfidence.textContent = `Reconstructed view · ${imageRecord.reconstruction_confidence || "derived"}`;
+    context.append(reconstructedConfidence);
+  } else if (imageRecord.color_decision === "approved") {
     const colorConfidence = document.createElement("span");
     colorConfidence.className = "media-color-confidence";
     colorConfidence.textContent = `Color reconstruction · ${imageRecord.color_confidence}`;
