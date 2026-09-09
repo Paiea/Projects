@@ -223,12 +223,16 @@ function pickIsland(parentId, islandStrengths = {}) {
   })[0];
 }
 
-function selectRepresentation({ deck, parentId, parentIntroduced, islandStrengths = {}, repCount = 0, repairPending = false, avoidKind = null }) {
-  const entry = pickIsland(parentId, islandStrengths);
+function selectRepresentation({ deck, parentId, parentIntroduced, islandStrengths = {}, repCount = 0, repairPending = false, avoidKind = null, preferredIslandId = null }) {
+  const preferred = preferredIslandId
+    ? islandsFor(parentId).find((candidate) => candidate.id === preferredIslandId)
+    : null;
+  const entry = preferred || pickIsland(parentId, islandStrengths);
   if (!entry) return repairPending
     ? { kind: "parent", repair: true, vector: "recognize" }
     : { kind: "parent" };
   if (repairPending) return { kind: "island", island: entry, repair: true };
+  if (preferred) return { kind: "island", island: entry };
   if (avoidKind === "parent") return { kind: "island", island: entry };
   if (avoidKind === "island" && (deck === "core" || islandStable(islandStrengths, entry))) return { kind: "parent" };
   if (deck === "core") {

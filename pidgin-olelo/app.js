@@ -125,6 +125,8 @@ let history = [];
 let historyCursor = -1;
 let reviewingHistory = false;
 let preferredItemId = null;
+let preferredIslandId = null;
+let replyScaffoldOnce = null;
 let excludeVectorOnce = null;
 let avoidRepresentationOnce = null;
 let repairVectorOnce = null;
@@ -360,6 +362,7 @@ function nextQuestion() {
       repCount: state.repCount,
       repairPending: (sessionMisses[item.id] || 0) >= 1,
       avoidKind: avoidRepresentationOnce,
+      preferredIslandId: preferredIslandId,
     });
 
   if (representation.kind === "island") {
@@ -398,11 +401,14 @@ function nextQuestion() {
     if (response) {
       const questionItem = ALL_ITEMS.find((candidate) => candidate.id === response.questionId);
       if (questionItem) {
+        const usePidginScaffold = replyScaffoldOnce === item.id;
         const question = ENGINE.conversationQuestionText(
           questionItem,
           vectorStrengths,
           sessionMisses[item.id] || 0,
+          usePidginScaffold,
         );
+        if (usePidginScaffold) replyScaffoldOnce = null;
         const built = ENGINE.buildResponseQuestion(item, activeItems(), { question, cue: response.cue });
         return rebuilding ? { ...built, rebuild: true } : built;
       }
@@ -481,7 +487,11 @@ function scheduleRepairOutcome(correct) {
     rebuildParentOnce = currentItem.id;
     return;
   }
+  if (!correct && currentQuestion?.response) {
+    replyScaffoldOnce = currentItem.id;
+  }
   if (!correct && currentQuestion?.island) {
+    preferredIslandId = currentQuestion.islandId;
     repairVectorOnce = "recognize";
   }
 }
@@ -638,8 +648,6 @@ function pushQuestion(question) {
   if (historyCursor < history.length - 1) history = history.slice(0, historyCursor + 1);
   history.push(question);
   historyCursor = history.length - 1;
-  state.lastSeen[question.itemId] = Date.now();
-  saveState();
   drawQuestion(question);
 }
 
@@ -652,6 +660,7 @@ function renderNextQuestion({ scrollToQuestion = false } = {}) {
   const showWhatYouKnow = !question.intro && !question.repair && !question.rebuild
     && state.repCount > 0 && (state.repCount + 1) % ENGINE.SHOW_WHAT_YOU_KNOW_EVERY === 0;
   preferredItemId = null;
+  preferredIslandId = null;
   excludeVectorOnce = null;
   avoidRepresentationOnce = null;
   repairVectorOnce = null;
@@ -691,11 +700,13 @@ function moveForward() {
 function finishIntro() {
   if (currentQuestion.island) {
     islandState.introduced[currentQuestion.islandId] = true;
+    preferredIslandId = currentQuestion.islandId;
     saveIslandState();
   } else {
     state.introduced[currentQuestion.itemId] = true;
   }
   state.repCount += 1;
+  state.lastSeen[currentQuestion.itemId] = Date.now();
   preferredItemId = currentQuestion.itemId;
   maybeUnlockNext();
   saveState();
@@ -718,6 +729,19 @@ function rateCurrent(delta) {
   }
 
   const item = currentItem;
+  if (ENGINE.isNeutralDefer(currentQuestion.vector, delta)) {
+    state.repCount += 1;
+    state.lastSeen[item.id] = Date.now();
+    maybeUnlockNext();
+    saveState();
+    renderFeedback("forward", "Not yet is fine. Use um when get chance.");
+    const feedbackText = els.feedback.textContent;
+    const feedbackKind = els.feedback.dataset.kind;
+    renderNextQuestion({ scrollToQuestion: true });
+    renderFeedback(feedbackKind, feedbackText);
+    return;
+  }
+
   rateQuestion(delta);
   state.repCount += 1;
   state.lastSeen[item.id] = Date.now();
