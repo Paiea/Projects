@@ -1,10 +1,12 @@
 const IMAGE_DATA_URL = "data/images/index.json";
 const pilot = document.querySelector("#image-pilot");
+const pilotCount = document.querySelector("#pilot-count");
 
 const STATE_ASSET_FIELDS = {
-  original: "original_asset",
-  restored: "restored_asset",
+  reconstructed: "reconstructed_asset",
   color: "color_asset",
+  restored: "restored_asset",
+  original: "original_asset",
 };
 
 function assetForState(imageRecord, state) {
@@ -19,10 +21,10 @@ function applyState(image, buttons, imageRecord, state) {
   image.src = asset;
   image.dataset.state = state;
 
-  for (const button of buttons) {
-    const active = button.dataset.state === state;
-    button.classList.toggle("active", active);
-    button.setAttribute("aria-pressed", String(active));
+  for (const buttonNode of buttons) {
+    const active = buttonNode.dataset.state === state;
+    buttonNode.classList.toggle("active", active);
+    buttonNode.setAttribute("aria-pressed", String(active));
   }
 }
 
@@ -34,6 +36,10 @@ function button(label, state) {
   node.textContent = label;
   node.setAttribute("aria-pressed", "false");
   return node;
+}
+
+function publicReconstruction(imageRecord) {
+  return imageRecord.reconstruction_decision === "approved" && imageRecord.reconstructed_asset;
 }
 
 function renderCard(imageRecord) {
@@ -56,8 +62,13 @@ function renderCard(imageRecord) {
   stage.className = "media-stage pilot-media-stage";
   if (imageRecord.crop_mode === "stereo-left") stage.classList.add("crop-stereo-left");
 
+  const defaultState = publicReconstruction(imageRecord) ? "reconstructed"
+    : imageRecord.color_decision === "approved" && imageRecord.color_asset ? "color"
+      : imageRecord.restored_asset ? "restored"
+        : "original";
+
   const image = document.createElement("img");
-  image.src = imageRecord.original_asset;
+  image.src = assetForState(imageRecord, defaultState);
   image.alt = imageRecord.title;
   image.loading = "lazy";
   image.decoding = "async";
@@ -66,22 +77,34 @@ function renderCard(imageRecord) {
 
   const toolbar = document.createElement("div");
   toolbar.className = "media-toolbar pilot-toolbar";
-  const original = button("Original", "original");
-  const restored = button("Restored", "restored");
-  toolbar.append(original, restored);
-  const buttons = [original, restored];
+  const buttons = [];
 
+  if (imageRecord.reconstruction_decision === "approved" && imageRecord.reconstructed_asset) {
+    const reconstructed = button("Reconstructed", "reconstructed");
+    toolbar.append(reconstructed);
+    buttons.push(reconstructed);
+  }
   if (imageRecord.color_decision === "approved" && imageRecord.color_asset) {
     const color = button("Color", "color");
     toolbar.append(color);
     buttons.push(color);
+  }
+  if (imageRecord.restored_asset) {
+    const restored = button("Restored", "restored");
+    toolbar.append(restored);
+    buttons.push(restored);
+  }
+  if (imageRecord.original_asset) {
+    const original = button(imageRecord.original_label || "Original", "original");
+    toolbar.append(original);
+    buttons.push(original);
   }
 
   for (const control of buttons) {
     control.addEventListener("click", () => applyState(image, buttons, imageRecord, control.dataset.state));
   }
 
-  applyState(image, buttons, imageRecord, imageRecord.color_asset ? "color" : "restored");
+  applyState(image, buttons, imageRecord, defaultState);
   article.append(toolbar);
 
   const meta = document.createElement("div");
@@ -92,9 +115,15 @@ function renderCard(imageRecord) {
   meta.append(relationship);
 
   const confidence = document.createElement("p");
-  confidence.textContent = imageRecord.color_decision === "approved"
-    ? `Color estimate: ${imageRecord.color_confidence}. ${imageRecord.color_reason}`
-    : `Color skipped. ${imageRecord.color_reason}`;
+  if (imageRecord.reconstruction_decision === "approved") {
+    confidence.textContent = `Reconstructed view: ${imageRecord.reconstruction_confidence || "derived"}. ${imageRecord.reconstruction_reason || ""}`;
+  } else if (imageRecord.reconstruction_decision === "hold") {
+    confidence.textContent = `Reconstruction held. ${imageRecord.reconstruction_reason || "Archive source shown instead."}`;
+  } else if (imageRecord.color_decision === "approved") {
+    confidence.textContent = `Color estimate: ${imageRecord.color_confidence}. ${imageRecord.color_reason}`;
+  } else {
+    confidence.textContent = imageRecord.color_reason || "Archive source shown without a derived color state.";
+  }
   meta.append(confidence);
 
   const caption = document.createElement("p");
@@ -112,20 +141,22 @@ function renderCard(imageRecord) {
   return article;
 }
 
-fetch(IMAGE_DATA_URL)
+fetch(IMAGE_DATA_URL, { cache: "no-store" })
   .then((response) => {
     if (!response.ok) throw new Error(`Image data returned ${response.status}`);
     return response.json();
   })
   .then((payload) => {
     pilot.replaceChildren();
-    for (const imageRecord of payload.images) pilot.append(renderCard(imageRecord));
+    const allImages = [...(payload.images || []), ...(payload.feed_images || [])];
+    if (pilotCount) pilotCount.textContent = `${allImages.length} images`;
+    for (const imageRecord of allImages) pilot.append(renderCard(imageRecord));
   })
   .catch((error) => {
     console.error(error);
     pilot.replaceChildren();
     const message = document.createElement("p");
     message.className = "error";
-    message.textContent = "The Image OS proving set could not be loaded.";
+    message.textContent = "The Image OS visual archive could not be loaded.";
     pilot.append(message);
   });
