@@ -51,6 +51,16 @@ Do not copy private recovery material into this public repository merely to make
 
 This repository is public. Never commit student records, browser localStorage exports, passwords, tokens, secrets, private relationship information, raw ChatGPT export data, private recovery notes, or other sensitive personal material.
 
+## Image binary handoff
+
+For generated or edited image assets, read `docs/IMAGE_BINARY_HANDOFF.md` before moving binaries through GitHub or integrating them into a public project.
+
+Default rule:
+
+**AI owns visual planning, filenames, manifests, mappings, code, and verification. When direct binary transport is unreliable, the user owns the final approved image-file drop into the exact repository path.**
+
+Do not treat a successful GitHub blob write as proof that an image is valid. Verify the actual image after upload and again on the deployed surface when it is highly visible. Prefer clean batch ZIP handoffs when safe asset bytes are available. Keep project visual memories isolated even when projects share this transport workflow.
+
 ## Handoff
 
 Follow `state/HANDSHAKE_PROTOCOL.md` after substantial work. Prefer one living state file with a compact `NEXT_TASK` and `RE-PROMPT` over timestamped handoff files.
