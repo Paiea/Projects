@@ -1,0 +1,132 @@
+{
+  "resources": [
+    {
+      "item_id": "HAR-1897-06-16-TREATY-001",
+      "links": [
+        {
+          "label": "Read the proposed 1897 annexation treaty",
+          "url": "https://dlnr.hawaii.gov/mk/files/2017/02/Q-7-Treaty-of-Annexation-1898.pdf",
+          "kind": "primary-source",
+          "note": "Hawaiʻi government-hosted reproduction of the treaty signed June 16, 1897. The U.S. Senate did not ratify this treaty."
+        }
+      ]
+    },
+    {
+      "item_id": "HAR-1897-06-17-LILIU-001",
+      "links": [
+        {
+          "label": "Read Liliʻuokalani's full protest",
+          "url": "https://libweb.hawaii.edu/digicoll/annexation/protest/liliu5.php",
+          "kind": "primary-source",
+          "note": "UH Mānoa preserves the June 17, 1897 protest with transcription and document-view links."
+        },
+        {
+          "label": "See the July 10 Hawaiian newspaper printing",
+          "url": "https://nupepa-hawaii.com/2014/01/28/the-queens-protest-to-treaty-1897/",
+          "kind": "newspaper-transcription",
+          "note": "A modern transcription of the Hawaiian text printed by Ke Aloha Aina on July 10, 1897, twenty-three days after the protest."
+        }
+      ]
+    },
+    {
+      "item_id": "HAR-1897-06-17-LILIU-002",
+      "links": [
+        {
+          "label": "Read Liliʻuokalani's full protest",
+          "url": "https://libweb.hawaii.edu/digicoll/annexation/protest/liliu5.php",
+          "kind": "primary-source",
+          "note": "This card is one atomic argument from the longer June 17 protest preserved by UH Mānoa."
+        }
+      ]
+    },
+    {
+      "item_id": "HAR-1897-06-17-LILIU-003",
+      "links": [
+        {
+          "label": "Read Liliʻuokalani's full protest",
+          "url": "https://libweb.hawaii.edu/digicoll/annexation/protest/liliu5.php",
+          "kind": "primary-source",
+          "note": "This consent argument appears inside the longer June 17 protest preserved by UH Mānoa."
+        }
+      ]
+    },
+    {
+      "item_id": "HAR-1897-06-17-LILIU-004",
+      "links": [
+        {
+          "label": "Read Liliʻuokalani's full protest",
+          "url": "https://libweb.hawaii.edu/digicoll/annexation/protest/liliu5.php",
+          "kind": "primary-source",
+          "note": "The full closing passage separately asks the President to withdraw the treaty and the Senate to reject ratification."
+        }
+      ]
+    },
+    {
+      "item_id": "HAR-1897-06-17-LILIU-005",
+      "links": [
+        {
+          "label": "Read Liliʻuokalani's full protest",
+          "url": "https://libweb.hawaii.edu/digicoll/annexation/protest/liliu5.php",
+          "kind": "primary-source",
+          "note": "The full closing passage separately asks the President to withdraw the treaty and the Senate to reject ratification."
+        }
+      ]
+    },
+    {
+      "item_id": "HAR-1897-08-21-ALOHA-MELE-001",
+      "links": [
+        {
+          "label": "Hear Ka Naʻi Aupuni performed",
+          "url": "https://www.youtube.com/watch?v=zj3YhR2-QwQ",
+          "kind": "modern-performance",
+          "note": "Project KULEANA performance published in 2015. This is not a recording from 1897, and later performance wording can differ from the 1897 printed text."
+        },
+        {
+          "label": "Lyrics + audio from Kamehameha Schools",
+          "url": "https://blogs.ksbe.edu/mespence/ka-na%CA%BBi-aupuni/",
+          "kind": "modern-reference",
+          "note": "Modern educational lyrics and audio for Ka Naʻi Aupuni. Compare them with the source-facing 1897 newspaper wording rather than treating them as identical."
+        }
+      ]
+    },
+    {
+      "item_id": "HAR-1897-09-06-ALOHA-001",
+      "links": [
+        {
+          "label": "Explore the Palace Square meeting and petition campaign",
+          "url": "https://libweb.hawaii.edu/digicoll/annexation/petition/pet-intro.php",
+          "kind": "archive-context",
+          "note": "UH Mānoa's annexation collection connects the September 6 mass meeting to the petition campaign that followed."
+        }
+      ]
+    },
+    {
+      "item_id": "HAR-1897-09-10-KUOKOA-002",
+      "links": [
+        {
+          "label": "Read the treaty behind this headline",
+          "url": "https://dlnr.hawaii.gov/mk/files/2017/02/Q-7-Treaty-of-Annexation-1898.pdf",
+          "kind": "primary-source",
+          "note": "The newspaper headline announces the treaty text. This link opens a Hawaiʻi government-hosted reproduction of the proposed 1897 treaty itself."
+        }
+      ]
+    },
+    {
+      "item_id": "HAR-1897-09-11-PETITION-001",
+      "links": [
+        {
+          "label": "Open the National Archives petition document",
+          "url": "https://docsteach.org/document/petition-against-annexation-hawaii/",
+          "kind": "primary-source",
+          "note": "National Archives / DocsTeach record from the Records of the U.S. Senate for the 1897 Hui Aloha ʻĀina petition with 21,269 signatures."
+        },
+        {
+          "label": "Read National Archives context",
+          "url": "https://www.archives.gov/education/lessons/hawaii-petition",
+          "kind": "archive-context",
+          "note": "National Archives overview of the petition campaign, its collection, and its later presentation in Washington."
+        }
+      ]
+    }
+  ]
+}
