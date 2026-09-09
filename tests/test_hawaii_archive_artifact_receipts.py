@@ -49,6 +49,15 @@ class HawaiiArchiveArtifactReceiptTests(unittest.TestCase):
         self.assertIn("media-newspaper", styles)
         self.assertIn("object-fit: contain", styles)
 
+    def test_document_artifacts_preserve_their_natural_height(self):
+        styles = (ARCHIVE / "styles.css").read_text(encoding="utf-8")
+
+        self.assertIn(".media-stage.media-document {", styles)
+        self.assertIn("aspect-ratio: auto", styles)
+        self.assertIn(".media-stage.media-document .media-stage-link", styles)
+        self.assertIn(".media-stage.media-document img", styles)
+        self.assertIn("height: auto", styles)
+
 
 if __name__ == "__main__":
     unittest.main()

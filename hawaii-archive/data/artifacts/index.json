@@ -37,6 +37,7 @@
       "relationship_default": "exact",
       "relationship_label": "Exact document · signature area",
       "crop_mode": "none",
+      "display_mode": "intrinsic",
       "review_status": "approved",
       "color_decision": "skipped",
       "reconstruction_decision": "skipped"
