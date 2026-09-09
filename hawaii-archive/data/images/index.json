@@ -7,7 +7,7 @@
       "image_class": "portrait",
       "title": "James Keauiluna Kaulia",
       "display_date": "c. 1893",
-      "caption": "James Keauiluna Kaulia, c. 1893. The photograph predates the 1897 Palace Square speech and is shown as a near-match portrait of the same person, not as an image of the event.",
+      "caption": "James Keauiluna Kaulia, c. 1893. The reconstructed portrait is shown first. The exact uploaded parent image and a separate archival reference remain available underneath so the evidence trail is not collapsed into one fake original.",
       "source_authority_url": "https://www.loc.gov/item/89709348/",
       "source_record_label": "Library of Congress, Representative Committee of Delegates of the Hawaiian People, c. 1893; J.K. Kaulia identified in the group portrait",
       "source_image_url": "https://upload.wikimedia.org/wikipedia/commons/e/e0/J._K._Kaulia_%281893_crop%29.jpg",
@@ -17,6 +17,38 @@
       "restored_asset": "assets/images/HAR-IMG-0001/restored.jpg",
       "color_asset": "assets/images/HAR-IMG-0001/color.jpg",
       "reconstructed_asset": "assets/images/HAR-IMG-0001/reconstructed.jpg",
+      "views": [
+        {
+          "id": "reconstructed",
+          "label": "Reconstructed",
+          "asset": "assets/images/HAR-IMG-0001/reconstructed.jpg",
+          "source_role": "derived"
+        },
+        {
+          "id": "color",
+          "label": "Color",
+          "asset": "assets/images/HAR-IMG-0001/color.jpg",
+          "source_role": "derived"
+        },
+        {
+          "id": "restored",
+          "label": "Restored",
+          "asset": "assets/images/HAR-IMG-0001/restored.jpg",
+          "source_role": "derived"
+        },
+        {
+          "id": "original-source",
+          "label": "Original source",
+          "asset": "assets/images/HAR-IMG-0001/original.png",
+          "source_role": "exact-source"
+        },
+        {
+          "id": "archival-reference",
+          "label": "Archival reference",
+          "asset": "assets/images/HAR-IMG-0001/original.jpg",
+          "source_role": "same-person"
+        }
+      ],
       "relationship_default": "near",
       "relationship_label": "Same person · earlier portrait",
       "restore_method": "deterministic-tonal",
@@ -30,14 +62,14 @@
       "color_reason": "Proof-of-concept reconstruction uses restrained period-plausible tones: warm brown skin, white shirt/cuffs, dark charcoal suit, muted brown-gray waistcoat, and a neutral studio background. Exact garment and backdrop colors are not recoverable from the albumen print and remain explicitly interpretive.",
       "reconstruction_decision": "approved",
       "reconstruction_confidence": "plausible",
-      "reconstruction_reason": "Historically informed reconstructed view derived from the archival portrait and restoration work. It is the preferred presentation image because it feels most lifelike, while Original, Restored, and Color remain available as evidence states."
+      "reconstruction_reason": "Historically informed reconstructed view derived from the uploaded portrait source and restoration work. It is the preferred presentation image while the exact parent and archival reference remain accessible."
     },
     {
       "id": "HAR-IMG-0002",
       "image_class": "built-environment",
       "title": "ʻIolani Palace",
       "display_date": "c. 1889–1890",
-      "caption": "ʻIolani Palace around 1889–1890, several years before the September 1897 Palace Square meeting. The reconstructed close view is shown first; the archival wide view remains available underneath as source evidence.",
+      "caption": "ʻIolani Palace around 1889–1890, several years before the September 1897 Palace Square meeting. The source-faithful wide reconstruction is shown first, with the separate close reconstruction, older color pass, restoration, exact uploaded source, and archive access copy all preserved underneath.",
       "source_authority_url": "https://digitalarchives.hawaii.gov/browse/parent/ark%3A70111/1z1Z",
       "source_record_label": "Hawaiʻi State Archives, PPWD-1-8-010, Buildings Government - Iolani Palace, c. 1890, Theodore P. Severin",
       "source_image_url": "https://imagesofoldhawaii.com/wp-content/uploads/Iolani-Palace-circa-1889.jpg",
@@ -47,6 +79,44 @@
       "restored_asset": "assets/images/HAR-IMG-0002/restored.jpg",
       "color_asset": "assets/images/HAR-IMG-0002/color.jpg",
       "reconstructed_asset": "assets/images/HAR-IMG-0002/reconstructed.png",
+      "views": [
+        {
+          "id": "reconstructed-wide",
+          "label": "Reconstructed wide",
+          "asset": "assets/images/HAR-IMG-0002/color.png",
+          "source_role": "derived"
+        },
+        {
+          "id": "reconstructed-close",
+          "label": "Reconstructed close",
+          "asset": "assets/images/HAR-IMG-0002/reconstructed.png",
+          "source_role": "derived"
+        },
+        {
+          "id": "color",
+          "label": "Color",
+          "asset": "assets/images/HAR-IMG-0002/color.jpg",
+          "source_role": "derived"
+        },
+        {
+          "id": "restored",
+          "label": "Restored",
+          "asset": "assets/images/HAR-IMG-0002/restored.jpg",
+          "source_role": "derived"
+        },
+        {
+          "id": "original-source",
+          "label": "Original source",
+          "asset": "assets/images/HAR-IMG-0002/original.png",
+          "source_role": "exact-source"
+        },
+        {
+          "id": "archive-access-copy",
+          "label": "Archive access copy",
+          "asset": "assets/images/HAR-IMG-0002/original.jpg",
+          "source_role": "related-reference"
+        }
+      ],
       "relationship_default": "context",
       "relationship_label": "Same place · c. 1890 context",
       "restore_method": "deterministic-tonal",
@@ -60,7 +130,7 @@
       "color_reason": "The overall reconstruction is anchored by the surviving/restored palace's known light masonry, dark roof, tropical green grounds, and Honolulu sky. Exact 1889–1890 paint, vegetation, atmospheric, and material colors are still estimates.",
       "reconstruction_decision": "approved",
       "reconstruction_confidence": "plausible",
-      "reconstruction_reason": "Historically informed close reconstruction based on the palace visual lane. It is not the original photograph and does not claim the exact 1897 rally moment."
+      "reconstruction_reason": "Two approved derived Palace views are preserved: a wide source-faithful reconstruction and a more interpretive close view. Neither claims the exact 1897 rally moment."
     },
     {
       "id": "HAR-IMG-0003",
@@ -106,7 +176,8 @@
       "source_image_access_note": "Public-domain access copy of the Hawaiʻi State Archives portrait.",
       "rights_note": "Wikimedia Commons identifies the Hawaiʻi State Archives photograph as public domain.",
       "original_asset": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Liliuokalani_in_1891_(PPWD-16-4.019).jpg",
-      "original_label": "Period portrait",
+      "original_label": "Archival reference",
+      "source_role": "related-reference",
       "reconstructed_asset": "assets/images/HAR-IMG-0011/reconstructed.png",
       "relationship_default": "near",
       "relationship_label": "Same person · earlier portrait",
@@ -116,7 +187,7 @@
       "color_reason": "No separate color-only state in this batch.",
       "reconstruction_decision": "approved",
       "reconstruction_confidence": "plausible",
-      "reconstruction_reason": "Historically informed portrait-style reconstruction. Use as derived presentation, not likeness authority."
+      "reconstruction_reason": "Historically informed portrait-style reconstruction. Use as derived presentation, not likeness authority. The period portrait underneath is a related identity reference, not the literal parent image."
     },
     {
       "id": "HAR-IMG-0012",
@@ -130,7 +201,8 @@
       "source_image_access_note": "Public-domain period portrait from an 1896 history of the Hawaiian monarchy and revolution.",
       "rights_note": "Wikimedia Commons marks the image public domain in the United States.",
       "original_asset": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Sanford_B._Dole_(1896).jpg",
-      "original_label": "Period portrait",
+      "original_label": "Archival reference",
+      "source_role": "related-reference",
       "reconstructed_asset": "assets/images/HAR-IMG-0012/reconstructed.png",
       "relationship_default": "near",
       "relationship_label": "Same person · Republic-era portrait",
@@ -140,7 +212,7 @@
       "color_reason": "No separate color-only state in this batch.",
       "reconstruction_decision": "approved",
       "reconstruction_confidence": "plausible",
-      "reconstruction_reason": "Historically informed portrait-style reconstruction paired with a period source portrait."
+      "reconstruction_reason": "Historically informed portrait-style reconstruction paired with a period identity reference, not a claimed restoration of that exact photograph."
     },
     {
       "id": "HAR-IMG-0013",
@@ -154,7 +226,8 @@
       "source_image_access_note": "Public-domain Hawaiʻi State Archives harbor photograph available through Wikimedia Commons.",
       "rights_note": "Wikimedia Commons marks the archival photograph public domain.",
       "original_asset": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Honolulu_Harbor_in_1890.jpg",
-      "original_label": "Archive photo",
+      "original_label": "Archival reference",
+      "source_role": "related-reference",
       "reconstructed_asset": "assets/images/HAR-IMG-0013/reconstructed.png",
       "relationship_default": "context",
       "relationship_label": "Same place · 1890 harbor context",
@@ -164,7 +237,7 @@
       "color_reason": "No separate color-only state in this batch.",
       "reconstruction_decision": "approved",
       "reconstruction_confidence": "plausible",
-      "reconstruction_reason": "General steamship-era harbor reconstruction. Do not identify the generated warship as USS Bennington."
+      "reconstruction_reason": "General steamship-era harbor reconstruction. Do not identify the generated warship as USS Bennington. The 1890 harbor photograph is a related place reference, not the parent source."
     },
     {
       "id": "HAR-IMG-0014",
@@ -178,7 +251,8 @@
       "source_image_access_note": "Public-domain Brother Bertram photograph available through Wikimedia Commons.",
       "rights_note": "Wikimedia Commons marks the photograph public domain.",
       "original_asset": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Waikiki_Beach,_with_Diamond_Head,_photograph_by_Brother_Bertram.jpg",
-      "original_label": "Period photo",
+      "original_label": "Archival reference",
+      "source_role": "related-reference",
       "reconstructed_asset": "assets/images/HAR-IMG-0014/reconstructed.png",
       "relationship_default": "context",
       "relationship_label": "Same place · period recreation context",
@@ -188,7 +262,7 @@
       "color_reason": "No separate color-only state in this batch.",
       "reconstruction_decision": "approved",
       "reconstruction_confidence": "plausible",
-      "reconstruction_reason": "Broad Waikīkī recreation reconstruction. Specific people, clothing, and actions are interpretive."
+      "reconstruction_reason": "Broad Waikīkī recreation reconstruction. Specific people, clothing, and actions are interpretive. The period beach photograph is a related place reference, not the literal parent image."
     },
     {
       "id": "HAR-IMG-0015",
@@ -203,6 +277,7 @@
       "rights_note": "Period archival photograph; source record is preserved explicitly.",
       "original_asset": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Fort_and_King_Streets,_Honolulu,_photograph_by_Frank_Davey_(PP-38-6-005).jpg",
       "original_label": "Archive photo",
+      "source_role": "related-reference",
       "reconstructed_asset": "assets/images/HAR-IMG-0015/reconstructed.png",
       "relationship_default": "context",
       "relationship_label": "Same district · near-period street context",
@@ -227,6 +302,7 @@
       "rights_note": "Wikimedia Commons marks the historical newspaper image public domain in the United States.",
       "original_asset": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Anti-Annexation_meeting_at_Hilo,_1897.jpg",
       "original_label": "Archive reference",
+      "source_role": "related-reference",
       "reconstructed_asset": "assets/images/HAR-IMG-0016/reconstructed.png",
       "relationship_default": "context",
       "relationship_label": "Same movement · Hilo, Sept. 16, 1897",
@@ -237,6 +313,44 @@
       "reconstruction_decision": "hold",
       "reconstruction_confidence": "unknown",
       "reconstruction_reason": "Hold from public reconstructed-first display because the generated Palace rally scene invents exact-looking protest banners and event details."
+    }
+  ],
+  "photo_posts": [
+    {
+      "id": "HAR-PHOTO-FORT-001",
+      "anchor_after": "HAR-1897-06-07-AHALONO-001",
+      "media_ref": "HAR-IMG-0015",
+      "place": "Fort and King Streets, Honolulu",
+      "display_date": "c. 1900",
+      "feed_rendering": "Fort and King Streets, c. 1900.\nNewspapers, business, gossip, politics, and ordinary errands moved through streets like these.",
+      "relationship_note": "Near-period Honolulu street context, not a photograph of the June 7 newspaper launch."
+    },
+    {
+      "id": "HAR-PHOTO-HARBOR-001",
+      "anchor_after": "HAR-1897-06-16-TREATY-001",
+      "media_ref": "HAR-IMG-0013",
+      "place": "Honolulu Harbor",
+      "display_date": "1890",
+      "feed_rendering": "Honolulu Harbor, 1890.\nShips carried more than cargo. They carried people, orders, news, rumor, and power.",
+      "relationship_note": "Same-place near-period context. This is not a photograph of a specific 1897 ship arrival."
+    },
+    {
+      "id": "HAR-PHOTO-WAIKIKI-001",
+      "anchor_after": "HAR-1897-06-19-ALOHA-LIFE-001",
+      "media_ref": "HAR-IMG-0014",
+      "place": "Waikīkī, Honolulu",
+      "display_date": "late nineteenth century",
+      "feed_rendering": "Waikīkī, late nineteenth century.\nThe political crisis did not stop ordinary life.",
+      "relationship_note": "Broad place-and-period context, not evidence for one exact day in 1897."
+    },
+    {
+      "id": "HAR-PHOTO-POI-001",
+      "anchor_after": "HAR-1897-06-29-KSG-001",
+      "media_ref": "HAR-IMG-0003",
+      "place": "Hawaiian Islands",
+      "display_date": "1896",
+      "feed_rendering": "Preparing dinner, 1896.\nHistory still had to eat.",
+      "relationship_note": "Exact archival activity from 1896 used as ordinary-life context inside the 1897 attention field."
     }
   ]
 }
