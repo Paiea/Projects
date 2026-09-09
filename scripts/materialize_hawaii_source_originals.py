@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import json
 import shutil
-import urllib.parse
 import urllib.request
 from pathlib import Path
 
@@ -14,15 +13,11 @@ DATA = ROOT / "hawaii-archive" / "data" / "images"
 USER_AGENT = "Paiea-Hawaii-Archive-Revival/1.0"
 
 
-def commons_redirect(filename: str) -> str:
-    return "https://commons.wikimedia.org/wiki/Special:Redirect/file/" + urllib.parse.quote(filename)
-
-
 ITEMS = [
     {
         "id": "HAR-IMG-0011",
         "subject": "Queen Liliʻuokalani portrait",
-        "source_filename": "Liliuokalani in 1891 (PPWD-16-4.019).jpg",
+        "source_image_url": "https://upload.wikimedia.org/wikipedia/commons/e/e9/Liliuokalani_in_1891_%28PPWD-16-4.019%29.jpg",
         "source_authority_url": "https://commons.wikimedia.org/wiki/File:Liliuokalani_in_1891_(PPWD-16-4.019).jpg",
         "source_record": "Hawaiʻi State Archives, PPWD-16-4.019, Queen Liliʻuokalani, c. 1891",
         "source_date": "c. 1891",
@@ -33,7 +28,7 @@ ITEMS = [
     {
         "id": "HAR-IMG-0012",
         "subject": "Sanford B. Dole portrait",
-        "source_filename": "Sanford B. Dole (1896).jpg",
+        "source_image_url": "https://upload.wikimedia.org/wikipedia/commons/9/96/Sanford_B._Dole_%281896%29.jpg",
         "source_authority_url": "https://commons.wikimedia.org/wiki/File:Sanford_B._Dole_(1896).jpg",
         "source_record": "S. B. Dole, President of the Republic of Hawaii, published 1896",
         "source_date": "c. 1896",
@@ -44,7 +39,7 @@ ITEMS = [
     {
         "id": "HAR-IMG-0013",
         "subject": "Honolulu Harbor",
-        "source_filename": "Honolulu Harbor in 1890.jpg",
+        "source_image_url": "https://upload.wikimedia.org/wikipedia/commons/2/2f/Honolulu_Harbor_in_1890.jpg",
         "source_authority_url": "https://commons.wikimedia.org/wiki/File:Honolulu_Harbor_in_1890.jpg",
         "source_record": "Honolulu Harbor in 1890, Hawaiʻi State Archives",
         "source_date": "1890",
@@ -55,7 +50,7 @@ ITEMS = [
     {
         "id": "HAR-IMG-0014",
         "subject": "Waikīkī Beach and Diamond Head",
-        "source_filename": "Waikiki Beach, with Diamond Head, photograph by Brother Bertram.jpg",
+        "source_image_url": "https://upload.wikimedia.org/wikipedia/commons/1/1c/Waikiki_Beach%2C_with_Diamond_Head%2C_photograph_by_Brother_Bertram.jpg",
         "source_authority_url": "https://commons.wikimedia.org/wiki/File:Waikiki_Beach,_with_Diamond_Head,_photograph_by_Brother_Bertram.jpg",
         "source_record": "Brother Bertram Photo Collection, Waikīkī Beach with Diamond Head",
         "source_date": "1883–1905",
@@ -66,7 +61,7 @@ ITEMS = [
     {
         "id": "HAR-IMG-0015",
         "subject": "Fort and King Streets, Honolulu",
-        "source_filename": "Fort and King Streets, Honolulu, photograph by Frank Davey (PP-38-6-005).jpg",
+        "source_image_url": "https://upload.wikimedia.org/wikipedia/commons/2/23/Fort_and_King_Streets%2C_Honolulu%2C_photograph_by_Frank_Davey_%28PP-38-6-005%29.jpg",
         "source_authority_url": "https://commons.wikimedia.org/wiki/File:Fort_and_King_Streets,_Honolulu,_photograph_by_Frank_Davey_(PP-38-6-005).jpg",
         "source_record": "Hawaiʻi State Archives, PP-38-6-005, Fort and King Streets, Frank Davey",
         "source_date": "c. 1900",
@@ -77,7 +72,7 @@ ITEMS = [
     {
         "id": "HAR-IMG-0016",
         "subject": "Anti-annexation meeting at Hilo",
-        "source_filename": "Anti-Annexation meeting at Hilo, 1897.jpg",
+        "source_image_url": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Anti-Annexation_meeting_at_Hilo%2C_1897.jpg",
         "source_authority_url": "https://commons.wikimedia.org/wiki/File:Anti-Annexation_meeting_at_Hilo,_1897.jpg",
         "source_record": "Anti-annexation meeting at Hilo, September 16, 1897; San Francisco Call, Sept. 30, 1897",
         "source_date": "1897-09-16",
@@ -123,9 +118,9 @@ def main() -> None:
         folder.mkdir(parents=True, exist_ok=True)
 
         original = folder / "original.jpg"
-        if item.get("source_filename"):
+        if item.get("source_image_url"):
             if not original.exists():
-                download(commons_redirect(item["source_filename"]), original)
+                download(item["source_image_url"], original)
         else:
             source = ASSETS / item["copy_original_from"]
             shutil.copy2(source, original)
