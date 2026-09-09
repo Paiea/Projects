@@ -65,6 +65,12 @@ class MobilePracticeShellTests(unittest.TestCase):
         self.assertRegex(mobile, r"\.app-footer,\s*\.quick-rule,\s*\.answer-support\s*\{[^}]*display:\s*none")
         self.assertNotIn("overflow-y: auto", mobile)
 
+    def test_mobile_reply_prompt_does_not_honor_forced_desktop_line_breaks(self):
+        engine = self.read("core-engine.js")
+        mobile = self.mobile_css()
+        self.assertIn('prompt: `Uncle:\\n${question}\\n\\nYou:\\n${cue}\\n\\nSay it in Hawaiian:\\n___`', engine)
+        self.assertRegex(mobile, r"\.prompt\s*\{[^}]*white-space:\s*normal")
+
     def test_mobile_noeau_reveal_swaps_content_in_place(self):
         mobile = self.mobile_css()
         self.assertIn('.noeau-inline', mobile)
