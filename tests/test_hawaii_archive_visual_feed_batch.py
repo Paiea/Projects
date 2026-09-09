@@ -88,6 +88,13 @@ class HawaiiArchiveVisualFeedBatchTests(unittest.TestCase):
         self.assertIn("anchor_after", script)
         self.assertIn("Visual context", script)
 
+    def test_image_pilot_uses_same_ordered_view_contract(self):
+        pilot = (ARCHIVE / "image-pilot.js").read_text(encoding="utf-8")
+        self.assertIn("imageRecord.views", pilot)
+        self.assertIn("applyView", pilot)
+        self.assertIn("view.label", pilot)
+        self.assertIn("configuredViews[0]", pilot)
+
 
 if __name__ == "__main__":
     unittest.main()
