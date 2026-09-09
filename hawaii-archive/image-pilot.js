@@ -5,6 +5,7 @@ const STATE_ASSET_FIELDS = {
   original: "original_asset",
   restored: "restored_asset",
   color: "color_asset",
+  reconstructed: "reconstructed_asset",
 };
 
 function assetForState(imageRecord, state) {
@@ -77,11 +78,22 @@ function renderCard(imageRecord) {
     buttons.push(color);
   }
 
+  if (imageRecord.reconstructed_decision === "approved" && imageRecord.reconstructed_asset) {
+    const reconstructed = button("Reconstructed", "reconstructed");
+    toolbar.append(reconstructed);
+    buttons.push(reconstructed);
+  }
+
   for (const control of buttons) {
     control.addEventListener("click", () => applyState(image, buttons, imageRecord, control.dataset.state));
   }
 
-  applyState(image, buttons, imageRecord, imageRecord.color_asset ? "color" : "restored");
+  const defaultState = imageRecord.reconstructed_decision === "approved" && imageRecord.reconstructed_asset
+    ? "reconstructed"
+    : imageRecord.color_decision === "approved" && imageRecord.color_asset
+      ? "color"
+      : "restored";
+  applyState(image, buttons, imageRecord, defaultState);
   article.append(toolbar);
 
   const meta = document.createElement("div");
@@ -94,8 +106,14 @@ function renderCard(imageRecord) {
   const confidence = document.createElement("p");
   confidence.textContent = imageRecord.color_decision === "approved"
     ? `Color estimate: ${imageRecord.color_confidence}. ${imageRecord.color_reason}`
-    : `Color skipped. ${imageRecord.color_reason}`;
+    : `Color held back. ${imageRecord.color_reason}`;
   meta.append(confidence);
+
+  if (imageRecord.reconstructed_decision === "approved") {
+    const reconstructed = document.createElement("p");
+    reconstructed.textContent = `Reconstructed view: ${imageRecord.reconstructed_note}`;
+    meta.append(reconstructed);
+  }
 
   const caption = document.createElement("p");
   caption.textContent = imageRecord.caption;
