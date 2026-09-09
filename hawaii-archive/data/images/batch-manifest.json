@@ -1,0 +1,169 @@
+{
+  "batch_id": "hawaii-archive-image-batch-001",
+  "window": "1897-08-23 to 1897-09-12",
+  "image_count": 10,
+  "purpose": "Upload-ready image batch for Hawaiʻi Archive Revival mixed historical feed.",
+  "notes": [
+    "This batch mixes source-faithful image sets and reconstructed-only support images.",
+    "Original archival source images are included where available in this workspace, especially for Kaulia and the wide ʻIolani Palace panorama.",
+    "For reconstructed-only items, the source-original lane is still pending and should be researched/attached in a later batch when available.",
+    "Use relationship labels honestly: exact, near, or context."
+  ],
+  "items": [
+    {
+      "id": "HAR-IMG-0001",
+      "subject": "James Keauiluna Kaulia portrait",
+      "date": "c. 1893",
+      "relationship": "near",
+      "recommended_use": "combo-post",
+      "caption": "James Keauiluna Kaulia, a key anti-annexation organizer and speaker.",
+      "confidence": "plausible",
+      "source_archive": "Library of Congress / archival portrait reference",
+      "source_url": "local-staged-reference",
+      "states": {
+        "original": "assets/images/HAR-IMG-0001/original.png",
+        "restored": "assets/images/HAR-IMG-0001/restored.jpg",
+        "color": "assets/images/HAR-IMG-0001/color.jpg",
+        "reconstructed": "assets/images/HAR-IMG-0001/reconstructed.jpg"
+      },
+      "notes": "Best current portrait set. Keep original visible. Reconstructed view is the strongest-looking public-facing asset."
+    },
+    {
+      "id": "HAR-IMG-0002",
+      "subject": "ʻIolani Palace panorama",
+      "date": "c. 1890s",
+      "relationship": "place",
+      "recommended_use": "combo-post",
+      "caption": "Wide view of ʻIolani Palace and grounds with the mountains behind.",
+      "confidence": "supported",
+      "source_archive": "Historical palace panorama reference",
+      "source_url": "local-staged-reference",
+      "states": {
+        "original": "assets/images/HAR-IMG-0002/original.png",
+        "restored": "assets/images/HAR-IMG-0002/restored.jpg",
+        "color": "assets/images/HAR-IMG-0002/color.png"
+      },
+      "notes": "Best wide source-faithful palace set. Use for Original / Restored / Color reconstruction."
+    },
+    {
+      "id": "HAR-IMG-0003",
+      "subject": "Queen Liliʻuokalani portrait",
+      "date": "1890s",
+      "relationship": "near",
+      "recommended_use": "portrait-post",
+      "caption": "Portrait-style reconstructed view of Queen Liliʻuokalani.",
+      "confidence": "plausible",
+      "source_archive": "source pending packaging",
+      "source_url": null,
+      "states": {
+        "reconstructed": "assets/images/HAR-IMG-0003/reconstructed.png"
+      },
+      "notes": "Strong supporting political figure visual. Source original not yet included in this batch."
+    },
+    {
+      "id": "HAR-IMG-0004",
+      "subject": "Sanford B. Dole portrait",
+      "date": "1890s",
+      "relationship": "near",
+      "recommended_use": "portrait-post",
+      "caption": "Portrait-style reconstructed view of Sanford B. Dole.",
+      "confidence": "plausible",
+      "source_archive": "source pending packaging",
+      "source_url": null,
+      "states": {
+        "reconstructed": "assets/images/HAR-IMG-0004/reconstructed.png"
+      },
+      "notes": "Useful for annexation / Republic thread."
+    },
+    {
+      "id": "HAR-IMG-0005",
+      "subject": "Honolulu Harbor in the steamship era",
+      "date": "1890s",
+      "relationship": "context",
+      "recommended_use": "place-post",
+      "caption": "Harbor scene for shipping, arrivals, and U.S. naval pressure context.",
+      "confidence": "plausible",
+      "source_archive": "source pending packaging",
+      "source_url": null,
+      "states": {
+        "reconstructed": "assets/images/HAR-IMG-0005/reconstructed.png"
+      },
+      "notes": "Good support image for Bennington / harbor / shipping posts."
+    },
+    {
+      "id": "HAR-IMG-0006",
+      "subject": "Waikīkī surfers with Diamond Head",
+      "date": "1890s",
+      "relationship": "context",
+      "recommended_use": "daily-life-post",
+      "caption": "Waikīkī surfers and shoreline life with Diamond Head in view.",
+      "confidence": "plausible",
+      "source_archive": "source pending packaging",
+      "source_url": null,
+      "states": {
+        "reconstructed": "assets/images/HAR-IMG-0006/reconstructed.png"
+      },
+      "notes": "Strong ordinary-life / recreation support image."
+    },
+    {
+      "id": "HAR-IMG-0007",
+      "subject": "Fort Street stroll, Honolulu",
+      "date": "1890s",
+      "relationship": "context",
+      "recommended_use": "street-life-post",
+      "caption": "Street-life view evoking downtown Honolulu circulation and everyday movement.",
+      "confidence": "plausible",
+      "source_archive": "source pending packaging",
+      "source_url": null,
+      "states": {
+        "reconstructed": "assets/images/HAR-IMG-0007/reconstructed.png"
+      },
+      "notes": "Good for transport, business, and ordinary-city-life posts."
+    },
+    {
+      "id": "HAR-IMG-0008",
+      "subject": "Poi making / preparing dinner",
+      "date": "1896",
+      "relationship": "context",
+      "recommended_use": "daily-life-post",
+      "caption": "Ordinary-life food preparation scene.",
+      "confidence": "plausible",
+      "source_archive": "Library of Congress-style ordinary life reference",
+      "source_url": "local-generated-derivation",
+      "states": {
+        "reconstructed": "assets/images/HAR-IMG-0008/reconstructed.png"
+      },
+      "notes": "Useful daily-life counterweight to political material."
+    },
+    {
+      "id": "HAR-IMG-0009",
+      "subject": "1897 rally at ʻIolani Palace",
+      "date": "1897",
+      "relationship": "context",
+      "recommended_use": "event-post",
+      "caption": "Crowd scene evoking the scale and energy of Palace Square organizing.",
+      "confidence": "plausible",
+      "source_archive": "source pending packaging",
+      "source_url": null,
+      "states": {
+        "reconstructed": "assets/images/HAR-IMG-0009/reconstructed.png"
+      },
+      "notes": "Use honestly as a reconstructed event-context image, not a claimed documentary photograph of the exact rally."
+    },
+    {
+      "id": "HAR-IMG-0010",
+      "subject": "ʻIolani Palace reconstructed close view",
+      "date": "1890s",
+      "relationship": "context",
+      "recommended_use": "place-post",
+      "caption": "Closer reconstructed view of ʻIolani Palace.",
+      "confidence": "plausible",
+      "source_archive": "derived from palace visual lane",
+      "source_url": null,
+      "states": {
+        "reconstructed": "assets/images/HAR-IMG-0010/reconstructed.png"
+      },
+      "notes": "Use as Reconstructed view paired beneath the wide source-faithful palace image."
+    }
+  ]
+}

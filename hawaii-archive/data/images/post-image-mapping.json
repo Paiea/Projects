@@ -1,0 +1,147 @@
+[
+  {
+    "image_id": "HAR-IMG-0001",
+    "subject": "James Keauiluna Kaulia portrait",
+    "recommended_use": "combo-post",
+    "relationship": "near",
+    "suggested_post_topics": [
+      "Kaulia",
+      "anti-annexation leadership",
+      "petition organizing"
+    ],
+    "preferred_state_order": [
+      "original",
+      "restored",
+      "color",
+      "reconstructed"
+    ]
+  },
+  {
+    "image_id": "HAR-IMG-0002",
+    "subject": "ʻIolani Palace panorama",
+    "recommended_use": "combo-post",
+    "relationship": "place",
+    "suggested_post_topics": [
+      "ʻIolani Palace",
+      "Palace Square",
+      "mass meeting"
+    ],
+    "preferred_state_order": [
+      "original",
+      "restored",
+      "color"
+    ]
+  },
+  {
+    "image_id": "HAR-IMG-0003",
+    "subject": "Queen Liliʻuokalani portrait",
+    "recommended_use": "portrait-post",
+    "relationship": "near",
+    "suggested_post_topics": [
+      "Liliʻuokalani",
+      "Washington correspondence",
+      "royalist network"
+    ],
+    "preferred_state_order": [
+      "reconstructed"
+    ]
+  },
+  {
+    "image_id": "HAR-IMG-0004",
+    "subject": "Sanford B. Dole portrait",
+    "recommended_use": "portrait-post",
+    "relationship": "near",
+    "suggested_post_topics": [
+      "Republic Senate",
+      "annexation treaty",
+      "Sanford B. Dole"
+    ],
+    "preferred_state_order": [
+      "reconstructed"
+    ]
+  },
+  {
+    "image_id": "HAR-IMG-0005",
+    "subject": "Honolulu Harbor in the steamship era",
+    "recommended_use": "place-post",
+    "relationship": "context",
+    "suggested_post_topics": [
+      "U.S.S. Bennington",
+      "Honolulu Harbor",
+      "ships and arrivals"
+    ],
+    "preferred_state_order": [
+      "reconstructed"
+    ]
+  },
+  {
+    "image_id": "HAR-IMG-0006",
+    "subject": "Waikīkī surfers with Diamond Head",
+    "recommended_use": "daily-life-post",
+    "relationship": "context",
+    "suggested_post_topics": [
+      "Waikīkī recreation",
+      "surf riding",
+      "ordinary life"
+    ],
+    "preferred_state_order": [
+      "reconstructed"
+    ]
+  },
+  {
+    "image_id": "HAR-IMG-0007",
+    "subject": "Fort Street stroll, Honolulu",
+    "recommended_use": "street-life-post",
+    "relationship": "context",
+    "suggested_post_topics": [
+      "Fort Street",
+      "transportation",
+      "business notices"
+    ],
+    "preferred_state_order": [
+      "reconstructed"
+    ]
+  },
+  {
+    "image_id": "HAR-IMG-0008",
+    "subject": "Poi making / preparing dinner",
+    "recommended_use": "daily-life-post",
+    "relationship": "context",
+    "suggested_post_topics": [
+      "ordinary life",
+      "food preparation",
+      "home life"
+    ],
+    "preferred_state_order": [
+      "reconstructed"
+    ]
+  },
+  {
+    "image_id": "HAR-IMG-0009",
+    "subject": "1897 rally at ʻIolani Palace",
+    "recommended_use": "event-post",
+    "relationship": "context",
+    "suggested_post_topics": [
+      "Sept. 6 crowd",
+      "mass meeting",
+      "political organizing"
+    ],
+    "preferred_state_order": [
+      "reconstructed"
+    ]
+  },
+  {
+    "image_id": "HAR-IMG-0010",
+    "subject": "ʻIolani Palace reconstructed close view",
+    "recommended_use": "place-post",
+    "relationship": "context",
+    "suggested_post_topics": [
+      "ʻIolani Palace",
+      "place context",
+      "architectural view"
+    ],
+    "preferred_state_order": [
+      "reconstructed"
+    ]
+  }
+]

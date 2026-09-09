@@ -1,0 +1,14 @@
+HAWAIʻI ARCHIVE REVIVAL — IMAGE BATCH 001
+
+What to do:
+1. Unzip this package.
+2. Drop the contents of the `assets/images/` folders into the matching project image area in the repo/site.
+3. Keep `batch-manifest.json` and `post-image-mapping.json` together so the integration pass can wire the site states.
+4. Preserve image IDs and filenames exactly.
+
+Notes:
+- `original` = source archival image when available.
+- `restored` = cleaned black-and-white restoration.
+- `color` = color reconstruction.
+- `reconstructed` = historically informed reconstructed view; do not present as the original archival photograph.
+- Some items are reconstructed-only for now. Their source-original lane is pending later archival sourcing.
