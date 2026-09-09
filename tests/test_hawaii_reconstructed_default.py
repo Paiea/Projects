@@ -17,6 +17,7 @@ class HawaiiReconstructedDefaultTests(unittest.TestCase):
             kaulia["reconstructed_asset"],
             "assets/images/HAR-IMG-0001/reconstructed.jpg",
         )
+        self.assertEqual(kaulia["reconstruction_decision"], "approved")
         self.assertTrue(kaulia["original_asset"])
         self.assertTrue(kaulia["restored_asset"])
         self.assertTrue(kaulia["color_asset"])
@@ -24,7 +25,8 @@ class HawaiiReconstructedDefaultTests(unittest.TestCase):
         script = (ROOT / "hawaii-archive" / "app.js").read_text(encoding="utf-8")
         self.assertIn('reconstructed: "reconstructed_asset"', script)
         self.assertIn('makeMediaButton("Reconstructed", "reconstructed")', script)
-        self.assertIn('imageRecord.reconstructed_asset ? "reconstructed"', script)
+        self.assertIn('imageRecord.reconstruction_decision === "approved"', script)
+        self.assertIn("publicReconstructedAsset", script)
         self.assertIn("Reconstructed view", script)
 
 
