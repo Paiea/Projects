@@ -1,13 +1,20 @@
 const CHALLENGE_WINDOW_MS = 10 * 60 * 1000;
 const STORAGE_KEY = "pidgin-olelo-core-vectors-v1";
+const MISSION_RECEIPT_STORAGE_KEY = "pidgin-olelo-mission-receipts-v1";
 
 function blockForTime(nowMs) {
   return Math.floor(nowMs / CHALLENGE_WINDOW_MS);
 }
 
-function missionForBlock(block, items) {
+function eligibleMissionItems(items, introduced = {}) {
+  const learned = items.filter((item) => Boolean(introduced?.[item.id]));
+  return learned.length ? learned : items.slice(0, 1);
+}
+
+function missionForBlock(block, items, introduced = {}) {
   if (!items.length) throw new Error("Mission mode needs at least one Core phrase.");
-  const item = items[(block * 17 + 11) % items.length];
+  const eligible = eligibleMissionItems(items, introduced);
+  const item = eligible[(block * 17 + 11) % eligible.length];
   return {
     block,
     itemId: item.id,
@@ -16,8 +23,8 @@ function missionForBlock(block, items) {
   };
 }
 
-function missionForTime(nowMs, items) {
-  return missionForBlock(blockForTime(nowMs), items);
+function missionForTime(nowMs, items, introduced = {}) {
+  return missionForBlock(blockForTime(nowMs), items, introduced);
 }
 
 function millisecondsToNextBlock(nowMs) {
@@ -46,23 +53,70 @@ function missionSeallyLine(mission) {
   return "Go use this before ten minutes pau. No count if you whisper um to yourself in the bathroom.";
 }
 
-function giveUseCredit(itemId) {
+function emptyCoreState() {
+  return { vectorStrengths: {}, introduced: {}, lastSeen: {}, repCount: 0 };
+}
+
+function missionReceiptKey(mission) {
+  return `${mission.block}:${mission.itemId}`;
+}
+
+function creditMissionUse(state, receipts, mission, nowMs = Date.now()) {
+  const itemId = mission.itemId;
+  if (!state.vectorStrengths) state.vectorStrengths = {};
+  if (!state.vectorStrengths[itemId]) state.vectorStrengths[itemId] = {};
+  const current = Number(state.vectorStrengths[itemId].use) || 0;
+  const receiptKey = missionReceiptKey(mission);
+
+  if (receipts[receiptKey]) {
+    return { credited: false, useStrength: current, receiptKey };
+  }
+
+  state.vectorStrengths[itemId].use = Math.min(3, current + 1);
+  state.introduced = state.introduced || {};
+  state.introduced[itemId] = true;
+  state.lastSeen = state.lastSeen || {};
+  state.lastSeen[itemId] = nowMs;
+  state.repCount = Number(state.repCount) || 0;
+  receipts[receiptKey] = nowMs;
+
+  return {
+    credited: true,
+    useStrength: state.vectorStrengths[itemId].use,
+    receiptKey,
+  };
+}
+
+function loadCoreState() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    const state = raw ? JSON.parse(raw) : { vectorStrengths: {}, introduced: {}, lastSeen: {}, repCount: 0 };
-    if (!state.vectorStrengths) state.vectorStrengths = {};
-    if (!state.vectorStrengths[itemId]) state.vectorStrengths[itemId] = {};
-    const current = Number(state.vectorStrengths[itemId].use) || 0;
-    state.vectorStrengths[itemId].use = Math.min(3, current + 1);
-    state.introduced = state.introduced || {};
-    state.introduced[itemId] = true;
-    state.lastSeen = state.lastSeen || {};
-    state.lastSeen[itemId] = Date.now();
-    state.repCount = Number(state.repCount) || 0;
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-    return state.vectorStrengths[itemId].use;
+    return raw ? JSON.parse(raw) : emptyCoreState();
   } catch {
-    return null;
+    return emptyCoreState();
+  }
+}
+
+function loadMissionReceipts() {
+  try {
+    const raw = localStorage.getItem(MISSION_RECEIPT_STORAGE_KEY);
+    return raw ? JSON.parse(raw) : {};
+  } catch {
+    return {};
+  }
+}
+
+function giveUseCredit(mission) {
+  try {
+    const state = loadCoreState();
+    const receipts = loadMissionReceipts();
+    const result = creditMissionUse(state, receipts, mission, Date.now());
+    if (result.credited) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      localStorage.setItem(MISSION_RECEIPT_STORAGE_KEY, JSON.stringify(receipts));
+    }
+    return result;
+  } catch {
+    return { credited: false, useStrength: null, receiptKey: missionReceiptKey(mission) };
   }
 }
 
@@ -70,12 +124,16 @@ if (typeof module !== "undefined" && module.exports) {
   module.exports = {
     CHALLENGE_WINDOW_MS,
     STORAGE_KEY,
+    MISSION_RECEIPT_STORAGE_KEY,
     blockForTime,
+    eligibleMissionItems,
     missionForBlock,
     missionForTime,
     millisecondsToNextBlock,
     formatCountdown,
     missionSeallyLine,
+    missionReceiptKey,
+    creditMissionUse,
   };
 }
 
@@ -95,11 +153,14 @@ if (typeof document !== "undefined") {
   let mission = null;
 
   function renderMission(block) {
-    mission = missionForBlock(block, coreItems);
+    const coreState = loadCoreState();
+    const receipts = loadMissionReceipts();
+    mission = missionForBlock(block, coreItems, coreState.introduced || {});
+    const alreadyUsed = Boolean(receipts[missionReceiptKey(mission)]);
     els.prompt.textContent = mission.hawaiian;
     els.answer.textContent = mission.pidgin;
-    els.used.disabled = false;
-    els.used.textContent = "I USED IT";
+    els.used.disabled = alreadyUsed;
+    els.used.textContent = alreadyUsed ? "USED UM ✓" : "I USED IT";
     els.feedback.hidden = true;
     els.feedback.textContent = "";
     if (els.seallyLine) els.seallyLine.textContent = missionSeallyLine(mission);
@@ -115,13 +176,19 @@ if (typeof document !== "undefined") {
 
   els.used.addEventListener("click", () => {
     if (!mission) return;
-    giveUseCredit(mission.itemId);
+    const result = giveUseCredit(mission);
     els.used.disabled = true;
     els.used.textContent = "USED UM ✓";
-    els.feedback.textContent = "That counts. Real-world use gets stronger evidence than another quiz tap.";
-    els.feedback.dataset.kind = "got";
+    els.feedback.textContent = result.credited
+      ? "That counts. Real-world use gets stronger evidence than another quiz tap."
+      : "Already counted this one for this mission.";
+    els.feedback.dataset.kind = result.credited ? "got" : "forward";
     els.feedback.hidden = false;
-    if (els.seallyLine) els.seallyLine.textContent = "Chee. That counts. No make fake.";
+    if (els.seallyLine) {
+      els.seallyLine.textContent = result.credited
+        ? "Chee. That counts. No make fake."
+        : "One use receipt per mission, professor.";
+    }
   });
 
   tick();

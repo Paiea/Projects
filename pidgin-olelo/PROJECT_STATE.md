@@ -157,7 +157,9 @@ Routing should make the next rep meaningfully different or meaningfully easier, 
 - repeated misses pause new-parent expansion
 - positive scored retrieval evidence on active material earns expansion; simply seeing an intro does not
 - rendering a card does not count as `lastSeen`; spacing evidence updates when the learner actually completes an intro, answers, or deliberately defers a use task
-- `USE IT` → **Not yet** is a neutral defer, not a Hawaiian miss: it gives no negative strength, repair request, or Seally miss reaction
+- **Show me** is help, not evidence: after a peek, positive self-credit and MORE LIKE THIS stay unavailable until **Replay** starts a clean attempt; the learner can still mark the peeked attempt as a miss
+- `USE IT` → **Not yet** is a neutral defer, not a Hawaiian miss: it gives no negative strength, repair request, Seally miss reaction, `repCount`, or unlock-cadence credit; it only updates `lastSeen` and moves on
+- periodic **SHOW WHAT YOU KNOW** checks use retrieval/context vectors such as cloze, produce, and scenario; real-world `use` remains a normal Stage 5 transfer vector but is never treated as a quiz challenge
 - rep cadence remains a minimum pacing gate
 
 ## Uncle Seally
@@ -197,9 +199,12 @@ Treat a future need to scroll merely to reveal the answer or reach Next, or a fu
 
 Mission remains transfer, not another quiz.
 
-- deterministic one Core 30 phrase per 10-minute block
+- one deterministic Core phrase per 10-minute block
+- when the learner has introduced Core thoughts, Mission chooses only from that introduced set; a fresh learner gets the first Core phrase as the stable fallback instead of unseen-phrase roulette
 - learner uses it outside the app
 - **I USED IT** writes `use` evidence into the same Core state
+- a persisted `block + item` receipt allows only one use credit for that mission and restores **USED UM ✓** after refresh
+- a new 10-minute block creates a new opportunity to earn real-world use credit
 - refreshing does not reroll the mission
 
 ## ʻŌlelo Noʻeau
@@ -249,4 +254,4 @@ Do not add another mode until actual use shows the current representation system
 
 ## RE-PROMPT
 
-> Continue Pidgin → ʻŌlelo from current `Paiea/Projects` authority. Read root `AGENTS.md`, `state/PROJECT_REGISTRY.md`, `state/HANDSHAKE_PROTOCOL.md`, and `pidgin-olelo/PROJECT_STATE.md`. Preserve the north star that success means Hawaiian entering ordinary life, not passing a grammar or reading course. Preserve Core 30 as the permanent default, one mixed Learn flow, six hidden vectors, WIN-style MORE LIKE THIS / SHOW WHAT YOU KNOW, compiler-style one-thought-many-representations, strict `learning · solid` mastery, sparse Uncle Seally, inline Noʻeau, orthography checks, no synthetic audio, and the viewport-first mobile practice shell. Preserve Hawaiian islands as derived representations with separate island progress. Context islands are pragmatic shortcuts whose Pidgin meaning follows the parent thought, including `Pehea? → How you?`; mixed Pidgin + Hawaiian is valid scaffolding. Core is full-phrase-first with zoom-down repair and immediate fuller-parent rebuild after successful repair. Graded island prompts mask the answer. Repair/rebuild cards never become SHOW WHAT YOU KNOW. More Phrases is quiet secondary practice over the existing utility-ranked extra 70, island-first, 10 active, with 8 reps as a minimum unlock cadence plus positive scored evidence/repeated-miss gating. Pidgin is the trusted bridge and never the punchline. Prefer real learner use and fluent-speaker/kumu corrections over architectural expansion.
+> Continue Pidgin → ʻŌlelo from current `Paiea/Projects` authority. Read root `AGENTS.md`, `state/PROJECT_REGISTRY.md`, `state/HANDSHAKE_PROTOCOL.md`, and `pidgin-olelo/PROJECT_STATE.md`. Preserve the north star that success means Hawaiian entering ordinary life, not passing a grammar or reading course. Preserve Core 30 as the permanent default, one mixed Learn flow, six hidden vectors, WIN-style MORE LIKE THIS / SHOW WHAT YOU KNOW, compiler-style one-thought-many-representations, strict `learning · solid` mastery, sparse Uncle Seally, inline Noʻeau, orthography checks, no synthetic audio, and the viewport-first mobile practice shell. Preserve Hawaiian islands as derived representations with separate island progress. Context islands are pragmatic shortcuts whose Pidgin meaning follows the parent thought, including `Pehea? → How you?`; mixed Pidgin + Hawaiian is valid scaffolding. Core is full-phrase-first with zoom-down repair and immediate fuller-parent rebuild after successful repair. Graded island prompts mask the answer. Repair/rebuild cards never become SHOW WHAT YOU KNOW. Show Me is help, not evidence; a peek blocks positive credit and MORE LIKE THIS until Replay starts a clean attempt. USE IT → Not yet is neutral and does not advance rep or unlock cadence. SHOW WHAT YOU KNOW never uses the real-world `use` vector. Mission chooses from introduced Core when available, uses the first Core item as a fresh fallback, and persists one use receipt per 10-minute block + item. More Phrases is quiet secondary practice over the existing utility-ranked extra 70, island-first, 10 active, with 8 reps as a minimum unlock cadence plus positive scored evidence/repeated-miss gating. Pidgin is the trusted bridge and never the punchline. Prefer real learner use and fluent-speaker/kumu corrections over architectural expansion.
