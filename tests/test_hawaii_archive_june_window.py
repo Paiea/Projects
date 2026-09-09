@@ -55,6 +55,31 @@ class HawaiiArchiveJuneWindowTests(unittest.TestCase):
         self.assertEqual(unity["hawaiian"], "E malama i ka maluhia.")
         self.assertEqual(unity["english_close"], "Keep the peace.")
 
+    def test_attention_world_reaches_before_treaty_and_into_july_cultural_response(self):
+        payload = json.loads((WEEKS / "1897-06-01.json").read_text(encoding="utf-8"))
+        by_id = {item["id"]: item for item in payload["items"]}
+
+        pre_treaty = by_id["HAR-1897-06-07-AHALONO-001"]
+        self.assertLess(pre_treaty["date"], "1897-06-16")
+        self.assertEqual(pre_treaty["place"], "Honolulu, Oʻahu")
+        self.assertIn("Ka Ahalono o Hawaii", pre_treaty["hawaiian"])
+        self.assertNotIn("voice_actor", pre_treaty)
+
+        prayer = by_id["HAR-1897-07-03-ALOHA-PULE-001"]
+        self.assertEqual(prayer["date"], "1897-07-03")
+        self.assertEqual(prayer["publication"], "Ke Aloha Aina")
+        self.assertIn("He Pule Ola Hawaii", prayer["hawaiian"])
+        self.assertIn("Hanau ka po ia Hawaii", prayer["hawaiian"])
+        self.assertNotIn("voice_actor", prayer)
+        self.assertIn("Kumulipo", prayer["voice_evidence"])
+
+        resource_payload = json.loads(
+            (ROOT / "hawaii-archive" / "data" / "resources" / "index.json").read_text(encoding="utf-8")
+        )
+        resource_map = {entry["item_id"]: entry["links"] for entry in resource_payload["resources"]}
+        prayer_links = resource_map["HAR-1897-07-03-ALOHA-PULE-001"]
+        self.assertTrue(any("Kumulipo" in link["label"] for link in prayer_links))
+
     def test_public_reader_names_the_long_annexation_crisis_window(self):
         page = (ROOT / "hawaii-archive" / "index.html").read_text(encoding="utf-8")
         script = (ROOT / "hawaii-archive" / "app.js").read_text(encoding="utf-8")
