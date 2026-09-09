@@ -36,6 +36,9 @@ on:
       - 'tests/test_hawaii_image_source_originals.py'
       - '.github/workflows/project-hub-tests.yml'
 
+permissions:
+  contents: write
+
 jobs:
   verify:
     runs-on: ubuntu-latest
@@ -44,6 +47,29 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Materialize corrected archival source pack
+        if: github.ref == 'refs/heads/feature/hawaii-archive-source-originals'
+        run: python scripts/materialize_hawaii_source_originals.py
+      - name: Commit corrected archival source pack
+        if: github.ref == 'refs/heads/feature/hawaii-archive-source-originals'
+        run: |
+          if git diff --quiet -- hawaii-archive/assets/images hawaii-archive/data/images/source-originals-002.json; then
+            echo "Source pack already materialized."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add hawaii-archive/assets/images/HAR-IMG-0011 \
+                  hawaii-archive/assets/images/HAR-IMG-0012 \
+                  hawaii-archive/assets/images/HAR-IMG-0013 \
+                  hawaii-archive/assets/images/HAR-IMG-0014 \
+                  hawaii-archive/assets/images/HAR-IMG-0015 \
+                  hawaii-archive/assets/images/HAR-IMG-0016 \
+                  hawaii-archive/assets/images/HAR-IMG-0017 \
+                  hawaii-archive/assets/images/HAR-IMG-0018 \
+                  hawaii-archive/data/images/source-originals-002.json
+          git commit -m "assets: pair reconstructed views with archival originals"
+          git push
       - name: Verify project hub registration
         run: python tests/test_project_hub.py
       - name: Verify Hawaiʻi Archive Revival contracts
