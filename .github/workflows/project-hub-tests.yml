@@ -9,8 +9,6 @@ on:
       - 'hawaii-archive/**'
       - 'systems/image-os/**'
       - 'scripts/build_hawaii_image_assets.py'
-      - 'scripts/rehouse_hawaii_reconstructions.py'
-      - 'scripts/wire_hawaii_photo_posts_v2.py'
       - 'tests/test_project_hub.py'
       - 'tests/test_hawaii_archive.py'
       - 'tests/test_hawaii_archive_live_cache.py'
@@ -27,8 +25,6 @@ on:
       - 'hawaii-archive/**'
       - 'systems/image-os/**'
       - 'scripts/build_hawaii_image_assets.py'
-      - 'scripts/rehouse_hawaii_reconstructions.py'
-      - 'scripts/wire_hawaii_photo_posts_v2.py'
       - 'tests/test_project_hub.py'
       - 'tests/test_hawaii_archive.py'
       - 'tests/test_hawaii_archive_live_cache.py'
@@ -38,9 +34,6 @@ on:
       - 'tests/test_hawaii_archive_photo_posts_v2.py'
       - '.github/workflows/project-hub-tests.yml'
 
-permissions:
-  contents: write
-
 jobs:
   verify:
     runs-on: ubuntu-latest
@@ -49,33 +42,6 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Rehouse already-uploaded reconstructions
-        if: github.ref == 'refs/heads/feature/hawaii-archive-photo-posts-v2'
-        run: python scripts/rehouse_hawaii_reconstructions.py
-      - name: Wire grounded feed visuals
-        if: github.ref == 'refs/heads/feature/hawaii-archive-photo-posts-v2'
-        run: python scripts/wire_hawaii_photo_posts_v2.py
-      - name: Commit materialized photo-post assets and routes
-        if: github.ref == 'refs/heads/feature/hawaii-archive-photo-posts-v2'
-        run: |
-          if git diff --quiet -- hawaii-archive/assets/images hawaii-archive/data/weeks; then
-            echo "Photo-post material already current."
-          else
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add hawaii-archive/assets/images/HAR-IMG-0002/reconstructed.png \
-                    hawaii-archive/assets/images/HAR-IMG-0003/reconstructed.png \
-                    hawaii-archive/assets/images/HAR-IMG-0011/reconstructed.png \
-                    hawaii-archive/assets/images/HAR-IMG-0012/reconstructed.png \
-                    hawaii-archive/assets/images/HAR-IMG-0013/reconstructed.png \
-                    hawaii-archive/assets/images/HAR-IMG-0014/reconstructed.png \
-                    hawaii-archive/assets/images/HAR-IMG-0015/reconstructed.png \
-                    hawaii-archive/assets/images/HAR-IMG-0016/reconstructed.png \
-                    hawaii-archive/data/weeks/1897-06-01.json \
-                    hawaii-archive/data/weeks/1897-09-06.json
-            git commit -m "data: wire reconstructed-first Hawaiʻi photo posts"
-            git push
-          fi
       - name: Verify project hub registration
         run: python tests/test_project_hub.py
       - name: Verify Hawaiʻi Archive Revival contracts
