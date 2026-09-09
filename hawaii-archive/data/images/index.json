@@ -16,6 +16,7 @@
       "original_asset": "assets/images/HAR-IMG-0001/original.jpg",
       "restored_asset": "assets/images/HAR-IMG-0001/restored.jpg",
       "color_asset": "assets/images/HAR-IMG-0001/color.jpg",
+      "reconstructed_asset": "assets/images/HAR-IMG-0001/reconstructed.jpg",
       "relationship_default": "near",
       "relationship_label": "Same person · earlier portrait",
       "restore_method": "deterministic-tonal",
@@ -26,7 +27,10 @@
       "color_method": "best-estimate-hand-tint",
       "colorization_class": "color-kaulia",
       "color_confidence": "plausible",
-      "color_reason": "Proof-of-concept reconstruction uses restrained period-plausible tones: warm brown skin, white shirt/cuffs, dark charcoal suit, muted brown-gray waistcoat, and a neutral studio background. Exact garment and backdrop colors are not recoverable from the albumen print and remain explicitly interpretive."
+      "color_reason": "Proof-of-concept reconstruction uses restrained period-plausible tones: warm brown skin, white shirt/cuffs, dark charcoal suit, muted brown-gray waistcoat, and a neutral studio background. Exact garment and backdrop colors are not recoverable from the albumen print and remain explicitly interpretive.",
+      "reconstruction_decision": "approved",
+      "reconstruction_confidence": "plausible",
+      "reconstruction_reason": "Historically informed reconstructed view derived from the archival portrait and restoration work. It is the preferred presentation image because it feels most lifelike, while Original, Restored, and Color remain available as evidence states."
     },
     {
       "id": "HAR-IMG-0002",
