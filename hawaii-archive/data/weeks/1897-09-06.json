@@ -69,7 +69,8 @@
       "status": "pilot",
       "event_date": "1897-09-06",
       "publication_date": "1897-09-11",
-      "information_lag_note": "The speech occurred at the September 6 Palace Square mass meeting; the Ke Aloha Aina account was published September 11, preserving a five-day event-to-publication lag."
+      "information_lag_note": "The speech occurred at the September 6 Palace Square mass meeting; the Ke Aloha Aina account was published September 11, preserving a five-day event-to-publication lag.",
+      "media_ref": "HAR-IMG-0016"
     },
     {
       "id": "HAR-1897-09-06-ALOHA-004",
@@ -220,7 +221,8 @@
       "translation_basis": "The figure caption supplies the English headline meaning.",
       "confidence": "supported",
       "route": "cheap-pass",
-      "status": "pilot"
+      "status": "pilot",
+      "media_ref": "HAR-IMG-0012"
     },
     {
       "id": "HAR-1897-09-10-KUOKOA-002",
