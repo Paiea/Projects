@@ -15,6 +15,7 @@ on:
       - 'tests/test_hawaii_archive_june_window.py'
       - 'tests/test_hawaii_image_asset_states.py'
       - 'tests/test_hawaii_reconstructed_default.py'
+      - 'tests/test_hawaii_archive_photo_posts_v2.py'
       - '.github/workflows/project-hub-tests.yml'
   pull_request:
     paths:
@@ -30,6 +31,7 @@ on:
       - 'tests/test_hawaii_archive_june_window.py'
       - 'tests/test_hawaii_image_asset_states.py'
       - 'tests/test_hawaii_reconstructed_default.py'
+      - 'tests/test_hawaii_archive_photo_posts_v2.py'
       - '.github/workflows/project-hub-tests.yml'
 
 jobs:
@@ -52,6 +54,8 @@ jobs:
         run: python tests/test_hawaii_image_asset_states.py
       - name: Verify reconstructed-first media behavior
         run: python tests/test_hawaii_reconstructed_default.py
+      - name: Verify reconstructed-first photo posts
+        run: python tests/test_hawaii_archive_photo_posts_v2.py
       - name: Check Hawaiʻi Archive JavaScript syntax
         run: |
           node --check hawaii-archive/app.js
