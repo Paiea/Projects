@@ -6,6 +6,7 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 ARCHIVE = ROOT / "hawaii-archive"
 IMAGE_INDEX = ARCHIVE / "data" / "images" / "index.json"
+IMAGE_OS = ROOT / "systems" / "image-os"
 
 
 class HawaiiArchivePublicImageCurationTests(unittest.TestCase):
@@ -58,8 +59,21 @@ class HawaiiArchivePublicImageCurationTests(unittest.TestCase):
 
     def test_reader_only_renders_public_views(self):
         app = (ARCHIVE / "app.js").read_text(encoding="utf-8")
+        pilot = (ARCHIVE / "image-pilot.js").read_text(encoding="utf-8")
         self.assertIn("imageRecord.views", app)
+        self.assertIn("imageRecord.views", pilot)
         self.assertNotIn("imageRecord.process_views", app)
+        self.assertNotIn("imageRecord.process_views", pilot)
+
+    def test_image_os_keeps_process_archive_separate_from_public_view_budget(self):
+        current = (IMAGE_OS / "CURRENT.md").read_text(encoding="utf-8").lower()
+        profile = (IMAGE_OS / "profiles" / "historical-hawaii.md").read_text(encoding="utf-8").lower()
+        project_state = (ARCHIVE / "PROJECT_STATE.md").read_text(encoding="utf-8").lower()
+
+        for text in [current, profile, project_state]:
+            self.assertIn("public view budget", text)
+            self.assertIn("process_views", text)
+            self.assertIn("meaningfully different", text)
 
 
 if __name__ == "__main__":
