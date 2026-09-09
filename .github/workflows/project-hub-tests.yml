@@ -1,5 +1,6 @@
 name: Project Hub Tests
 
+# Read-only verification. No workflow step mutates repository content.
 on:
   push:
     paths:
