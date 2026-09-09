@@ -1,5 +1,5 @@
 {
-  "batch_id": "artifact-receipts-001",
+  "batch_id": "artifact-receipts-002",
   "images": [
     {
       "id": "HAR-ART-0001",
@@ -61,6 +61,126 @@
       "review_status": "approved",
       "color_decision": "skipped",
       "reconstruction_decision": "skipped"
+    },
+    {
+      "id": "HAR-ART-0004",
+      "image_class": "document",
+      "title": "Hui Aloha ʻĀina petition, South Kona women",
+      "display_date": "September 11, 1897",
+      "caption": "An exact Hui Aloha ʻĀina petition sheet for women in South Kona, Hawaiʻi, dated September 11, 1897. Showing the district's own sheet keeps the petition geography visible instead of recycling one generic petition image.",
+      "source_authority_url": "https://libweb.hawaii.edu/digicoll/annexation/petition/pet008.php",
+      "source_record_label": "UH Mānoa Library, Kue petition, South Kona, Hawaiʻi, Women, Sept. 11, 1897",
+      "source_image_url": "https://libweb.hawaii.edu/digicoll/annexation/petition/pet008.gif",
+      "source_image_access_note": "UH Mānoa access scan linked directly from the district petition record.",
+      "rights_note": "Historical petition scan shown with UH Mānoa provenance; the collection record remains authority.",
+      "original_asset": "https://libweb.hawaii.edu/digicoll/annexation/petition/pet008.gif",
+      "original_label": "Original petition sheet",
+      "relationship_default": "exact",
+      "relationship_label": "Exact document · South Kona women",
+      "crop_mode": "none",
+      "review_status": "approved",
+      "color_decision": "skipped",
+      "reconstruction_decision": "skipped"
+    },
+    {
+      "id": "HAR-ART-0005",
+      "image_class": "document",
+      "title": "Hui Aloha ʻĀina petition, North Kohala women",
+      "display_date": "September 11, 1897",
+      "caption": "An exact Hui Aloha ʻĀina petition sheet for women in North Kohala, Hawaiʻi, dated September 11, 1897.",
+      "source_authority_url": "https://libweb.hawaii.edu/digicoll/annexation/petition/pet038.php",
+      "source_record_label": "UH Mānoa Library, Kue petition, North Kohala, Hawaiʻi, Women, Sept. 11, 1897",
+      "source_image_url": "https://libweb.hawaii.edu/digicoll/annexation/petition/pet038.gif",
+      "source_image_access_note": "UH Mānoa access scan linked from the North Kohala women's petition record.",
+      "rights_note": "Historical petition scan shown with UH Mānoa provenance; the collection record remains authority.",
+      "original_asset": "https://libweb.hawaii.edu/digicoll/annexation/petition/pet038.gif",
+      "original_label": "Original petition sheet",
+      "relationship_default": "exact",
+      "relationship_label": "Exact document · North Kohala women",
+      "crop_mode": "none",
+      "review_status": "approved",
+      "color_decision": "skipped",
+      "reconstruction_decision": "skipped"
+    },
+    {
+      "id": "HAR-ART-0006",
+      "image_class": "document",
+      "title": "Hui Aloha ʻĀina petition, ʻEwa women",
+      "display_date": "September 11, 1897",
+      "caption": "An exact Hui Aloha ʻĀina petition sheet for women in ʻEwa, Oʻahu, dated September 11, 1897.",
+      "source_authority_url": "https://libweb.hawaii.edu/digicoll/annexation/petition/pet250.php",
+      "source_record_label": "UH Mānoa Library, Kue petition, ʻEwa, Oʻahu, Women, Sept. 11, 1897",
+      "source_image_url": "https://libweb.hawaii.edu/digicoll/annexation/petition/pet250.gif",
+      "source_image_access_note": "UH Mānoa access scan linked directly from the ʻEwa women's petition record.",
+      "rights_note": "Historical petition scan shown with UH Mānoa provenance; the collection record remains authority.",
+      "original_asset": "https://libweb.hawaii.edu/digicoll/annexation/petition/pet250.gif",
+      "original_label": "Original petition sheet",
+      "relationship_default": "exact",
+      "relationship_label": "Exact document · ʻEwa women",
+      "crop_mode": "none",
+      "review_status": "approved",
+      "color_decision": "skipped",
+      "reconstruction_decision": "skipped"
+    },
+    {
+      "id": "HAR-ART-0007",
+      "image_class": "document",
+      "title": "Hui Aloha ʻĀina petition, South Kona men",
+      "display_date": "September 11, 1897",
+      "caption": "An exact Hui Aloha ʻĀina petition sheet for men in South Kona, Hawaiʻi, dated September 11, 1897.",
+      "source_authority_url": "https://libweb.hawaii.edu/digicoll/annexation/petition/pet501.php",
+      "source_record_label": "UH Mānoa Library, Kue petition, South Kona, Hawaiʻi, Men, Sept. 11, 1897",
+      "source_image_url": "https://libweb.hawaii.edu/digicoll/annexation/petition/pet501.gif",
+      "source_image_access_note": "UH Mānoa access scan linked directly from the South Kona men's petition record.",
+      "rights_note": "Historical petition scan shown with UH Mānoa provenance; the collection record remains authority.",
+      "original_asset": "https://libweb.hawaii.edu/digicoll/annexation/petition/pet501.gif",
+      "original_label": "Original petition sheet",
+      "relationship_default": "exact",
+      "relationship_label": "Exact document · South Kona men",
+      "crop_mode": "none",
+      "review_status": "approved",
+      "color_decision": "skipped",
+      "reconstruction_decision": "skipped"
+    },
+    {
+      "id": "HAR-ART-0008",
+      "image_class": "document",
+      "title": "Hui Aloha ʻĀina petition, Honolulu men",
+      "display_date": "September 11, 1897",
+      "caption": "An exact Hui Aloha ʻĀina petition sheet for men in Honolulu, Oʻahu, dated September 11, 1897.",
+      "source_authority_url": "https://libweb.hawaii.edu/digicoll/annexation/petition/pet701.php",
+      "source_record_label": "UH Mānoa Library, Kue petition, Honolulu, Oʻahu, Men, Sept. 11, 1897",
+      "source_image_url": "https://libweb.hawaii.edu/digicoll/annexation/petition/pet701.gif",
+      "source_image_access_note": "UH Mānoa access scan linked directly from the Honolulu men's petition record.",
+      "rights_note": "Historical petition scan shown with UH Mānoa provenance; the collection record remains authority.",
+      "original_asset": "https://libweb.hawaii.edu/digicoll/annexation/petition/pet701.gif",
+      "original_label": "Original petition sheet",
+      "relationship_default": "exact",
+      "relationship_label": "Exact document · Honolulu men",
+      "crop_mode": "none",
+      "review_status": "approved",
+      "color_decision": "skipped",
+      "reconstruction_decision": "skipped"
+    },
+    {
+      "id": "HAR-ART-0009",
+      "image_class": "newspaper",
+      "title": "Hui Pakaka Nalu surf-riding advertisement",
+      "display_date": "July 16, 1897",
+      "caption": "The exact July 16, 1897 Hui Pakaka Nalu surf-riding advertisement from The Independent, offering first-class canoes with experienced Native canoeists at Waikīkī for $1 per hour per person.",
+      "source_authority_url": "https://chroniclingamerica.loc.gov/lccn/sn85047097/1897-07-16/ed-1/seq-4/",
+      "source_record_label": "The Independent, July 16, 1897, p. 4, SURF RIDING advertisement; Chronicling America",
+      "source_image_url": "https://www.surfresearch.com.au/1897_Hui_Pakaka_Nulu_Independent_July16.jpg",
+      "source_image_access_note": "Secondary web crop of the exact historical advertisement. Chronicling America remains the source authority for the 1897 newspaper page.",
+      "rights_note": "The underlying 1897 newspaper is historical public-domain material; this project preserves the Chronicling America record as authority and identifies the secondary crop only as an access image.",
+      "original_asset": "https://www.surfresearch.com.au/1897_Hui_Pakaka_Nulu_Independent_July16.jpg",
+      "original_label": "Newspaper ad scan",
+      "relationship_default": "exact",
+      "relationship_label": "Exact publication artifact · surf-riding ad",
+      "crop_mode": "none",
+      "review_status": "approved",
+      "color_decision": "skipped",
+      "reconstruction_decision": "skipped"
     }
   ],
   "attachments": [
@@ -75,6 +195,30 @@
     {
       "item_id": "HAR-1897-06-17-LILIU-005",
       "media_ref": "HAR-ART-0003"
+    },
+    {
+      "item_id": "HAR-1897-09-11-PETITION-HI-W-001",
+      "media_ref": "HAR-ART-0004"
+    },
+    {
+      "item_id": "HAR-1897-09-11-PETITION-HI-KOHALA-W-001",
+      "media_ref": "HAR-ART-0005"
+    },
+    {
+      "item_id": "HAR-1897-09-11-PETITION-OAHU-EWA-W-001",
+      "media_ref": "HAR-ART-0006"
+    },
+    {
+      "item_id": "HAR-1897-09-11-PETITION-HI-M-001",
+      "media_ref": "HAR-ART-0007"
+    },
+    {
+      "item_id": "HAR-1897-09-11-PETITION-OAHU-M-001",
+      "media_ref": "HAR-ART-0008"
+    },
+    {
+      "item_id": "HAR-1897-07-16-IND-SURF-001",
+      "media_ref": "HAR-ART-0009"
     }
   ]
 }
