@@ -72,8 +72,9 @@ Important boundaries:
 - mixed Pidgin + Hawaiian is intentional translanguaging support and is not something to automatically correct away
 - `standalone: false` islands are recognition-only scaffolds and must not become free production/scenario prompts
 - Core is still full-phrase-first; islands appear lightly after introduction or as a one-step repair after a full-parent miss
+- when an island is introduced, the next rep retrieves that exact island once before normal routing resumes
 - if a missed parent has no useful island, repair falls back to supported parent recognition rather than repeating the same hard card
-- an island miss can zoom further down to recognition
+- an island miss zooms down on that exact failed island, usually to recognition, rather than switching sideways to another island under the same parent
 - successful repair immediately rebuilds the same parent once before normal routing resumes
 - repair and immediate rebuild cards never receive **SHOW WHAT YOU KNOW** or Seally's harder-transition behavior
 - extra material is island-first and only expands back to the full parent after the island earns retrieval/context evidence
@@ -139,6 +140,7 @@ Conversation question scaffolding is learner-state driven, not arbitrary rep par
 - if the paired question thought is still unfamiliar, show the Pidgin question scaffold first
 - once the paired question has recognition evidence, show the Hawaiian question
 - if the learner misses the reply, temporarily fall back to the Pidgin question scaffold for repair
+- that one-shot Pidgin fallback survives any intermediate repair card and is consumed only when the conversational reply card actually returns
 - the learner-facing response cue stores only the intended Pidgin reply, never a translation/explanation string such as `Answer: ...`
 
 ## Routing Judgment
@@ -149,11 +151,13 @@ Routing should make the next rep meaningfully different or meaningfully easier, 
 - it also avoids the previous vector when another unlocked vector is available
 - extra material may refuse an island → full-parent jump when the island is not stable yet; scaffold safety outranks novelty
 - one parent miss is enough to request a zoom-down repair
-- an island miss can force recognition as the next repair level
+- an island miss repairs the exact failed island and can force recognition as the next repair level
 - successful repair schedules one immediate fuller-parent rebuild
 - repair/rebuild cards are scaffold work, never **SHOW WHAT YOU KNOW**
 - repeated misses pause new-parent expansion
 - positive scored retrieval evidence on active material earns expansion; simply seeing an intro does not
+- rendering a card does not count as `lastSeen`; spacing evidence updates when the learner actually completes an intro, answers, or deliberately defers a use task
+- `USE IT` → **Not yet** is a neutral defer, not a Hawaiian miss: it gives no negative strength, repair request, or Seally miss reaction
 - rep cadence remains a minimum pacing gate
 
 ## Uncle Seally
@@ -198,7 +202,7 @@ Mission remains transfer, not another quiz.
 - **I USED IT** writes `use` evidence into the same Core state
 - refreshing does not reroll the mission
 
-## ʻŌlelo Noʻeau
+## ʻŌLELO NOʻEAU
 
 Noʻeau remains inline cultural flavor under Core Learn, not a separate user-facing mode.
 
