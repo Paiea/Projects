@@ -84,12 +84,13 @@ class PidginOleloIslandRouterTests(unittest.TestCase):
         '''
         data = run_node(script)
         self.assertEqual(data["recognize"]["vector"], "recognize")
-        self.assertEqual(data["recognize"]["answer"], "How? / How going?")
+        self.assertEqual(data["recognize"]["answer"], "How you?")
         self.assertEqual(data["produce"]["vector"], "produce")
         self.assertEqual(data["produce"]["answer"], "Pehea?")
         self.assertIn("____", data["produce"]["prompt"])
         self.assertEqual(data["scenario"]["vector"], "scenario")
-        self.assertEqual(data["scenario"]["prompt"], "Pehea? Tough day?")
+        self.assertEqual(data["scenario"]["prompt"], "____ Tough day?")
+        self.assertEqual(data["scenario"]["answer"], "Pehea?")
         self.assertTrue(data["scenario"]["island"])
 
 
