@@ -4,6 +4,13 @@ import unittest
 
 
 ROOT = Path(__file__).resolve().parents[1]
+WEEKS = ROOT / "hawaii-archive" / "data" / "weeks"
+
+
+def load_attention_window():
+    window = json.loads((WEEKS / "1897-08-23.json").read_text(encoding="utf-8"))
+    base = json.loads((WEEKS / window["extends"]).read_text(encoding="utf-8"))
+    return window, [*window["items"], *base["items"]]
 
 
 class HawaiiArchiveTests(unittest.TestCase):
@@ -16,15 +23,15 @@ class HawaiiArchiveTests(unittest.TestCase):
         self.assertTrue((ROOT / "hawaii-archive" / "PROJECT_STATE.md").exists())
 
     def test_attention_window_has_authority_routing_and_voice_evidence(self):
-        path = ROOT / "hawaii-archive" / "data" / "weeks" / "1897-08-23.json"
-        payload = json.loads(path.read_text(encoding="utf-8"))
+        payload, items = load_attention_window()
         self.assertEqual(payload["week_start"], "1897-08-23")
         self.assertEqual(payload["week_end"], "1897-09-12")
-        # The widened historical-attention window must preserve the 47-post September checkpoint
-        # and add grounded lead-up material rather than merely changing the label.
-        self.assertGreaterEqual(len(payload["items"]), 50)
+        self.assertEqual(payload["extends"], "1897-09-06.json")
+        # The widened window preserves the accepted 47-post September fixture by reference
+        # and adds grounded lead-up material rather than copying or relabeling it.
+        self.assertGreaterEqual(len(items), 50)
 
-        ids = [item["id"] for item in payload["items"]]
+        ids = [item["id"] for item in items]
         self.assertEqual(len(ids), len(set(ids)))
 
         required = {
@@ -44,7 +51,7 @@ class HawaiiArchiveTests(unittest.TestCase):
             "route",
             "status",
         }
-        for item in payload["items"]:
+        for item in items:
             self.assertTrue(required.issubset(item))
             self.assertGreaterEqual(item["date"], payload["week_start"])
             self.assertLessEqual(item["date"], payload["week_end"])
@@ -56,18 +63,15 @@ class HawaiiArchiveTests(unittest.TestCase):
             self.assertTrue(item["feed_rendering"])
             self.assertTrue(item["voice_evidence"])
 
-        # The backward expansion has to contain actual pre-rally material.
-        pre_rally = [item for item in payload["items"] if item["date"] < "1897-09-06"]
+        pre_rally = [item for item in items if item["date"] < "1897-09-06"]
         self.assertGreaterEqual(len(pre_rally), 3)
 
-        # Scale should broaden the surviving attention field without imposing a topic quota.
-        self.assertGreaterEqual(len({item["publication"] for item in payload["items"]}), 3)
-        self.assertGreaterEqual(len({item["place"] for item in payload["items"]}), 4)
+        self.assertGreaterEqual(len({item["publication"] for item in items}), 3)
+        self.assertGreaterEqual(len({item["place"] for item in items}), 4)
 
-        # At least one record must prove that event time and publication time are not collapsed.
         lagged = [
             item
-            for item in payload["items"]
+            for item in items
             if item.get("event_date")
             and item.get("publication_date")
             and item["event_date"] != item["publication_date"]
@@ -75,11 +79,11 @@ class HawaiiArchiveTests(unittest.TestCase):
         ]
         self.assertTrue(lagged)
 
-        energetic = [item for item in payload["items"] if "!!" in item["hawaiian"]]
+        energetic = [item for item in items if "!!" in item["hawaiian"]]
         self.assertTrue(energetic)
         self.assertTrue(any("!!" in item["feed_rendering"] for item in energetic))
 
-        voiced = [item for item in payload["items"] if item.get("voice_actor")]
+        voiced = [item for item in items if item.get("voice_actor")]
         self.assertGreaterEqual(len(voiced), 6)
         self.assertTrue(any(item["rhetorical_mode"] == "call-and-response" for item in voiced))
         self.assertTrue(any(item["rhetorical_mode"] == "warning" for item in voiced))
@@ -89,15 +93,13 @@ class HawaiiArchiveTests(unittest.TestCase):
         script = (ROOT / "hawaii-archive" / "app.js").read_text(encoding="utf-8")
         self.assertIn("AUGUST 23–SEPTEMBER 12, 1897", page)
         self.assertIn('data/weeks/1897-08-23.json', script)
+        self.assertIn("windowPayload.extends", script)
         self.assertNotIn('const WEEK_DATA_URL = "data/weeks/1897-09-06.json"', script)
 
     def test_petition_geography_expansion_is_broad_without_fake_voice(self):
-        path = ROOT / "hawaii-archive" / "data" / "weeks" / "1897-08-23.json"
-        payload = json.loads(path.read_text(encoding="utf-8"))
-        items = payload["items"]
+        _, items = load_attention_window()
         petition_pages = [item for item in items if item["kind"] == "petition-district-page"]
 
-        # This is a source-density checkpoint, not a topical quota. The archive earns the count.
         self.assertGreaterEqual(len(items), 50)
         self.assertGreaterEqual(len(petition_pages), 34)
         self.assertGreaterEqual(len({item["place"] for item in petition_pages}), 20)
@@ -221,10 +223,8 @@ class HawaiiArchiveTests(unittest.TestCase):
         self.assertTrue(all(image.get("colorization_class") for image in approved_color))
         self.assertTrue(all(image.get("color_confidence") in {"plausible", "supported", "verified"} for image in approved_color))
 
-        window = json.loads(
-            (ROOT / "hawaii-archive" / "data" / "weeks" / "1897-08-23.json").read_text(encoding="utf-8")
-        )
-        image_refs = [item.get("image_ref") for item in window["items"] if item.get("image_ref")]
+        _, items = load_attention_window()
+        image_refs = [item.get("image_ref") for item in items if item.get("image_ref")]
         self.assertGreaterEqual(len(image_refs), 1)
         self.assertTrue(set(image_refs).issubset({image["id"] for image in images}))
 
