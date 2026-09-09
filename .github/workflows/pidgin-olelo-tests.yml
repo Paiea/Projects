@@ -35,7 +35,11 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: pidgin-olelo-test-output
-          path: test-output.txt
+          path: |
+            test-output.txt
+            pidgin-olelo/app.js
+            pidgin-olelo/core-engine.js
+            pidgin-olelo/islands.js
       - name: Check JavaScript syntax
         run: |
           node --check pidgin-olelo/app.js
