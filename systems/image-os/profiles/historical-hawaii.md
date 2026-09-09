@@ -1,4 +1,4 @@
-# Image OS Profile — Historical Hawaiʻi
+# Image OS Profile - Historical Hawaiʻi
 
 Source of truth for the **project-local visual profile** used when Image OS processes archival Hawaiʻi material for Hawaiʻi Archive Revival.
 
@@ -12,7 +12,7 @@ The default result should feel like a careful restoration or source-locked recon
 
 ## Default reconstruction stack
 
-When an actual archival photograph exists, the preferred public stack is:
+When an actual archival photograph exists, the preferred conceptual stack is:
 
 `Original source → source-locked reconstruction → optional interpretive third layer`
 
@@ -29,6 +29,26 @@ Preserve aggressively in that second layer:
 - the source's overall moment and social action.
 
 An interpretive third layer may add more life, inferred detail, or a different presentation only when useful, and must be labeled separately so it cannot silently replace the source-locked reconstruction.
+
+## Public view budget
+
+The public Hawaiʻi Archive surface should normally expose only **2 to 4 meaningfully different** visual states per record.
+
+Use:
+
+- `views` for the curated public controls;
+- `process_views` for earlier attempts, near-duplicates, held experiments, intermediate restoration/color states, and other useful process evidence.
+
+Preserve process evidence when it teaches the system, but do not make the reader click through multiple versions that communicate essentially the same thing.
+
+Typical public choices:
+
+- portrait: best reconstruction + source/reference;
+- archival place: best reconstruction + exact source, plus one genuinely different close/reference view if useful;
+- illustration: photo reconstruction + original newspaper image;
+- held reconstruction: archival source only.
+
+A state earns a public button only when it is **meaningfully different** in visual information, evidence role, or reader experience.
 
 ## Default preferences
 
@@ -51,10 +71,10 @@ An interpretive third layer may add more life, inferred detail, or a different p
 
 For color or reconstructed detail, classify important claims as:
 
-- `verified` — supported by direct historical evidence for this subject/object;
-- `supported` — strong period/source evidence supports the interpretation;
-- `plausible` — reasonable period-consistent inference but not established;
-- `unknown` — evidence is insufficient.
+- `verified` - supported by direct historical evidence for this subject/object;
+- `supported` - strong period/source evidence supports the interpretation;
+- `plausible` - reasonable period-consistent inference but not established;
+- `unknown` - evidence is insufficient.
 
 Do not upgrade `plausible` to `supported` because the generated result looks convincing.
 
@@ -75,9 +95,9 @@ Crowd anatomy needs an explicit pass. Hands, wrists, arms, shoulders, occlusions
 
 Every image considered for Hawaiʻi Archive Revival should state how it relates to the post or week:
 
-- `exact` — same documented event/subject/date relationship;
-- `near` — strongly related place/person/period, but not the exact documented moment;
-- `context` — useful visual world-building for the period/topic with no direct event claim.
+- `exact` - same documented event/subject/date relationship;
+- `near` - strongly related place/person/period, but not the exact documented moment;
+- `context` - useful visual world-building for the period/topic with no direct event claim.
 
 The public surface must preserve that distinction whenever confusion would be likely.
 
@@ -107,4 +127,5 @@ Reject or redo results that:
 - restage an archival photograph when the job called for a source-locked reconstruction;
 - introduce unsupported readable signs, banners, headlines, flags, or slogans;
 - show broken fingers, merged hands, missing limbs, disconnected arms, or impossible body geometry;
-- drift toward generic racial/ethnic stereotypes rather than the documented Hawaiʻi context.
+- drift toward generic racial/ethnic stereotypes rather than the documented Hawaiʻi context;
+- expose multiple public controls for near-duplicate attempts when one stronger view communicates the same thing.
