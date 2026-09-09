@@ -1,4 +1,4 @@
-const WEEK_DATA_URL = "data/weeks/1897-09-06.json";
+const ATTENTION_WINDOW_URL = "data/weeks/1897-08-23.json";
 const IMAGE_DATA_URL = "data/images/index.json";
 
 const feed = document.querySelector("#feed");
@@ -352,7 +352,7 @@ function renderWeek(payload, imagePayload) {
   marker.textContent = "You're caught up.";
   end.append(marker);
   const note = document.createElement("p");
-  note.textContent = "That's everything currently surfaced for this historical week.";
+  note.textContent = "That's everything currently surfaced for this historical window.";
   end.append(note);
   feed.append(end);
 }
@@ -373,8 +373,19 @@ function fetchFreshJson(url) {
   });
 }
 
+function loadAttentionWindow() {
+  return fetchFreshJson(ATTENTION_WINDOW_URL).then((windowPayload) => {
+    if (!windowPayload.extends) return windowPayload;
+
+    return fetchFreshJson(`data/weeks/${windowPayload.extends}`).then((basePayload) => ({
+      ...windowPayload,
+      items: [...windowPayload.items, ...basePayload.items],
+    }));
+  });
+}
+
 Promise.all([
-  fetchFreshJson(WEEK_DATA_URL),
+  loadAttentionWindow(),
   fetchFreshJson(IMAGE_DATA_URL),
 ])
   .then(([weekPayload, imagePayload]) => renderWeek(weekPayload, imagePayload))
