@@ -9,6 +9,8 @@ on:
       - 'hawaii-archive/**'
       - 'systems/image-os/**'
       - 'scripts/build_hawaii_image_assets.py'
+      - 'scripts/materialize_hawaii_image_os_v2_live_assets.py'
+      - '.image-os-staging/**'
       - 'tests/test_project_hub.py'
       - 'tests/test_hawaii_archive.py'
       - 'tests/test_hawaii_image_asset_states.py'
@@ -22,11 +24,15 @@ on:
       - 'hawaii-archive/**'
       - 'systems/image-os/**'
       - 'scripts/build_hawaii_image_assets.py'
+      - 'scripts/materialize_hawaii_image_os_v2_live_assets.py'
       - 'tests/test_project_hub.py'
       - 'tests/test_hawaii_archive.py'
       - 'tests/test_hawaii_image_asset_states.py'
       - 'tests/test_hawaii_image_os_v2_live.py'
       - '.github/workflows/project-hub-tests.yml'
+
+permissions:
+  contents: write
 
 jobs:
   verify:
@@ -36,6 +42,20 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Materialize staged Image OS v2 assets
+        if: github.ref == 'refs/heads/feature/hawaii-archive-image-os-v2-live' && github.actor != 'github-actions[bot]' && hashFiles('.image-os-staging/READY') != ''
+        run: python scripts/materialize_hawaii_image_os_v2_live_assets.py
+      - name: Commit materialized Image OS v2 assets
+        if: github.ref == 'refs/heads/feature/hawaii-archive-image-os-v2-live' && github.actor != 'github-actions[bot]' && hashFiles('.image-os-staging/READY') != ''
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add hawaii-archive/assets/images/HAR-IMG-0001/reconstructed.jpg
+          git add hawaii-archive/assets/images/HAR-IMG-0002/color-v2.jpg
+          git add hawaii-archive/assets/images/HAR-IMG-0002/reconstructed.jpg
+          git rm -r .image-os-staging
+          git commit -m "build: materialize Image OS v2 live assets"
+          git push origin HEAD:feature/hawaii-archive-image-os-v2-live
       - name: Verify project hub registration
         run: python tests/test_project_hub.py
       - name: Verify Hawaiʻi Archive Revival contracts
