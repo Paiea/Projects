@@ -545,6 +545,59 @@ h1 {
   font-weight: 750;
 }
 
+.resource-links {
+  margin: 14px 0 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+
+.resource-links-title {
+  color: var(--ink);
+  font-size: 0.76rem;
+  font-weight: 850;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.resource-link {
+  padding: 9px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.resource-link:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.resource-link-topline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 7px;
+}
+
+.resource-link-topline a {
+  color: var(--accent);
+  font-weight: 800;
+}
+
+.resource-kind {
+  display: inline-flex;
+  padding: 3px 6px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 0.65rem;
+  font-weight: 800;
+}
+
+.resource-note {
+  margin-top: 5px !important;
+  color: var(--muted);
+  font-size: 0.76rem;
+  line-height: 1.45;
+}
+
 .routing-line {
   color: var(--muted);
   font-size: 0.76rem;
