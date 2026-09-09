@@ -366,15 +366,16 @@ function renderError(error) {
   feed.append(message);
 }
 
+function fetchFreshJson(url) {
+  return fetch(url, { cache: "no-store" }).then((response) => {
+    if (!response.ok) throw new Error(`${url} returned ${response.status}`);
+    return response.json();
+  });
+}
+
 Promise.all([
-  fetch(WEEK_DATA_URL).then((response) => {
-    if (!response.ok) throw new Error(`Week data returned ${response.status}`);
-    return response.json();
-  }),
-  fetch(IMAGE_DATA_URL).then((response) => {
-    if (!response.ok) throw new Error(`Image data returned ${response.status}`);
-    return response.json();
-  }),
+  fetchFreshJson(WEEK_DATA_URL),
+  fetchFreshJson(IMAGE_DATA_URL),
 ])
   .then(([weekPayload, imagePayload]) => renderWeek(weekPayload, imagePayload))
   .catch(renderError);
