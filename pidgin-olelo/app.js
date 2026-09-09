@@ -127,6 +127,8 @@ let reviewingHistory = false;
 let preferredItemId = null;
 let excludeVectorOnce = null;
 let avoidRepresentationOnce = null;
+let repairVectorOnce = null;
+let rebuildParentOnce = null;
 let autoRated = false;
 let sessionMisses = {};
 let lastSeallyRep = state.repCount;
@@ -275,11 +277,9 @@ function activeItems() {
 }
 
 function itemHasEvidence(itemId) {
-  if (state.introduced[itemId]) return true;
   if (Object.values(vectorStrengths[itemId] || {}).some((value) => Number(value) > 0)) return true;
   return ISLANDS.islandsFor(itemId).some((entry) => (
-    islandState.introduced[entry.id]
-    || Object.values(islandStrengths[entry.id] || {}).some((value) => Number(value) > 0)
+    Object.values(islandStrengths[entry.id] || {}).some((value) => Number(value) > 0)
   ));
 }
 
@@ -349,24 +349,30 @@ function nextQuestion() {
   const item = nextItem();
   if (!item) return null;
 
-  const representation = ISLANDS.selectRepresentation({
-    deck: IS_EXTRA_DECK ? "extra" : "core",
-    parentId: item.id,
-    parentIntroduced: Boolean(state.introduced[item.id]),
-    islandStrengths,
-    repCount: state.repCount,
-    repairPending: (sessionMisses[item.id] || 0) >= 1,
-    avoidKind: avoidRepresentationOnce,
-  });
+  const rebuilding = rebuildParentOnce === item.id;
+  const representation = rebuilding
+    ? { kind: "parent", rebuild: true }
+    : ISLANDS.selectRepresentation({
+      deck: IS_EXTRA_DECK ? "extra" : "core",
+      parentId: item.id,
+      parentIntroduced: Boolean(state.introduced[item.id]),
+      islandStrengths,
+      repCount: state.repCount,
+      repairPending: (sessionMisses[item.id] || 0) >= 1,
+      avoidKind: avoidRepresentationOnce,
+    });
 
   if (representation.kind === "island") {
     const island = representation.island;
+    const vector = representation.repair && repairVectorOnce
+      ? repairVectorOnce
+      : pickIslandVector(island.id);
     const question = !islandState.introduced[island.id]
       ? ISLANDS.buildIslandIntro(item, island)
       : ISLANDS.buildIslandQuestion(
         item,
         island,
-        pickIslandVector(island.id),
+        vector,
         islandAlternatives(activeItems(), island.id),
         island.mixedExamples?.[state.repCount % Math.max(1, island.mixedExamples?.length || 1)] || null,
       );
@@ -397,13 +403,15 @@ function nextQuestion() {
           vectorStrengths,
           sessionMisses[item.id] || 0,
         );
-        return ENGINE.buildResponseQuestion(item, activeItems(), { question, cue: response.cue });
+        const built = ENGINE.buildResponseQuestion(item, activeItems(), { question, cue: response.cue });
+        return rebuilding ? { ...built, rebuild: true } : built;
       }
     }
   }
 
   const scenario = CURRICULUM.scenarioFor(item.id);
-  return ENGINE.buildQuestion(item, vector, activeItems(), scenario);
+  const built = ENGINE.buildQuestion(item, vector, activeItems(), scenario);
+  return rebuilding ? { ...built, rebuild: true } : built;
 }
 
 function isReviewingHistory() {
@@ -467,6 +475,17 @@ function rateQuestion(delta) {
   ENGINE.rateVector(vectorStrengths, currentItem.id, currentQuestion.vector, delta);
 }
 
+function scheduleRepairOutcome(correct) {
+  if (correct && currentQuestion?.repair) {
+    preferredItemId = currentItem.id;
+    rebuildParentOnce = currentItem.id;
+    return;
+  }
+  if (!correct && currentQuestion?.island) {
+    repairVectorOnce = "recognize";
+  }
+}
+
 function recordKnownChoice(correct) {
   if (!currentQuestion || currentQuestion.intro || autoRated || isReviewingHistory()) return;
 
@@ -476,12 +495,16 @@ function recordKnownChoice(correct) {
   autoRated = true;
 
   if (!correct) preferredItemId = currentItem.id;
+  scheduleRepairOutcome(correct);
 
   if (correct) {
     renderFeedback("got", currentQuestion.repair
-      ? "Got the repair. Now we can build the whole thought back up."
+      ? "Got the repair. Now we build the whole thought back up once."
       : "Chee. That one. Say the Hawaiian once before you move.");
     registerCorrect(currentItem.id);
+  } else if (currentQuestion.island && currentQuestion.vector === "recognize") {
+    renderFeedback("miss", `Almost. ${currentQuestion.prompt} carries ${currentQuestion.answer} here. Get the smaller thought first.`);
+    registerMiss(currentItem.id);
   } else if (currentQuestion.response) {
     renderFeedback("miss", `😭 Brah. Wrong reply. The line that fits is ${currentQuestion.answer}. Say um once.`);
     registerMiss(currentItem.id);
@@ -569,7 +592,8 @@ function drawQuestion(question, { preserveReveal = false } = {}) {
   resetButtons();
 
   const reviewing = isReviewingHistory();
-  const showWhatYouKnow = !question.intro && state.repCount > 0 && (state.repCount + 1) % ENGINE.SHOW_WHAT_YOU_KNOW_EVERY === 0;
+  const showWhatYouKnow = !question.intro && !question.repair && !question.rebuild
+    && state.repCount > 0 && (state.repCount + 1) % ENGINE.SHOW_WHAT_YOU_KNOW_EVERY === 0;
   els.vectorLabel.textContent = reviewing
     ? `REVIEW · ${question.label}`
     : (showWhatYouKnow ? `SHOW WHAT YOU KNOW · ${question.label}` : question.label);
@@ -625,15 +649,20 @@ function renderNextQuestion({ scrollToQuestion = false } = {}) {
   const previousQuestion = currentQuestion;
   const question = nextQuestion();
   if (!question) return;
-  const showWhatYouKnow = !question.intro && state.repCount > 0 && (state.repCount + 1) % ENGINE.SHOW_WHAT_YOU_KNOW_EVERY === 0;
+  const showWhatYouKnow = !question.intro && !question.repair && !question.rebuild
+    && state.repCount > 0 && (state.repCount + 1) % ENGINE.SHOW_WHAT_YOU_KNOW_EVERY === 0;
   preferredItemId = null;
   excludeVectorOnce = null;
   avoidRepresentationOnce = null;
+  repairVectorOnce = null;
+  rebuildParentOnce = null;
   pushQuestion(question);
 
   if (
-    showWhatYouKnow ||
-    (previousQuestion && question.itemId === previousQuestion.itemId && question.stage > previousQuestion.stage)
+    !question.repair && !question.rebuild && (
+      showWhatYouKnow ||
+      (previousQuestion && question.itemId === previousQuestion.itemId && question.stage > previousQuestion.stage)
+    )
   ) {
     setSeallyState("harder", question.itemId);
   }
@@ -692,12 +721,13 @@ function rateCurrent(delta) {
   rateQuestion(delta);
   state.repCount += 1;
   state.lastSeen[item.id] = Date.now();
+  scheduleRepairOutcome(delta > 0);
 
   if (delta > 0) {
     const message = currentQuestion.vector === "use"
       ? `Used um. ${item.hawaiian} gets real-world credit, which matters more than one tap in here.`
       : (currentQuestion.repair
-        ? `Got the smaller repair for ${item.hawaiian}. Now we build the whole thought back up.`
+        ? `Got the smaller repair for ${item.hawaiian}. Now we build the whole thought back up once.`
         : `Got um. ${currentQuestion.label.toLowerCase()} is getting stronger for ${currentQuestion.island ? currentQuestion.answer : item.hawaiian}`);
     renderFeedback("got", message);
     registerCorrect(item.id);
