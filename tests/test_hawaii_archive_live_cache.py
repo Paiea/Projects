@@ -13,7 +13,8 @@ class HawaiiArchiveLiveCacheTests(unittest.TestCase):
         self.assertIn('app.js?v=', page)
         self.assertIn('cache: "no-store"', script)
         self.assertIn('fetchFreshJson', script)
-        self.assertIn('fetchFreshJson(WEEK_DATA_URL)', script)
+        self.assertIn('fetchFreshJson(ATTENTION_WINDOW_URL)', script)
+        self.assertIn('fetchFreshJson(`data/weeks/${windowPayload.extends}`)', script)
 
 
 if __name__ == "__main__":
