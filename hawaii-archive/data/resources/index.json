@@ -73,6 +73,23 @@
       ]
     },
     {
+      "item_id": "HAR-1897-07-03-ALOHA-PULE-001",
+      "links": [
+        {
+          "label": "Read Liliʻuokalani's 1897 Kumulipo translation",
+          "url": "https://sacred-texts.com/pac/lku/index.htm",
+          "kind": "primary-source",
+          "note": "Digital reproduction of Liliʻuokalani's 1897 English translation of the Kumulipo. The book's title page says the translation was completed in Washington, D.C., on May 20, 1897."
+        },
+        {
+          "label": "See the Hawaiʻi State Archives Kumulipo record",
+          "url": "https://ags.hawaii.gov/archives/online-exhibitions/mea-lili%CA%BBuokalani-exhibition/",
+          "kind": "archive-context",
+          "note": "Hawaiʻi State Archives identifies An Account of the Creation of the World as Liliʻuokalani's published Kumulipo translation, dated 1897."
+        }
+      ]
+    },
+    {
       "item_id": "HAR-1897-08-21-ALOHA-MELE-001",
       "links": [
         {
