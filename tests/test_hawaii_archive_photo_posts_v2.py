@@ -18,15 +18,23 @@ def load_chain(filename):
 
 
 class HawaiiArchivePhotoPostsV2Tests(unittest.TestCase):
-    def test_palace_uses_new_reconstructed_view_first(self):
+    def test_palace_and_poi_keep_reconstructions_in_their_authoritative_records(self):
         payload = json.loads(IMAGE_INDEX.read_text(encoding="utf-8"))
         images = {item["id"]: item for item in payload["images"]}
+
         palace = images["HAR-IMG-0002"]
         self.assertEqual(
             palace["reconstructed_asset"],
-            "assets/images/HAR-IMG-0010/reconstructed.png",
+            "assets/images/HAR-IMG-0002/reconstructed.png",
         )
         self.assertEqual(palace["reconstruction_decision"], "approved")
+
+        poi = images["HAR-IMG-0003"]
+        self.assertEqual(
+            poi["reconstructed_asset"],
+            "assets/images/HAR-IMG-0003/reconstructed.png",
+        )
+        self.assertEqual(poi["reconstruction_decision"], "approved")
 
     def test_new_visual_records_preserve_real_old_source_and_reconstruction(self):
         payload = json.loads(IMAGE_INDEX.read_text(encoding="utf-8"))
@@ -38,13 +46,15 @@ class HawaiiArchivePhotoPostsV2Tests(unittest.TestCase):
             "HAR-IMG-0014",
             "HAR-IMG-0015",
             "HAR-IMG-0016",
-            "HAR-IMG-0018",
         }
         self.assertTrue(expected.issubset(images))
         for image_id in expected:
             item = images[image_id]
             self.assertTrue(item["original_asset"].startswith("https://"))
-            self.assertTrue(item["reconstructed_asset"])
+            self.assertEqual(
+                item["reconstructed_asset"],
+                f"assets/images/{image_id}/reconstructed.png",
+            )
             self.assertTrue(item["source_authority_url"].startswith("https://"))
             self.assertEqual(item["reconstruction_decision"], "approved")
             self.assertIn(item["relationship_default"], {"near", "context"})
