@@ -31,21 +31,23 @@ Always inspect fresh `main` before editing because text/history and visual work 
 
 ## Current Text State
 
-The public chronology is **June 1-September 12, 1897** and recursively composes **62 grounded text records**:
+The public chronology is **June 1-September 12, 1897** and recursively composes **65 grounded text records**:
 
-`1897-06-01.json` (11 records)
+`1897-06-01.json` (14 records)
 → `1897-08-23.json` (4 records)
 → `1897-09-06.json` (47 records)
 
 Current chronology anchors include:
 
 - June 7: supported archival reconstruction of William White starting *Ka Ahalono o Hawaii*;
+- June 11: *The Hawaiian Gazette* reports 24 people canoe surf-riding in Pakaka Nalu canoes, with brighter moonlight bringing more night parties;
 - June 16: proposed annexation treaty signed in Washington;
 - June 17: Liliʻuokalani formally protests the treaty;
 - June 19: ordinary-life/music signal from Honolulu;
 - June 29: Kamehameha School for Girls graduation program;
 - July 3: *Ke Aloha Aina* `He Pule Ola Hawaii` / Kumulipo response;
-- July 10: Hawaiian newspaper publication of Liliʻuokalani's June 17 protest;
+- July 16: *The Independent* advertises Hui Pakaka Nalu surf rides at Waikīkī for $1 per hour per person;
+- August 1/2: *The Independent* reports a crowded Waikīkī Sunday of band music, bathing, and surf riding on boards and in canoes;
 - August 21: Samuel K. Kamakaia unity/peace mele;
 - September 6: Palace Square anti-annexation mass meeting;
 - September 9: Republic of Hawaiʻi Senate ratifies the treaty;
@@ -75,11 +77,19 @@ Approved direction:
 
 `data/artifacts/index.json` is a small batchable attachment layer. It uses the same media renderer as photographs/reconstructions but keeps exact historical artifacts semantically distinct.
 
-Current **artifact-receipts-001** proof batch:
+Current **artifact-receipts-002** batch preserves the first three receipts and adds six more exact-source attachments:
 
 - `HAR-1897-09-11-PETITION-001` → `HAR-ART-0001`: National Archives image of an original Hui Aloha ʻĀina anti-annexation petition sheet with bilingual heading and signatures;
 - `HAR-1897-06-17-LILIU-002` → `HAR-ART-0002`: UH Mānoa scan of the signature area from Liliʻuokalani's June 17 protest;
-- `HAR-1897-06-17-LILIU-005` → `HAR-ART-0003`: UH Mānoa scan of the Hawaiian-language newspaper printing of the protest.
+- `HAR-1897-06-17-LILIU-005` → `HAR-ART-0003`: UH Mānoa scan of the Hawaiian-language newspaper printing of the protest;
+- South Kona women → `HAR-ART-0004`: their own Sept. 11 petition sheet;
+- North Kohala women → `HAR-ART-0005`: their own Sept. 11 petition sheet;
+- ʻEwa women → `HAR-ART-0006`: their own Sept. 11 petition sheet;
+- South Kona men → `HAR-ART-0007`: their own Sept. 11 petition sheet;
+- Honolulu men → `HAR-ART-0008`: their own Sept. 11 petition sheet;
+- `HAR-1897-07-16-IND-SURF-001` → `HAR-ART-0009`: exact publication artifact for the Hui Pakaka Nalu surf-riding advertisement, using a secondary crop only as the access image while Chronicling America remains source authority.
+
+The petition rule is now concrete: **show distinct district sheets where available instead of recycling one generic petition receipt across the geography.**
 
 ### 4. Visual-context photo cards
 
@@ -94,7 +104,7 @@ The first batch adds:
 - Waikīkī, late nineteenth century, after the June 19 ordinary-life/music signal;
 - poi preparation, 1896, after the June 29 school-program signal.
 
-The sourced historical count remains **62**. Visual-context cards do not inflate the archive's evidence count.
+The sourced historical count is **65**. Visual-context cards do not inflate the archive's evidence count.
 
 ## Visual Feed State
 
@@ -185,13 +195,14 @@ A newly surfaced meeting illustration is a candidate for this lane, but it is no
 - Political repetition is not automatically redundancy when it shows sustained attention, organizing, argument, or geographic spread.
 - Sparse dates may stay sparse.
 - Preserve event/publication/circulation timing when evidence distinguishes them.
-- Do not manufacture Hawaiian from English-only research.
+- Do not manufacture Hawaiian from English-only research. Preserve only source-facing Hawaiian names or terms when the underlying item is English-language.
 - `voice_actor` requires real attribution.
 - Collective petition records remain collective. Do not invent individual signer speech.
 - Feed rendering is accessibility, not historical quotation.
 - **Fast surface, deep archive.** Prefer concise feed cards with optional doors into the real historical object.
 - **Show receipts when the artifact earns it.** Do not reduce every artifact to a text link.
 - **Images can themselves be posts.** Use short photo-first cards when visual context materially improves the feed without inventing historical speech.
+- **Visual density is allowed.** The product is an archive feed, not a sparse gallery. More photos, scans, and receipt media are useful when relationship/provenance stays honest.
 - **Do not make every card visually busy.** Media is earned when seeing the object materially changes the experience.
 - **Exact / near / context must stay explicit.** Never make a contextual image look like an exact event photograph.
 - **Actual parent source and additional references can coexist.** Do not collapse distinct evidence roles into one misleading `Original` control.
@@ -208,24 +219,25 @@ This restriction is specific to IHLRT. Other UH Mānoa digital-collection pages 
 
 ## Known Gaps / High-Value Work
 
-- June 1-15 remains sparse, though no longer empty.
+- June 1-15 remains relatively sparse, though June 7 and June 11 now give it both information-network and ordinary-life texture.
 - Continue source-permitted June 18-30 reporting/reaction and July circulation/interpretation.
 - September 2 Kalaupapa remains a strong political + ordinary-life seam if source-facing Hawaiian is recovered.
-- Expand artifact receipts to high-value treaty pages, strong newspaper headlines, district petition sheets, letters, proclamations, and mele printings when a stable visual source is available.
+- Expand artifact receipts to high-value treaty pages, strong newspaper headlines, more district petition sheets, letters, proclamations, printed mele, advertisements, and other source objects when a stable visual source is available.
 - As new archival visuals arrive from the text/history lane, prefer exact source pairing first, then preserve useful secondary references as additional layers.
 - Continue batching 5-10 earned image/combo/photo updates rather than one-off visual plumbing.
-- For petition geography, a few representative exact sheets are better than attaching the same generic petition image to every district card. Preserve distinct district scans when available.
+- For petition geography, continue using representative exact sheets rather than attaching the same generic petition image to every district card.
+- Chronicling America / Library of Congress newspaper runs are a productive permitted lane for ordinary-life texture such as surf, shipping, performances, school notices, commerce, recreation, accidents, and advertisements.
 
 ## NEXT_TASK
 
-**Text lane:** keep mining June/July with historical-attention and information-lag discipline. Ordinary life belongs when the archive actually gives it. When source scans or illustrations are surfaced, preserve their source identity so the visual lane can consume them without re-researching the post.
+**Text lane:** keep mining June/July with historical-attention and information-lag discipline. Ordinary life belongs when the archive actually gives it. Strong current seams include surf/recreation, shipping, commerce, performances, schools, street life, and information-network changes alongside the annexation crisis.
 
-**Artifact lane:** continue 5-10 earned receipts at a time. Priority: treaty document/page, Sept. 10 Kuokoa treaty headline/front page, representative district petition sheets, additional letters/protests, and printed mele where the scan itself is useful.
+**Artifact lane:** continue 5-10 earned receipts at a time. Priority: treaty document/page, Sept. 10 Kuokoa treaty headline/front page, additional district petition sheets, letters/protests, newspaper advertisements, and printed mele where the scan itself is useful.
 
-**Visual lane:** after this visual-feed batch is live, use the next strong sourced illustration/photo objects to create another 5-10 update batch. First high-value generation seam is illustration-derived photo reconstruction where the historical image provides real composition/blocking authority. Preserve exact parent source + cleaned source + reconstruction + useful related references as separate roles.
+**Visual lane:** use the next strong sourced illustration/photo objects to create another 5-10 update batch. First high-value generation seam is illustration-derived photo reconstruction where the historical image provides real composition/blocking authority. Preserve exact parent source + cleaned source + reconstruction + useful related references as separate roles.
 
 If a required approved binary exists outside GitHub, use `docs/IMAGE_BINARY_HANDOFF.md` and provide one deterministic ZIP rather than asking the user to reconstruct file destinations manually.
 
 ## RE-PROMPT
 
-> Continue Hawaiʻi Archive Revival from current `Paiea/Projects` GitHub authority. Read root `AGENTS.md`, `state/PROJECT_REGISTRY.md`, `state/HANDSHAKE_PROTOCOL.md`, `hawaii-archive/PROJECT_STATE.md`, `hawaii-archive/data/ITEM_CONTRACT.md`, `hawaii-archive/data/resources/index.json`, `hawaii-archive/data/artifacts/index.json`, `hawaii-archive/data/images/index.json`, and current Image OS authority. Preserve the June 1-September 12, 1897 chronology, 62 grounded text records, historical-attention rule, information lag, and fast-surface/deep-archive model. Use combo posts and short visual-context photo posts when current images earn them. Lead with the strongest approved derived visual, keep exact parent sources and additional archival references as separate honest layers, preserve held reconstruction decisions, and batch useful visual publication work instead of doing one-off image plumbing.
+> Continue Hawaiʻi Archive Revival from current `Paiea/Projects` GitHub authority. Read root `AGENTS.md`, `state/PROJECT_REGISTRY.md`, `state/HANDSHAKE_PROTOCOL.md`, `hawaii-archive/PROJECT_STATE.md`, `hawaii-archive/data/ITEM_CONTRACT.md`, `hawaii-archive/data/resources/index.json`, `hawaii-archive/data/artifacts/index.json`, `hawaii-archive/data/images/index.json`, and current Image OS authority. Preserve the June 1-September 12, 1897 chronology, 65 grounded text records, historical-attention rule, information lag, and fast-surface/deep-archive model. Keep mining permitted newspaper/archive lanes for both political and ordinary-life attention. Use exact artifact receipts and distinct district petition sheets when available, allow useful visual density, lead with the strongest approved derived visual, keep exact parent sources and additional archival references as separate honest layers, preserve held reconstruction decisions, and batch useful publication work instead of doing one-off image plumbing.
