@@ -3,7 +3,7 @@
   "week_end": "1897-09-12",
   "title": "August 23–September 12, 1897",
   "extends": "1897-09-06.json",
-  "scope_note": "Expansion in progress: 50 sourced items across August 23–September 12, 1897. The widened window preserves the accepted September 6–12 record set by reference and begins adding documented lead-up material before the Palace Square mass meeting. Sparse early dates remain sparse until source-facing Hawaiian is recovered; historical attention, not a quota, determines what survives.",
+  "scope_note": "Expansion in progress: 51 sourced items across August 23–September 12, 1897. The widened window preserves the accepted September 6–12 record set by reference and begins adding documented lead-up material before the Palace Square mass meeting. Sparse early dates remain sparse until source-facing Hawaiian is recovered; historical attention, not a quota, determines what survives.",
   "items": [
     {
       "id": "HAR-1897-09-01-ALOHA-COORD-001",
@@ -47,6 +47,26 @@
     },
     {
       "id": "HAR-1897-09-01-ALOHA-COORD-003",
+      "date": "1897-09-01",
+      "publication": "Ke Aloha Aina",
+      "voice_actor": "Joseph Heleluhe, on behalf of Liliʻuokalani",
+      "place": "Ebbitt House, Washington, D.C.",
+      "kind": "coordination-letter",
+      "hawaiian": "a iwaena oia halawai ana e noonoo ai oukou i ke poo o ka ka lahui kue no ka hoohui aina, a malalo la hoi oia poo e kakau inoa mai ai na makaaina aloha aina a pau loa",
+      "english_close": "At that meeting, consider the heading for the lāhui's protest against annexation, and under that heading let all aloha ʻāina makaʻāinana sign their names.",
+      "feed_rendering": "Agree on one heading for the lāhui's protest. Then let the aloha ʻāina sign under it.",
+      "rhetorical_mode": "petition-directive",
+      "voice_evidence": "This is a distinct operational instruction inside the letter: unify the petition's heading and gather the lāhui's signatures beneath it. It shows the petition as coordinated political work rather than a spontaneous document.",
+      "source_url": "https://dokumen.pub/aloha-betrayed-native-hawaiian-resistance-to-american-colonialism-9780822386223.html",
+      "source_label": "Noenoe K. Silva, Aloha Betrayed, quoting the Sept. 1, 1897 Ebbitt House letter later published by ʻAʻima Nāwahī",
+      "translation_basis": "Silva preserves the Hawaiian passage and English translation. The feed rendering stays close to the petition-coordination action in the source.",
+      "confidence": "supported",
+      "route": "high-fidelity",
+      "status": "pilot",
+      "event_date": "1897-09-01"
+    },
+    {
+      "id": "HAR-1897-09-01-ALOHA-COORD-004",
       "date": "1897-09-01",
       "publication": "Ke Aloha Aina",
       "voice_actor": "Joseph Heleluhe, on behalf of Liliʻuokalani",
