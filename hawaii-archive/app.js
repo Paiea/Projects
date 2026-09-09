@@ -1,5 +1,6 @@
 const ATTENTION_WINDOW_URL = "data/weeks/1897-06-01.json";
 const IMAGE_DATA_URL = "data/images/index.json";
+const RESOURCE_DATA_URL = "data/resources/index.json";
 
 const feed = document.querySelector("#feed");
 const count = document.querySelector("#item-count");
@@ -46,6 +47,17 @@ function imageClassLabel(value) {
   return labels[value] || "Archive image";
 }
 
+function resourceKindLabel(value) {
+  const labels = {
+    "primary-source": "Primary source",
+    "newspaper-transcription": "Newspaper text",
+    "modern-performance": "Modern performance",
+    "modern-reference": "Modern reference",
+    "archive-context": "Archive context",
+  };
+  return labels[value] || "Related resource";
+}
+
 function makeActionDetail(label, body) {
   const details = document.createElement("details");
   details.className = "post-action";
@@ -69,7 +81,47 @@ function makeActionDetail(label, body) {
   return details;
 }
 
-function makeVoiceSourcePanel(item) {
+function makeResourceLinks(links) {
+  const section = document.createElement("div");
+  section.className = "resource-links";
+
+  const heading = document.createElement("p");
+  heading.className = "resource-links-title";
+  heading.textContent = "Go deeper";
+  section.append(heading);
+
+  for (const resource of links) {
+    const card = document.createElement("div");
+    card.className = "resource-link";
+
+    const topLine = document.createElement("div");
+    topLine.className = "resource-link-topline";
+
+    const kind = document.createElement("span");
+    kind.className = "resource-kind";
+    kind.textContent = resourceKindLabel(resource.kind);
+    topLine.append(kind);
+
+    const link = document.createElement("a");
+    link.href = resource.url;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.textContent = resource.label;
+    topLine.append(link);
+    card.append(topLine);
+
+    const note = document.createElement("p");
+    note.className = "resource-note";
+    note.textContent = resource.note;
+    card.append(note);
+
+    section.append(card);
+  }
+
+  return section;
+}
+
+function makeVoiceSourcePanel(item, resourceLinks = []) {
   const wrapper = document.createElement("div");
   wrapper.className = "voice-source-panel";
 
@@ -103,6 +155,10 @@ function makeVoiceSourcePanel(item) {
     const evidence = document.createElement("p");
     evidence.textContent = item.translation_basis;
     wrapper.append(evidence);
+  }
+
+  if (resourceLinks.length) {
+    wrapper.append(makeResourceLinks(resourceLinks));
   }
 
   const routing = document.createElement("p");
@@ -265,7 +321,7 @@ function makePostMedia(imageRecord) {
   return figure;
 }
 
-function renderPost(item, imageMap) {
+function renderPost(item, imageMap, resourceMap) {
   const article = document.createElement("article");
   article.className = "post-card";
 
@@ -330,13 +386,13 @@ function renderPost(item, imageMap) {
   actions.className = "post-actions";
   actions.append(makeActionDetail("Original Hawaiian", item.hawaiian));
   actions.append(makeActionDetail("Close English", item.english_close));
-  actions.append(makeActionDetail("Voice & source", makeVoiceSourcePanel(item)));
+  actions.append(makeActionDetail("Voice & source", makeVoiceSourcePanel(item, resourceMap.get(item.id) || [])));
   article.append(actions);
 
   return article;
 }
 
-function renderWeek(payload, imagePayload) {
+function renderWeek(payload, imagePayload, resourcePayload) {
   feed.replaceChildren();
   count.textContent = String(payload.items.length);
   scopeNote.textContent = payload.scope_note.replace(
@@ -345,6 +401,7 @@ function renderWeek(payload, imagePayload) {
   );
 
   const imageMap = new Map(imagePayload.images.map((imageRecord) => [imageRecord.id, imageRecord]));
+  const resourceMap = new Map(resourcePayload.resources.map((entry) => [entry.item_id, entry.links]));
   const grouped = new Map();
   for (const item of payload.items) {
     if (!grouped.has(item.date)) grouped.set(item.date, []);
@@ -362,7 +419,7 @@ function renderWeek(payload, imagePayload) {
     heading.append(label);
     day.append(heading);
 
-    for (const item of items) day.append(renderPost(item, imageMap));
+    for (const item of items) day.append(renderPost(item, imageMap, resourceMap));
     feed.append(day);
   }
 
@@ -409,9 +466,17 @@ function loadAttentionWindow() {
   return loadWindowChain(ATTENTION_WINDOW_URL.replace("data/weeks/", ""));
 }
 
+function loadResourceData() {
+  return fetchFreshJson(RESOURCE_DATA_URL).catch((error) => {
+    console.warn("Supplemental archive resources could not be loaded.", error);
+    return { resources: [] };
+  });
+}
+
 Promise.all([
   loadAttentionWindow(),
   fetchFreshJson(IMAGE_DATA_URL),
+  loadResourceData(),
 ])
-  .then(([weekPayload, imagePayload]) => renderWeek(weekPayload, imagePayload))
+  .then(([weekPayload, imagePayload, resourcePayload]) => renderWeek(weekPayload, imagePayload, resourcePayload))
   .catch(renderError);
