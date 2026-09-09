@@ -1,6 +1,7 @@
 const ATTENTION_WINDOW_URL = "data/weeks/1897-06-01.json";
 const IMAGE_DATA_URL = "data/images/index.json";
 const RESOURCE_DATA_URL = "data/resources/index.json";
+const ARTIFACT_DATA_URL = "data/artifacts/index.json";
 
 const feed = document.querySelector("#feed");
 const count = document.querySelector("#item-count");
@@ -43,6 +44,8 @@ function imageClassLabel(value) {
     portrait: "Portrait",
     "built-environment": "Place",
     "daily-life-crowd": "Daily life",
+    document: "Document",
+    newspaper: "Newspaper",
   };
   return labels[value] || "Archive image";
 }
@@ -326,14 +329,14 @@ function makePostMedia(imageRecord) {
   source.href = imageRecord.source_authority_url;
   source.target = "_blank";
   source.rel = "noopener noreferrer";
-  source.textContent = `Archive source · ${imageRecord.display_date}`;
+  source.textContent = imageRecord.source_link_label || `Archive source · ${imageRecord.display_date}`;
   sourceLine.append(source);
   figure.append(sourceLine);
 
   return figure;
 }
 
-function renderPost(item, imageMap, resourceMap) {
+function renderPost(item, imageMap, resourceMap, attachmentMap) {
   const article = document.createElement("article");
   article.className = "post-card";
 
@@ -390,7 +393,7 @@ function renderPost(item, imageMap, resourceMap) {
   rendering.textContent = item.feed_rendering;
   article.append(rendering);
 
-  const mediaRef = item.media_ref || item.image_ref;
+  const mediaRef = item.media_ref || item.image_ref || attachmentMap.get(item.id);
   if (mediaRef && imageMap.has(mediaRef)) {
     article.append(makePostMedia(imageMap.get(mediaRef)));
   }
@@ -405,7 +408,7 @@ function renderPost(item, imageMap, resourceMap) {
   return article;
 }
 
-function renderWeek(payload, imagePayload, resourcePayload) {
+function renderWeek(payload, imagePayload, resourcePayload, artifactPayload) {
   feed.replaceChildren();
   count.textContent = String(payload.items.length);
   scopeNote.textContent = payload.scope_note.replace(
@@ -416,9 +419,13 @@ function renderWeek(payload, imagePayload, resourcePayload) {
   const allImages = [
     ...(imagePayload.images || []),
     ...(imagePayload.feed_images || []),
+    ...(artifactPayload.images || []),
   ];
   const imageMap = new Map(allImages.map((imageRecord) => [imageRecord.id, imageRecord]));
   const resourceMap = new Map(resourcePayload.resources.map((entry) => [entry.item_id, entry.links]));
+  const artifactAttachmentMap = new Map(
+    (artifactPayload.attachments || []).map((entry) => [entry.item_id, entry.media_ref]),
+  );
   const grouped = new Map();
   for (const item of payload.items) {
     if (!grouped.has(item.date)) grouped.set(item.date, []);
@@ -436,7 +443,7 @@ function renderWeek(payload, imagePayload, resourcePayload) {
     heading.append(label);
     day.append(heading);
 
-    for (const item of items) day.append(renderPost(item, imageMap, resourceMap));
+    for (const item of items) day.append(renderPost(item, imageMap, resourceMap, artifactAttachmentMap));
     feed.append(day);
   }
 
@@ -490,10 +497,20 @@ function loadResourceData() {
   });
 }
 
+function loadArtifactData() {
+  return fetchFreshJson(ARTIFACT_DATA_URL).catch((error) => {
+    console.warn("Artifact receipt media could not be loaded.", error);
+    return { images: [], attachments: [] };
+  });
+}
+
 Promise.all([
   loadAttentionWindow(),
   fetchFreshJson(IMAGE_DATA_URL),
   loadResourceData(),
+  loadArtifactData(),
 ])
-  .then(([weekPayload, imagePayload, resourcePayload]) => renderWeek(weekPayload, imagePayload, resourcePayload))
+  .then(([weekPayload, imagePayload, resourcePayload, artifactPayload]) => (
+    renderWeek(weekPayload, imagePayload, resourcePayload, artifactPayload)
+  ))
   .catch(renderError);
