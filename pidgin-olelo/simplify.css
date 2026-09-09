@@ -250,6 +250,7 @@
     margin: 7px 0;
     font-size: clamp(1.75rem, 9vw, 2.5rem);
     line-height: 1.08;
+    white-space: normal;
   }
 
   .choice-wrap {
