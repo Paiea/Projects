@@ -1,6 +1,6 @@
 # HAWAIʻI ARCHIVE REVIVAL - PROJECT STATE
 
-> Keep this file hot. Exact archival sources outrank derived translations, feed renderings, reconstructed images, chat summaries, and old checkpoints.
+> Keep this file hot. Exact archival sources outrank derived translations, feed renderings, reconstructed images, related resources, chat summaries, and old checkpoints.
 
 ## Purpose
 
@@ -12,6 +12,8 @@ Governing rule:
 
 The feed should preserve what people were hearing, arguing about, organizing around, and doing in ordinary life, including the lag between event, publication, circulation, and reaction.
 
+The product should feel fast at the surface and deep underneath: a reader can scroll like social media, then open the surviving document, newspaper text, petition, performance, or archive context when curiosity hits.
+
 ## Authority
 
 - Accepted authority: current `main` in `Paiea/Projects` after merge.
@@ -20,6 +22,7 @@ The feed should preserve what people were hearing, arguing about, organizing aro
 - Intermediate fixture: `hawaii-archive/data/weeks/1897-08-23.json`
 - September base: `hawaii-archive/data/weeks/1897-09-06.json`
 - Text contract: `hawaii-archive/data/ITEM_CONTRACT.md`
+- Supplemental deep resources: `hawaii-archive/data/resources/index.json`
 - Active text ledger: `hawaii-archive/data/weeks/1897-06-01.sources.md`
 - Live image index: `hawaii-archive/data/images/index.json`
 - Newer image batch/mapping: `hawaii-archive/data/images/batch-manifest.json`, `hawaii-archive/data/images/post-image-mapping.json`
@@ -66,9 +69,36 @@ Ordinary-life records currently include the June 19 Kaumakapili music/concert ru
 
 The August 21 Samuel K. Kamakaia mele adds the source-facing instruction `E malama i ka maluhia.` as a compact unity/peace signal before the September coordination and mass-meeting sequence.
 
+## Deep Resource / Social Feed State
+
+The reader now supports a lightweight **Go deeper** layer inside `Voice & source`.
+
+Primary `source_url` remains the evidence/provenance owner for each historical post. `data/resources/index.json` is supplemental experience metadata keyed by post ID. It may point to:
+
+- a full primary document behind an atomic card;
+- an archival collection or petition document;
+- a source-facing newspaper transcription;
+- a modern performance or educational audio resource;
+- a contextual archive page.
+
+Modern or derived resources must identify themselves honestly. A later performance of an 1897 mele is useful because it lets the reader hear the song, but it is **not** period audio and must say so.
+
+Current seeded proof covers ten high-value posts, including:
+
+- June 16 treaty context → Hawaiʻi government-hosted reproduction of the proposed 1897 treaty;
+- all five Liliʻuokalani protest cards → UH Mānoa full June 17 protest, with the lead card also linking the July 10 Hawaiian newspaper transcription;
+- August 21 `Ka Naʻi Aupuni` / unity mele → Project KULEANA modern performance plus Kamehameha Schools lyrics/audio;
+- September 6 Kaulia → UH Mānoa Palace Square / petition campaign context;
+- September 10 *Ka Nupepa Kuokoa* `KE KINO O KE KUIKAHI` headline → actual treaty text;
+- September 11 petition heading → National Archives / DocsTeach petition document plus National Archives context.
+
+Supplemental resource loading is non-fatal. If the resource index fails to load, the historical feed still renders from its text and image authority.
+
+This is the preferred depth pattern going forward: **do not automatically make feed copy longer; connect concise posts to the real surviving thing behind them.**
+
 ## Image / Feed Integration State
 
-The product direction is now explicit:
+The product direction is explicit:
 
 > **Approved historical pictures belong in the historical feed, not only in Image OS comparison/demo surfaces.**
 
@@ -112,6 +142,9 @@ Do not solve this by renaming or reassigning IDs ad hoc in the text branch.
 - `voice_actor` requires real attribution.
 - Collective petition records remain collective.
 - Feed rendering is accessibility, not historical quotation.
+- **Fast surface, deep archive.** Prefer concise feed cards with optional doors into full historical objects over bloating every post with explanatory prose.
+- **Source and related resource are different roles.** `source_url` owns provenance; supplemental links deepen experience but do not silently become evidence authority.
+- **Modern media must declare its time.** A modern performance, documentary, reconstruction, translation, or educational rendition must never masquerade as an 1897 recording or source object.
 - Images may be `exact`, `near`, or `context`; never imply an exact event photograph when evidence only supports context.
 - Original visual evidence remains accessible beside derived states.
 - Reconstructed images are derived historical interpretation, not source photographs.
@@ -131,8 +164,9 @@ Do not use IHLRT as a new automated/AI-assisted mining lane. Existing accepted r
 - Deepen July circulation/interpretation without over-slicing the Queen's protest.
 - September 2 Kalaupapa remains a strong political + ordinary-life research seam if source-facing Hawaiian is recovered.
 - The newer 10-image batch must be normalized into one live image authority before broad feed matching.
+- Resource enrichment currently covers showcase posts only. Expand it when a stable, useful historical object or honest later rendition materially improves a post; do not add links merely to make every card look busy.
 
-## Last Meaningful Text Changes
+## Last Meaningful Text / Feed Changes
 
 - Widened the chronology to June 1-September 12, 1897.
 - Replaced one-level fixture loading with recursive composition.
@@ -141,10 +175,11 @@ Do not use IHLRT as a new automated/AI-assisted mining lane. Existing accepted r
 - Added the August 21 Samuel K. Kamakaia unity/peace mele signal.
 - Preserved the July 10 publication lag for the June 17 protest.
 - Kept June 1-15 sparse because no new source-facing Hawaiian was strong enough to promote in the latest pass.
+- Added the supplemental deep-resource layer so high-value posts can open the actual treaty, full protest, National Archives petition, archival context, and clearly labeled modern performances without making the surface feed verbose.
 
 ## NEXT_TASK
 
-**Text lane:** continue source-permitted June 1-15 mining, then June 18-30 and July circulation. Preserve historical attention and information lag. Do not force coverage.
+**Text lane:** continue source-permitted June 1-15 mining, then June 18-30 and July circulation. Preserve historical attention and information lag. Do not force coverage. When a newly surfaced post has a strong surviving object behind it, add an honest deep-resource link rather than automatically expanding feed prose.
 
 **Feed/image integration:** after the image chat normalizes the live image index and resolves the `0003+` ID collision, promote approved images into the feed. First priority is the reconstructed ʻIolani Palace view, then Queen Liliʻuokalani, Dole, harbor, Waikīkī/surfing, Fort Street, poi/daily life, and Palace Square rally context. Prefer matching to existing historical posts where grounded; create photo posts where the image itself earns a feed moment.
 
@@ -152,4 +187,4 @@ Do not use IHLRT as a new automated/AI-assisted mining lane. Existing accepted r
 
 ## RE-PROMPT
 
-> Continue Hawaiʻi Archive Revival from current Paiea/Projects GitHub authority. Read root AGENTS.md, state/PROJECT_REGISTRY.md, state/HANDSHAKE_PROTOCOL.md, hawaii-archive/PROJECT_STATE.md, hawaii-archive/data/ITEM_CONTRACT.md, and the active text/image authority files named there. Preserve the June 1-September 12, 1897 chronology, historical-attention rule, and information lag. Text currently composes 60 grounded records. Continue source-permitted June/July mining, and once the image lane has normalized the newer 10-image batch into the live index, integrate approved pictures into the feed as grounded combo posts or earned photo posts without inventing historical text or overwriting Image OS work.
+> Continue Hawaiʻi Archive Revival from current Paiea/Projects GitHub authority. Read root AGENTS.md, state/PROJECT_REGISTRY.md, state/HANDSHAKE_PROTOCOL.md, hawaii-archive/PROJECT_STATE.md, hawaii-archive/data/ITEM_CONTRACT.md, hawaii-archive/data/resources/index.json, and the active text/image authority files named there. Preserve the June 1-September 12, 1897 chronology, historical-attention rule, information lag, and fast-surface/deep-archive model. Text currently composes 60 grounded records. Continue source-permitted June/July mining and enrich strong posts with honest links to full primary documents, archival collections, or clearly labeled later performances. Preserve newer Image OS authority and do not wire conflicting image IDs from the staged batch blindly.
