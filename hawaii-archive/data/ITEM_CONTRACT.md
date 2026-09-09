@@ -37,6 +37,25 @@ Changing a downstream layer must never mutate the source-facing text.
 
 When a better transcription or stronger source replaces an earlier interpretation, dependent English/feed/voice layers should be treated as stale and re-evaluated. Unrelated records should not rerun.
 
+## Supplemental resource layer
+
+A post may have optional deeper-reading or listening resources in `data/resources/index.json`. This is a **supplemental resource** layer, not a replacement for `source_url` and not new historical authority.
+
+Use it for things that help a reader move from a fast social-feed post into the surviving historical object or a clearly labeled later interpretation, such as:
+
+- the full treaty or protest behind an atomic excerpt;
+- a full petition document or archival collection;
+- a newspaper transcription or facsimile related to the post;
+- a modern performance, audio recording, educational rendition, or documentary treatment that helps a reader hear or experience surviving material.
+
+Every resource link must identify what it is. A `modern performance` must never be presented as period audio. If a 2015 performance is attached to an 1897 mele, the note must make clear that it is not a recording from 1897 and may reflect later performance wording. The same honesty rule applies to modern translations, restorations, reconstructions, documentaries, and contextual essays.
+
+Keep the hierarchy visible:
+
+`historical source authority` → `derived feed post` → `optional deeper resource`
+
+A useful related resource can deepen the experience without becoming evidence for a claim it does not itself support.
+
 ## Historical attention and information time
 
 **Follow historical attention. Do not manufacture balance. Preserve repetition when the repetition itself shows what people cared about. Preserve multiple voices and places. Add ordinary life wherever the archive gives it to us. Preserve the lag between something happening and people learning about it.**
@@ -71,7 +90,7 @@ Do not invent slang, jokes, outrage, intimacy, certainty, quotations, or modern 
 
 Use `cheap-pass` when meaning and social intent are straightforward and well-supported.
 
-Use `review` when ambiguity, transcription uncertainty, idiom, cultural context, rhetorical stance, attribution, source quality, or event/publication timing can materially change meaning or tone.
+Use `review` when ambiguity, transcription uncertainty, idiom, cultural context, rhetorical stance, attribution uncertainty, source quality, or event/publication timing can materially change meaning or tone.
 
 Use `high-fidelity` when the item is both difficult and important enough to justify expensive reasoning/research.
 
