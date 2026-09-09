@@ -30,11 +30,6 @@ class HawaiiArchiveArtifactReceiptTests(unittest.TestCase):
         self.assertEqual(protest["relationship_default"], "exact")
         self.assertIn("libweb.hawaii.edu", protest["original_asset"])
         self.assertIn("signature", protest["caption"].lower())
-        self.assertEqual(
-            protest["display_mode"],
-            "intrinsic",
-            "short signature crops should size to their natural height instead of inheriting a full-page document frame",
-        )
 
         newspaper = images["HAR-ART-0003"]
         self.assertEqual(newspaper["image_class"], "newspaper")
@@ -53,9 +48,15 @@ class HawaiiArchiveArtifactReceiptTests(unittest.TestCase):
         self.assertIn("media-document", styles)
         self.assertIn("media-newspaper", styles)
         self.assertIn("object-fit: contain", styles)
-        self.assertIn("media-intrinsic", script)
-        self.assertIn(".media-stage.media-intrinsic", styles)
+
+    def test_document_artifacts_preserve_their_natural_height(self):
+        styles = (ARCHIVE / "styles.css").read_text(encoding="utf-8")
+
+        self.assertIn(".media-stage.media-document {", styles)
         self.assertIn("aspect-ratio: auto", styles)
+        self.assertIn(".media-stage.media-document .media-stage-link", styles)
+        self.assertIn(".media-stage.media-document img", styles)
+        self.assertIn("height: auto", styles)
 
 
 if __name__ == "__main__":
