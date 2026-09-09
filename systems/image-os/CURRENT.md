@@ -1,4 +1,4 @@
-# IMAGE OS — CURRENT
+# IMAGE OS - CURRENT
 
 > Hot state for reusable visual work. Exact source images and project-local evidence outrank derived restorations, color reconstructions, prompts, reviews, and remembered chat decisions.
 
@@ -38,16 +38,16 @@ A visual record may have more than one historical source-like object. Do not fla
 
 Reusable role vocabulary:
 
-- `exact-source` — the actual source image from which a derived version was made;
-- `illustration-source` — the historical illustration that constrains a reconstruction;
-- `same-person` — archival image of the same person, not necessarily the parent source;
-- `same-place` — archival image of the same place;
-- `same-activity` — archival image of the same activity;
-- `same-movement` — evidence from the same historical movement/event family;
-- `related-reference` — useful period evidence with a looser relationship;
-- `derived` — restoration, colorization, reconstructed view, or other transformed output.
+- `exact-source` - the actual source image from which a derived version was made;
+- `illustration-source` - the historical illustration that constrains a reconstruction;
+- `same-person` - archival image of the same person, not necessarily the parent source;
+- `same-place` - archival image of the same place;
+- `same-activity` - archival image of the same activity;
+- `same-movement` - evidence from the same historical movement/event family;
+- `related-reference` - useful period evidence with a looser relationship;
+- `derived` - restoration, colorization, reconstructed view, or other transformed output.
 
-Public labels should communicate these roles honestly. Useful labels include:
+Useful public labels include:
 
 - `Reconstructed`
 - `Reconstructed from source`
@@ -88,17 +88,27 @@ The reconstruction may recover plausible color, material feel, facial legibility
 
 An **interpretive third layer** may add more life, infer missing detail, or present the scene differently when useful. It must be separately labeled and must not silently replace the source-locked version.
 
-## Multi-view publication rule
+## Public view budget
 
-The best approved derived image may lead the public presentation when that improves experience, but evidence must remain reachable underneath.
+The public reader is not the process archive.
 
-A project may expose an ordered `views` list rather than forcing every record into exactly four states.
+A visual record may keep many generated states, but public `views` should normally expose only **2 to 4 meaningfully different** choices. If two controls communicate almost the same visual information, keep the stronger one public and move the other into `process_views`.
 
-Example:
+Preferred split:
 
-`Reconstructed from source → Earlier reconstruction → Color → Restored → Original source → Related archival reference`
+- `views` - curated public presentation;
+- `process_views` - earlier attempts, near-duplicates, held experiments, intermediate color/restoration states, and other useful generation evidence that should remain durable but not clutter the reader.
 
-This is especially useful when multiple approved reconstructions, failed/earlier attempts, or multiple evidence objects should coexist. Image OS may showcase iteration when the attempts teach something about the reconstruction process.
+`process_views` are deliberately not rendered by the normal public reader or Image OS pilot.
+
+Typical public stacks:
+
+- portrait: `Reconstructed → Original source / Archival reference`;
+- source-backed place: `Reconstructed → Original source`, plus one genuinely different close or reference view when it earns the space;
+- illustration lane: `Photo reconstruction → Original newspaper image`;
+- held reconstruction: archival source only.
+
+Keep an extra public state only when it is **meaningfully different** in what the reader learns or sees. Process history belongs in the data/archive layer, not automatically in the public toolbar.
 
 Approval remains per output/version. Approval of one derived view does not automatically approve another.
 
@@ -178,9 +188,9 @@ Therefore:
 
 A period portrait or place photo may be extremely useful under a reconstructed image while still not being the exact source used to create it. Public controls must preserve that distinction.
 
-### Keep useful extra evidence
+### Keep useful extra evidence without forcing it public
 
-When both an exact source and additional period references exist, keep both. A richer evidence chain is preferable to deleting secondary evidence for UI neatness.
+When both an exact source and additional period references exist, preserve both. Preservation does not mean every related image, restoration, or attempt needs a public toolbar button. Public curation and durable evidence retention are separate decisions.
 
 ### Generated text is evidence-risky
 
@@ -188,14 +198,14 @@ Readable banners, business signs, headlines, slogans, flags, and labels can make
 
 ## Current Hawaiʻi Archive proof
 
-The proving set now includes:
+The proving set now demonstrates both reconstruction and curation:
 
-- Kaulia with a newer source-locked reconstruction first, earlier reconstruction/color/restoration, exact uploaded source, and separate archival reference;
-- ʻIolani Palace with a newer source-locked wide reconstruction, a separate close interpretive reconstruction, earlier derived attempts, restoration, exact uploaded source, and archive access copy;
-- poi preparation with archival stereograph + derived views, while a contaminated Kaulia-leak attempt remains held;
-- Queen Liliʻuokalani, Sanford B. Dole, Honolulu Harbor, and Waikīkī with newer reconstructed views plus earlier attempts and honestly labeled archival references;
-- Fort/King Street reconstruction held because of unsupported person/signage leakage while the archival street photo remains publishable;
-- the Sept. 16, 1897 Hilo anti-annexation newspaper illustration paired with an approved photo reconstruction after multiple crowd/anatomy/demographic-drift retries. It remains same-movement context, not a Sept. 6 Palace Square photograph.
+- Kaulia leads with the newer source-locked reconstruction, while the exact uploaded source and separate archival reference stay public; earlier reconstruction/color/restoration states moved to `process_views`;
+- ʻIolani Palace keeps the newest source-locked wide view plus a genuinely different close view, exact source, and archive access copy; older near-duplicate states moved to `process_views`;
+- poi preparation now shows reconstruction plus exact stereograph publicly, while color/restoration experiments stay in `process_views`;
+- Queen Liliʻuokalani, Sanford B. Dole, Honolulu Harbor, and Waikīkī each use a simple reconstruction + archival reference public stack;
+- Fort/King Street shows only the archival street photo because the reconstruction is held;
+- the Sept. 16, 1897 Hilo anti-annexation illustration shows the approved photo reconstruction plus the original newspaper image; alternate attempts remain in `process_views`.
 
 The public feed may also use short **visual-context photo cards** that point at existing visual records without pretending the photograph occurred on the anchor post's date.
 
@@ -209,6 +219,7 @@ The public feed may also use short **visual-context photo cards** that point at 
 - Keep saturation and cinematic stylization restrained by default.
 - Never imply an exact event/date relationship when only contextual similarity is known.
 - Do not let the visual lane overwhelm the consuming project's identity.
+- Apply the public view budget: normally 2 to 4 meaningfully different public states, with process evidence in `process_views`.
 - Held reconstruction decisions are valuable state. Do not erase them just because the underlying archival source is worth publishing.
 - Crowd review must explicitly include fingers, limbs, occlusions, repeated faces, demographic drift, and style-reference leakage.
 - When direct binary transport is unreliable, use the repository image-binary handoff protocol and one deterministic ZIP rather than repeated manual byte plumbing.
@@ -228,8 +239,8 @@ The public feed may also use short **visual-context photo cards** that point at 
 
 Use current Hawaiʻi Archive feed/archive sources to select **10 net-new visual opportunities**, not another pass over the same Kaulia/Palace/Queen/Harbor lanes.
 
-Prefer real archival photos or illustrations already connected to useful posts. For photographs, build `Original source → source-locked reconstruction → optional interpretive third layer`. For illustrations, build `Original newspaper image → cleaned illustration → photo reconstruction`. Keep useful related archival references, and batch the binary handoff when direct GitHub transport is inefficient.
+Prefer real archival photos or illustrations already connected to useful posts. For photographs, build `Original source → source-locked reconstruction → optional interpretive third layer`. For illustrations, build `Original newspaper image → cleaned illustration → photo reconstruction`. Keep useful related archival references and process evidence, but expose only meaningfully different states in the public view budget. Batch the binary handoff when direct GitHub transport is inefficient.
 
 ## RE-PROMPT
 
-> Continue Image OS from current `Paiea/Projects` GitHub authority with Hawaiʻi Archive Revival as the proving ground. Read root `AGENTS.md`, state routing/handshake files, `systems/image-os/CURRENT.md`, `hawaii-archive/PROJECT_STATE.md`, and current visual records. Preserve exact source authority. Default the second visual layer to a source-locked reconstruction that still reads as the same archival image; allow a separately labeled interpretive third layer only after that. Distinguish parent sources from related archival references, keep useful extra evidence and prior attempts, and preserve held decisions. For crowd scenes, explicitly review fingers, limb connectivity, repeated faces, demographic drift, style-reference leakage, and generated readable text. Batch the next 10 net-new source-backed visual opportunities rather than redoing the existing proving set.
+> Continue Image OS from current `Paiea/Projects` GitHub authority with Hawaiʻi Archive Revival as the proving ground. Preserve exact source authority. Default the second visual layer to a source-locked reconstruction that still reads as the same archival image; allow a separately labeled interpretive third layer only after that. Keep public `views` curated to 2-4 meaningfully different states and move earlier attempts, near-duplicates, held experiments, and intermediate states into `process_views`. Distinguish parent sources from related archival references, preserve held decisions, and review crowd fingers, limb connectivity, repeated faces, demographic drift, style-reference leakage, and generated readable text. Batch the next 10 net-new source-backed visual opportunities rather than redoing the existing proving set.
