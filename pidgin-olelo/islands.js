@@ -4,7 +4,7 @@ function island(id, parentId, type, hawaiian, gloss, standalone, ...mixedExample
 
 const CORE_ISLANDS = {
   "how-you": [
-    island("how-you:pehea-context", "how-you", "context", "Pehea?", "How? / How going?", true, "Pehea? Tough day?", "Work was nuts. Pehea?"),
+    island("how-you:pehea-context", "how-you", "context", "Pehea?", "How you?", true, "Pehea? Tough day?", "Work was nuts. Pehea?"),
     island("how-you:oe", "how-you", "word", "ʻoe", "you", false, "Pehea ʻoe? Zoom in: ʻoe is you."),
   ],
   "say-again": [
@@ -100,7 +100,7 @@ const EXTRA_SEEDS = {
   "talk-together": ["word", "kamaʻilio", "talk / converse", true],
   yesterday: ["chunk", "I nehinei", "yesterday", true],
   why: ["chunk", "No ke aha?", "why?", true],
-  "how-many": ["context", "ʻEhia?", "how many?", true],
+  "how-many": ["context", "ʻEhia?", "How many?", true],
   "want-this": ["word", "kēia", "this", false],
   "want-that": ["word", "kēlā", "that", false],
   "dont-want": ["chunk", "ʻAʻole au makemake", "I don't want / like", true],
@@ -248,6 +248,13 @@ function buildIslandIntro(parent, entry) {
   };
 }
 
+function maskIsland(context, entry) {
+  const source = context || entry.mixedExamples?.[0] || "";
+  return source.includes(entry.hawaiian)
+    ? source.replace(entry.hawaiian, "____")
+    : `${source} · ____`;
+}
+
 function buildIslandQuestion(parent, entry, vector, alternatives = [], mixedContext = null) {
   if (entry.standalone === false) vector = "recognize";
   const base = { itemId: parent.id, semanticItemId: parent.id, islandId: entry.id, island: true, vector };
@@ -255,11 +262,10 @@ function buildIslandQuestion(parent, entry, vector, alternatives = [], mixedCont
     return { ...base, stage: 2, label: "ZOOM IN", instruction: "What does this Hawaiian island mean here?", prompt: entry.hawaiian, answer: entry.gloss, answerLabel: "Pidgin meaning", choices: [entry.gloss, ...alternatives.filter((x) => x !== entry.gloss)].slice(0, 4) };
   }
   if (vector === "scenario") {
-    return { ...base, stage: 4, label: "DROP UM IN", instruction: "Use just the Hawaiian island that fits.", prompt: mixedContext || entry.mixedExamples?.[0] || parent.pidgin, answer: entry.hawaiian, answerLabel: "Hawaiian island", choices: [] };
+    return { ...base, stage: 4, label: "DROP UM IN", instruction: "Use just the Hawaiian island that fits.", prompt: maskIsland(mixedContext || entry.mixedExamples?.[0] || parent.pidgin, entry), answer: entry.hawaiian, answerLabel: "Hawaiian island", choices: [] };
   }
   const context = mixedContext || entry.mixedExamples?.[0] || parent.pidgin;
-  const prompt = context.includes(entry.hawaiian) ? context.replace(entry.hawaiian, "____") : `${context} · ____`;
-  return { ...base, vector: "produce", stage: 3, label: "FILL THE ISLAND", instruction: "Keep the Pidgin thought. Supply only the Hawaiian part.", prompt, answer: entry.hawaiian, answerLabel: "Hawaiian island", choices: [] };
+  return { ...base, vector: "produce", stage: 3, label: "FILL THE ISLAND", instruction: "Keep the Pidgin thought. Supply only the Hawaiian part.", prompt: maskIsland(context, entry), answer: entry.hawaiian, answerLabel: "Hawaiian island", choices: [] };
 }
 
 function validate(items, coreIds) {
@@ -283,6 +289,7 @@ function validate(items, coreIds) {
       if (entry.parentId !== parentId) errors.push(`parent mismatch: ${entry.id}`);
       if (entry.type === "context" && !entry.mixedExamples?.length) errors.push(`context island missing mixed example: ${entry.id}`);
       if (entry.type === "context" && !entry.mixedExamples?.some((example) => example.includes(entry.hawaiian))) errors.push(`context island not grounded in example: ${entry.id}`);
+      if (entry.type === "context" && parent && entry.gloss !== parent.pidgin) errors.push(`context island should carry parent Pidgin thought: ${entry.id}`);
       if (entry.hawaiian !== entry.hawaiian.normalize("NFC")) errors.push(`non-NFC Hawaiian: ${entry.id}`);
       if (parent) {
         const parentText = parent.hawaiian.normalize("NFC").toLocaleLowerCase();
