@@ -34,6 +34,27 @@ class HawaiiArchiveJuneWindowTests(unittest.TestCase):
         self.assertGreaterEqual(len(lagged_protest), 3)
         self.assertTrue(all(item["hawaiian"] for item in payload["items"]))
 
+    def test_followup_tranche_separates_protest_requests_and_adds_august_unity_mele(self):
+        payload = json.loads((WEEKS / "1897-06-01.json").read_text(encoding="utf-8"))
+        by_id = {item["id"]: item for item in payload["items"]}
+
+        withdrawal = by_id["HAR-1897-06-17-LILIU-004"]
+        senate = by_id["HAR-1897-06-17-LILIU-005"]
+        unity = by_id["HAR-1897-08-21-ALOHA-MELE-001"]
+
+        self.assertNotIn("Senate", withdrawal["feed_rendering"])
+        self.assertEqual(senate["voice_actor"], "Liliʻuokalani")
+        self.assertEqual(senate["event_date"], "1897-06-17")
+        self.assertEqual(senate["publication_date"], "1897-07-10")
+        self.assertIn("hoole i ke apono", senate["hawaiian"])
+        self.assertTrue(senate["information_lag_note"])
+
+        self.assertEqual(unity["date"], "1897-08-21")
+        self.assertEqual(unity["publication"], "Ke Aloha Aina")
+        self.assertEqual(unity["voice_actor"], "Samuel K. Kamakaia")
+        self.assertEqual(unity["hawaiian"], "E malama i ka maluhia.")
+        self.assertEqual(unity["english_close"], "Keep the peace.")
+
     def test_public_reader_names_the_long_annexation_crisis_window(self):
         page = (ROOT / "hawaii-archive" / "index.html").read_text(encoding="utf-8")
         script = (ROOT / "hawaii-archive" / "app.js").read_text(encoding="utf-8")
