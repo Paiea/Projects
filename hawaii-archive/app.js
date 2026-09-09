@@ -9,6 +9,7 @@ const STATE_ASSET_FIELDS = {
   original: "original_asset",
   restored: "restored_asset",
   color: "color_asset",
+  reconstructed: "reconstructed_asset",
 };
 
 function formatHistoricalDate(value) {
@@ -185,6 +186,12 @@ function makePostMedia(imageRecord) {
     buttons.push(colorButton);
   }
 
+  if (imageRecord.reconstructed_decision === "approved" && imageRecord.reconstructed_asset) {
+    const reconstructedButton = makeMediaButton("Reconstructed", "reconstructed");
+    toolbar.append(reconstructedButton);
+    buttons.push(reconstructedButton);
+  }
+
   const fullImageLink = document.createElement("a");
   fullImageLink.className = "media-full-link";
   fullImageLink.target = "_blank";
@@ -199,9 +206,11 @@ function makePostMedia(imageRecord) {
     });
   }
 
-  const defaultState = imageRecord.color_decision === "approved" && imageRecord.color_asset
-    ? "color"
-    : "restored";
+  const defaultState = imageRecord.reconstructed_decision === "approved" && imageRecord.reconstructed_asset
+    ? "reconstructed"
+    : imageRecord.color_decision === "approved" && imageRecord.color_asset
+      ? "color"
+      : "restored";
   setMediaState(image, buttons, imageRecord, defaultState, fullImageLinks);
   figure.append(toolbar);
 
@@ -223,6 +232,13 @@ function makePostMedia(imageRecord) {
     colorConfidence.className = "media-color-confidence";
     colorConfidence.textContent = `Color reconstruction · ${imageRecord.color_confidence}`;
     context.append(colorConfidence);
+  }
+
+  if (imageRecord.reconstructed_decision === "approved") {
+    const reconstructed = document.createElement("span");
+    reconstructed.className = "media-color-confidence";
+    reconstructed.textContent = "Reconstructed view · interpretive";
+    context.append(reconstructed);
   }
   figure.append(context);
 
