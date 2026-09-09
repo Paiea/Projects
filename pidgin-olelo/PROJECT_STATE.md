@@ -4,13 +4,15 @@
 
 Use familiar Hawaiʻi Pidgin as a trusted retrieval bridge into useful spoken ʻōlelo Hawaiʻi.
 
-**Core 30 remains the permanent center.** The full `phrases.js` bank still contains 100 semantic parent thoughts. The extra 70 are now available through a quiet secondary practice surface, but they are not a third primary mode and do not replace Core 30.
+**The primary success signal is Hawaiian entering ordinary life.** This project is not trying to turn an adult learner into a grammar student or Hawaiian reader first. Useful words, familiar phrases, shortened conversational Hawaiian, and mixed Pidgin + Hawaiian are valid progress when they make Hawaiian easier to remember and more likely to be used today.
+
+**Core 30 remains the permanent center.** The full `phrases.js` bank still contains 100 semantic parent thoughts. The extra 70 are available through a quiet secondary practice surface, but they are not a third primary mode and do not replace Core 30.
 
 The durable teaching idea is:
 
-> one thought authority → multiple derived representations → repeated retrieval → weak-path targeting → spontaneous use
+> one thought authority → multiple useful representations → repeated retrieval → everyday use → fuller Hawaiian when ready
 
-Pidgin represents familiar learner thought. Hawaiian remains the language authority. Pidgin support fades as the learner gets stronger, and **Pidgin is never the joke**.
+Pidgin represents familiar learner thought. Hawaiian remains the language authority and deeper destination, but grammatical completeness is not required before useful Hawaiian can enter the learner's day. Pidgin is never the joke.
 
 ## Current Authority
 
@@ -26,7 +28,7 @@ Pidgin represents familiar learner thought. Hawaiian remains the language author
 - Noʻeau bank: `pidgin-olelo/noeau.js`
 - Responsive shell: `pidgin-olelo/styles.css` + `pidgin-olelo/simplify.css`
 
-Regression authority includes `tests/test_pidgin_olelo*.py`, especially island, routing, mobile-shell, response, Seally, one-word-cloze, Noʻeau, More-Phrases, mobile-readability, and routing-judgment coverage.
+Regression authority includes `tests/test_pidgin_olelo*.py`, especially island, routing, life-use, mobile-shell, response, Seally, one-word-cloze, Noʻeau, More-Phrases, mobile-readability, and routing-judgment coverage.
 
 ## Core Learning Model
 
@@ -65,18 +67,24 @@ Important boundaries:
 - islands are **representations**, not new semantic curriculum
 - parent progress and island progress are stored separately
 - knowing `Pehea?` must not pretend the learner already owns `Pehea ʻoe?`
+- context islands are practical conversational shorthand, not forced dictionary decomposition
+- a context island carries the practical Pidgin thought of its parent; for this curriculum `Pehea?` is taught as **How you?**, not `How? / How going?`
+- mixed Pidgin + Hawaiian is intentional translanguaging support and is not something to automatically correct away
 - `standalone: false` islands are recognition-only scaffolds and must not become free production/scenario prompts
 - Core is still full-phrase-first; islands appear lightly after introduction or as a one-step repair after a full-parent miss
 - if a missed parent has no useful island, repair falls back to supported parent recognition rather than repeating the same hard card
-- successful repair returns routing toward the fuller parent without erasing parent progress
-- extra material is island-first and only expands back to the full parent after the island earns at least two production wins plus one contextual-use win
-- contextual islands must actually appear inside at least one stored mixed example; do not create a context label that the example never shows
+- an island miss can zoom further down to recognition
+- successful repair immediately rebuilds the same parent once before normal routing resumes
+- repair and immediate rebuild cards never receive **SHOW WHAT YOU KNOW** or Seally's harder-transition behavior
+- extra material is island-first and only expands back to the full parent after the island earns retrieval/context evidence
+- contextual islands must actually appear inside at least one stored mixed example
+- graded island production/scenario prompts must mask the Hawaiian target instead of visibly containing their own answer
 
 Core island state uses `pidgin-olelo-core-islands-v1`. Extra island state uses `pidgin-olelo-extra-islands-v1`.
 
 ## More Phrases
 
-The extra 70 existing parent meanings are no longer dumped in source order. They are explicitly utility-ranked for adult local use.
+The extra 70 existing parent meanings are explicitly utility-ranked for adult local use rather than dumped in source order.
 
 The first active block starts with useful conversational/body-state material such as:
 
@@ -89,15 +97,17 @@ Rules:
 - Core reveals the `More phrases` link only after 5 Core thoughts are solid
 - direct `more.html` access is harmless
 - extra practice starts with 10 active parent thoughts
-- 8 reps remains the minimum cadence before another parent can enter, but rep count alone no longer forces an unlock
-- a new parent enters only when every currently active parent has at least some learning evidence and none is in a repeated-miss state
+- 8 reps remains the minimum cadence before another parent can enter, but rep count alone does not force an unlock
+- intro exposure alone is not learning evidence
+- every currently active parent needs at least one positive scored parent or island result before another parent can enter
+- repeated-miss state pauses expansion
 - existing users keep already-unlocked material; evidence gating pauses future expansion rather than shrinking their current pool
 - the same `core-engine.js` and `app.js` runtime power both Learn and More
 - do not fork a separate extra learning engine
 
 ## Local Adult Context
 
-Island prompts may embed a small Hawaiian handle inside familiar local adult Pidgin. This is deliberate translanguaging support, not a claim that the mixed sentence is Hawaiian grammar.
+Island prompts may embed a small Hawaiian handle inside familiar local adult Pidgin. This is deliberate translanguaging support, not a claim that the mixed sentence is formal Hawaiian grammar.
 
 Current examples include:
 
@@ -110,7 +120,7 @@ Current examples include:
 - auntie feeding/extra-plate situations
 - Kailua/H-1/work/traffic situations
 
-Keep these sparse and useful. The point is to make the Hawaiian island retrievable inside a thought the learner already naturally has.
+Keep these sparse and useful. The point is to make Hawaiian retrievable inside thoughts the learner already naturally has, then let fuller Hawaiian grow from that usage.
 
 ## Translation vs Conversation Reply
 
@@ -139,15 +149,20 @@ Routing should make the next rep meaningfully different or meaningfully easier, 
 - it also avoids the previous vector when another unlocked vector is available
 - extra material may refuse an island → full-parent jump when the island is not stable yet; scaffold safety outranks novelty
 - one parent miss is enough to request a zoom-down repair
+- an island miss can force recognition as the next repair level
+- successful repair schedules one immediate fuller-parent rebuild
+- repair/rebuild cards are scaffold work, never **SHOW WHAT YOU KNOW**
 - repeated misses pause new-parent expansion
-- successful evidence on active material is what earns expansion, with rep cadence acting as a minimum pacing gate
+- positive scored retrieval evidence on active material earns expansion; simply seeing an intro does not
+- rep cadence remains a minimum pacing gate
 
 ## Uncle Seally
 
 Uncle Seally remains a sparse adult teacher voice, not a click mascot.
 
 - ordinary correct reactions are throttled
-- miss/repeated miss, mastery, Show Me, Replay, and harder scaffold transitions are teacher moments
+- miss/repeated miss, mastery, Show Me, Replay, and true harder scaffold transitions are teacher moments
+- repair/rebuild cards are not treated as harder transitions
 - seal jokes remain rare
 - humor can use aunties, fridge uncles, Costco, H-1, Kāneʻohe/Kailua, slippers, food, family, parking, and driving
 - **the joke is never that Pidgin is broken English**
@@ -163,7 +178,7 @@ Phone Learn remains viewport-first and no-scroll for the primary loop:
 - Next swaps content in place rather than document-scrolling
 - secondary shape/note/example help stays below the primary loop
 
-Readability is now a durable constraint, especially for older learners and low-vision use:
+Readability is a durable constraint, especially for older learners and low-vision use:
 
 - do not turn instructions, choices, feedback, Seally speech, or Noʻeau into microcopy merely to make the viewport fit
 - primary Hawaiian/Pidgin prompts and revealed answers remain the largest text in the loop
@@ -199,7 +214,7 @@ The concrete location example remains:
 
 **Where the car stay? → Ma hea ke kaʻa?**
 
-Hawaiian targets, particles, articles, island glosses, and examples still need fluent-speaker/kumu review before becoming curriculum authority.
+Practical-use scaffolding does not erase the distinction between a shortened/mixed learner representation and a fuller Hawaiian parent phrase. Hawaiian targets, particles, articles, island choices, and examples still need fluent-speaker/kumu review before becoming curriculum authority.
 
 ## Audio Boundary
 
@@ -211,16 +226,18 @@ A future hear-it vector should return only with trustworthy fluent Hawaiian audi
 
 Use the current Core + island + More-Phrases system with a real learner before expanding architecture again. Workshop from observed friction, especially:
 
+- whether shortened Hawaiian actually enters Dad's ordinary speech
+- whether `Pehea? → How you?` style pragmatic islands feel natural and useful
+- whether successful repairs rebuild the full parent at the right moment
+- whether graded island prompts feel fair now that answers are masked
+- whether retrieval-evidence gating slows the extra 70 appropriately
 - whether strength-aware conversation scaffolding feels natural rather than repetitive
-- whether one-miss zoom-down repair is enough support without becoming annoying
-- whether MORE LIKE THIS now feels genuinely different while preserving the same thought
-- whether evidence-gated unlocking slows the extra 70 at the right moments
+- whether MORE LIKE THIS feels genuinely different while preserving the same thought
 - whether Core islands feel like helpful zoom-ins rather than interruption
-- whether island-first extra practice makes the 70 feel learnable instead of like a vocabulary dump
 - whether the 5-solid gate for `More phrases` feels too early or too late
 - whether local mixed contexts help retrieval without confusing Hawaiian authority
 - whether parent vs island progress behaves intuitively
-- whether the larger phone readability floor still keeps the primary loop comfortably visible without scrolling on Dad's device
+- whether the larger phone readability floor keeps the primary loop comfortably visible without scrolling on Dad's device
 - whether Seally stays funny and sparse
 - any correction from a fluent-speaker/kumu
 
@@ -228,4 +245,4 @@ Do not add another mode until actual use shows the current representation system
 
 ## RE-PROMPT
 
-> Continue Pidgin → ʻŌlelo from current `Paiea/Projects` authority. Read root `AGENTS.md`, `state/PROJECT_REGISTRY.md`, `state/HANDSHAKE_PROTOCOL.md`, and `pidgin-olelo/PROJECT_STATE.md`. Preserve Core 30 as the permanent default, one mixed Learn flow, six hidden vectors, WIN-style MORE LIKE THIS / SHOW WHAT YOU KNOW, compiler-style one-thought-many-representations, strict `learning · solid` mastery, sparse Uncle Seally, inline Noʻeau, orthography checks, no synthetic audio, and the viewport-first mobile practice shell. Preserve Hawaiian islands as derived representations with separate island progress. Core is full-phrase-first with occasional zoom-ins and one-miss zoom-down repair; More Phrases is quiet secondary practice over the existing utility-ranked extra 70, island-first, 10 active, with 8 reps as a minimum unlock cadence plus evidence/repeated-miss gating, graduating toward full parent phrases only after island retrieval/context evidence. Preserve strength-aware conversation scaffolding, MORE LIKE THIS representation switching when safe, recognition-only `standalone: false` islands, semantic context grounding, and the mobile readability floor. Pidgin is the trusted bridge and never the punchline. Prefer real learner testing and fluent-speaker/kumu corrections over architectural expansion.
+> Continue Pidgin → ʻŌlelo from current `Paiea/Projects` authority. Read root `AGENTS.md`, `state/PROJECT_REGISTRY.md`, `state/HANDSHAKE_PROTOCOL.md`, and `pidgin-olelo/PROJECT_STATE.md`. Preserve the north star that success means Hawaiian entering ordinary life, not passing a grammar or reading course. Preserve Core 30 as the permanent default, one mixed Learn flow, six hidden vectors, WIN-style MORE LIKE THIS / SHOW WHAT YOU KNOW, compiler-style one-thought-many-representations, strict `learning · solid` mastery, sparse Uncle Seally, inline Noʻeau, orthography checks, no synthetic audio, and the viewport-first mobile practice shell. Preserve Hawaiian islands as derived representations with separate island progress. Context islands are pragmatic shortcuts whose Pidgin meaning follows the parent thought, including `Pehea? → How you?`; mixed Pidgin + Hawaiian is valid scaffolding. Core is full-phrase-first with zoom-down repair and immediate fuller-parent rebuild after successful repair. Graded island prompts mask the answer. Repair/rebuild cards never become SHOW WHAT YOU KNOW. More Phrases is quiet secondary practice over the existing utility-ranked extra 70, island-first, 10 active, with 8 reps as a minimum unlock cadence plus positive scored evidence/repeated-miss gating. Pidgin is the trusted bridge and never the punchline. Prefer real learner use and fluent-speaker/kumu corrections over architectural expansion.
