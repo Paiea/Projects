@@ -12,7 +12,7 @@ The durable teaching idea is:
 
 > one thought authority → multiple useful representations → repeated retrieval → everyday use → fuller Hawaiian when ready
 
-Pidgin represents familiar learner thought. Hawaiian remains the language authority and deeper destination, but grammatical completeness is not required before useful Hawaiian can enter the learner's day. Pidgin is never the joke.
+Pidgin represents familiar learner thought. Hawaiian remains the language authority and deeper destination, but grammatical completeness is not required before useful Hawaiian can enter the learner's day. Pidgin support fades when the learner no longer needs it, but mixed Pidgin + Hawaiian remains valid everyday use rather than an error to correct away. Pidgin is never the joke.
 
 ## Current Authority
 
