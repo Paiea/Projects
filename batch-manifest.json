@@ -1,0 +1,140 @@
+{
+  "batch": "hawaii-archive-image-batch-003",
+  "purpose": "Route the current reconstruction batch without overwriting existing authority. Approved/reviewable assets land under existing image IDs; contaminated attempts remain outside the site drop-in tree.",
+  "routing_rule": "Upload only the contents of DROP-INTO-PROJECTS-ROOT to the Projects repository root. Do not upload HOLD-NOT-FOR-SITE.",
+  "next_pass": "Generate 10 net-new visual assets from feed/archive sources rather than repeating the current Kaulia/Palace/etc. lanes.",
+  "items": [
+    {
+      "batch_index": 1,
+      "name": "Hilo / anti-annexation assembly photo reconstruction",
+      "image_id": "HAR-IMG-0016",
+      "state": "photo-reconstruction",
+      "publish_recommendation": "approve-with-label",
+      "source_relationship": "illustration-source / movement-level context",
+      "repo_target": "hawaii-archive/assets/images/HAR-IMG-0016/photo-reconstruction-v2.png",
+      "packaged_path": "DROP-INTO-PROJECTS-ROOT/hawaii-archive/assets/images/HAR-IMG-0016/photo-reconstruction-v2.png",
+      "sha256": "29fcf378650b0405f1744b3ae34f7494ba8ece0c79b58cbea104519e6cbd015c",
+      "note": "Derived from the historical meeting illustration lane. Do not label as a photograph of the Sept. 6 Palace Square meeting."
+    },
+    {
+      "batch_index": 2,
+      "name": "James Keauiluna Kaulia source-locked reconstruction",
+      "image_id": "HAR-IMG-0001",
+      "state": "reconstructed-from-source",
+      "publish_recommendation": "approve",
+      "source_relationship": "exact-source",
+      "repo_target": "hawaii-archive/assets/images/HAR-IMG-0001/reconstructed-source-locked-v2.png",
+      "packaged_path": "DROP-INTO-PROJECTS-ROOT/hawaii-archive/assets/images/HAR-IMG-0001/reconstructed-source-locked-v2.png",
+      "sha256": "180e83da111bd3385bb6a640ea2f02580e1a684d3d425409b2d68dddf3c13b81",
+      "note": "Use as a newer source-locked reconstruction while preserving the existing original, restored, color, and archival reference."
+    },
+    {
+      "batch_index": 3,
+      "name": "ʻIolani Palace source-locked wide reconstruction",
+      "image_id": "HAR-IMG-0002",
+      "state": "reconstructed-from-source",
+      "publish_recommendation": "approve",
+      "source_relationship": "exact-source / same composition",
+      "repo_target": "hawaii-archive/assets/images/HAR-IMG-0002/reconstructed-wide-v3.png",
+      "packaged_path": "DROP-INTO-PROJECTS-ROOT/hawaii-archive/assets/images/HAR-IMG-0002/reconstructed-wide-v3.png",
+      "sha256": "1df8444728ee8e134bdefdae995273abfa4aa9d3a5c04441eb46b6265dd71792",
+      "note": "Candidate new primary wide Palace view. Preserve the close reconstruction as a separate view."
+    },
+    {
+      "batch_index": 4,
+      "name": "ʻIolani Palace close interpretive reconstruction",
+      "image_id": "HAR-IMG-0002",
+      "state": "interpretive-reconstruction",
+      "publish_recommendation": "approve-as-secondary",
+      "source_relationship": "same-place / interpretive",
+      "repo_target": "hawaii-archive/assets/images/HAR-IMG-0002/reconstructed-close-v2.png",
+      "packaged_path": "DROP-INTO-PROJECTS-ROOT/hawaii-archive/assets/images/HAR-IMG-0002/reconstructed-close-v2.png",
+      "sha256": "02898b4e01464878e09f2823bc8951ba5f76e4ee955ce1071f1ad3bb1ce72a7a",
+      "note": "Secondary Palace view only. Do not present as the exact parent-photo reconstruction."
+    },
+    {
+      "batch_index": 5,
+      "name": "Queen Liliʻuokalani reconstructed portrait",
+      "image_id": "HAR-IMG-0011",
+      "state": "reconstructed",
+      "publish_recommendation": "review-then-approve",
+      "source_relationship": "same-person / archival-reference",
+      "repo_target": "hawaii-archive/assets/images/HAR-IMG-0011/reconstructed-v2.png",
+      "packaged_path": "DROP-INTO-PROJECTS-ROOT/hawaii-archive/assets/images/HAR-IMG-0011/reconstructed-v2.png",
+      "sha256": "4a69f198f49b678bbafa9af1d09a6f8ef819be242c5791fbdf0fce38a4172093",
+      "note": "Use with the real period portrait underneath. Do not claim this is a literal restoration unless exact parentage is later verified."
+    },
+    {
+      "batch_index": 6,
+      "name": "Sanford B. Dole reconstructed portrait",
+      "image_id": "HAR-IMG-0012",
+      "state": "interpretive-reconstruction",
+      "publish_recommendation": "review",
+      "source_relationship": "same-person / archival-reference",
+      "repo_target": "hawaii-archive/assets/images/HAR-IMG-0012/reconstructed-v2.png",
+      "packaged_path": "DROP-INTO-PROJECTS-ROOT/hawaii-archive/assets/images/HAR-IMG-0012/reconstructed-v2.png",
+      "sha256": "bfdc5afccfa61d3e47340a81af74fe38d5b7b41f6690d0a865b06cab76e4367a",
+      "note": "Interpretive composition. Keep the real period Dole portrait as the archival reference."
+    },
+    {
+      "batch_index": 7,
+      "name": "Honolulu Harbor steamship-era reconstruction",
+      "image_id": "HAR-IMG-0013",
+      "state": "interpretive-reconstruction",
+      "publish_recommendation": "review",
+      "source_relationship": "same-place / period-context",
+      "repo_target": "hawaii-archive/assets/images/HAR-IMG-0013/reconstructed-v2.png",
+      "packaged_path": "DROP-INTO-PROJECTS-ROOT/hawaii-archive/assets/images/HAR-IMG-0013/reconstructed-v2.png",
+      "sha256": "1d3e31899637419c3e6c8a86097eb5b2be45b6821138b455fc960e75eb135223",
+      "note": "Do not identify the generated ship as USS Bennington or treat invented signage as historical evidence."
+    },
+    {
+      "batch_index": 8,
+      "name": "Waikīkī surfing reconstruction",
+      "image_id": "HAR-IMG-0014",
+      "state": "interpretive-reconstruction",
+      "publish_recommendation": "review",
+      "source_relationship": "same-place / same-activity / period-context",
+      "repo_target": "hawaii-archive/assets/images/HAR-IMG-0014/reconstructed-v2.png",
+      "packaged_path": "DROP-INTO-PROJECTS-ROOT/hawaii-archive/assets/images/HAR-IMG-0014/reconstructed-v2.png",
+      "sha256": "e213ee8af7e687214d07f2303551a8f5967767f7e2644a5fde973c7b9c1b0c83",
+      "note": "Use as a vivid recreation, with the real period Waikīkī reference available underneath."
+    },
+    {
+      "batch_index": 9,
+      "name": "Poi / taro preparation reconstruction",
+      "image_id": "HAR-IMG-0003",
+      "state": "reconstruction-attempt",
+      "publish_recommendation": "HOLD",
+      "source_relationship": "same-activity",
+      "repo_target": null,
+      "packaged_path": "HOLD-NOT-FOR-SITE/HAR-IMG-0003-polynesian_village_taro_preparation.png",
+      "sha256": "2b86ef8a308e66fe7a4fe5af951f7b35ffd11e995b1600e5ce41134e9221de54",
+      "note": "HOLD. The image again contains a Kaulia-like central man and is not source-locked closely enough to the 1896 stereograph."
+    },
+    {
+      "batch_index": 10,
+      "name": "Fort Street / downtown Honolulu reconstruction",
+      "image_id": "HAR-IMG-0015",
+      "state": "reconstruction-attempt",
+      "publish_recommendation": "HOLD",
+      "source_relationship": "same-place / period-context",
+      "repo_target": null,
+      "packaged_path": "HOLD-NOT-FOR-SITE/HAR-IMG-0015-colorized_honolulu_commercial_street_1890s.png",
+      "sha256": "4ab2015e71dd696f7ed62798a2a3e59a3cd76544b150d8de503fa976c717c76e",
+      "note": "HOLD. Kaulia-like figure contamination and invented readable commercial signage make it unsuitable as historical reconstruction."
+    },
+    {
+      "batch_index": 11,
+      "name": "Hilo assembly reconstruction, approved comparison attempt",
+      "image_id": "HAR-IMG-0016",
+      "state": "photo-reconstruction",
+      "publish_recommendation": "approve-with-label",
+      "source_relationship": "illustration-source / movement-level context",
+      "repo_target": "hawaii-archive/assets/images/HAR-IMG-0016/photo-reconstruction-approved.png",
+      "packaged_path": "DROP-INTO-PROJECTS-ROOT/hawaii-archive/assets/images/HAR-IMG-0016/photo-reconstruction-approved.png",
+      "sha256": "0b86a9b370036c325da971bd2536d14e40ba1c027ba90cc66a748f3d9e81f1f2",
+      "note": "The user preferred this attempt during iteration. Preserve alongside the later attempt so Image OS can show how reconstruction improved."
+    }
+  ]
+}
