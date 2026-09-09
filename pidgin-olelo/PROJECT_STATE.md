@@ -202,7 +202,7 @@ Mission remains transfer, not another quiz.
 - **I USED IT** writes `use` evidence into the same Core state
 - refreshing does not reroll the mission
 
-## ʻŌLELO NOʻEAU
+## ʻŌlelo Noʻeau
 
 Noʻeau remains inline cultural flavor under Core Learn, not a separate user-facing mode.
 
