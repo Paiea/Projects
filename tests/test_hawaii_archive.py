@@ -15,13 +15,14 @@ class HawaiiArchiveTests(unittest.TestCase):
         self.assertIn("## Hawaiʻi Archive Revival", registry)
         self.assertTrue((ROOT / "hawaii-archive" / "PROJECT_STATE.md").exists())
 
-    def test_week_fixture_has_authority_routing_and_voice_evidence(self):
-        path = ROOT / "hawaii-archive" / "data" / "weeks" / "1897-09-06.json"
+    def test_attention_window_has_authority_routing_and_voice_evidence(self):
+        path = ROOT / "hawaii-archive" / "data" / "weeks" / "1897-08-23.json"
         payload = json.loads(path.read_text(encoding="utf-8"))
-        self.assertEqual(payload["week_start"], "1897-09-06")
-        # The current grounded checkpoint is 47 records. The 100-post expansion remains a target,
-        # not a reason to keep already-grounded material off the public site.
-        self.assertGreaterEqual(len(payload["items"]), 47)
+        self.assertEqual(payload["week_start"], "1897-08-23")
+        self.assertEqual(payload["week_end"], "1897-09-12")
+        # The widened historical-attention window must preserve the 47-post September checkpoint
+        # and add grounded lead-up material rather than merely changing the label.
+        self.assertGreaterEqual(len(payload["items"]), 50)
 
         ids = [item["id"] for item in payload["items"]]
         self.assertEqual(len(ids), len(set(ids)))
@@ -55,6 +56,10 @@ class HawaiiArchiveTests(unittest.TestCase):
             self.assertTrue(item["feed_rendering"])
             self.assertTrue(item["voice_evidence"])
 
+        # The backward expansion has to contain actual pre-rally material.
+        pre_rally = [item for item in payload["items"] if item["date"] < "1897-09-06"]
+        self.assertGreaterEqual(len(pre_rally), 3)
+
         # Scale should broaden the surviving attention field without imposing a topic quota.
         self.assertGreaterEqual(len({item["publication"] for item in payload["items"]}), 3)
         self.assertGreaterEqual(len({item["place"] for item in payload["items"]}), 4)
@@ -79,14 +84,21 @@ class HawaiiArchiveTests(unittest.TestCase):
         self.assertTrue(any(item["rhetorical_mode"] == "call-and-response" for item in voiced))
         self.assertTrue(any(item["rhetorical_mode"] == "warning" for item in voiced))
 
+    def test_public_reader_uses_widened_attention_window(self):
+        page = (ROOT / "hawaii-archive" / "index.html").read_text(encoding="utf-8")
+        script = (ROOT / "hawaii-archive" / "app.js").read_text(encoding="utf-8")
+        self.assertIn("AUGUST 23–SEPTEMBER 12, 1897", page)
+        self.assertIn('data/weeks/1897-08-23.json', script)
+        self.assertNotIn('const WEEK_DATA_URL = "data/weeks/1897-09-06.json"', script)
+
     def test_petition_geography_expansion_is_broad_without_fake_voice(self):
-        path = ROOT / "hawaii-archive" / "data" / "weeks" / "1897-09-06.json"
+        path = ROOT / "hawaii-archive" / "data" / "weeks" / "1897-08-23.json"
         payload = json.loads(path.read_text(encoding="utf-8"))
         items = payload["items"]
         petition_pages = [item for item in items if item["kind"] == "petition-district-page"]
 
         # This is a source-density checkpoint, not a topical quota. The archive earns the count.
-        self.assertGreaterEqual(len(items), 47)
+        self.assertGreaterEqual(len(items), 50)
         self.assertGreaterEqual(len(petition_pages), 34)
         self.assertGreaterEqual(len({item["place"] for item in petition_pages}), 20)
         self.assertEqual(
@@ -209,10 +221,10 @@ class HawaiiArchiveTests(unittest.TestCase):
         self.assertTrue(all(image.get("colorization_class") for image in approved_color))
         self.assertTrue(all(image.get("color_confidence") in {"plausible", "supported", "verified"} for image in approved_color))
 
-        week = json.loads(
-            (ROOT / "hawaii-archive" / "data" / "weeks" / "1897-09-06.json").read_text(encoding="utf-8")
+        window = json.loads(
+            (ROOT / "hawaii-archive" / "data" / "weeks" / "1897-08-23.json").read_text(encoding="utf-8")
         )
-        image_refs = [item.get("image_ref") for item in week["items"] if item.get("image_ref")]
+        image_refs = [item.get("image_ref") for item in window["items"] if item.get("image_ref")]
         self.assertGreaterEqual(len(image_refs), 1)
         self.assertTrue(set(image_refs).issubset({image["id"] for image in images}))
 
