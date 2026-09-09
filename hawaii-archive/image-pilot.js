@@ -28,6 +28,19 @@ function applyState(image, buttons, imageRecord, state) {
   }
 }
 
+function applyView(image, buttons, view) {
+  if (!view?.asset) return;
+
+  image.src = view.asset;
+  image.dataset.state = view.id;
+
+  for (const buttonNode of buttons) {
+    const active = buttonNode.dataset.state === view.id;
+    buttonNode.classList.toggle("active", active);
+    buttonNode.setAttribute("aria-pressed", String(active));
+  }
+}
+
 function button(label, state) {
   const node = document.createElement("button");
   node.type = "button";
@@ -62,13 +75,17 @@ function renderCard(imageRecord) {
   stage.className = "media-stage pilot-media-stage";
   if (imageRecord.crop_mode === "stereo-left") stage.classList.add("crop-stereo-left");
 
+  const configuredViews = Array.isArray(imageRecord.views)
+    ? imageRecord.views.filter((view) => view?.asset)
+    : [];
+  const usesConfiguredViews = configuredViews.length > 0;
   const defaultState = publicReconstruction(imageRecord) ? "reconstructed"
     : imageRecord.color_decision === "approved" && imageRecord.color_asset ? "color"
       : imageRecord.restored_asset ? "restored"
         : "original";
 
   const image = document.createElement("img");
-  image.src = assetForState(imageRecord, defaultState);
+  image.src = usesConfiguredViews ? configuredViews[0].asset : assetForState(imageRecord, defaultState);
   image.alt = imageRecord.title;
   image.loading = "lazy";
   image.decoding = "async";
@@ -79,32 +96,51 @@ function renderCard(imageRecord) {
   toolbar.className = "media-toolbar pilot-toolbar";
   const buttons = [];
 
-  if (imageRecord.reconstruction_decision === "approved" && imageRecord.reconstructed_asset) {
-    const reconstructed = button("Reconstructed", "reconstructed");
-    toolbar.append(reconstructed);
-    buttons.push(reconstructed);
-  }
-  if (imageRecord.color_decision === "approved" && imageRecord.color_asset) {
-    const color = button("Color", "color");
-    toolbar.append(color);
-    buttons.push(color);
-  }
-  if (imageRecord.restored_asset) {
-    const restored = button("Restored", "restored");
-    toolbar.append(restored);
-    buttons.push(restored);
-  }
-  if (imageRecord.original_asset) {
-    const original = button(imageRecord.original_label || "Original", "original");
-    toolbar.append(original);
-    buttons.push(original);
+  if (usesConfiguredViews) {
+    for (const view of configuredViews) {
+      const viewButton = button(view.label, view.id);
+      toolbar.append(viewButton);
+      buttons.push(viewButton);
+    }
+  } else {
+    if (imageRecord.reconstruction_decision === "approved" && imageRecord.reconstructed_asset) {
+      const reconstructed = button("Reconstructed", "reconstructed");
+      toolbar.append(reconstructed);
+      buttons.push(reconstructed);
+    }
+    if (imageRecord.color_decision === "approved" && imageRecord.color_asset) {
+      const color = button("Color", "color");
+      toolbar.append(color);
+      buttons.push(color);
+    }
+    if (imageRecord.restored_asset) {
+      const restored = button("Restored", "restored");
+      toolbar.append(restored);
+      buttons.push(restored);
+    }
+    if (imageRecord.original_asset) {
+      const original = button(imageRecord.original_label || "Original", "original");
+      toolbar.append(original);
+      buttons.push(original);
+    }
   }
 
   for (const control of buttons) {
-    control.addEventListener("click", () => applyState(image, buttons, imageRecord, control.dataset.state));
+    control.addEventListener("click", () => {
+      if (usesConfiguredViews) {
+        const view = configuredViews.find((candidate) => candidate.id === control.dataset.state);
+        applyView(image, buttons, view);
+      } else {
+        applyState(image, buttons, imageRecord, control.dataset.state);
+      }
+    });
   }
 
-  applyState(image, buttons, imageRecord, defaultState);
+  if (usesConfiguredViews) {
+    applyView(image, buttons, configuredViews[0]);
+  } else {
+    applyState(image, buttons, imageRecord, defaultState);
+  }
   article.append(toolbar);
 
   const meta = document.createElement("div");
