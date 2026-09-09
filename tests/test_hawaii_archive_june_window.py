@@ -42,6 +42,8 @@ class HawaiiArchiveJuneWindowTests(unittest.TestCase):
         self.assertIn("The Annexation Crisis", page)
         self.assertNotIn("This Week in Hawaiʻi", page)
         self.assertIn('data/weeks/1897-06-01.json', script)
+        self.assertIn("loadWindowChain", script)
+        self.assertIn("loadWindowChain(windowPayload.extends)", script)
 
 
 if __name__ == "__main__":
