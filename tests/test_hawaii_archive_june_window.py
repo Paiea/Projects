@@ -80,6 +80,19 @@ class HawaiiArchiveJuneWindowTests(unittest.TestCase):
         prayer_links = resource_map["HAR-1897-07-03-ALOHA-PULE-001"]
         self.assertTrue(any("Kumulipo" in link["label"] for link in prayer_links))
 
+    def test_june_19_keeps_ordinary_interisland_commerce_in_the_feed(self):
+        payload = json.loads((WEEKS / "1897-06-01.json").read_text(encoding="utf-8"))
+        by_id = {item["id"]: item for item in payload["items"]}
+
+        wool = by_id["HAR-1897-06-19-NIIHAU-WOOL-001"]
+        self.assertEqual(wool["date"], "1897-06-19")
+        self.assertEqual(wool["publication"], "Ke Aloha Aina")
+        self.assertEqual(wool["place"], "Niʻihau")
+        self.assertIn("hulu hipa", wool["hawaiian"])
+        self.assertIn("Malulani", wool["hawaiian"])
+        self.assertIn("wool", wool["english_close"].lower())
+        self.assertNotIn("voice_actor", wool)
+
     def test_public_reader_names_the_long_annexation_crisis_window(self):
         page = (ROOT / "hawaii-archive" / "index.html").read_text(encoding="utf-8")
         script = (ROOT / "hawaii-archive" / "app.js").read_text(encoding="utf-8")
