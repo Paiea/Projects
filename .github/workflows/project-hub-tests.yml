@@ -22,6 +22,7 @@ on:
       - 'tests/test_hawaii_archive_photo_posts_v2.py'
       - 'tests/test_hawaii_archive_visual_feed_batch.py'
       - 'tests/test_hawaii_archive_image_batch_003_live.py'
+      - 'tests/test_hawaii_archive_public_image_curation.py'
       - '.github/workflows/project-hub-tests.yml'
   pull_request:
     paths:
@@ -43,6 +44,7 @@ on:
       - 'tests/test_hawaii_archive_photo_posts_v2.py'
       - 'tests/test_hawaii_archive_visual_feed_batch.py'
       - 'tests/test_hawaii_archive_image_batch_003_live.py'
+      - 'tests/test_hawaii_archive_public_image_curation.py'
       - '.github/workflows/project-hub-tests.yml'
 
 jobs:
@@ -77,6 +79,8 @@ jobs:
         run: python tests/test_hawaii_archive_visual_feed_batch.py
       - name: Verify live image batch 003 routing
         run: python tests/test_hawaii_archive_image_batch_003_live.py
+      - name: Verify curated public image stacks
+        run: python tests/test_hawaii_archive_public_image_curation.py
       - name: Check Hawaiʻi Archive JavaScript syntax
         run: |
           node --check hawaii-archive/app.js

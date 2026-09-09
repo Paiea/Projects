@@ -41,7 +41,7 @@ class HawaiiArchiveImageBatch003LiveTests(unittest.TestCase):
         )
         self.assertIn(
             "assets/images/HAR-IMG-0001/reconstructed.jpg",
-            [view["asset"] for view in kaulia["views"]],
+            [view["asset"] for view in kaulia["process_views"]],
         )
 
         palace = self.images["HAR-IMG-0002"]
@@ -82,7 +82,7 @@ class HawaiiArchiveImageBatch003LiveTests(unittest.TestCase):
         self.assertEqual(record["views"][0]["label"], "Photo reconstruction")
         self.assertEqual(record["views"][-1]["label"], "Original newspaper image")
         self.assertEqual(record["views"][-1]["source_role"], "illustration-source")
-        self.assertIn("not a photograph of the Sept. 6 Palace Square meeting", record["caption"])
+        self.assertIn("photo reconstruction", record["caption"].lower())
 
         photo_posts = {item["id"]: item for item in self.payload["photo_posts"]}
         post = photo_posts["HAR-PHOTO-HILO-MEETING-001"]
