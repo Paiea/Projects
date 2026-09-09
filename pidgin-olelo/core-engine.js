@@ -1,5 +1,5 @@
 const VECTORS = ["recognize", "cloze", "produce", "scenario", "say", "use"];
-const HARD_VECTORS = ["cloze", "produce", "scenario", "use"];
+const HARD_VECTORS = ["cloze", "produce", "scenario"];
 const SHOW_WHAT_YOU_KNOW_EVERY = 6;
 const MAX_VECTOR_STRENGTH = 3;
 

@@ -40,7 +40,7 @@ console.log(JSON.stringify(q));
     def test_open_recall_can_be_self_rated_without_revealing_first(self):
         app = (PROJECT / "app.js").read_text(encoding="utf-8")
         self.assertIn("const canSelfRate = !intro && !autoScored && !reviewing && !autoRated;", app)
-        self.assertIn("els.gotIt.disabled = !canSelfRate;", app)
+        self.assertIn("els.gotIt.disabled = !canSelfRate || peekedThisAttempt;", app)
         self.assertIn("els.missIt.disabled = !canSelfRate;", app)
         self.assertIn('els.showAnswer.addEventListener("click"', app)
         self.assertIn('setSeallyState("show")', app)

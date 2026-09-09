@@ -132,6 +132,7 @@ let avoidRepresentationOnce = null;
 let repairVectorOnce = null;
 let rebuildParentOnce = null;
 let autoRated = false;
+let peekedThisAttempt = false;
 let sessionMisses = {};
 let lastSeallyRep = state.repCount;
 let noeauIndex = NOEAU_ITEMS.length ? Math.floor(Date.now() / 86400000) % NOEAU_ITEMS.length : -1;
@@ -589,11 +590,11 @@ function setRevealed(revealed) {
   } else {
     els.gotIt.hidden = false;
     els.missIt.hidden = false;
-    els.gotIt.disabled = !canSelfRate;
+    els.gotIt.disabled = !canSelfRate || peekedThisAttempt;
     els.missIt.disabled = !canSelfRate;
   }
 
-  els.moreLikeThis.disabled = intro ? true : (!revealed && !autoRated);
+  els.moreLikeThis.disabled = intro ? true : ((!revealed && !autoRated) || peekedThisAttempt);
 }
 
 function drawQuestion(question, { preserveReveal = false } = {}) {
@@ -648,6 +649,7 @@ function pushQuestion(question) {
   if (historyCursor < history.length - 1) history = history.slice(0, historyCursor + 1);
   history.push(question);
   historyCursor = history.length - 1;
+  peekedThisAttempt = false;
   drawQuestion(question);
 }
 
@@ -730,9 +732,7 @@ function rateCurrent(delta) {
 
   const item = currentItem;
   if (ENGINE.isNeutralDefer(currentQuestion.vector, delta)) {
-    state.repCount += 1;
     state.lastSeen[item.id] = Date.now();
-    maybeUnlockNext();
     saveState();
     renderFeedback("forward", "Not yet is fine. Use um when get chance.");
     const feedbackText = els.feedback.textContent;
@@ -741,6 +741,8 @@ function rateCurrent(delta) {
     renderFeedback(feedbackKind, feedbackText);
     return;
   }
+
+  if (delta > 0 && peekedThisAttempt) return;
 
   rateQuestion(delta);
   state.repCount += 1;
@@ -772,7 +774,7 @@ function rateCurrent(delta) {
 }
 
 function moreLikeThis() {
-  if (!currentQuestion || currentQuestion.intro || isReviewingHistory()) return;
+  if (!currentQuestion || currentQuestion.intro || isReviewingHistory() || peekedThisAttempt) return;
   preferredItemId = currentQuestion.itemId;
   excludeVectorOnce = currentQuestion.vector;
   avoidRepresentationOnce = currentQuestion.island ? "island" : "parent";
@@ -809,6 +811,7 @@ function openMore(event) {
 }
 
 els.showAnswer.addEventListener("click", () => {
+  peekedThisAttempt = true;
   setRevealed(true);
   setSeallyState("show");
 });
@@ -819,9 +822,10 @@ els.backCard.addEventListener("click", () => showHistoryItem(historyCursor - 1, 
 els.forwardCard.addEventListener("click", moveForward);
 els.replayCard.addEventListener("click", () => {
   if (!currentQuestion) return;
+  peekedThisAttempt = false;
   drawQuestion(currentQuestion, { preserveReveal: currentQuestion.intro || isReviewingHistory() });
   renderFeedback("replay", isReviewingHistory()
-    ? "REVIEW only. No score changes."
+    ? "REVIEW only. No scores change."
     : (currentQuestion.intro ? "Read both once more, then say the Hawaiian." : "Replay. No peek. Try the same angle again."));
   if (!isReviewingHistory()) setSeallyState("replay", currentQuestion.itemId);
 });
