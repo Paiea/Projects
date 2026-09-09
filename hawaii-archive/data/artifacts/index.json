@@ -1,0 +1,79 @@
+{
+  "batch_id": "artifact-receipts-001",
+  "images": [
+    {
+      "id": "HAR-ART-0001",
+      "image_class": "document",
+      "title": "Hui Aloha ʻĀina petition against annexation",
+      "display_date": "1897",
+      "caption": "An original 1897 Hui Aloha ʻĀina petition sheet against annexation, showing the bilingual petition heading and signatures. The National Archives identifies the petition set as carrying 21,269 Native Hawaiian signatures.",
+      "source_authority_url": "https://www.archives.gov/education/lessons/hawaii-petition",
+      "source_record_label": "National Archives, Petition Against the Annexation of Hawaii from Hui Aloha ʻĀina, 1897",
+      "source_image_url": "https://www.archives.gov/files/education/images/hawaiipetition.jpg",
+      "source_image_access_note": "National Archives public-domain educational access image of the original petition sheet.",
+      "rights_note": "Materials created by the National Archives are public domain; the page identifies this as a primary-source petition image.",
+      "original_asset": "https://www.archives.gov/files/education/images/hawaiipetition.jpg",
+      "original_label": "Original petition sheet",
+      "relationship_default": "exact",
+      "relationship_label": "Exact document · original petition sheet",
+      "crop_mode": "none",
+      "review_status": "approved",
+      "color_decision": "skipped",
+      "reconstruction_decision": "skipped"
+    },
+    {
+      "id": "HAR-ART-0002",
+      "image_class": "document",
+      "title": "Liliʻuokalani protest signatures",
+      "display_date": "June 17, 1897",
+      "caption": "Signature area from Liliʻuokalani's June 17, 1897 protest against ratification of the annexation treaty, including the Queen's and witness signatures in the UH Mānoa document collection.",
+      "source_authority_url": "https://libweb.hawaii.edu/digicoll/annexation/protest/liliu5.php",
+      "source_record_label": "UH Mānoa Library, Liliʻuokalani to William McKinley, June 17, 1897",
+      "source_image_url": "https://libweb.hawaii.edu/digicoll/annexation/protest/liliu5-sig.gif",
+      "source_image_access_note": "UH Mānoa scan presented with the full protest transcription and document record.",
+      "rights_note": "Historical document scan shown with UH Mānoa provenance; the project links back to the collection record rather than treating the access image as independent authority.",
+      "original_asset": "https://libweb.hawaii.edu/digicoll/annexation/protest/liliu5-sig.gif",
+      "original_label": "Original document scan",
+      "relationship_default": "exact",
+      "relationship_label": "Exact document · signature area",
+      "crop_mode": "none",
+      "review_status": "approved",
+      "color_decision": "skipped",
+      "reconstruction_decision": "skipped"
+    },
+    {
+      "id": "HAR-ART-0003",
+      "image_class": "newspaper",
+      "title": "Hawaiian newspaper printing of Liliʻuokalani's protest",
+      "display_date": "July 10, 1897",
+      "caption": "A Hawaiian-language newspaper page carrying Liliʻuokalani's June 17 protest. UH Mānoa preserves the newspaper report alongside the signed English protest, making the publication lag visible as an artifact rather than only a note.",
+      "source_authority_url": "https://libweb.hawaii.edu/digicoll/annexation/protest/liliu5.php",
+      "source_record_label": "UH Mānoa Library, Hawaiian-language newspaper report accompanying Liliʻuokalani's June 17, 1897 protest",
+      "source_image_url": "https://libweb.hawaii.edu/digicoll/annexation/protest/liliu5-hawn1.gif",
+      "source_image_access_note": "UH Mānoa scan of page 1 of the Hawaiian-language newspaper report preserved with the protest collection.",
+      "rights_note": "Historical newspaper scan shown with UH Mānoa provenance and linked to the collection record.",
+      "original_asset": "https://libweb.hawaii.edu/digicoll/annexation/protest/liliu5-hawn1.gif",
+      "original_label": "Newspaper scan",
+      "relationship_default": "exact",
+      "relationship_label": "Exact publication artifact · Hawaiian text",
+      "crop_mode": "none",
+      "review_status": "approved",
+      "color_decision": "skipped",
+      "reconstruction_decision": "skipped"
+    }
+  ],
+  "attachments": [
+    {
+      "item_id": "HAR-1897-09-11-PETITION-001",
+      "media_ref": "HAR-ART-0001"
+    },
+    {
+      "item_id": "HAR-1897-06-17-LILIU-002",
+      "media_ref": "HAR-ART-0002"
+    },
+    {
+      "item_id": "HAR-1897-06-17-LILIU-005",
+      "media_ref": "HAR-ART-0003"
+    }
+  ]
+}

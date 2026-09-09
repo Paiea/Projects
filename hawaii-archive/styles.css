@@ -320,6 +320,18 @@ h1 {
   object-position: center top;
 }
 
+.media-stage.media-document,
+.media-stage.media-newspaper {
+  aspect-ratio: 3 / 4;
+  background: #f1eee7;
+}
+
+.media-stage.media-document img,
+.media-stage.media-newspaper img {
+  object-fit: contain;
+  object-position: center top;
+}
+
 .media-stage::after {
   position: absolute;
   z-index: 1;
