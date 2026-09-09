@@ -45,12 +45,16 @@ function getStrength(strengths, itemId, vector) {
   return clampStrength(strengths?.[itemId]?.[vector] || 0);
 }
 
-function conversationQuestionText(questionItem, strengths = {}, missCount = 0) {
+function conversationQuestionText(questionItem, strengths = {}, missCount = 0, forcePidgin = false) {
   if (!questionItem) return "";
-  if (Number(missCount) > 0) return questionItem.pidgin;
+  if (forcePidgin || Number(missCount) > 0) return questionItem.pidgin;
   return getStrength(strengths, questionItem.id, "recognize") >= 1
     ? questionItem.hawaiian
     : questionItem.pidgin;
+}
+
+function isNeutralDefer(vector, delta) {
+  return vector === "use" && Number(delta) < 0;
 }
 
 function canUnlockNext(activeIds = [], evidenceIds = [], repeatedMissIds = []) {
@@ -334,6 +338,7 @@ const coreEngineApi = {
   VECTOR_META,
   getStrength,
   conversationQuestionText,
+  isNeutralDefer,
   canUnlockNext,
   itemAverage,
   isOwned,
