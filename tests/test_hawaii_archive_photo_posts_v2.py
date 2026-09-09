@@ -23,7 +23,7 @@ class HawaiiArchivePhotoPostsV2Tests(unittest.TestCase):
         images = {item["id"]: item for item in payload["images"]}
 
         palace = images["HAR-IMG-0002"]
-        self.assertEqual(palace["reconstructed_asset"], "assets/images/HAR-IMG-0002/reconstructed.png")
+        self.assertEqual(palace["reconstructed_asset"], "assets/images/HAR-IMG-0002/reconstructed-wide-v3.png")
         self.assertEqual(palace["reconstruction_decision"], "approved")
 
         poi = images["HAR-IMG-0003"]
@@ -36,20 +36,28 @@ class HawaiiArchivePhotoPostsV2Tests(unittest.TestCase):
         expected = {f"HAR-IMG-{number:04d}" for number in range(11, 17)}
         self.assertEqual(set(feed_images), expected)
 
+        expected_primary = {
+            "HAR-IMG-0011": "assets/images/HAR-IMG-0011/reconstructed-v2.png",
+            "HAR-IMG-0012": "assets/images/HAR-IMG-0012/reconstructed-v2.png",
+            "HAR-IMG-0013": "assets/images/HAR-IMG-0013/reconstructed-v2.png",
+            "HAR-IMG-0014": "assets/images/HAR-IMG-0014/reconstructed-v2.png",
+            "HAR-IMG-0015": "assets/images/HAR-IMG-0015/reconstructed.png",
+            "HAR-IMG-0016": "assets/images/HAR-IMG-0016/photo-reconstruction-approved.png",
+        }
         for image_id in expected:
             item = feed_images[image_id]
             self.assertTrue(item["original_asset"].startswith("https://"))
-            self.assertEqual(item["reconstructed_asset"], f"assets/images/{image_id}/reconstructed.png")
+            self.assertEqual(item["reconstructed_asset"], expected_primary[image_id])
             self.assertTrue(item["source_authority_url"].startswith("https://"))
             self.assertIn(item["reconstruction_decision"], {"approved", "hold"})
             self.assertIn(item["relationship_default"], {"near", "context"})
 
         self.assertEqual(feed_images["HAR-IMG-0015"]["reconstruction_decision"], "hold")
-        self.assertEqual(feed_images["HAR-IMG-0016"]["reconstruction_decision"], "hold")
-        self.assertEqual(feed_images["HAR-IMG-0016"]["original_label"], "Archive reference")
+        self.assertEqual(feed_images["HAR-IMG-0016"]["reconstruction_decision"], "approved")
+        self.assertEqual(feed_images["HAR-IMG-0016"]["original_label"], "Original newspaper image")
 
     def test_queen_reconstruction_cannot_collapse_into_poi_migration(self):
-        queen = ARCHIVE / "assets" / "images" / "HAR-IMG-0011" / "reconstructed.png"
+        queen = ARCHIVE / "assets" / "images" / "HAR-IMG-0011" / "reconstructed-v2.png"
         poi = ARCHIVE / "assets" / "images" / "HAR-IMG-0003" / "reconstructed.png"
         self.assertTrue(queen.is_file())
         self.assertTrue(poi.is_file())
