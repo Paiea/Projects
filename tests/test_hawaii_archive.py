@@ -7,10 +7,16 @@ ROOT = Path(__file__).resolve().parents[1]
 WEEKS = ROOT / "hawaii-archive" / "data" / "weeks"
 
 
+def load_window_chain(filename):
+    payload = json.loads((WEEKS / filename).read_text(encoding="utf-8"))
+    if not payload.get("extends"):
+        return payload, list(payload["items"])
+    _, base_items = load_window_chain(payload["extends"])
+    return payload, [*payload["items"], *base_items]
+
+
 def load_attention_window():
-    window = json.loads((WEEKS / "1897-08-23.json").read_text(encoding="utf-8"))
-    base = json.loads((WEEKS / window["extends"]).read_text(encoding="utf-8"))
-    return window, [*window["items"], *base["items"]]
+    return load_window_chain("1897-06-01.json")
 
 
 class HawaiiArchiveTests(unittest.TestCase):
@@ -24,12 +30,10 @@ class HawaiiArchiveTests(unittest.TestCase):
 
     def test_attention_window_has_authority_routing_and_voice_evidence(self):
         payload, items = load_attention_window()
-        self.assertEqual(payload["week_start"], "1897-08-23")
+        self.assertEqual(payload["week_start"], "1897-06-01")
         self.assertEqual(payload["week_end"], "1897-09-12")
-        self.assertEqual(payload["extends"], "1897-09-06.json")
-        # The widened window preserves the accepted 47-post September fixture by reference
-        # and adds grounded lead-up material rather than copying or relabeling it.
-        self.assertGreaterEqual(len(items), 50)
+        self.assertEqual(payload["extends"], "1897-08-23.json")
+        self.assertGreaterEqual(len(items), 58)
 
         ids = [item["id"] for item in items]
         self.assertEqual(len(ids), len(set(ids)))
@@ -64,7 +68,7 @@ class HawaiiArchiveTests(unittest.TestCase):
             self.assertTrue(item["voice_evidence"])
 
         pre_rally = [item for item in items if item["date"] < "1897-09-06"]
-        self.assertGreaterEqual(len(pre_rally), 3)
+        self.assertGreaterEqual(len(pre_rally), 10)
 
         self.assertGreaterEqual(len({item["publication"] for item in items}), 3)
         self.assertGreaterEqual(len({item["place"] for item in items}), 4)
@@ -91,16 +95,17 @@ class HawaiiArchiveTests(unittest.TestCase):
     def test_public_reader_uses_widened_attention_window(self):
         page = (ROOT / "hawaii-archive" / "index.html").read_text(encoding="utf-8")
         script = (ROOT / "hawaii-archive" / "app.js").read_text(encoding="utf-8")
-        self.assertIn("AUGUST 23–SEPTEMBER 12, 1897", page)
-        self.assertIn('data/weeks/1897-08-23.json', script)
-        self.assertIn("windowPayload.extends", script)
+        self.assertIn("JUNE 1–SEPTEMBER 12, 1897", page)
+        self.assertIn('data/weeks/1897-06-01.json', script)
+        self.assertIn("loadWindowChain", script)
+        self.assertIn("loadWindowChain(windowPayload.extends)", script)
         self.assertNotIn('const WEEK_DATA_URL = "data/weeks/1897-09-06.json"', script)
 
     def test_petition_geography_expansion_is_broad_without_fake_voice(self):
         _, items = load_attention_window()
         petition_pages = [item for item in items if item["kind"] == "petition-district-page"]
 
-        self.assertGreaterEqual(len(items), 50)
+        self.assertGreaterEqual(len(items), 58)
         self.assertGreaterEqual(len(petition_pages), 34)
         self.assertGreaterEqual(len({item["place"] for item in petition_pages}), 20)
         self.assertEqual(
@@ -123,7 +128,8 @@ class HawaiiArchiveTests(unittest.TestCase):
         script = (ROOT / "hawaii-archive" / "app.js").read_text(encoding="utf-8")
         styles = (ROOT / "hawaii-archive" / "styles.css").read_text(encoding="utf-8")
 
-        self.assertIn("This Week in Hawaiʻi", page)
+        self.assertIn("Hawaiʻi, 1897", page)
+        self.assertIn("The Annexation Crisis", page)
         self.assertIn("What Hawaiʻi was talking about", page)
         self.assertIn("post-author", script)
         self.assertIn("post-actions", script)

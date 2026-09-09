@@ -1,4 +1,4 @@
-const ATTENTION_WINDOW_URL = "data/weeks/1897-08-23.json";
+const ATTENTION_WINDOW_URL = "data/weeks/1897-06-01.json";
 const IMAGE_DATA_URL = "data/images/index.json";
 
 const feed = document.querySelector("#feed");
@@ -373,15 +373,19 @@ function fetchFreshJson(url) {
   });
 }
 
-function loadAttentionWindow() {
-  return fetchFreshJson(ATTENTION_WINDOW_URL).then((windowPayload) => {
+function loadWindowChain(filename) {
+  return fetchFreshJson(`data/weeks/${filename}`).then((windowPayload) => {
     if (!windowPayload.extends) return windowPayload;
 
-    return fetchFreshJson(`data/weeks/${windowPayload.extends}`).then((basePayload) => ({
+    return loadWindowChain(windowPayload.extends).then((basePayload) => ({
       ...windowPayload,
       items: [...windowPayload.items, ...basePayload.items],
     }));
   });
+}
+
+function loadAttentionWindow() {
+  return loadWindowChain(ATTENTION_WINDOW_URL.replace("data/weeks/", ""));
 }
 
 Promise.all([
