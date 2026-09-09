@@ -36,9 +36,9 @@ class HawaiiArchivePhotoPostsV2Tests(unittest.TestCase):
         )
         self.assertEqual(poi["reconstruction_decision"], "approved")
 
-    def test_new_visual_records_preserve_real_old_source_and_reconstruction(self):
+    def test_new_feed_visuals_preserve_real_old_source_and_reconstruction(self):
         payload = json.loads(IMAGE_INDEX.read_text(encoding="utf-8"))
-        images = {item["id"]: item for item in payload["images"]}
+        feed_images = {item["id"]: item for item in payload["feed_images"]}
         expected = {
             "HAR-IMG-0011",
             "HAR-IMG-0012",
@@ -47,9 +47,9 @@ class HawaiiArchivePhotoPostsV2Tests(unittest.TestCase):
             "HAR-IMG-0015",
             "HAR-IMG-0016",
         }
-        self.assertTrue(expected.issubset(images))
+        self.assertEqual(set(feed_images), expected)
         for image_id in expected:
-            item = images[image_id]
+            item = feed_images[image_id]
             self.assertTrue(item["original_asset"].startswith("https://"))
             self.assertEqual(
                 item["reconstructed_asset"],
@@ -62,17 +62,20 @@ class HawaiiArchivePhotoPostsV2Tests(unittest.TestCase):
     def test_strongest_visuals_are_routed_into_grounded_feed_posts(self):
         _, items = load_chain("1897-06-01.json")
         by_id = {item["id"]: item for item in items}
-        self.assertEqual(by_id["HAR-1897-06-17-LILIU-001"]["image_ref"], "HAR-IMG-0011")
-        self.assertEqual(by_id["HAR-1897-09-06-ALOHA-003"]["image_ref"], "HAR-IMG-0016")
+        self.assertEqual(by_id["HAR-1897-06-17-LILIU-001"]["media_ref"], "HAR-IMG-0011")
+        self.assertEqual(by_id["HAR-1897-09-06-ALOHA-003"]["media_ref"], "HAR-IMG-0016")
         self.assertEqual(by_id["HAR-1897-09-06-ALOHA-004"]["image_ref"], "HAR-IMG-0002")
 
-    def test_image_pilot_handles_sparse_states_and_reconstructed_default(self):
-        script = (ARCHIVE / "image-pilot.js").read_text(encoding="utf-8")
-        self.assertIn('reconstructed: "reconstructed_asset"', script)
-        self.assertIn('button("Reconstructed", "reconstructed")', script)
-        self.assertIn("if (imageRecord.original_asset)", script)
-        self.assertIn("if (imageRecord.restored_asset)", script)
-        self.assertIn("imageRecord.reconstructed_asset", script)
+    def test_reader_and_pilot_resolve_feed_images_and_sparse_states(self):
+        app = (ARCHIVE / "app.js").read_text(encoding="utf-8")
+        pilot = (ARCHIVE / "image-pilot.js").read_text(encoding="utf-8")
+        self.assertIn("imagePayload.feed_images", app)
+        self.assertIn("item.media_ref || item.image_ref", app)
+        self.assertIn('reconstructed: "reconstructed_asset"', pilot)
+        self.assertIn('button("Reconstructed", "reconstructed")', pilot)
+        self.assertIn("if (imageRecord.original_asset)", pilot)
+        self.assertIn("if (imageRecord.restored_asset)", pilot)
+        self.assertIn("imageRecord.reconstructed_asset", pilot)
 
 
 if __name__ == "__main__":
