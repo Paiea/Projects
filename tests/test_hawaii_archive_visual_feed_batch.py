@@ -22,8 +22,8 @@ class HawaiiArchiveVisualFeedBatchTests(unittest.TestCase):
         self.assertEqual(
             [(view["label"], view["asset"]) for view in views[:2]],
             [
-                ("Reconstructed wide", "assets/images/HAR-IMG-0002/color.png"),
-                ("Reconstructed close", "assets/images/HAR-IMG-0002/reconstructed.png"),
+                ("Reconstructed wide", "assets/images/HAR-IMG-0002/reconstructed-wide-v3.png"),
+                ("Reconstructed close", "assets/images/HAR-IMG-0002/reconstructed-close-v2.png"),
             ],
         )
         self.assertIn(
@@ -48,7 +48,7 @@ class HawaiiArchiveVisualFeedBatchTests(unittest.TestCase):
     def test_kaulia_keeps_uploaded_parent_and_archival_reference(self):
         kaulia = self.images["HAR-IMG-0001"]
         views = kaulia["views"]
-        self.assertEqual(views[0]["label"], "Reconstructed")
+        self.assertEqual(views[0]["label"], "Reconstructed from source")
         self.assertEqual(views[-2]["source_role"], "exact-source")
         self.assertEqual(views[-2]["asset"], "assets/images/HAR-IMG-0001/original.png")
         self.assertEqual(views[-1]["label"], "Archival reference")
@@ -60,13 +60,14 @@ class HawaiiArchiveVisualFeedBatchTests(unittest.TestCase):
             self.assertEqual(record["original_label"], "Archival reference")
             self.assertEqual(record["source_role"], "related-reference")
 
-    def test_four_existing_visuals_become_photo_first_feed_cards(self):
+    def test_five_visuals_are_photo_first_feed_cards(self):
         photo_posts = {item["id"]: item for item in self.payload["photo_posts"]}
         expected = {
             "HAR-PHOTO-FORT-001": ("HAR-1897-06-07-AHALONO-001", "HAR-IMG-0015"),
             "HAR-PHOTO-HARBOR-001": ("HAR-1897-06-16-TREATY-001", "HAR-IMG-0013"),
             "HAR-PHOTO-WAIKIKI-001": ("HAR-1897-06-19-ALOHA-LIFE-001", "HAR-IMG-0014"),
             "HAR-PHOTO-POI-001": ("HAR-1897-06-29-KSG-001", "HAR-IMG-0003"),
+            "HAR-PHOTO-HILO-MEETING-001": ("HAR-1897-09-06-ALOHA-003", "HAR-IMG-0016"),
         }
         self.assertEqual(set(photo_posts), set(expected))
         for post_id, (anchor, media_ref) in expected.items():
@@ -79,6 +80,7 @@ class HawaiiArchiveVisualFeedBatchTests(unittest.TestCase):
         self.assertIn("Ships carried more than cargo", photo_posts["HAR-PHOTO-HARBOR-001"]["feed_rendering"])
         self.assertIn("did not stop ordinary life", photo_posts["HAR-PHOTO-WAIKIKI-001"]["feed_rendering"])
         self.assertIn("History still had to eat", photo_posts["HAR-PHOTO-POI-001"]["feed_rendering"])
+        self.assertIn("newspaper illustration", photo_posts["HAR-PHOTO-HILO-MEETING-001"]["relationship_note"])
 
     def test_reader_renders_configured_views_and_photo_posts_without_changing_text_count(self):
         script = (ARCHIVE / "app.js").read_text(encoding="utf-8")

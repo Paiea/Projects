@@ -7,7 +7,7 @@
       "image_class": "portrait",
       "title": "James Keauiluna Kaulia",
       "display_date": "c. 1893",
-      "caption": "James Keauiluna Kaulia, c. 1893. The reconstructed portrait is shown first. The exact uploaded parent image and a separate archival reference remain available underneath so the evidence trail is not collapsed into one fake original.",
+      "caption": "James Keauiluna Kaulia, c. 1893. The newest source-locked reconstruction is shown first. Earlier derived attempts, the exact uploaded parent image, and a separate archival reference remain available underneath so the evidence trail also shows how the reconstruction work evolved.",
       "source_authority_url": "https://www.loc.gov/item/89709348/",
       "source_record_label": "Library of Congress, Representative Committee of Delegates of the Hawaiian People, c. 1893; J.K. Kaulia identified in the group portrait",
       "source_image_url": "https://upload.wikimedia.org/wikipedia/commons/e/e0/J._K._Kaulia_%281893_crop%29.jpg",
@@ -16,11 +16,17 @@
       "original_asset": "assets/images/HAR-IMG-0001/original.jpg",
       "restored_asset": "assets/images/HAR-IMG-0001/restored.jpg",
       "color_asset": "assets/images/HAR-IMG-0001/color.jpg",
-      "reconstructed_asset": "assets/images/HAR-IMG-0001/reconstructed.jpg",
+      "reconstructed_asset": "assets/images/HAR-IMG-0001/reconstructed-source-locked-v2.png",
       "views": [
         {
-          "id": "reconstructed",
-          "label": "Reconstructed",
+          "id": "reconstructed-source-locked-v2",
+          "label": "Reconstructed from source",
+          "asset": "assets/images/HAR-IMG-0001/reconstructed-source-locked-v2.png",
+          "source_role": "derived"
+        },
+        {
+          "id": "reconstructed-earlier",
+          "label": "Earlier reconstruction",
           "asset": "assets/images/HAR-IMG-0001/reconstructed.jpg",
           "source_role": "derived"
         },
@@ -62,14 +68,14 @@
       "color_reason": "Proof-of-concept reconstruction uses restrained period-plausible tones: warm brown skin, white shirt/cuffs, dark charcoal suit, muted brown-gray waistcoat, and a neutral studio background. Exact garment and backdrop colors are not recoverable from the albumen print and remain explicitly interpretive.",
       "reconstruction_decision": "approved",
       "reconstruction_confidence": "plausible",
-      "reconstruction_reason": "Historically informed reconstructed view derived from the uploaded portrait source and restoration work. It is the preferred presentation image while the exact parent and archival reference remain accessible."
+      "reconstruction_reason": "The preferred presentation is now a source-locked reconstruction of the uploaded portrait. It preserves the old reconstruction as process evidence while keeping the exact parent source and separate archival reference reachable."
     },
     {
       "id": "HAR-IMG-0002",
       "image_class": "built-environment",
       "title": "ʻIolani Palace",
       "display_date": "c. 1889–1890",
-      "caption": "ʻIolani Palace around 1889–1890, several years before the September 1897 Palace Square meeting. The source-faithful wide reconstruction is shown first, with the separate close reconstruction, older color pass, restoration, exact uploaded source, and archive access copy all preserved underneath.",
+      "caption": "ʻIolani Palace around 1889–1890, several years before the September 1897 Palace Square meeting. The newest source-locked wide reconstruction is shown first, followed by the newer close interpretive reconstruction, earlier attempts, restoration, exact uploaded source, and archive access copy.",
       "source_authority_url": "https://digitalarchives.hawaii.gov/browse/parent/ark%3A70111/1z1Z",
       "source_record_label": "Hawaiʻi State Archives, PPWD-1-8-010, Buildings Government - Iolani Palace, c. 1890, Theodore P. Severin",
       "source_image_url": "https://imagesofoldhawaii.com/wp-content/uploads/Iolani-Palace-circa-1889.jpg",
@@ -78,17 +84,29 @@
       "original_asset": "assets/images/HAR-IMG-0002/original.jpg",
       "restored_asset": "assets/images/HAR-IMG-0002/restored.jpg",
       "color_asset": "assets/images/HAR-IMG-0002/color.jpg",
-      "reconstructed_asset": "assets/images/HAR-IMG-0002/reconstructed.png",
+      "reconstructed_asset": "assets/images/HAR-IMG-0002/reconstructed-wide-v3.png",
       "views": [
         {
-          "id": "reconstructed-wide",
+          "id": "reconstructed-wide-v3",
           "label": "Reconstructed wide",
+          "asset": "assets/images/HAR-IMG-0002/reconstructed-wide-v3.png",
+          "source_role": "derived"
+        },
+        {
+          "id": "reconstructed-close-v2",
+          "label": "Reconstructed close",
+          "asset": "assets/images/HAR-IMG-0002/reconstructed-close-v2.png",
+          "source_role": "derived"
+        },
+        {
+          "id": "reconstructed-wide-earlier",
+          "label": "Earlier wide reconstruction",
           "asset": "assets/images/HAR-IMG-0002/color.png",
           "source_role": "derived"
         },
         {
-          "id": "reconstructed-close",
-          "label": "Reconstructed close",
+          "id": "reconstructed-close-earlier",
+          "label": "Earlier close reconstruction",
           "asset": "assets/images/HAR-IMG-0002/reconstructed.png",
           "source_role": "derived"
         },
@@ -130,7 +148,7 @@
       "color_reason": "The overall reconstruction is anchored by the surviving/restored palace's known light masonry, dark roof, tropical green grounds, and Honolulu sky. Exact 1889–1890 paint, vegetation, atmospheric, and material colors are still estimates.",
       "reconstruction_decision": "approved",
       "reconstruction_confidence": "plausible",
-      "reconstruction_reason": "Two approved derived Palace views are preserved: a wide source-faithful reconstruction and a more interpretive close view. Neither claims the exact 1897 rally moment."
+      "reconstruction_reason": "The newest wide view is the preferred source-locked reconstruction. A more interpretive close view and the earlier derived attempts remain visible as separate layers rather than replacing the source-faithful lane."
     },
     {
       "id": "HAR-IMG-0003",
@@ -160,7 +178,7 @@
       "color_reason": "The proof-of-concept reconstruction uses restrained brown earth/wood and skin tones, muted green vegetation, and neutral cloth. Exact clothing, vessel, vegetation, and food colors are not established by the stereograph and remain best estimates.",
       "reconstruction_decision": "approved",
       "reconstruction_confidence": "plausible",
-      "reconstruction_reason": "Derived daily-life reconstruction. It should be read beside the original stereograph rather than as replacement source evidence."
+      "reconstruction_reason": "Derived daily-life reconstruction. It should be read beside the original stereograph rather than as replacement source evidence. The contaminated Batch 003 poi attempt was intentionally not routed live."
     }
   ],
   "feed_images": [
@@ -169,7 +187,7 @@
       "image_class": "portrait",
       "title": "Queen Liliʻuokalani",
       "display_date": "c. 1891",
-      "caption": "Queen Liliʻuokalani in a period archival portrait, paired with a clearly labeled reconstructed view for visual immediacy. The reconstruction is not a restoration of this exact photograph.",
+      "caption": "Queen Liliʻuokalani in a period archival portrait, paired with a newer reconstructed view for visual immediacy. The period portrait remains the identity reference; the reconstruction is not claimed as a restoration of that exact photograph.",
       "source_authority_url": "https://commons.wikimedia.org/wiki/File:Liliuokalani_in_1891_(PPWD-16-4.019).jpg",
       "source_record_label": "Hawaiʻi State Archives, PPWD-16-4.019, Queen Liliʻuokalani, c. 1891",
       "source_image_url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Liliuokalani_in_1891_(PPWD-16-4.019).jpg",
@@ -178,7 +196,27 @@
       "original_asset": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Liliuokalani_in_1891_(PPWD-16-4.019).jpg",
       "original_label": "Archival reference",
       "source_role": "related-reference",
-      "reconstructed_asset": "assets/images/HAR-IMG-0011/reconstructed.png",
+      "reconstructed_asset": "assets/images/HAR-IMG-0011/reconstructed-v2.png",
+      "views": [
+        {
+          "id": "reconstructed-v2",
+          "label": "Reconstructed",
+          "asset": "assets/images/HAR-IMG-0011/reconstructed-v2.png",
+          "source_role": "derived"
+        },
+        {
+          "id": "reconstructed-earlier",
+          "label": "Earlier reconstruction",
+          "asset": "assets/images/HAR-IMG-0011/reconstructed.png",
+          "source_role": "derived"
+        },
+        {
+          "id": "archival-reference",
+          "label": "Archival reference",
+          "asset": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Liliuokalani_in_1891_(PPWD-16-4.019).jpg",
+          "source_role": "related-reference"
+        }
+      ],
       "relationship_default": "near",
       "relationship_label": "Same person · earlier portrait",
       "crop_mode": "none",
@@ -187,14 +225,14 @@
       "color_reason": "No separate color-only state in this batch.",
       "reconstruction_decision": "approved",
       "reconstruction_confidence": "plausible",
-      "reconstruction_reason": "Historically informed portrait-style reconstruction. Use as derived presentation, not likeness authority. The period portrait underneath is a related identity reference, not the literal parent image."
+      "reconstruction_reason": "Historically informed portrait reconstruction paired with a period identity reference. The newer reconstruction is preferred visually, but it remains a derived likeness rather than source authority."
     },
     {
       "id": "HAR-IMG-0012",
       "image_class": "portrait",
       "title": "Sanford B. Dole",
       "display_date": "c. 1896",
-      "caption": "Sanford B. Dole in a period portrait, paired with a reconstructed view as Republic-era political context. The archival portrait remains the identity reference.",
+      "caption": "Sanford B. Dole in a period portrait, paired with a newer reconstructed view as Republic-era political context. The archival portrait remains the identity reference.",
       "source_authority_url": "https://commons.wikimedia.org/wiki/File:Sanford_B._Dole_(1896).jpg",
       "source_record_label": "S. B. Dole, President of the Republic of Hawaii, published 1896",
       "source_image_url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Sanford_B._Dole_(1896).jpg",
@@ -203,7 +241,27 @@
       "original_asset": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Sanford_B._Dole_(1896).jpg",
       "original_label": "Archival reference",
       "source_role": "related-reference",
-      "reconstructed_asset": "assets/images/HAR-IMG-0012/reconstructed.png",
+      "reconstructed_asset": "assets/images/HAR-IMG-0012/reconstructed-v2.png",
+      "views": [
+        {
+          "id": "reconstructed-v2",
+          "label": "Reconstructed",
+          "asset": "assets/images/HAR-IMG-0012/reconstructed-v2.png",
+          "source_role": "derived"
+        },
+        {
+          "id": "reconstructed-earlier",
+          "label": "Earlier reconstruction",
+          "asset": "assets/images/HAR-IMG-0012/reconstructed.png",
+          "source_role": "derived"
+        },
+        {
+          "id": "archival-reference",
+          "label": "Archival reference",
+          "asset": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Sanford_B._Dole_(1896).jpg",
+          "source_role": "related-reference"
+        }
+      ],
       "relationship_default": "near",
       "relationship_label": "Same person · Republic-era portrait",
       "crop_mode": "none",
@@ -212,14 +270,14 @@
       "color_reason": "No separate color-only state in this batch.",
       "reconstruction_decision": "approved",
       "reconstruction_confidence": "plausible",
-      "reconstruction_reason": "Historically informed portrait-style reconstruction paired with a period identity reference, not a claimed restoration of that exact photograph."
+      "reconstruction_reason": "Historically informed portrait reconstruction paired with a period identity reference, not a claimed restoration of that exact photograph."
     },
     {
       "id": "HAR-IMG-0013",
       "image_class": "built-environment",
       "title": "Honolulu Harbor",
       "display_date": "1890",
-      "caption": "Honolulu Harbor in 1890, used as near-period context for shipping, arrivals, and naval pressure in the 1897 feed. The reconstruction is contextual, not an image of a specific 1897 ship arrival.",
+      "caption": "Honolulu Harbor in 1890, used as near-period context for shipping, arrivals, and naval pressure in the 1897 feed. The newer reconstruction makes the waterfront feel inhabited, but it remains contextual and is not an image of a specific 1897 ship arrival.",
       "source_authority_url": "https://commons.wikimedia.org/wiki/File:Honolulu_Harbor_in_1890.jpg",
       "source_record_label": "Honolulu Harbor in 1890, Hawaiʻi State Archives",
       "source_image_url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Honolulu_Harbor_in_1890.jpg",
@@ -228,7 +286,27 @@
       "original_asset": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Honolulu_Harbor_in_1890.jpg",
       "original_label": "Archival reference",
       "source_role": "related-reference",
-      "reconstructed_asset": "assets/images/HAR-IMG-0013/reconstructed.png",
+      "reconstructed_asset": "assets/images/HAR-IMG-0013/reconstructed-v2.png",
+      "views": [
+        {
+          "id": "reconstructed-v2",
+          "label": "Reconstructed",
+          "asset": "assets/images/HAR-IMG-0013/reconstructed-v2.png",
+          "source_role": "derived"
+        },
+        {
+          "id": "reconstructed-earlier",
+          "label": "Earlier reconstruction",
+          "asset": "assets/images/HAR-IMG-0013/reconstructed.png",
+          "source_role": "derived"
+        },
+        {
+          "id": "archival-reference",
+          "label": "Archival reference",
+          "asset": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Honolulu_Harbor_in_1890.jpg",
+          "source_role": "related-reference"
+        }
+      ],
       "relationship_default": "context",
       "relationship_label": "Same place · 1890 harbor context",
       "crop_mode": "none",
@@ -237,14 +315,14 @@
       "color_reason": "No separate color-only state in this batch.",
       "reconstruction_decision": "approved",
       "reconstruction_confidence": "plausible",
-      "reconstruction_reason": "General steamship-era harbor reconstruction. Do not identify the generated warship as USS Bennington. The 1890 harbor photograph is a related place reference, not the parent source."
+      "reconstruction_reason": "General steamship-era harbor reconstruction. Do not identify the generated ship as USS Bennington or treat generated signage as historical evidence. The 1890 harbor photograph remains a related place reference rather than the literal parent source."
     },
     {
       "id": "HAR-IMG-0014",
       "image_class": "daily-life-crowd",
       "title": "Waikīkī and Diamond Head",
       "display_date": "1883–1905",
-      "caption": "A period Waikīkī photograph with Diamond Head, paired with a reconstructed recreation scene. It is broad place-and-period context, not evidence for one exact day in 1897.",
+      "caption": "A period Waikīkī photograph with Diamond Head, paired with a newer reconstructed recreation scene. It is broad place-and-period context, not evidence for one exact day in 1897.",
       "source_authority_url": "https://commons.wikimedia.org/wiki/File:Waikiki_Beach,_with_Diamond_Head,_photograph_by_Brother_Bertram.jpg",
       "source_record_label": "Brother Bertram Photo Collection, Waikīkī Beach with Diamond Head, 1883–1905",
       "source_image_url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Waikiki_Beach,_with_Diamond_Head,_photograph_by_Brother_Bertram.jpg",
@@ -253,7 +331,27 @@
       "original_asset": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Waikiki_Beach,_with_Diamond_Head,_photograph_by_Brother_Bertram.jpg",
       "original_label": "Archival reference",
       "source_role": "related-reference",
-      "reconstructed_asset": "assets/images/HAR-IMG-0014/reconstructed.png",
+      "reconstructed_asset": "assets/images/HAR-IMG-0014/reconstructed-v2.png",
+      "views": [
+        {
+          "id": "reconstructed-v2",
+          "label": "Reconstructed",
+          "asset": "assets/images/HAR-IMG-0014/reconstructed-v2.png",
+          "source_role": "derived"
+        },
+        {
+          "id": "reconstructed-earlier",
+          "label": "Earlier reconstruction",
+          "asset": "assets/images/HAR-IMG-0014/reconstructed.png",
+          "source_role": "derived"
+        },
+        {
+          "id": "archival-reference",
+          "label": "Archival reference",
+          "asset": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Waikiki_Beach,_with_Diamond_Head,_photograph_by_Brother_Bertram.jpg",
+          "source_role": "related-reference"
+        }
+      ],
       "relationship_default": "context",
       "relationship_label": "Same place · period recreation context",
       "crop_mode": "none",
@@ -262,7 +360,7 @@
       "color_reason": "No separate color-only state in this batch.",
       "reconstruction_decision": "approved",
       "reconstruction_confidence": "plausible",
-      "reconstruction_reason": "Broad Waikīkī recreation reconstruction. Specific people, clothing, and actions are interpretive. The period beach photograph is a related place reference, not the literal parent image."
+      "reconstruction_reason": "Broad Waikīkī recreation reconstruction. Specific people, clothing, and actions are interpretive. The period beach photograph remains a related place reference, not the literal parent image."
     },
     {
       "id": "HAR-IMG-0015",
@@ -292,27 +390,47 @@
     {
       "id": "HAR-IMG-0016",
       "image_class": "daily-life-crowd",
-      "title": "Anti-annexation organizing, 1897",
-      "display_date": "September 1897",
-      "caption": "A Sept. 16, 1897 Hilo anti-annexation meeting illustration provides real movement-level crowd evidence. It is not a photograph of the Sept. 6 Palace Square meeting. The generated Palace rally reconstruction remains on hold because it invents exact-looking banners and crowd details.",
+      "title": "Anti-annexation organizing, Hilo",
+      "display_date": "September 16, 1897",
+      "caption": "A Sept. 16, 1897 Hilo anti-annexation meeting survives visually as a newspaper illustration. The preferred photo reconstruction is derived from that illustration and uses it as movement-level crowd and voting evidence. It is not a photograph of the Sept. 6 Palace Square meeting, and faces, color, materials, and fine anatomy remain interpretive.",
       "source_authority_url": "https://commons.wikimedia.org/wiki/File:Anti-Annexation_meeting_at_Hilo,_1897.jpg",
       "source_record_label": "The San Francisco Call, Sept. 30, 1897, illustration of the Sept. 16 anti-annexation meeting at Hilo",
       "source_image_url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Anti-Annexation_meeting_at_Hilo,_1897.jpg",
       "source_image_access_note": "Public-domain historical newspaper illustration of a documented 1897 anti-annexation meeting in Hilo.",
       "rights_note": "Wikimedia Commons marks the historical newspaper image public domain in the United States.",
       "original_asset": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Anti-Annexation_meeting_at_Hilo,_1897.jpg",
-      "original_label": "Archive reference",
-      "source_role": "related-reference",
-      "reconstructed_asset": "assets/images/HAR-IMG-0016/reconstructed.png",
+      "original_label": "Original newspaper image",
+      "source_role": "illustration-source",
+      "reconstructed_asset": "assets/images/HAR-IMG-0016/photo-reconstruction-approved.png",
+      "views": [
+        {
+          "id": "photo-reconstruction-approved",
+          "label": "Photo reconstruction",
+          "asset": "assets/images/HAR-IMG-0016/photo-reconstruction-approved.png",
+          "source_role": "derived"
+        },
+        {
+          "id": "photo-reconstruction-attempt",
+          "label": "Reconstruction attempt",
+          "asset": "assets/images/HAR-IMG-0016/photo-reconstruction-v2.png",
+          "source_role": "derived"
+        },
+        {
+          "id": "original-newspaper-image",
+          "label": "Original newspaper image",
+          "asset": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Anti-Annexation_meeting_at_Hilo,_1897.jpg",
+          "source_role": "illustration-source"
+        }
+      ],
       "relationship_default": "context",
       "relationship_label": "Same movement · Hilo, Sept. 16, 1897",
       "crop_mode": "none",
-      "review_status": "hold",
+      "review_status": "approved",
       "color_decision": "skipped",
-      "color_reason": "No separate color-only state in this batch.",
-      "reconstruction_decision": "hold",
-      "reconstruction_confidence": "unknown",
-      "reconstruction_reason": "Hold from public reconstructed-first display because the generated Palace rally scene invents exact-looking protest banners and event details."
+      "color_reason": "Color, faces, materials, and fine detail in the photo reconstruction are interpretive because the parent source is an illustration.",
+      "reconstruction_decision": "approved",
+      "reconstruction_confidence": "plausible",
+      "reconstruction_reason": "Approved as a clearly labeled photo reconstruction from the documented Hilo newspaper illustration. The historical illustration owns event identity and broad composition; generated demographic appearance and anatomy were explicitly reviewed after several failed attempts."
     }
   ],
   "photo_posts": [
@@ -351,6 +469,15 @@
       "display_date": "1896",
       "feed_rendering": "Preparing dinner, 1896.\nHistory still had to eat.",
       "relationship_note": "Exact archival activity from 1896 used as ordinary-life context inside the 1897 attention field."
+    },
+    {
+      "id": "HAR-PHOTO-HILO-MEETING-001",
+      "anchor_after": "HAR-1897-09-06-ALOHA-003",
+      "media_ref": "HAR-IMG-0016",
+      "place": "Hilo, Hawaiʻi Island",
+      "display_date": "September 16, 1897",
+      "feed_rendering": "Hilo, Sept. 16, 1897.\nThe anti-annexation movement was still filling rooms and raising hands. This scene survives as a newspaper illustration; the photo reconstruction follows that source.",
+      "relationship_note": "Photo reconstruction derived from a documented Sept. 16 Hilo anti-annexation newspaper illustration. It is same-movement context, not a photograph of the Sept. 6 Palace Square meeting."
     }
   ]
 }

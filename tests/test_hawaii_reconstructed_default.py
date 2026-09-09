@@ -15,7 +15,7 @@ class HawaiiReconstructedDefaultTests(unittest.TestCase):
 
         self.assertEqual(
             kaulia["reconstructed_asset"],
-            "assets/images/HAR-IMG-0001/reconstructed.jpg",
+            "assets/images/HAR-IMG-0001/reconstructed-source-locked-v2.png",
         )
         self.assertEqual(kaulia["reconstruction_decision"], "approved")
         self.assertTrue(kaulia["original_asset"])

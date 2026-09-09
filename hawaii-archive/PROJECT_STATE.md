@@ -12,6 +12,8 @@ Governing rule:
 
 The product should feel fast at the surface and deep underneath. A reader can scroll like social media, then open the surviving document, newspaper page, petition, photograph, performance, or archive context when curiosity hits.
 
+The visual goal is increasingly explicit: use real archival objects as the spine, then make 125+ year old Hawaiʻi feel present without hiding which layer is source and which layer is reconstruction.
+
 ## Authority
 
 - Repository: `Paiea/Projects`
@@ -63,6 +65,8 @@ The feed has four complementary depth mechanisms.
 
 `feed_rendering` stays concise. It is derived accessibility, never historical quotation.
 
+The feed is allowed to sound alive. A visual-context line may compress or frame a source-backed moment in modern readable language as long as it does not impersonate a historical quotation or invent event facts.
+
 ### 2. Go deeper links
 
 `data/resources/index.json` connects selected posts to full primary documents, archival collections, source-facing transcriptions, and honestly labeled later performances or educational resources.
@@ -89,22 +93,23 @@ Current **artifact-receipts-002** batch preserves the first three receipts and a
 - Honolulu men → `HAR-ART-0008`: their own Sept. 11 petition sheet;
 - `HAR-1897-07-16-IND-SURF-001` → `HAR-ART-0009`: exact publication artifact for the Hui Pakaka Nalu surf-riding advertisement, using a secondary crop only as the access image while Chronicling America remains source authority.
 
-The petition rule is now concrete: **show distinct district sheets where available instead of recycling one generic petition receipt across the geography.**
+The petition rule is concrete: **show distinct district sheets where available instead of recycling one generic petition receipt across the geography.**
 
 ### 4. Visual-context photo cards
 
 `data/images/index.json` may define short `photo_posts` that appear immediately after a grounded historical post without becoming additional sourced text records.
 
-These cards are explicitly **Visual context**. Their `anchor_after` field controls feed placement; it does not claim that the archival photo was made on the anchor post's date.
+These cards are explicitly **Visual context**. Their `anchor_after` field controls feed placement; it does not claim that the archival photo or reconstruction was made on the anchor post's date unless the record says so.
 
-The first batch adds:
+The current five cards are:
 
 - Fort and King Streets, c. 1900, after the June 7 newspaper-launch signal;
 - Honolulu Harbor, 1890, after the June 16 treaty shock;
 - Waikīkī, late nineteenth century, after the June 19 ordinary-life/music signal;
-- poi preparation, 1896, after the June 29 school-program signal.
+- poi preparation, 1896, after the June 29 school-program signal;
+- Sept. 16 Hilo anti-annexation organizing, using an illustration-derived photo reconstruction after the Sept. 6 Palace Square call-and-response as explicitly later same-movement context.
 
-The sourced historical count is **65**. Visual-context cards do not inflate the archive's evidence count.
+The sourced historical count remains **65**. Visual-context cards do not inflate the archive's evidence count.
 
 ## Visual Feed State
 
@@ -114,14 +119,24 @@ The live image authority supports `images`, `feed_images`, optional ordered `vie
 
 The best approved derived image may lead, but the reader must be able to move backward into evidence.
 
-A record may expose several distinct roles instead of forcing everything into one `Original` slot. Useful labels include:
+The preferred stack for a real archival photograph is now:
 
+`Original source → source-locked reconstruction → optional interpretive third layer`
+
+Public order may lead with the strongest approved reconstruction, but the second conceptual layer must still be a source-locked version that reads as the same photograph. A more cinematic/restaged interpretation is a separate third layer, not a substitute.
+
+Useful public labels include:
+
+- `Reconstructed from source`
 - `Reconstructed`
+- `Photo reconstruction`
 - `Reconstructed wide`
 - `Reconstructed close`
+- `Earlier reconstruction`
 - `Color`
 - `Restored`
 - `Original source`
+- `Original newspaper image`
 - `Archive access copy`
 - `Archival reference`
 
@@ -142,30 +157,48 @@ Current source-role vocabulary includes:
 
 A related period portrait or place photo is not the `Original source` of a reconstruction unless the reconstruction was actually derived from it.
 
+### Batch 003 live routes
+
+- `HAR-IMG-0001` Kaulia now leads with `reconstructed-source-locked-v2.png`; the older reconstruction, color, restoration, exact uploaded parent, and separate archival Kaulia reference remain available.
+- `HAR-IMG-0002` Palace now leads with `reconstructed-wide-v3.png`, followed by `reconstructed-close-v2.png`; earlier wide/close attempts, color, restoration, exact uploaded parent, and archive access copy remain available.
+- `HAR-IMG-0011` Queen Liliʻuokalani, `0012` Sanford B. Dole, `0013` Honolulu Harbor, and `0014` Waikīkī now lead with their uploaded `reconstructed-v2.png` files and preserve earlier attempts plus archival references underneath.
+- `HAR-IMG-0016` Hilo now leads with the user-approved illustration-derived `photo-reconstruction-approved.png`; another reconstruction attempt remains visible as process evidence, followed by the original newspaper illustration.
+- `HAR-IMG-0015` Fort/King Street remains held at the reconstruction layer. Its real archival street image remains publishable.
+- `HAR-IMG-0003` poi keeps the existing live source/reconstruction stack. The newer Kaulia-contaminated taro attempt was not routed into the site.
+
 ### Palace lane
 
-`HAR-IMG-0002` is the showcase multi-view proof.
+`HAR-IMG-0002` remains the showcase multi-view proof.
 
-Order:
+Order now begins:
 
-1. `Reconstructed wide` → the full source-faithful wide Palace reconstruction already present as `assets/images/HAR-IMG-0002/color.png`;
-2. `Reconstructed close` → the separate close Palace reconstruction;
-3. `Color` → the older color pass;
-4. `Restored`;
-5. `Original source` → the exact uploaded parent image;
-6. `Archive access copy` → the separate period access/reference copy.
+1. `Reconstructed wide` → newest source-locked wide reconstruction;
+2. `Reconstructed close` → newer separate close interpretive reconstruction;
+3. earlier wide reconstruction;
+4. earlier close reconstruction;
+5. `Color`;
+6. `Restored`;
+7. `Original source` → exact uploaded parent image;
+8. `Archive access copy` → separate period access/reference copy.
 
 Do not silently replace one Palace reconstruction with the other.
 
 ### Kaulia lane
 
-`HAR-IMG-0001` now preserves both the exact uploaded parent image and the separate archival Kaulia reference beneath the approved reconstructed portrait.
+`HAR-IMG-0001` now demonstrates why exact-parent reconstruction matters: the newer source-locked version can lead while the older successful reconstruction remains visible as an attempt, followed by exact source and additional reference layers.
 
-### Related-reference feed images
+### Hilo illustration lane
 
-Queen Liliʻuokalani, Sanford B. Dole, Honolulu Harbor, and Waikīkī currently pair reconstructed views with period archival references that are **related evidence, not literal parent sources**. Their controls therefore say `Archival reference`, not `Original`.
+The Sept. 16, 1897 Hilo anti-annexation newspaper illustration now has a public `Photo reconstruction` layer.
 
-Fort/King Street and the generated Palace-rally reconstruction remain held where generated details are unsupported. The real Fort/King archival image can still appear as visual context. The Sept. 16 Hilo anti-annexation illustration remains useful as same-movement context for the Sept. 6 organizing thread, but it must never masquerade as a Palace Square photograph.
+Important limitation:
+
+- it is a reconstruction of the **Hilo illustration**;
+- it is not a photograph of the Sept. 6 Palace Square mass meeting;
+- faces, individual appearance, color, materials, and fine anatomy are interpretive;
+- the broad historical value is movement-level evidence of anti-annexation organizing and a visual source showing a crowded hand-raising/voting scene.
+
+Several failed/revised attempts taught Image OS to inspect hands, finger counts, arm connectivity, generic demographic drift, and style-reference leakage more aggressively. The project may preserve useful attempts because improvement of the reconstruction process is itself part of the visual archive experiment.
 
 ## Illustration → Photo Reconstruction Lane
 
@@ -187,7 +220,7 @@ Preserve the source's:
 
 Do not invent banners, signs, extra people, buildings, or choreography merely to make the scene cinematic. Faces, fine materials, lighting, and color may remain explicitly interpretive.
 
-A newly surfaced meeting illustration is a candidate for this lane, but it is not part of live authority until its source identity, target post, and approved binary handoff are resolved.
+Crowd review must explicitly inspect hands/fingers, wrists/arms/shoulders, missing or duplicated limbs, repeated faces, generated text, style-reference leakage, and demographic drift relative to the documented context. Do not infer precise individual ethnicity from appearance alone.
 
 ## Durable Decisions
 
@@ -206,6 +239,8 @@ A newly surfaced meeting illustration is a candidate for this lane, but it is no
 - **Do not make every card visually busy.** Media is earned when seeing the object materially changes the experience.
 - **Exact / near / context must stay explicit.** Never make a contextual image look like an exact event photograph.
 - **Actual parent source and additional references can coexist.** Do not collapse distinct evidence roles into one misleading `Original` control.
+- **Source-locked reconstruction is the default second layer.** The first reconstruction after a real photograph should remain recognizably the same photograph; more interpretive life belongs in a separate third layer.
+- **Attempts can be useful evidence.** Preserve earlier reconstruction attempts when they materially show process learning, but never let them outrank the historical source.
 - **Modern media must declare its time.** A modern performance, documentary, reconstruction, translation, or educational rendition must never masquerade as an 1897 recording or source object.
 - **Secondary archival reconstruction must declare itself.** A supported event reconstructed from later research may enter when useful, but must not masquerade as a recovered primary item.
 - Reconstructed images are derived historical interpretation, not source photographs.
@@ -223,8 +258,9 @@ This restriction is specific to IHLRT. Other UH Mānoa digital-collection pages 
 - Continue source-permitted June 18-30 reporting/reaction and July circulation/interpretation.
 - September 2 Kalaupapa remains a strong political + ordinary-life seam if source-facing Hawaiian is recovered.
 - Expand artifact receipts to high-value treaty pages, strong newspaper headlines, more district petition sheets, letters, proclamations, printed mele, advertisements, and other source objects when a stable visual source is available.
-- As new archival visuals arrive from the text/history lane, prefer exact source pairing first, then preserve useful secondary references as additional layers.
+- As new archival visuals arrive from the text/history lane, prefer exact source pairing first, then source-locked reconstruction, then optional interpretive variants.
 - Continue batching 5-10 earned image/combo/photo updates rather than one-off visual plumbing.
+- The next visual batch should be **10 net-new visual opportunities**, not another redo of Kaulia/Palace/Queen/Harbor/etc.
 - For petition geography, continue using representative exact sheets rather than attaching the same generic petition image to every district card.
 - Chronicling America / Library of Congress newspaper runs are a productive permitted lane for ordinary-life texture such as surf, shipping, performances, school notices, commerce, recreation, accidents, and advertisements.
 
@@ -234,10 +270,10 @@ This restriction is specific to IHLRT. Other UH Mānoa digital-collection pages 
 
 **Artifact lane:** continue 5-10 earned receipts at a time. Priority: treaty document/page, Sept. 10 Kuokoa treaty headline/front page, additional district petition sheets, letters/protests, newspaper advertisements, and printed mele where the scan itself is useful.
 
-**Visual lane:** use the next strong sourced illustration/photo objects to create another 5-10 update batch. First high-value generation seam is illustration-derived photo reconstruction where the historical image provides real composition/blocking authority. Preserve exact parent source + cleaned source + reconstruction + useful related references as separate roles.
+**Visual lane:** inspect the current feed and existing source/artifact media, then queue **10 net-new source-backed visuals**. Prefer archival photos/illustrations already connected to useful posts. For real photos, produce a source-locked reconstruction as the second layer. For illustrations, use the illustration as composition/blocking authority. Keep attempts when they teach Image OS, and use one deterministic ZIP when binary transfer is needed.
 
 If a required approved binary exists outside GitHub, use `docs/IMAGE_BINARY_HANDOFF.md` and provide one deterministic ZIP rather than asking the user to reconstruct file destinations manually.
 
 ## RE-PROMPT
 
-> Continue Hawaiʻi Archive Revival from current `Paiea/Projects` GitHub authority. Read root `AGENTS.md`, `state/PROJECT_REGISTRY.md`, `state/HANDSHAKE_PROTOCOL.md`, `hawaii-archive/PROJECT_STATE.md`, `hawaii-archive/data/ITEM_CONTRACT.md`, `hawaii-archive/data/resources/index.json`, `hawaii-archive/data/artifacts/index.json`, `hawaii-archive/data/images/index.json`, and current Image OS authority. Preserve the June 1-September 12, 1897 chronology, 65 grounded text records, historical-attention rule, information lag, and fast-surface/deep-archive model. Keep mining permitted newspaper/archive lanes for both political and ordinary-life attention. Use exact artifact receipts and distinct district petition sheets when available, allow useful visual density, lead with the strongest approved derived visual, keep exact parent sources and additional archival references as separate honest layers, preserve held reconstruction decisions, and batch useful publication work instead of doing one-off image plumbing.
+> Continue Hawaiʻi Archive Revival from current `Paiea/Projects` GitHub authority. Read root `AGENTS.md`, `state/PROJECT_REGISTRY.md`, `state/HANDSHAKE_PROTOCOL.md`, `hawaii-archive/PROJECT_STATE.md`, current feed/resource/artifact/image records, and current Image OS authority. Preserve the June 1-September 12, 1897 chronology, 65 grounded text records, historical-attention rule, information lag, and fast-surface/deep-archive model. Use exact source artifacts and useful visual density. Default real-photo reconstruction to `Original source → source-locked reconstruction → optional interpretive third layer`; keep related references and useful attempts as separate honest roles. For crowd reconstruction, review anatomy, fingers/limbs, demographic drift, style-reference leakage, and invented readable text. Continue with 10 net-new source-backed visual opportunities rather than redoing the current proving set.
