@@ -16,11 +16,23 @@ Do not replace this build with an older archived WIN/Daily Practice package.
 
 ## Current State
 
-**HOLD / OBSERVE.**
+Accepted `main` remains **HOLD / OBSERVE**.
+
+A focused compatibility change is currently proposed on branch `portable-win/room22-handoff-v1` in draft PR #61, `Route Room 22 into Portable WIN modes`.
+
+The branch adds only a Room 22 entry bridge:
+
+- a short-lived browser-local handoff for an exact roster student + existing proficiency standard;
+- handoff validation against the current local roster and current `PROF_STANDARDS` catalog;
+- one-time handoff consumption with no student identity in the URL;
+- direct `?mode=quickfire`, `?mode=teach`, and `?mode=assess` entry points;
+- focused automated tests and a Portable WIN test workflow.
+
+It does **not** redesign WIN, change the proficiency engine, expand the standard catalog, or alter the local-first architecture.
 
 PR #1, `Ship Projects hub and Portable WIN`, was explicitly approved and merged into `main` on 2026-09-01. Merge commit: `4715df0dee4ad781ae805c7067ed22b4d35e6902`.
 
-Accepted working surfaces:
+Accepted working surfaces on `main`:
 
 - WIN group flow and six-question ladders
 - Morning
@@ -48,10 +60,14 @@ The app is a static local-first bundle. It uses browser `localStorage` for runti
 - Bar Models: Parts & Whole is a reusable Story Problems Teach/Review lane, not a one-off Chapter 3 screen.
 - Practice/teacher demo sessions must not silently write student proficiency evidence.
 - The original self-contained handoff may be split into local static files for repository transport as long as behavior remains equivalent and offline-capable.
+- Room 22 may route into WIN using browser-local handoff state, but student identity must not be put into URL query parameters.
+- Future assessment expansion should preserve one shared evidence model so online proficiency checks, curriculum checks, and later standard-aligned paper checks can support the same downstream gradebook decisions.
 
-## Verification — 2026-09-01
+## Verification
 
-Before merge, the feature branch was verified as follows:
+### Accepted build — 2026-09-01
+
+Before merge, the accepted build was verified as follows:
 
 - all runtime/style assets present and referenced by the shell
 - 23 runtime/style Git blobs hash-audited against branch metadata
@@ -66,36 +82,36 @@ Before merge, the feature branch was verified as follows:
 - roster editing persisting only to browser-local storage
 - GitHub-hash-matched asset bundle passing rendered classroom-flow regression with no console/page errors
 
-After merge:
+### Room 22 bridge — 2026-09-10
 
-- PR #1 merged successfully into `main`
-- `main` contains `portable-win/index.html` and the accepted static bundle
-- `main` shell still identifies the authoritative 2026-09-01 WIN/Proficiency/Morning/Teach/Bar Models build and references only local runtime/style assets
-- public GitHub Pages deployment could not be independently confirmed from the available external lookup at this moment; source authority on `main` is confirmed
+- branch: `portable-win/room22-handoff-v1`
+- draft PR: #61
+- Portable WIN Tests run `34534843605`: success
+- exact handoff validates roster membership + known standard
+- stale/unknown handoffs are discarded
+- direct quickfire / teach / assess routing is covered
+- no student query parameter is used
 
 ## Known Issues / Open Questions
 
-- GitHub Pages/public hub propagation should be checked if the public route is needed and does not appear immediately after merge.
+- Accepted `main` does not yet contain the Room 22 bridge until PR #61 is reviewed and merged.
+- The current proficiency catalog covers five Q1 Math standards. Expanding toward full Grade 2 standards coverage is a separate future workshop/design task and should not be mixed into the small routing PR.
 - Real roster setup is browser/device-local by design. A new browser/device starts with generic roster slots until the teacher edits and saves the roster.
+- Future worksheet/second-source standard checks need a deliberate capture format so they can raise evidence confidence without automatically requiring two assessments for every standard.
 
 ## Last Meaningful Changes
 
-- Recovered the exact tested 2026-09-01 Portable WIN handoff after chat failure.
-- Replaced the hardcoded real roster with 17 generic public-safe defaults while preserving the roster editor and local persistence.
-- Split the tested self-contained build into an offline-capable static bundle under `portable-win/` for GitHub hosting.
-- Restored the missing runtime/style files that the earlier shell commit referenced.
-- Preserved Big Red Lollipop, Q1 proficiency, Morning, Teach, Bar Models, WIN, History, and Settings behavior.
-- Completed branch-level hash and rendered regression verification.
-- Merged PR #1 into `main` after explicit approval and confirmed the accepted Portable WIN shell on `main`.
+- Added a narrow Room 22 compatibility bridge on branch `portable-win/room22-handoff-v1` without redesigning the accepted app.
+- Added one-time local assessment handoff and direct Quickfire / Teach / Assess entry routing.
+- Added focused regression tests for the bridge.
+- Preserved all accepted Portable WIN behavior and local-only roster/evidence storage.
 
 ## NEXT_TASK
 
-**HOLD / OBSERVE.**
+Review draft PR #61 together with the coordinated Room 22 teacher-front-end work. If approved, merge/deploy in an order that leaves Room 22 buttons pointing at a compatible Portable WIN build.
 
-Use Portable WIN from `main`. Do not change the accepted build merely to keep development moving. If a concrete classroom need, bug, or improvement appears, inspect the current `main` build first, make the smallest useful change on a branch, preserve the public/private boundary, verify the affected classroom flow, then update this state.
-
-If the public GitHub Pages route is needed and is not serving yet, verify repository Pages configuration/propagation before changing application code.
+After that, return to **HOLD / OBSERVE** until the planned WIN workshop. That later workshop should cover broader Grade 2 standards testability, smart evidence-gap queues, reteach queues, and optional second-source/worksheet evidence without bloating the everyday teaching flow.
 
 ## RE-PROMPT
 
-> Continue Portable WIN from current Paiea/Projects GitHub authority. Read root AGENTS.md, state/PROJECT_REGISTRY.md, state/HANDSHAKE_PROTOCOL.md, and portable-win/PROJECT_STATE.md. Treat main as accepted authority. Preserve the local-first architecture, public/private boundary, and verified classroom behavior. Execute only a concrete new need or bug from the current build, validate the affected flow, update project state, and leave the next handshake.
+> Continue Portable WIN from current Paiea/Projects GitHub authority. Read root AGENTS.md, state/PROJECT_REGISTRY.md, state/HANDSHAKE_PROTOCOL.md, and portable-win/PROJECT_STATE.md. Treat main as accepted authority and inspect draft PR #61 if it remains open. Preserve the local-first architecture, public/private boundary, and verified classroom behavior. Do not expand the full standards catalog unless that workshop is explicitly requested. Validate changes, update project state, and leave the next handshake.

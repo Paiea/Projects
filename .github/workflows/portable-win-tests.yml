@@ -1,0 +1,28 @@
+name: Portable WIN Tests
+
+on:
+  push:
+    paths:
+      - 'portable-win/**'
+      - 'tests/test_portable_win_room22_handoff.cjs'
+      - '.github/workflows/portable-win-tests.yml'
+  pull_request:
+    paths:
+      - 'portable-win/**'
+      - 'tests/test_portable_win_room22_handoff.cjs'
+      - '.github/workflows/portable-win-tests.yml'
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify Room 22 assessment handoff
+        run: node --test tests/test_portable_win_room22_handoff.cjs
+      - name: Check Portable WIN JavaScript syntax
+        run: |
+          node --check portable-win/room22-handoff.js
+          node --check portable-win/win-4.js
