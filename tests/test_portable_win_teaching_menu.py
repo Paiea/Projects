@@ -1,9 +1,9 @@
 from pathlib import Path
-import json
 import subprocess
 
 ROOT = Path(__file__).resolve().parents[1]
 INDEX = ROOT / "portable-win" / "index.html"
+LOADER = ROOT / "portable-win" / "win-3.js"
 ENGINE = ROOT / "portable-win" / "teaching-menu.js"
 
 
@@ -14,9 +14,10 @@ def require(condition, message):
 
 def test_ui_contract():
     html = INDEX.read_text(encoding="utf-8")
+    loader = LOADER.read_text(encoding="utf-8")
     require(ENGINE.exists(), "portable-win/teaching-menu.js must exist")
-    require('src="teaching-menu.js"' in html, "index.html must load teaching-menu.js")
-    require(html.index('src="win-4.js"') < html.index('src="teaching-menu.js"'), "teaching-menu.js must load after the existing app so it can evolve, not replace, current behavior")
+    require('teaching-menu.js' in loader, "the existing Teach loader must add teaching-menu.js without replacing the app shell")
+    require(loader.index('win-3-3b.js') < loader.index('teaching-menu.js'), "teaching-menu.js must extend the existing Teach runtime after its current chunks")
 
     # Preserve the useful existing surfaces instead of simplifying them away.
     for screen in ("win", "morning", "teach", "history", "settings"):
