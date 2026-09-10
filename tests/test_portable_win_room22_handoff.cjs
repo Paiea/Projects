@@ -59,12 +59,20 @@ test('Room 22 handoff refuses stale, unknown-student, and unknown-standard reque
   }
 });
 
-test('Portable WIN loads the handoff helper before the existing WIN runtime and initializes the handoff from the normal boot', () => {
+test('Portable WIN loads private handoff before runtime and routing after runtime', () => {
   const html = fs.readFileSync(path.join(__dirname, '..', 'portable-win', 'index.html'), 'utf8');
-  const win4 = fs.readFileSync(path.join(__dirname, '..', 'portable-win', 'win-4.js'), 'utf8');
   assert.ok(html.indexOf('room22-handoff.js') !== -1, 'missing room22-handoff.js script');
   assert.ok(html.indexOf('room22-handoff.js') < html.indexOf('win-1.js'), 'handoff helper must load before WIN runtime');
-  assert.match(win4, /applyRoom22AssessmentHandoff\(\)/);
-  assert.match(win4, /prepareProficiencyAttempt\(handoff\.standard\)/);
-  assert.match(win4, /URLSearchParams/);
+  assert.ok(html.indexOf('room22-routing.js') > html.indexOf('win-4.js'), 'routing must run after WIN initialization');
+});
+
+test('Room 22 routing supports assess, teach, and quickfire entry modes plus exact private assessment handoff', () => {
+  const routing = fs.readFileSync(path.join(__dirname, '..', 'portable-win', 'room22-routing.js'), 'utf8');
+  assert.match(routing, /URLSearchParams/);
+  assert.match(routing, /mode === 'assess'/);
+  assert.match(routing, /mode === 'teach'/);
+  assert.match(routing, /mode === 'quickfire'/);
+  assert.match(routing, /Room22AssessmentHandoff\.consume/);
+  assert.match(routing, /prepareProficiencyAttempt\(handoff\.standard\)/);
+  assert.doesNotMatch(routing, /searchParams\.get\(['"]student['"]\)/);
 });
