@@ -2,7 +2,9 @@
 
 ## Purpose
 
-Portable WIN is a lightweight Grade 2 classroom tool for teacher-led WIN groups, quick checks, proficiency evidence, Morning practice, reusable teaching material, and targeted review without requiring a server or online AI runtime.
+Portable WIN is a lightweight Grade 2 classroom teaching menu for teacher-led whole-class work, WIN groups, quick checks, proficiency evidence, Morning practice, reusable teaching material, and targeted review without requiring a server or online AI runtime.
+
+WIN remains a first-class student/group intervention and note-taking mode. The default daily surface is now the broader **Room 22 Teaching Menu / Mr. Frank mode**.
 
 ## Authority
 
@@ -10,21 +12,24 @@ Accepted authority is `main` in `Paiea/Projects`.
 
 Portable WIN lives under `portable-win/`. The browser entrypoint is `portable-win/index.html`; runtime and styles are local sibling JS/CSS files loaded by that shell.
 
-The accepted app is derived from the tested **Big Red Lollipop Assessment** build with **Bar Models: Parts & Whole** layered on top. Public-repository defaults are 17 neutral `Student 01` through `Student 17` slots. Real roster names belong only in browser-local storage entered through Settings.
+The accepted app is derived from the tested **Big Red Lollipop Assessment** build with **Bar Models: Parts & Whole** and the 2026-09-10 **Teaching Menu** layer on top. Public-repository defaults are 17 neutral `Student 01` through `Student 17` slots. Real roster names belong only in browser-local storage entered through Settings.
 
 Do not replace this build with an older archived WIN/Daily Practice package.
 
 ## Current State
 
-**HOLD / OBSERVE.**
+**ACTIVE / OBSERVE.**
 
-PR #1, `Ship Projects hub and Portable WIN`, was explicitly approved and merged into `main` on 2026-09-01. Merge commit: `4715df0dee4ad781ae805c7067ed22b4d35e6902`.
+PR #62, `Evolve Portable WIN into the Room 22 teaching menu`, was merged into `main` on 2026-09-10. Squash merge commit: `89c94051da003128e4d6cb0e4ad6b74e33ef014a`.
 
 Accepted working surfaces:
 
+- Teaching Menu / Teach as the default classroom-facing surface
+- Mr. Frank class/group mode as the default teaching identity
+- direct Teaching Menu shortcuts to Standards Check and Student / WIN
 - WIN group flow and six-question ladders
 - Morning
-- Teach
+- Teach projector, including FIGURE IT OUT, BTC, QUICK FIRE, and DISCUSS
 - History
 - Settings
 - Q1 Show What You Know / proficiency checks
@@ -34,6 +39,7 @@ Accepted working surfaces:
 - EASIER / SAME / HARDER
 - MORE LIKE THIS
 - GOT IT / ALMOST / NOT YET
+- ELA Teaching Menu lanes: READ & THINK, INFERENCE / EVIDENCE, LANGUAGE PLAY
 
 The app is a static local-first bundle. It uses browser `localStorage` for runtime classroom state and has no external runtime dependency.
 
@@ -44,58 +50,56 @@ The app is a static local-first bundle. It uses browser `localStorage` for runti
 - GitHub `main` is source authority; browser `localStorage` is runtime classroom state, not repository content.
 - Never commit real student rosters, proficiency records, assessment results, or localStorage exports.
 - Public defaults stay generic. A teacher may enter a real roster locally through Settings.
+- Do not simplify Portable WIN by removing working classroom controls merely to make the UI cleaner.
+- WIN remains roster-rich because student names, group selection, history, and notes are useful in that mode.
+- General classroom teaching should default to Mr. Frank / class-group mode rather than forcing student selection.
+- Standards checks default to the existing `MR. FRANK — DEMO / TEACH` identity. Teacher/demo sessions must not write student proficiency or assessment evidence.
+- Quick Fire remains a fast classroom mode; sophistication should live mainly in the prompt engine rather than extra setup UI.
+- ELA prompt generation should rotate what students do with language: read, retell, infer, find evidence, predict, repair, build, choose, explain, and play with meaning.
 - Hub integration must not redesign or remove working WIN features.
 - Bar Models: Parts & Whole is a reusable Story Problems Teach/Review lane, not a one-off Chapter 3 screen.
-- Practice/teacher demo sessions must not silently write student proficiency evidence.
 - The original self-contained handoff may be split into local static files for repository transport as long as behavior remains equivalent and offline-capable.
 
-## Verification — 2026-09-01
+## Verification — 2026-09-10
 
-Before merge, the feature branch was verified as follows:
+PR #62 was developed test-first and verified before merge:
 
-- all runtime/style assets present and referenced by the shell
-- 23 runtime/style Git blobs hash-audited against branch metadata
-- no external script/style/runtime dependency required
-- 17 generic public roster slots present
-- recovered real roster and stray roster-name examples absent from the public bundle
-- WIN / Morning / Teach / History / Settings navigation working
-- all five Q1 Show What You Know standards launching
-- Big Red Lollipop launching with 13 questions
-- Bar Models shortcut opening the reusable Teach lane
-- a two-student WIN group launching and generating teaching material
-- roster editing persisting only to browser-local storage
-- GitHub-hash-matched asset bundle passing rendered classroom-flow regression with no console/page errors
+- failing Teaching Menu contract established before implementation
+- `portable-win/teaching-menu.js` syntax checked with Node
+- Teaching Menu engine contract passed for default surface, Mr. Frank assessment identity, ELA lanes, eight-move Quick Fire runs, evidence prompts, and Teacher Trap language play
+- existing WIN / Morning / Teach / History / Settings navigation contract preserved
+- repository Project Hub test workflow passed on the feature branch
+- PR diff confirmed additive changes: one Teaching Menu layer, one loader extension, one regression test, and workflow coverage
+- no roster, student evidence, or classroom data was committed
+- PR #62 merged successfully into `main` as `89c94051da003128e4d6cb0e4ad6b74e33ef014a`
 
-After merge:
-
-- PR #1 merged successfully into `main`
-- `main` contains `portable-win/index.html` and the accepted static bundle
-- `main` shell still identifies the authoritative 2026-09-01 WIN/Proficiency/Morning/Teach/Bar Models build and references only local runtime/style assets
-- public GitHub Pages deployment could not be independently confirmed from the available external lookup at this moment; source authority on `main` is confirmed
+Earlier 2026-09-01 verification remains applicable to the unchanged WIN, Morning, proficiency, curriculum-assessment, Bar Models, roster, history, and local-storage machinery.
 
 ## Known Issues / Open Questions
 
-- GitHub Pages/public hub propagation should be checked if the public route is needed and does not appear immediately after merge.
+- Continue classroom-testing the new ELA lanes. The current prompt families intentionally favor short, teacher-facilitated language use over worksheet-style comprehension.
+- Reading Adventure / longer passage work is not yet a separate mode. Add it only if classroom use shows the short teaching-menu loops are insufficient.
 - Real roster setup is browser/device-local by design. A new browser/device starts with generic roster slots until the teacher edits and saves the roster.
+- GitHub Pages propagation should be verified after deployment when public access matters.
 
 ## Last Meaningful Changes
 
-- Recovered the exact tested 2026-09-01 Portable WIN handoff after chat failure.
-- Replaced the hardcoded real roster with 17 generic public-safe defaults while preserving the roster editor and local persistence.
-- Split the tested self-contained build into an offline-capable static bundle under `portable-win/` for GitHub hosting.
-- Restored the missing runtime/style files that the earlier shell commit referenced.
-- Preserved Big Red Lollipop, Q1 proficiency, Morning, Teach, Bar Models, WIN, History, and Settings behavior.
-- Completed branch-level hash and rendered regression verification.
-- Merged PR #1 into `main` after explicit approval and confirmed the accepted Portable WIN shell on `main`.
+- Promoted Teach into the broader Room 22 Teaching Menu without removing WIN functionality.
+- Made Mr. Frank / class-group teaching the default opening surface.
+- Made Show What You Know and Big Red Lollipop launch into the existing non-saving Mr. Frank teacher/demo identity by default; individual students remain selectable.
+- Added direct Standards Check and Student / WIN shortcuts to the Teaching Menu.
+- Added READ & THINK, INFERENCE / EVIDENCE, and LANGUAGE PLAY ELA lanes.
+- Added varied ELA teaching moves including retell, sequence, evidence hunting, inference, prediction, sentence repair, sentence building, meaning checks, and Teacher Trap.
+- Added regression coverage and wired Portable WIN changes into the repository test workflow.
 
 ## NEXT_TASK
 
-**HOLD / OBSERVE.**
+**USE / OBSERVE.**
 
-Use Portable WIN from `main`. Do not change the accepted build merely to keep development moving. If a concrete classroom need, bug, or improvement appears, inspect the current `main` build first, make the smallest useful change on a branch, preserve the public/private boundary, verify the affected classroom flow, then update this state.
+Use the Teaching Menu in real class blocks and preserve the things that are fast in practice. The next improvement should come from observed friction, especially ELA/reading prompt quality, timer/race behavior, or moving between Mr. Frank and student-specific work.
 
-If the public GitHub Pages route is needed and is not serving yet, verify repository Pages configuration/propagation before changing application code.
+Do not add a large dashboard or rebuild the UI without classroom evidence that the current interaction is failing.
 
 ## RE-PROMPT
 
-> Continue Portable WIN from current Paiea/Projects GitHub authority. Read root AGENTS.md, state/PROJECT_REGISTRY.md, state/HANDSHAKE_PROTOCOL.md, and portable-win/PROJECT_STATE.md. Treat main as accepted authority. Preserve the local-first architecture, public/private boundary, and verified classroom behavior. Execute only a concrete new need or bug from the current build, validate the affected flow, update project state, and leave the next handshake.
+> Continue Portable WIN / Room 22 Teaching Menu from current Paiea/Projects GitHub authority. Read root AGENTS.md, state/PROJECT_REGISTRY.md, state/HANDSHAKE_PROTOCOL.md, and portable-win/PROJECT_STATE.md. Treat main as accepted authority. Preserve the local-first architecture, public/private boundary, roster-rich WIN mode, Mr. Frank default teaching mode, Quick Fire speed, and existing classroom controls. Use classroom friction as the reason for changes. Prefer additive improvements to the teaching/prompt engine over UI simplification. Validate affected flows, update project state, and leave the next handshake.
