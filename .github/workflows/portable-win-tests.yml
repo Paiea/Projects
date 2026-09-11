@@ -27,3 +27,5 @@ jobs:
         run: python tests/test_portable_win_teaching_menu.py
       - name: Compiler Kernel contract
         run: python tests/test_portable_win_compiler_kernel.py
+      - name: Facilitation Shell contract
+        run: python tests/test_portable_win_facilitation_shell.py
