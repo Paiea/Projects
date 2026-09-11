@@ -72,6 +72,9 @@ def test_browser_orchestration_contract():
 
     require("hideNormalControl('#teachIntentButtons')" in source, "intent controls should be hidden from the normal setup")
     require("hideNormalControl('#teachModeButtons')" in source, "legacy facilitation controls should be hidden from the normal setup")
+    require("$('#mrFrankModeBadge')" in source and "style.display='none'" in source, "Mr. Frank badge should not add first-line setup noise")
+    require("$('#teachContextSummary')" in source, "context summary should be handled by the simplified shell")
+    require("advanced.appendChild(context)" in source, "current-week context editor should live under More Options")
     require("selectMode('QUICK FIRE')" in source, "Quick Fire launch must route through the existing Quick Fire engine")
     require("window.print()" in source or "root.print()" in source, "Guided Page must be printable")
     require("teachState.mode=originalMode" in source, "DEEPER must restore Quick Fire instead of switching modes")
