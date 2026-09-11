@@ -30,6 +30,13 @@ const rep = q.numberRelationship(46, 'REPRESENTATION');
 assert.deepEqual(rep.display, ['46 = 4 tens + 6 ones','56 = 5 tens + 6 ones']);
 assert.equal(rep.prompt, 'What changed?');
 
+assert.equal(q.cleanStudentScaffold('Show how you know.'), '');
+assert.equal(q.cleanStudentScaffold('Explain how you know.'), '');
+assert.equal(
+  q.cleanStudentScaffold('Use a number line if it helps. Show how you know.'),
+  'Use a number line if it helps.'
+);
+
 const split = q.splitPassageTask({
   prompt:'Tane finished tying his shoe, looked at the clock, and hurried toward the door with his backpack.\n\nTell the tiny story back in your own words.',
   sub:'Keep the important parts. You do not need every word. Start with one small step or an oral response. Offer a choice or representation if needed.'
@@ -72,6 +79,8 @@ def test_browser_loader_and_rendering_contract():
     ):
         require(text in source, f"prompt-quality browser layer must contain {text}")
     require("Start with one small step or an oral response" in source, "known generic scaffold should be stripped explicitly")
+    require("Show how you know." in source, "generic explanation filler should be stripped explicitly")
+    require("Explain how you know." in source, "generic explanation filler should be stripped explicitly")
     require("teachMathSet" in source, "browser layer should harden live number-sense sets")
 
 
