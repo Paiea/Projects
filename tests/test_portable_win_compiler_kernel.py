@@ -3,6 +3,7 @@ import subprocess
 
 ROOT = Path(__file__).resolve().parents[1]
 INDEX = ROOT / "portable-win" / "index.html"
+LOADER = ROOT / "portable-win" / "win-3.js"
 ENGINE = ROOT / "portable-win" / "teaching-menu.js"
 
 
@@ -13,12 +14,15 @@ def require(condition, message):
 
 def test_ui_contract():
     html = INDEX.read_text(encoding="utf-8")
+    loader = LOADER.read_text(encoding="utf-8")
+    engine = ENGINE.read_text(encoding="utf-8")
 
-    require('CLASS TEST · BIG RED LOLLIPOP' not in html, "obsolete Big Red Lollipop launch must be removed")
-    require('id="classTestSetup"' not in html, "obsolete story-specific setup screen must be removed from active UI")
-    require('id="teachIntentButtons"' in html, "Teaching Menu must expose instructional intent")
+    require('teaching-menu.js' in loader, "compiler kernel must load after the existing Teach runtime")
+    require('deactivateLegacyClassTest' in engine, "obsolete story-specific assessment must be removed from the live DOM")
+    require("button.remove()" in engine, "obsolete Big Red Lollipop launch button must be removed at runtime")
+    require('teachIntentButtons' in engine, "Teaching Menu must expose instructional intent")
     for intent in ("REVIEW", "PRACTICE", "TEACH"):
-        require(f'data-intent="{intent}"' in html, f"Teaching Menu must expose {intent}")
+        require(intent in engine, f"Teaching Menu must expose {intent}")
     for mode in ("FIGURE IT OUT", "BTC", "QUICK FIRE", "DISCUSS"):
         require(f'data-value="{mode}"' in html, f"existing facilitation mode {mode} must remain")
     for screen in ("win", "morning", "teach", "history", "settings"):
@@ -34,6 +38,7 @@ assert.equal(menu.defaultSurface(), 'teach');
 assert.equal(menu.defaultAssessmentIdentity(), '__ROOM22_DEMO__');
 assert.deepEqual(menu.INSTRUCTIONAL_INTENTS, ['REVIEW', 'PRACTICE', 'TEACH']);
 assert.deepEqual(menu.FACILITATION_MODES, ['FIGURE IT OUT', 'BTC', 'QUICK FIRE', 'DISCUSS']);
+assert.ok(menu.ELA_SKILLS.includes('CURRENT TEXT TALK'));
 
 const state = menu.createTeachingState({subject:'ELA', skill:'READ & THINK'});
 assert.equal(state.intent, 'PRACTICE');
@@ -44,6 +49,13 @@ const seq = menu.buildElaTeachingMoves('READ & THINK', 'QUICK FIRE', () => 0.37)
 assert.equal(seq.length, 8);
 assert.ok(new Set(seq.map(x => x.move)).size >= 4);
 assert.ok(seq.some(x => /clue|prove|evidence/i.test(`${x.prompt} ${x.sub || ''}`)));
+
+const currentText = menu.buildElaTeachingMoves('CURRENT TEXT TALK', 'QUICK FIRE', () => 0, {
+  context: {elaStory:'Not Norman', vocabulary:['friendship','different']}
+});
+assert.equal(currentText.length, 8);
+assert.ok(currentText.some(x => /Not Norman/.test(x.prompt)));
+assert.ok(currentText.some(x => /friendship/.test(`${x.prompt} ${x.sub}`)));
 
 const pool = [
   {move:'SOLVE', prompt:'one'},
@@ -63,6 +75,12 @@ for (const label of ['ASK', 'LOOK FOR', 'IF STUCK', 'PUSH', 'CONNECT']) {
 const ctx = menu.normalizeContext({elaStory:'Not Norman', vocabulary:['friendship']});
 assert.equal(ctx.elaStory, 'Not Norman');
 assert.deepEqual(ctx.vocabulary, ['friendship']);
+
+const review = menu.applyIntentToSequence([{prompt:'8 + 7 = ?', sub:''}], 'REVIEW', 'MATH', 'MAKE 10');
+const teach = menu.applyIntentToSequence([{prompt:'8 + 7 = ?', sub:''}], 'TEACH', 'MATH', 'MAKE 10');
+assert.equal(review[0].intent, 'REVIEW');
+assert.equal(teach[0].intent, 'TEACH');
+assert.equal(teach[0].phase, 'CONNECT');
 '''
     result = subprocess.run(
         ["node", "-e", node_program],
