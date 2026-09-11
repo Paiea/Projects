@@ -39,6 +39,9 @@ assert.equal(notReady.disabled, true);
 const readyNonPriority = browser.standardCardModel(map.getStandard('2.NBT.A.1'));
 assert.equal(readyNonPriority.priority, false);
 assert.equal(readyNonPriority.disabled, false);
+
+const cleaned = browser.normalizeAssessmentItem({prompt:'In 462, what is the value of the tens tens digit?', choices:['60','6','600','2'], expectedAnswer:'60'});
+assert.equal(cleaned.prompt, 'In 462, what is the value of the tens digit?');
 '''
     result = subprocess.run(["node", "-e", node_program], cwd=ROOT, capture_output=True, text=True)
     require(result.returncode == 0, f"assessment browser pure contract failed:\n{result.stdout}\n{result.stderr}")
@@ -48,10 +51,11 @@ def test_browser_source_and_priority_style_contract():
     source = BROWSER.read_text(encoding="utf-8")
     loader = LOADER.read_text(encoding="utf-8")
     css = CSS.read_text(encoding="utf-8")
-    for text in ("CURRICULUM", "YEAR", "ALL YEAR", "Q1", "Q2", "Q3", "Q4", "PRIORITY", "BLUEPRINT COMING", "Curriculum map is provisional"):
+    for text in ("CURRICULUM", "YEAR", "ALL YEAR", "Q1", "Q2", "Q3", "Q4", "PRIORITY", "BLUEPRINT COMING", "Curriculum map is provisional", "Quarter placement is provisional"):
         require(text in source, f"assessment browser must surface {text}")
     require("renderProfStudentMenu" in source, "browser must replace the old Q1-only standard picker")
     require("prepareProficiencyAttempt" in source, "ready standards must launch the existing formal check flow")
+    require("normalizeAssessmentItem" in source, "assessment prompts need a final classroom-facing cleanup pass")
     require("assessment-browser.js" in loader, "Portable WIN loader must load the assessment browser layer")
     require(loader.index("assessment-browser.js") < loader.index("teaching-menu.js"), "assessment browser should load before Teaching Menu layers")
     require(".assessment-priority" in css, "priority standards need a dedicated visual class")
