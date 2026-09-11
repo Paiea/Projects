@@ -32,6 +32,15 @@ assert.equal(shell.ROLE_CUES['DO TOGETHER'], 'Do this one with me.');
 assert.equal(shell.ROLE_CUES['TABLE TALK'], 'Solve it with your table.');
 assert.equal(shell.ROLE_CUES['QUICK CHECK'], 'Show me what you can do.');
 
+const rich = shell.rankForDepth([
+  {prompt:'Read it.'},
+  {prompt:'Compare two ideas and defend your choice.'},
+  {prompt:'Try another one.'},
+  {prompt:'Find the mistake and explain how to fix it.'}
+]);
+assert.match(rich[0].prompt, /Compare|mistake/i);
+assert.ok(shell.depthScore(rich[0]) > shell.depthScore({prompt:'Read it.'}));
+
 const page = shell.compileGuidedPage({
   quick:[{prompt:'quick 1'},{prompt:'quick 2'}],
   figure:[{prompt:'figure 1'},{prompt:'figure 2'}],
@@ -74,6 +83,7 @@ def test_browser_orchestration_contract():
         "BTC",
         "DISCUSS",
         "guided-role-cue",
+        "rankForDepth(sourceSet(deepMode))",
     ):
         require(text in source, f"facilitation shell must retain {text}")
 
