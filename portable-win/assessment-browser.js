@@ -34,7 +34,7 @@
   if(typeof document==='undefined'||!DEFAULT_MAP)return api;
 
   const map=DEFAULT_MAP;
-  let browserState={view:'CURRICULUM',section:'CORE-NUMBER-SENSE'};
+  let browserState={view:'CURRICULUM',section:'CORE-NUMBER-SENSE',assessmentProfile:'STANDARD'};
   const esc=value=>String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
 
   function launchStandardId(standard){return standard.legacy?standard.legacyId:standard.id}
@@ -61,10 +61,25 @@
     </button>`;
   }
 
+  function buildScopeCheck(active){
+    const multi=root.Room22MultiAssessment;
+    if(!multi||!active)return;
+    const profile=browserState.assessmentProfile||'STANDARD';
+    let test;
+    if(browserState.view==='YEAR'){
+      test=active.id==='ALL YEAR'
+        ?multi.buildAssessment({standardIds:active.standards.filter(s=>s.assessmentReady).map(s=>s.id),profile,scope:{type:'YEAR',id:'ALL YEAR'}})
+        :multi.buildQuarter(active.id,profile);
+    }else test=multi.buildCurriculumGroup(active.id,profile);
+    multi.launch(test,{label:active.name});
+  }
+
   function renderAssessmentBrowser(){
     const area=document.querySelector('#profStudentArea');if(!area)return;
     const identity=typeof profIdentityLabel==='function'?profIdentityLabel(profState.student):String(profState.student||'');
     const sections=normalizeSection(),active=sections.find(x=>x.id===browserState.section)||sections[0];
+    const readyStandards=(active?.standards||[]).filter(s=>s.assessmentReady);
+    const canBuild=readyStandards.length>=1&&!!root.Room22MultiAssessment;
     const provisional=browserState.view==='CURRICULUM'?'<div class="assessment-map-note">Curriculum map is provisional until reviewed Room22 unit/chapter pacing is connected. Standards and checks are real; grouping can move later.</div>':'';
     area.innerHTML=`<div class="assessment-browser">
       <div class="assessment-browser-head"><div><div class="eyebrow">TEACHER PICK</div><h1>SHOW WHAT YOU KNOW</h1><div class="lead">${esc(identity)}</div></div><button id="profStudentBack" class="secondary teacher-return">TEACHER BACK</button></div>
@@ -72,6 +87,15 @@
       ${provisional}
       <div class="assessment-scope-tabs">${sections.map(s=>`<button data-assessment-section="${esc(s.id)}" class="${s.id===active?.id?'selected':''}">${esc(s.id==='ALL YEAR'?'ALL YEAR':s.name)}</button>`).join('')}</div>
       <div class="assessment-section-head"><div><div class="eyebrow">${browserState.view==='YEAR'?'YEAR VIEW':'CURRICULUM VIEW'}</div><h2>${esc(active?.name||'')}</h2></div><div class="small">Green = current curriculum priority. It does not mean mastered.</div></div>
+      <div class="assessment-build-row">
+        <button id="assessmentBuildCheck" class="primary" ${canBuild?'':'disabled'}>BUILD CHECK</button>
+        <select id="assessmentProfile" aria-label="Assessment depth">
+          <option value="QUICK" ${browserState.assessmentProfile==='QUICK'?'selected':''}>QUICK · 5–8</option>
+          <option value="STANDARD" ${browserState.assessmentProfile==='STANDARD'?'selected':''}>STANDARD · 10–15</option>
+          <option value="DEEP" ${browserState.assessmentProfile==='DEEP'?'selected':''}>DEEP · COMPONENT COMPLETE</option>
+        </select>
+        <span class="small">${readyStandards.length} assessment-ready standard${readyStandards.length===1?'':'s'} in this section. The default check balances those standards automatically.</span>
+      </div>
       <div class="assessment-standard-grid">${(active?.standards||[]).map(cardHtml).join('')}</div>
       <div class="assessment-browser-key"><span class="assessment-priority-key">PRIORITY</span> Current priority standard <span>·</span> <b>READY TO CHECK</b> has a tested blueprint <span>·</span> <b>BLUEPRINT COMING</b> stays visible but cannot launch yet</div>
     </div>`;
@@ -86,6 +110,8 @@
       const standard=map.getStandard(button.dataset.standard);if(!standard)return;
       prepareProficiencyAttempt(launchStandardId(standard));
     });
+    const profile=area.querySelector('#assessmentProfile');if(profile)profile.onchange=()=>{browserState.assessmentProfile=profile.value};
+    const build=area.querySelector('#assessmentBuildCheck');if(build&&!build.disabled)build.onclick=()=>buildScopeCheck(active);
     area.querySelector('#profStudentBack').onclick=()=>{initProficiencySetup();setScreen('proficiencySetup')};
   }
 
