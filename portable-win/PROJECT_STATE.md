@@ -2,148 +2,216 @@
 
 ## Purpose
 
-Portable WIN is the lightweight Grade 2 live teaching surface for Room 22. It supports teacher-led whole-class work, targeted WIN groups, quick checks, proficiency evidence, Morning practice, reusable teaching material, and rapid review without requiring an online AI runtime.
+Portable WIN is the lightweight Grade 2 live teaching surface for Room 22.
 
-WIN remains a first-class student/group intervention and note-taking mode. The default daily surface is the broader **Room 22 Teaching Menu / Mr. Frank mode**.
+Its job is not to expose every instructional idea as a mode. Its job is to help Mr. Frank get from **target -> usable teaching move** with as little facilitation overhead as possible.
 
-Classroom Compiler is not a separate app inside Portable WIN. Its strongest surviving ideas now act as a small instructional kernel under the Teaching Menu: curriculum context, instructional intent, reusable teaching moves, teacher cues, and structural variation.
+The current classroom-facing model is:
+
+**SUBJECT -> TARGET -> GUIDED PAGE / QUICK FIRE / WIN**
+
+WIN remains the roster-rich student/group intervention and note-taking surface. Guided Page and Quick Fire are class/group teaching surfaces.
 
 ## Authority
 
-Accepted authority is `main` in `Paiea/Projects`.
+Accepted source authority is `main` in `Paiea/Projects` after the current facilitation-collapse work is merged.
 
-Portable WIN lives under `portable-win/`. The browser entrypoint is `portable-win/index.html`; runtime and styles are local sibling JS/CSS files loaded by that shell.
+Portable WIN lives under `portable-win/`.
 
-Public-repository defaults are neutral student slots. Real roster names belong only in browser-local storage entered through Settings. Do not replace this build with an older archived WIN, Daily Practice, Big Red Lollipop, or Classroom Compiler build.
+Runtime order for the whole-class teaching surface is:
+
+`win-3-3b.js -> teaching-menu.js -> teaching-kernel-runtime.js -> facilitation-shell.js`
+
+The original generators remain useful engine authority. `facilitation-shell.js` owns the simplified classroom-facing orchestration.
+
+Public-repository defaults must remain neutral. Real roster names, notes, evidence, photos, artifacts, assessment records, and localStorage exports must never be committed.
 
 ## Current State
 
 **ACTIVE / OBSERVE.**
 
-The current Teaching Menu preserves the existing WIN, Morning, History, Settings, standards-check, bar-model, timer, and projector workflows while adding the Compiler Kernel.
+### Primary classroom workflows
 
-Accepted working surfaces and behavior:
+#### 1. Guided Page
 
-- Teaching Menu / Teach is the default classroom-facing surface.
-- Mr. Frank class/group mode is the default teaching identity.
-- WIN remains roster-rich with student/group selection, notes, history, and intervention controls.
-- Standards Check defaults to the existing non-student `MR. FRANK - DEMO / TEACH` identity.
-- FIGURE IT OUT, BTC, QUICK FIRE, and DISCUSS remain facilitation choices.
-- REVIEW, PRACTICE, and TEACH are a separate instructional-intent dimension.
-- REVIEW favors quick retrieval and familiar work.
-- PRACTICE favors coached application, variation, explanation, and feedback.
-- TEACH preserves an instructional arc: Connect -> Notice -> Try Together -> Explain -> Practice -> Check.
-- Difficulty remains separate from instructional intent.
-- Projector controls include Another Like This, Change Move, Easier, and Harder.
-- Teacher cues use short semantic rails such as ASK, LOOK FOR, IF STUCK, PUSH, and CONNECT.
-- ELA Teaching Menu lanes include READ & THINK, INFERENCE / EVIDENCE, LANGUAGE PLAY, and CURRENT TEXT TALK plus the useful legacy literacy lanes.
-- CURRENT TEXT TALK uses the current text as context rather than creating a story-specific app mode.
-- A small optional This Week / Context editor stores current text, math focus, vocabulary, grammar, writing focus, and essential question locally in the browser.
-- Structural recent-history helps Review and Practice avoid repeating the same teaching move immediately.
-- Quick Fire remains intentionally fast and can continue into fresh sequences without returning to setup.
-- Existing WIN question ladders, teaching material, bar models, Morning, History, and Settings remain available.
+Guided Page is now the strongest/default whole-class action.
 
-The active Big Red Lollipop class-test product surface is retired. Its launch/setup/result UI is removed from the live DOM by the Teaching Menu extension after legacy code loads. Previously saved curriculum-assessment history remains readable; no historical evidence is destructively deleted.
+It compiles several existing generation engines into one facilitation-ready page instead of making the teacher choose among those engines.
 
-Stories are now context, not destinations. Changing from Not Norman to another class text should change the context used by ELA prompts, not require another top-level feature.
+Stable recipe:
 
-The app remains a static local-first bundle. It uses browser `localStorage` for runtime classroom state and has no external runtime dependency.
+1. **EASY START** — Everybody try.
+2. **DO TOGETHER** — Do this one with me.
+3. **TRY IT** — Now you try.
+4. **TABLE TALK** — Solve it with your table.
+5. **STRETCH** — Explain, compare, fix, or prove.
+6. **QUICK CHECK** — Show me what you can do.
 
-## Durable Decisions
+Teacher rhythm shown on the page:
 
-- Preserve the lightweight local-first architecture until Room 22 durable persistence is intentionally integrated.
+**START TOGETHER -> TABLES -> SHARE -> CHECK**
+
+Guided Page deliberately pulls from:
+
+- Quick Fire for easy entry and fresh checks
+- Figure It Out for accessible reasoning
+- BTC for richer group work
+- Discuss for explanation/comparison/error-analysis work
+
+BTC and Discuss source items are depth-ranked so richer prompts are preferred for Table Talk and Stretch rather than blindly taking the first generated item.
+
+The page supports:
+
+- New Page
+- Print
+- Back
+- optional `IF READY` material inside sections
+- current text or current math focus when browser-local context exists
+
+Guided Page is a facilitation artifact. It is not a new curriculum authority and is not meant to become another giant packet system.
+
+#### 2. Quick Fire
+
+Quick Fire remains the fast whole-class/table-to-table mode because it has been easy to facilitate in actual classroom use.
+
+Normal Quick Fire prioritizes:
+
+- the prompt
+- Next
+- Deeper
+- Easier
+- timer controls
+
+Teacher cue rails and move/intent metadata are hidden during normal Quick Fire so the projector is not competing with the task.
+
+`DEEPER` lets Quick Fire absorb much of the useful BTC/Discuss behavior without forcing a mode switch. It alternates BTC and Discuss sources, ranks available prompts for depth, inserts a richer compare/prove/defend/explain/diagnose-style task when available, and then restores `teachState.mode` to `QUICK FIRE`.
+
+Another Like This, Change Move, Harder, and New Set remain available under `MORE` rather than occupying first-line controls.
+
+#### 3. WIN / Student
+
+WIN remains the named-student mode.
+
+Preserve:
+
+- roster and saved groups
+- student/group selection
+- intervention targets and levels
+- six-question ladders
+- teaching material
+- Got It / Almost / Not Yet
+- notes
+- history
+- Easier / Same / Harder
+- More Like This
+
+Do not simplify WIN by removing the roster/evidence richness that makes it useful.
+
+## Simplified Teaching Menu
+
+The normal Teaching Menu should feel almost obvious:
+
+1. choose Subject
+2. choose Skill / Target
+3. choose Guided Page, Quick Fire, or WIN / Student
+
+The following still exist but are moved under **MORE OPTIONS** because they are not normal first-line decisions:
+
+- Review / Practice / Teach
+- Figure It Out / BTC / Quick Fire / Discuss manual selection
+- current-week/current-text context editor
+- Standards Check shortcut
+
+The Mr. Frank mode badge and current-context summary are also hidden from the normal setup because they added information without helping the next classroom action.
+
+## Durable Design Decisions
+
+- **Facilitation burden is the primary UI criterion.** A sophisticated activity that is difficult to run is worse than a simpler surface that helps the teacher successfully move a room through useful work.
+- A capability does not deserve a menu button merely because the engine can generate it.
+- Preserve useful engines even when their standalone UI is demoted.
+- Guided Page should carry part of the lesson so the teacher can work down a visible sequence instead of inventing every next move live.
+- Quick Fire should stay fast enough to ask around the room or table-to-table.
+- BTC is primarily deeper generation intelligence now, not a required separate classroom workflow.
+- Discuss and Figure It Out similarly remain useful source behaviors rather than mandatory setup decisions.
+- Review / Practice / Teach remain semantic engine concepts and advanced overrides, not normal setup burden.
+- Stories are context, not permanent destinations. `Not Norman` or a future Wonders text can influence prompts without becoming another top-level app feature.
+- Big Red Lollipop remains retired as an active product surface. Existing historical curriculum-assessment records may remain readable.
+- Bar Models remains a reusable math target rather than a chapter-specific product.
+- Mr. Frank/class-group teaching must not write named student evidence.
+- Named student evidence belongs in WIN or deliberate assessment flows.
+- Preserve Morning, History, Settings, Standards Check, timers, and the existing local-first storage boundary.
 - Normal classroom use must not require Node, npm, Python, localhost, a server, API, account, or online AI runtime.
-- GitHub `main` is source authority; browser `localStorage` is runtime classroom state, not repository content.
-- Never commit real student rosters, proficiency records, assessment results, notes, photos, artifacts, or localStorage exports.
-- Public defaults stay generic. A teacher may enter a real roster locally through Settings.
-- Do not simplify Portable WIN by removing working classroom controls merely to make the UI cleaner.
-- WIN remains roster-rich because student names, group selection, history, and notes are useful there.
-- General classroom teaching defaults to Mr. Frank / class-group mode rather than forcing student selection.
-- Teacher/demo sessions must not write student proficiency or assessment evidence.
-- Quick Fire stays fast; sophistication belongs mainly in the teaching/prompt engine rather than extra setup UI.
-- One shared academic engine should support different uses. Modes should increasingly describe **how the content is being used**, not own separate academic brains.
-- Teaching intent and facilitation are independent. REVIEW / PRACTICE / TEACH must not replace FIGURE IT OUT / BTC / QUICK FIRE / DISCUSS.
-- Difficulty is independent from both intent and facilitation.
-- ELA should rotate what students do with language: read, retell, infer, find evidence, predict, repair, build, choose, compare, explain, and play with meaning.
-- Repetition should be intentional. Same learning target is fine; the exact same experience over and over is not.
-- Current stories/texts supply context. They do not get permanent top-level buttons merely because they were taught once.
-- Teacher cues should be glanceable instructional ammunition, not scripted lesson plans.
-- Preserve student-facing/projector readability. New orchestration controls must not shrink the actual task.
-- Bar Models: Parts & Whole remains a reusable Story Problems Teach/Review lane, not a one-off chapter screen.
-- Classroom Compiler's historical mega-hubs, duplicate generators, decorative roles, and weak one-off modes are not authority for future Portable WIN UI.
+- GitHub `main` is source authority; browser `localStorage` is runtime classroom state.
+- Never commit real classroom/student data.
+- Do not revive old Classroom Compiler mega-hubs, decorative roles, duplicate generators, or one-off story modes merely because code or ideas exist.
 
-## Compiler Kernel Model
+## Facilitation Shell API
 
-The durable model is:
+`portable-win/facilitation-shell.js` exports pure helpers used by contract tests:
 
-`SUBJECT -> TARGET -> INSTRUCTIONAL INTENT -> FACILITATION`
+- `PRIMARY_WORKFLOWS`
+- `GUIDED_PAGE_ROLES`
+- `ROLE_CUES`
+- `depthScore()`
+- `rankForDepth()`
+- `compileGuidedPage()`
+- `pickDeepMode()`
 
-Then the kernel chooses or annotates a compatible teaching move.
+The pure layer keeps the key orchestration rules testable without requiring a browser.
 
-Stable dimensions:
+## Verification
 
-- **Target:** the skill or standard being worked on.
-- **Intent:** Review, Practice, or Teach.
-- **Facilitation:** Figure It Out, BTC, Quick Fire, or Discuss.
-- **Difficulty:** Easier, Current, or Harder.
-- **Context:** current text, math focus, vocabulary, grammar, writing focus, and essential question when useful.
-- **Move:** read, solve, retell, sequence, find the clue, prove it, error hunt, compare, pick a side, build it, predict, stronger example, and related compatible structures.
+Dedicated Portable WIN CI lives at:
 
-`NEXT` should preserve the teaching target while varying structure when useful. `ANOTHER LIKE THIS` preserves the move family. `CHANGE MOVE` preserves the target while changing the interaction structure.
+`.github/workflows/portable-win-tests.yml`
 
-## Verification - 2026-09-10
+It runs:
 
-Portable WIN now has a dedicated `.github/workflows/portable-win-tests.yml` workflow.
+- `tests/test_portable_win_teaching_menu.py`
+- `tests/test_portable_win_compiler_kernel.py`
+- `tests/test_portable_win_facilitation_shell.py`
 
-Current contract coverage verifies:
+Current contract coverage protects:
 
-- Teach remains the default surface.
-- Mr. Frank remains the default assessment identity.
-- WIN, Morning, Teach, History, and Settings remain present.
-- the Teaching Menu extension loads after the existing Teach runtime.
-- browser orchestration hardening loads after the Teaching Menu extension.
-- REVIEW / PRACTICE / TEACH and facilitation remain separate dimensions.
-- ELA Quick Fire produces varied teaching moves.
-- evidence-oriented ELA prompts remain present.
-- Teacher Trap / spot-the-weirdness work remains present.
-- CURRENT TEXT TALK consumes generic current-text/vocabulary context.
-- structural selection avoids immediate move repetition when alternatives exist.
-- TEACH is explicitly protected from structural first-move shuffling.
-- teacher cue labels remain available.
+- Teach as the default broad classroom surface
+- Mr. Frank non-student assessment identity
+- WIN / Morning / Teach / History / Settings availability
+- extension/runtime loader order
+- the three primary workflows
+- the six-role Guided Page recipe
+- plain-language role cues
+- Guided Page use of Quick Fire / Figure It Out / BTC / Discuss source capabilities
+- advanced setup controls being demoted rather than deleted
+- printable Guided Page behavior
+- Quick Fire using the existing fast engine
+- Deeper restoring Quick Fire mode
+- genuinely richer prompt ranking
+- Quick Fire projector clutter reduction
+- Compiler Kernel compatibility
 
-The dedicated Portable WIN workflow passed both the Teaching Menu and Compiler Kernel contracts after runtime hardening. Pages deployment remains the publication path for the public static site.
+The broader Project Hub workflow must also remain green before merge.
 
-## Known Issues / Open Questions
+## Known Issues / Observe in Class
 
-- The Compiler Kernel is still browser-local. Durable Room 22 backend integration is deliberately deferred to the Room 22 persistence work.
-- Current text defaults to Not Norman for the present classroom context but is editable locally. This default will become stale and should eventually come from Room 22 weekly/current curriculum state.
-- Continue classroom-testing ELA lanes for actual reading value, not just variety.
-- Longer Reading Adventure / passage sequences should be added only if the short facilitated loops prove insufficient.
-- The current Easier/Harder controls are useful first-pass adaptations, not a complete differentiation engine.
-- Real roster setup remains browser/device-local by design in this public build.
-
-## Last Meaningful Changes
-
-- Retired the active Big Red Lollipop class-test UI while preserving historical curriculum-assessment records.
-- Added REVIEW / PRACTICE / TEACH as instructional intent without replacing the existing facilitation modes.
-- Added generic CURRENT TEXT TALK so stories can feed teaching without becoming separate app features.
-- Added optional browser-local weekly/current teaching context.
-- Added structural teaching-move classification and recent-history variation.
-- Added teacher cue rails and projector metadata for intent, move, and difficulty.
-- Added Another Like This, Change Move, Easier, and Harder controls.
-- Preserved the TEACH instructional arc while allowing Review/Practice structural variation.
-- Added dedicated Portable WIN CI coverage.
+- Guided Page is a first browser implementation of the worksheet/adventure facilitation pattern. The next changes should come from actually teaching from it, especially density, font size, section order, and whether six blocks is the right amount.
+- The browser-generated Guided Page is not yet the same artifact pipeline as the Room 22 packet compiler. If Guided Page proves useful, the long-term move is to share a recipe/schema rather than maintain two unrelated worksheet brains.
+- Newer ELA lanes do not always encode BTC/Discuss differences directly. Depth ranking compensates for this in Guided Page and Deeper, but classroom evidence should determine whether the ELA generators themselves need better structure.
+- Current text/current-week context remains browser-local and can go stale. Room 22 durable curriculum context should eventually feed it.
+- Roster/runtime state remains browser/device-local in this public build until the private Room 22 persistence architecture is intentionally connected.
 
 ## NEXT_TASK
 
 **USE / OBSERVE.**
 
-Use the Teaching Menu during real Math and ELA blocks. The highest-value next evidence is whether Review / Practice / Teach reduces teacher decision load and whether CURRENT TEXT TALK plus the new ELA move families feel genuinely useful with the class.
+In actual Math and ELA blocks, test two things first:
 
-Do not resurrect old Classroom Compiler navigation merely because an old feature exists. Recover a primitive only when it solves a real classroom problem better than the current Teaching Menu.
+1. Can Mr. Frank teach straight down a Guided Page with less improvisational load than the old menu modes?
+2. Does Quick Fire + Deeper cover the useful BTC-style moments without making BTC a separate thing he has to think about?
 
-When Room 22 durable persistence is ready, the next architectural integration is for current curriculum context and teaching-session evidence to flow between Room 22 and Portable WIN without exposing student data publicly.
+Pay attention to what is never opened. If an advanced control is consistently unnecessary, it can eventually disappear entirely rather than merely remain hidden.
+
+Do not add another dashboard or mode without classroom evidence.
 
 ## RE-PROMPT
 
-> Continue Portable WIN / Room 22 Teaching Menu from current Paiea/Projects GitHub authority. Read root AGENTS.md, state/PROJECT_REGISTRY.md, state/HANDSHAKE_PROTOCOL.md, portable-win/PROJECT_STATE.md, and the current Compiler Kernel design. Treat main as accepted authority. Preserve the local-first public/private boundary, roster-rich WIN mode, Mr. Frank default teaching mode, Quick Fire speed, REVIEW/PRACTICE/TEACH intent model, facilitation separation, generic current-text context, structural variation, and the protected TEACH instructional arc. Use classroom friction as the reason for changes. Reuse strong Classroom Compiler primitives but do not restore its mega-hub UI. Validate affected flows, update project state, and leave the next handshake.
+> Continue Portable WIN / Room 22 Teaching Menu from current `Paiea/Projects` main authority. Fresh-read root AGENTS.md, state/PROJECT_REGISTRY.md, state/HANDSHAKE_PROTOCOL.md, portable-win/PROJECT_STATE.md, the facilitation-collapse spec/plan, and current runtime before changing code. Preserve the local-first public/private boundary and roster-rich WIN mode. Treat facilitation burden as the main UI criterion. The normal whole-class workflow is Subject -> Target -> Guided Page / Quick Fire / WIN. Guided Page compiles Quick Fire, Figure It Out, BTC, and Discuss into one six-part facilitation page. Quick Fire may borrow deeper BTC/Discuss prompts through Deeper while staying Quick Fire. Keep advanced capabilities available without restoring menu clutter. Use real classroom friction as the reason for the next change. Validate affected flows, update project state, and leave the next handshake.
