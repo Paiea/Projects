@@ -27,6 +27,10 @@ const shell = require('./portable-win/facilitation-shell.js');
 
 assert.deepEqual(shell.PRIMARY_WORKFLOWS, ['GUIDED PAGE','QUICK FIRE','WIN / STUDENT']);
 assert.deepEqual(shell.GUIDED_PAGE_ROLES, ['EASY START','DO TOGETHER','TRY IT','TABLE TALK','STRETCH','QUICK CHECK']);
+assert.equal(shell.ROLE_CUES['EASY START'], 'Everybody try.');
+assert.equal(shell.ROLE_CUES['DO TOGETHER'], 'Do this one with me.');
+assert.equal(shell.ROLE_CUES['TABLE TALK'], 'Solve it with your table.');
+assert.equal(shell.ROLE_CUES['QUICK CHECK'], 'Show me what you can do.');
 
 const page = shell.compileGuidedPage({
   quick:[{prompt:'quick 1'},{prompt:'quick 2'}],
@@ -36,6 +40,8 @@ const page = shell.compileGuidedPage({
 });
 assert.equal(page.length, 6);
 assert.deepEqual(page.map(x => x.role), shell.GUIDED_PAGE_ROLES);
+assert.equal(page[0].cue, 'Everybody try.');
+assert.equal(page[3].cue, 'Solve it with your table.');
 assert.equal(page[0].prompt, 'quick 1');
 assert.equal(page[3].prompt, 'btc 1');
 assert.equal(page[4].prompt, 'discuss 1');
@@ -67,6 +73,7 @@ def test_browser_orchestration_contract():
         "FIGURE IT OUT",
         "BTC",
         "DISCUSS",
+        "guided-role-cue",
     ):
         require(text in source, f"facilitation shell must retain {text}")
 
@@ -76,6 +83,8 @@ def test_browser_orchestration_contract():
     require("$('#teachContextSummary')" in source, "context summary should be handled by the simplified shell")
     require("advanced.appendChild(context)" in source, "current-week context editor should live under More Options")
     require("selectMode('QUICK FIRE')" in source, "Quick Fire launch must route through the existing Quick Fire engine")
+    require("$('#teachCueRail')" in source, "Quick Fire should explicitly manage the teacher cue rail")
+    require("$('#teachMoveBadge')" in source, "Quick Fire should explicitly manage projector metadata")
     require("window.print()" in source or "root.print()" in source, "Guided Page must be printable")
     require("teachState.mode=originalMode" in source, "DEEPER must restore Quick Fire instead of switching modes")
 
