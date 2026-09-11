@@ -3,7 +3,8 @@
     'Start with one small step or an oral response.',
     'Offer a choice or representation if needed.',
     'Show how you know.',
-    'Explain how you know.'
+    'Explain how you know.',
+    'Explain your answer.'
   ];
 
   function clampSeed(value){
