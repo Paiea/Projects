@@ -33,3 +33,5 @@ jobs:
         run: python tests/test_portable_win_student_display.py
       - name: Prompt Quality contract
         run: python tests/test_portable_win_prompt_quality.py
+      - name: Assessment Map contract
+        run: python tests/test_portable_win_assessment_map.py
