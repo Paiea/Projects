@@ -32,6 +32,7 @@ assert.equal(rep.prompt, 'What changed?');
 
 assert.equal(q.cleanStudentScaffold('Show how you know.'), '');
 assert.equal(q.cleanStudentScaffold('Explain how you know.'), '');
+assert.equal(q.cleanStudentScaffold('Explain your answer.'), '');
 assert.equal(
   q.cleanStudentScaffold('Use a number line if it helps. Show how you know.'),
   'Use a number line if it helps.'
@@ -81,6 +82,7 @@ def test_browser_loader_and_rendering_contract():
     require("Start with one small step or an oral response" in source, "known generic scaffold should be stripped explicitly")
     require("Show how you know." in source, "generic explanation filler should be stripped explicitly")
     require("Explain how you know." in source, "generic explanation filler should be stripped explicitly")
+    require("Explain your answer." in source, "generic explanation filler should be stripped explicitly")
     require("teachMathSet" in source, "browser layer should harden live number-sense sets")
 
 
