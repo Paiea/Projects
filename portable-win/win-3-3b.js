@@ -14,4 +14,3 @@ function stopTeachTimer(){if(teachState.timerId){clearInterval(teachState.timerI
 $$('[data-t]').forEach(b=>b.onclick=()=>{stopTeachTimer();teachState.timerBase=+b.dataset.t;teachState.timerSeconds=teachState.timerBase;renderTeachTimer()});
 $('#teachTimerStart').onclick=()=>{if(teachState.timerId){stopTeachTimer();return}if(teachState.timerSeconds<=0)teachState.timerSeconds=teachState.timerBase;$('#teachTimerStart').textContent='PAUSE';teachState.timerId=setInterval(()=>{teachState.timerSeconds--;renderTeachTimer();if(teachState.timerSeconds<=0)stopTeachTimer()},1000)};
 $('#teachTimerReset').onclick=()=>{stopTeachTimer();teachState.timerSeconds=teachState.timerBase;renderTeachTimer()};renderTeachTimer();
-$('#barModelTeachBtn').onclick=()=>{teachState.subject='MATH';teachState.skill='BAR MODELS: PARTS & WHOLE';teachState.mode='FIGURE IT OUT';setScreen('teach')};
