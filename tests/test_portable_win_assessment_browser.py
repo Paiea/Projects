@@ -3,7 +3,7 @@ import subprocess
 
 ROOT = Path(__file__).resolve().parents[1]
 BROWSER = ROOT / "portable-win" / "assessment-browser.js"
-MAP = ROOT / "portable-win" / "assessment-map.js"
+LOADER = ROOT / "portable-win" / "win-3.js"
 CSS = ROOT / "portable-win" / "student-display.css"
 
 
@@ -46,13 +46,14 @@ assert.equal(readyNonPriority.disabled, false);
 
 def test_browser_source_and_priority_style_contract():
     source = BROWSER.read_text(encoding="utf-8")
-    loader = MAP.read_text(encoding="utf-8")
+    loader = LOADER.read_text(encoding="utf-8")
     css = CSS.read_text(encoding="utf-8")
     for text in ("CURRICULUM", "YEAR", "ALL YEAR", "Q1", "Q2", "Q3", "Q4", "PRIORITY", "BLUEPRINT COMING", "Curriculum map is provisional"):
         require(text in source, f"assessment browser must surface {text}")
     require("renderProfStudentMenu" in source, "browser must replace the old Q1-only standard picker")
     require("prepareProficiencyAttempt" in source, "ready standards must launch the existing formal check flow")
-    require("assessment-browser.js" in loader, "assessment map must load the browser layer")
+    require("assessment-browser.js" in loader, "Portable WIN loader must load the assessment browser layer")
+    require(loader.index("assessment-browser.js") < loader.index("teaching-menu.js"), "assessment browser should load before Teaching Menu layers")
     require(".assessment-priority" in css, "priority standards need a dedicated visual class")
     priority_css = css.split(".assessment-priority", 1)[1][:400]
     require("#2f7d4b" in priority_css or "#edf8f0" in priority_css, "priority styling should be visibly green")
