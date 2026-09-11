@@ -2,6 +2,7 @@ from pathlib import Path
 import subprocess
 
 ROOT = Path(__file__).resolve().parents[1]
+INDEX = ROOT / "portable-win" / "index.html"
 LOADER = ROOT / "portable-win" / "win-3.js"
 SHELL = ROOT / "portable-win" / "facilitation-shell.js"
 
@@ -18,6 +19,12 @@ def test_loader_contract():
         loader.index('teaching-kernel-runtime.js') < loader.index('facilitation-shell.js'),
         "facilitation shell must load after the teaching kernel runtime",
     )
+
+
+def test_quick_access_contract():
+    index = INDEX.read_text(encoding="utf-8")
+    require('id="barModelTeachBtn"' not in index, "Bar Models should not have a dedicated WIN-home quick-access button")
+    require('TEACH · BAR MODELS' not in index, "Bar Models quick-access label should be removed from the WIN-home actions")
 
 
 def test_pure_facilitation_contract():
@@ -101,6 +108,7 @@ def test_browser_orchestration_contract():
 
 if __name__ == "__main__":
     test_loader_contract()
+    test_quick_access_contract()
     test_pure_facilitation_contract()
     test_browser_orchestration_contract()
     print("Portable WIN facilitation shell contract: PASS")
