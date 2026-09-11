@@ -86,7 +86,9 @@
     const out={...entry};
     const text=String(out.prompt||out.text||'');
     const naked=text.match(/^\s*What do you notice about\s+(\d+)\??\s*$/i);
-    if(naked)return{...out,...relationAsEntry(numberRelationship(Number(naked[1]),relationshipFamilyForSkill(skill)))};
+    // A naked notice prompt has already failed the facilitation test. Make its
+    // repair deterministic and maximally legible: related numbers first.
+    if(naked)return{...out,...relationAsEntry(numberRelationship(Number(naked[1]),'TENS_PATTERN'))};
     return out;
   }
 
