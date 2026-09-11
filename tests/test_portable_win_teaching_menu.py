@@ -44,7 +44,7 @@ const readThink = menu.buildElaTeachingMoves('READ & THINK', 'FIGURE IT OUT', ()
 assert.ok(readThink.some(x => /clue|prove|evidence/i.test(`${x.prompt} ${x.sub || ''}`)), 'READ & THINK should ask students to use text evidence');
 
 const language = menu.buildElaTeachingMoves('LANGUAGE PLAY', 'QUICK FIRE', () => 0.51);
-assert.ok(language.some(x => /teacher trap/i.test(x.move)), 'LANGUAGE PLAY should include Teacher Trap / spot-the-weirdness work');
+assert.ok(language.some(x => /teacher trap/i.test(`${x.move} ${x.prompt}`)), 'LANGUAGE PLAY should include Teacher Trap / spot-the-weirdness work');
 '''
     result = subprocess.run(
         ["node", "-e", node_program],
