@@ -5,6 +5,7 @@ ROOT = Path(__file__).resolve().parents[1]
 INDEX = ROOT / "portable-win" / "index.html"
 LOADER = ROOT / "portable-win" / "win-3.js"
 ENGINE = ROOT / "portable-win" / "teaching-menu.js"
+RUNTIME = ROOT / "portable-win" / "teaching-kernel-runtime.js"
 
 
 def require(condition, message):
@@ -16,11 +17,16 @@ def test_ui_contract():
     html = INDEX.read_text(encoding="utf-8")
     loader = LOADER.read_text(encoding="utf-8")
     engine = ENGINE.read_text(encoding="utf-8")
+    runtime = RUNTIME.read_text(encoding="utf-8")
 
     require('teaching-menu.js' in loader, "compiler kernel must load after the existing Teach runtime")
+    require('teaching-kernel-runtime.js' in loader, "browser orchestration hardening must load after the compiler kernel")
+    require(loader.index('teaching-menu.js') < loader.index('teaching-kernel-runtime.js'), "runtime hardening must load after teaching-menu.js")
     require('deactivateLegacyClassTest' in engine, "obsolete story-specific assessment must be removed from the live DOM")
     require("button.remove()" in engine, "obsolete Big Red Lollipop launch button must be removed at runtime")
     require('teachIntentButtons' in engine, "Teaching Menu must expose instructional intent")
+    require("intent!=='TEACH'" in runtime, "Review/Practice may vary structurally but Teach must preserve its instructional arc")
+    require("Connect -> Notice -> Try Together -> Explain -> Practice -> Check" in runtime, "Teach arc must be explicit in browser orchestration")
     for intent in ("REVIEW", "PRACTICE", "TEACH"):
         require(intent in engine, f"Teaching Menu must expose {intent}")
     for mode in ("FIGURE IT OUT", "BTC", "QUICK FIRE", "DISCUSS"):
