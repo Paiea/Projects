@@ -26,6 +26,26 @@
     return items[index%items.length];
   }
 
+  function depthScore(value){
+    const item=normalizeItem(value);
+    const text=`${item.move||''} ${item.prompt} ${item.sub}`.toLowerCase();
+    let score=0;
+    if(/compare|defend|prove|convince|evidence|justify/.test(text))score+=4;
+    if(/mistake|error|wrong|fix|misconception|diagnos/.test(text))score+=4;
+    if(/explain|why|how do you know|another way|different way|represent|strategy/.test(text))score+=2;
+    if(/group|team|table|partner|claim/.test(text))score+=1;
+    if(/read it\.?$|try another one|quick check/.test(text))score-=1;
+    return score;
+  }
+
+  function rankForDepth(items=[]){
+    return (Array.isArray(items)?items:[])
+      .filter(Boolean)
+      .map((value,index)=>({item:normalizeItem(value),index,score:depthScore(value)}))
+      .sort((a,b)=>b.score-a.score||a.index-b.index)
+      .map(x=>x.item);
+  }
+
   function compileGuidedPage({quick=[],figure=[],btc=[],discuss=[]}={}){
     const fallback=normalizeItem(null);
     const chosen=[
@@ -46,7 +66,7 @@
 
   function pickDeepMode(index=0){return Number(index)%2===0?'BTC':'DISCUSS'}
 
-  const api={PRIMARY_WORKFLOWS,GUIDED_PAGE_ROLES,ROLE_CUES,compileGuidedPage,pickDeepMode};
+  const api={PRIMARY_WORKFLOWS,GUIDED_PAGE_ROLES,ROLE_CUES,depthScore,rankForDepth,compileGuidedPage,pickDeepMode};
   if(typeof module!=='undefined'&&module.exports)module.exports=api;
   root.Room22FacilitationShell=api;
 
@@ -166,8 +186,8 @@
       return{
         quick:sourceSet('QUICK FIRE'),
         figure:sourceSet('FIGURE IT OUT'),
-        btc:sourceSet('BTC'),
-        discuss:sourceSet('DISCUSS')
+        btc:rankForDepth(sourceSet('BTC')),
+        discuss:rankForDepth(sourceSet('DISCUSS'))
       };
     }
 
@@ -284,7 +304,7 @@
       const originalMode=teachState.mode;
       const deepMode=pickDeepMode(deepIndex++);
       teachState.mode=deepMode;
-      const pool=sourceSet(deepMode);
+      const pool=rankForDepth(sourceSet(deepMode));
       teachState.mode=originalMode;
       if(!pool.length)return;
       let chosen=pool[0];
