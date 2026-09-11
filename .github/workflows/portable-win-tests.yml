@@ -1,0 +1,29 @@
+name: Portable WIN tests
+
+on:
+  push:
+    paths:
+      - 'portable-win/**'
+      - 'tests/test_portable_win_*.py'
+      - '.github/workflows/portable-win-tests.yml'
+  pull_request:
+    paths:
+      - 'portable-win/**'
+      - 'tests/test_portable_win_*.py'
+      - '.github/workflows/portable-win-tests.yml'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Teaching Menu contract
+        run: python tests/test_portable_win_teaching_menu.py
+      - name: Compiler Kernel contract
+        run: python tests/test_portable_win_compiler_kernel.py
