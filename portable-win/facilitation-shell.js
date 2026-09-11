@@ -228,6 +228,10 @@
         if(h)h.textContent='Room 22 Teaching Menu';
         if(p)p.textContent='Pick the target. Guided Page or Quick Fire. Go.';
       }
+      const mrFrankBadge=$('#mrFrankModeBadge');
+      if(mrFrankBadge)mrFrankBadge.style.display='none';
+      const contextSummary=$('#teachContextSummary');
+      if(contextSummary)contextSummary.style.display='none';
 
       const intentWrap=hideNormalControl('#teachIntentButtons');
       const modeWrap=hideNormalControl('#teachModeButtons');
@@ -250,6 +254,7 @@
       const advanced=panel.querySelector('.facilitation-advanced');
       if(intentWrap)advanced.appendChild(intentWrap);
       if(modeWrap)advanced.appendChild(modeWrap);
+      if(context)advanced.appendChild(context);
       const standards=$('#teachStandardsBtn');
       if(standards){
         const button=document.createElement('button');
