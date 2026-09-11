@@ -30,7 +30,14 @@
     };
   }
 
-  const api={curriculumSections,yearSections,standardCardModel};
+  function normalizeAssessmentItem(item={}){
+    return{
+      ...item,
+      prompt:String(item.prompt||'').replace(/\btens\s+tens\s+digit\b/gi,'tens digit').replace(/\s{2,}/g,' ').trim()
+    };
+  }
+
+  const api={curriculumSections,yearSections,standardCardModel,normalizeAssessmentItem};
   if(typeof document==='undefined'||!DEFAULT_MAP)return api;
 
   const map=DEFAULT_MAP;
@@ -71,6 +78,7 @@
         ?multi.buildAssessment({standardIds:active.standards.filter(s=>s.assessmentReady).map(s=>s.id),profile,scope:{type:'YEAR',id:'ALL YEAR'}})
         :multi.buildQuarter(active.id,profile);
     }else test=multi.buildCurriculumGroup(active.id,profile);
+    test={...test,items:test.items.map(normalizeAssessmentItem)};
     multi.launch(test,{label:active.name});
   }
 
@@ -80,7 +88,9 @@
     const sections=normalizeSection(),active=sections.find(x=>x.id===browserState.section)||sections[0];
     const readyStandards=(active?.standards||[]).filter(s=>s.assessmentReady);
     const canBuild=readyStandards.length>=1&&!!root.Room22MultiAssessment;
-    const provisional=browserState.view==='CURRICULUM'?'<div class="assessment-map-note">Curriculum map is provisional until reviewed Room22 unit/chapter pacing is connected. Standards and checks are real; grouping can move later.</div>':'';
+    const provisional=browserState.view==='CURRICULUM'
+      ?'<div class="assessment-map-note">Curriculum map is provisional until reviewed Room22 unit/chapter pacing is connected. Standards and checks are real; grouping can move later.</div>'
+      :'<div class="assessment-map-note">Quarter placement is provisional beyond the current confirmed Q1 priority set. Use YEAR to browse and build checks, but Room22 reviewed pacing will become the authority for exact quarter placement.</div>';
     area.innerHTML=`<div class="assessment-browser">
       <div class="assessment-browser-head"><div><div class="eyebrow">TEACHER PICK</div><h1>SHOW WHAT YOU KNOW</h1><div class="lead">${esc(identity)}</div></div><button id="profStudentBack" class="secondary teacher-return">TEACHER BACK</button></div>
       <div class="assessment-view-tabs"><button data-assessment-view="CURRICULUM" class="${browserState.view==='CURRICULUM'?'selected':''}">CURRICULUM</button><button data-assessment-view="YEAR" class="${browserState.view==='YEAR'?'selected':''}">YEAR</button></div>
@@ -128,6 +138,14 @@
     target.innerHTML=`<div><b>${esc(student)}</b></div><div class="small">${shown} of ${ready.length} assessment-ready standards currently show Level 3. Continue to browse Curriculum or Year.</div>`;
   }
 
+  function patchAssessmentGenerator(){
+    if(typeof profGenerator!=='function'||profGenerator.__assessmentBrowserQualityWrapped)return;
+    const previous=profGenerator;
+    const wrapped=function(standard,category,variant){return normalizeAssessmentItem(previous(standard,category,variant))};
+    wrapped.__assessmentBrowserQualityWrapped=true;
+    profGenerator=wrapped;
+  }
+
   function patchWinSuggestion(){
     if(typeof suggestedWinFromAttempt!=='function'||suggestedWinFromAttempt.__assessmentBrowserWrapped)return;
     const previous=suggestedWinFromAttempt;
@@ -145,6 +163,7 @@
   function boot(){
     if(typeof renderProfStudentMenu==='function')renderProfStudentMenu=renderAssessmentBrowser;
     if(typeof renderProfCurrentStatus==='function')renderProfCurrentStatus=compactCurrentStatus;
+    patchAssessmentGenerator();
     patchWinSuggestion();
   }
 
