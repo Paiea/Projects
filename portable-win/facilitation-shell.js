@@ -1,6 +1,14 @@
 (function(root){
   const PRIMARY_WORKFLOWS=['GUIDED PAGE','QUICK FIRE','WIN / STUDENT'];
   const GUIDED_PAGE_ROLES=['EASY START','DO TOGETHER','TRY IT','TABLE TALK','STRETCH','QUICK CHECK'];
+  const ROLE_CUES={
+    'EASY START':'Everybody try.',
+    'DO TOGETHER':'Do this one with me.',
+    'TRY IT':'Now you try.',
+    'TABLE TALK':'Solve it with your table.',
+    'STRETCH':'Explain, compare, fix, or prove.',
+    'QUICK CHECK':'Show me what you can do.'
+  };
 
   function normalizeItem(value){
     if(!value)return{prompt:'Try one useful example of the target.',sub:''};
@@ -30,6 +38,7 @@
     ];
     return GUIDED_PAGE_ROLES.map((role,index)=>({
       role,
+      cue:ROLE_CUES[role],
       ...chosen[index].main,
       extra:chosen[index].extra
     }));
@@ -37,7 +46,7 @@
 
   function pickDeepMode(index=0){return Number(index)%2===0?'BTC':'DISCUSS'}
 
-  const api={PRIMARY_WORKFLOWS,GUIDED_PAGE_ROLES,compileGuidedPage,pickDeepMode};
+  const api={PRIMARY_WORKFLOWS,GUIDED_PAGE_ROLES,ROLE_CUES,compileGuidedPage,pickDeepMode};
   if(typeof module!=='undefined'&&module.exports)module.exports=api;
   root.Room22FacilitationShell=api;
 
@@ -71,7 +80,8 @@
         .guided-facilitator-strip span{font-size:12px;font-weight:950;letter-spacing:.07em;border:1px solid rgba(127,127,127,.35);border-radius:999px;padding:6px 9px}
         .guided-page-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
         .guided-block{border:2px solid rgba(127,127,127,.32);border-radius:16px;padding:14px 16px;min-height:150px;break-inside:avoid;background:var(--card,#fff)}
-        .guided-role{font-size:12px;font-weight:950;letter-spacing:.09em;opacity:.68;margin-bottom:8px}
+        .guided-role{font-size:12px;font-weight:950;letter-spacing:.09em;opacity:.68}
+        .guided-role-cue{font-size:13px;font-weight:850;margin:3px 0 9px;opacity:.86}
         .guided-prompt{font-size:22px;font-weight:900;line-height:1.2;white-space:pre-wrap}
         .guided-sub{font-size:15px;line-height:1.35;margin-top:8px;opacity:.8;white-space:pre-wrap}
         .guided-extra{margin-top:10px;padding-top:9px;border-top:1px dashed rgba(127,127,127,.35);font-size:14px;line-height:1.35}
@@ -91,7 +101,7 @@
           body.guided-page-printing .guided-page-title{font-size:24px}
           body.guided-page-printing .guided-prompt{font-size:16px}
           body.guided-page-printing .guided-sub,body.guided-page-printing .guided-extra{font-size:11px}
-          body.guided-page-printing .guided-role,body.guided-page-printing .guided-facilitator-strip span{font-size:9px}
+          body.guided-page-printing .guided-role,body.guided-page-printing .guided-role-cue,body.guided-page-printing .guided-facilitator-strip span{font-size:9px}
         }
       `;
       document.head.appendChild(style);
@@ -180,6 +190,7 @@
         <div class="guided-page-grid">
           ${page.map((item,index)=>`<section class="guided-block">
             <div class="guided-role">${index+1} · ${escText(item.role)}</div>
+            <div class="guided-role-cue">${escText(item.cue)}</div>
             <div class="guided-prompt">${escText(item.prompt)}</div>
             ${item.sub?`<div class="guided-sub">${escText(item.sub)}</div>`:''}
             ${item.extra?`<div class="guided-extra"><b>IF READY</b><br>${escText(item.extra.prompt)}${item.extra.sub?`<br><span>${escText(item.extra.sub)}</span>`:''}</div>`:''}
@@ -287,10 +298,14 @@
     }
 
     function updateProjectorChrome(){
+      const quick=teachState.mode==='QUICK FIRE';
       const deeper=$('#teachDeeper');
-      if(deeper)deeper.style.display=teachState.mode==='QUICK FIRE'?'':'none';
-      const meta=$('#teachIntentBadge');
-      if(meta&&teachState.mode==='QUICK FIRE')meta.textContent='QUICK FIRE';
+      if(deeper)deeper.style.display=quick?'':'none';
+      const cueRail=$('#teachCueRail');
+      if(cueRail)cueRail.style.display=quick?'none':'';
+      const moveBadge=$('#teachMoveBadge');
+      const metaRow=moveBadge?.parentElement;
+      if(metaRow)metaRow.style.display=quick?'none':'';
     }
 
     function simplifyProjector(){
