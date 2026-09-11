@@ -37,3 +37,5 @@ jobs:
         run: python tests/test_portable_win_assessment_map.py
       - name: Assessment Browser contract
         run: python tests/test_portable_win_assessment_browser.py
+      - name: Multi-Assessment contract
+        run: python tests/test_portable_win_multi_assessment.py
