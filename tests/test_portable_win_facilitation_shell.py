@@ -72,7 +72,7 @@ def test_browser_orchestration_contract():
 
     require("hideNormalControl('#teachIntentButtons')" in source, "intent controls should be hidden from the normal setup")
     require("hideNormalControl('#teachModeButtons')" in source, "legacy facilitation controls should be hidden from the normal setup")
-    require("teachState.mode='QUICK FIRE'" in source or 'teachState.mode="QUICK FIRE"' in source, "Quick Fire launch must preserve the existing Quick Fire engine")
+    require("selectMode('QUICK FIRE')" in source, "Quick Fire launch must route through the existing Quick Fire engine")
     require("window.print()" in source or "root.print()" in source, "Guided Page must be printable")
     require("teachState.mode=originalMode" in source, "DEEPER must restore Quick Fire instead of switching modes")
 
