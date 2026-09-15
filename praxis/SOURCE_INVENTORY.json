@@ -1,7 +1,7 @@
 [
   {
     "sourceName": "ETS Praxis 5001 Study Companion",
-    "url": "https://praxis.ets.org/on/demandware.static/-/Library-Sites-ets-praxisLibrary/default/dw5d326ab0/pdfs/5001.pdf",
+    "url": "https://praxis.ets.org/on/demandware.static/-/Library-Sites-ets-praxisLibrary/default/pdfs/5001.pdf",
     "subtestsCovered": ["5002","5003","5004","5005"],
     "domainsCovered": "All official domains and content topics",
     "approxQuestionCount": "Official sample sets embedded in the companion; not used as a local item bank",
