@@ -10,11 +10,11 @@ Accepted authority is `main` in `Paiea/Projects`.
 
 The project lives under `praxis/`. The browser entrypoint is `praxis/index.html`; runtime code, content, styles, research notes, and regression tests are local sibling files in that folder.
 
-Current accepted baseline: **V2.3 Iteration 11**.
+Current baseline: **V2.3 Iteration 11 with September 15, 2026 question-quality review**.
 
 Current runtime bundle checksum recorded in the project is:
 
-`a9b09f7f72298511bd2706774d0e5ec4b971c984e0ea86e0ae589861d4e04a0d`
+`fe516cedfebc1fda2137c3cf9293b77b226947e4b586eb02013c5b58f6242b46`
 
 Do not replace current GitHub authority with an older local ZIP or remembered build. Compare candidate files against current `main` first.
 
@@ -40,6 +40,14 @@ Iteration 11 preserves two intentionally different full-test workflows:
 
 Full-test screens do not reveal topic or skill hints before feedback. Timers auto-submit at zero.
 
+### September 15 content review
+
+- Rewrote 36 fixed method questions across all four subtests with plausible distractors and option-specific explanations; corrected the closed-syllable answer key.
+- Shared these questions with short/topic practice, with stable content fingerprints, one occurrence per session, and keys/rationales shuffled together.
+- Added `content-research-test.js`; updated `validate.js` for all supported response types.
+- Research evidence, source-access limits, remaining fidelity gaps, and checksum recipe are in the September 15 section of `RESEARCH_REPORT.md`.
+- The remaining procedural bank has not received a complete editorial audit.
+
 ## Durable Decisions
 
 - Keep the app local-first and static. Normal study must not require an account, subscription, server, API, or online AI runtime.
@@ -53,6 +61,8 @@ Full-test screens do not reveal topic or skill hints before feedback. Timers aut
 - This public repository must not contain private study history, browser localStorage exports, credentials, or other personal data.
 
 ## Verification
+
+September 15 review: all 15 `*test.js` scripts plus `validate.js` and `smoke.js` pass (17 scripts). Independent review found within-session reviewed-item repetition and two unreachable RLA topic mappings; both were corrected and covered by failing-then-passing regressions. Reviewed answer keys received a separate editorial read-through.
 
 At registration time:
 

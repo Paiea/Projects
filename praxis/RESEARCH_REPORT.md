@@ -83,3 +83,39 @@ Current ETS prep pages separate two useful study behaviors: Learning Paths adver
 - Immediate-feedback answers lock after feedback so the stored result reflects the learner's first checked answer.
 
 Research checked 2026-09-04 against the current ETS 5001 page, Elementary Education Test Prep page, and Study Companion.
+
+## September 15, 2026: question quality review
+
+### Research checked in this pass
+
+The [current ETS Study Companion](https://praxis.ets.org/on/demandware.static/-/Library-Sites-ets-praxisLibrary/default/pdfs/5001.pdf) remains the blueprint authority. It specifies separately timed RLA (80 questions/90 minutes), mathematics (50/65), social studies (60/60), and science (55/60). Published domain proportions agree with the existing configuration. Its examples mix knowledge, application, passage evidence, diagrams, data, multiple selection, and numeric entry. ETS explicitly says these samples do not represent the full range of content or difficulty. RLA also describes order/matching/grid formats beyond the app’s current interactions. These observations support format and content alignment, not a claim that our difficulty matches a live test.
+
+The [PrepSaret public guide](https://prepsaret.com/praxis/praxis-5001-practice-test) and [course page](https://prepsaret.com/courses/elementary-education-multiple-subjects-5001) were accessible, but did not expose the expired subscription’s quiz bank. Marketing claims were not treated as question-level validation. Existing `PREPSARET_CALIBRATION.md` remains useful historical scope evidence; its underlying document was not retrieved again in this pass.
+
+[Teachers Test Prep](https://www.teacherstestprep.com/praxis-ii-elem-ed-multiple-subjects-5001-practice-tests) and [240 Tutoring](https://www.240tutoring.com/praxis-prep/praxis-elementary-education-multiple-subjects-5001-practice-test/) public practice landing pages were checked. This pass did not complete their interactive tests or claim their gated questions were inspected. No external bank was imported. Newly authored scenarios and passages are original; fictional historical documents are explicitly labeled fictional.
+
+### Findings in the actual app
+
+The prior full-test assembly inserted a fixed method layer after normal generation. Several distractors required little content knowledge to eliminate: science population alternatives included species-name spelling and food-web drawing colors. Historical questions frequently paired a reasonable inference with implausible universal claims. Reading inference items often offered only one sensible action. This is an editorial assessment of the repository, not an empirical comparison with undisclosed ETS items.
+
+One syllable item incorrectly keyed `robot` as having a closed first syllable; the earlier concept bank itself correctly described `ro-bot` as open first. The corrected item uses `basket` and `napkin` as closed examples and explains why `robot` and `tiger` do not qualify.
+
+The fixed method layer also incorporated each session seed into its fingerprint. Identical content therefore appeared new to replay checks. Replacements inherited unrelated base-item rationale arrays; five-option questions could retain only four rationale slots.
+
+### Changes delivered
+
+Rewrote 36 existing method questions: 9 RLA, 10 mathematics, 9 social studies, and 8 science. This is replacement and improvement of a defined layer, not 36 questions added to a claimed total bank size. Each selected-response item has a rationale for every option. Questions distinguish nearby concepts or identifiable errors instead of relying on irrelevant alternatives. Numeric-entry questions now rehearse area-unit conversion and modeling a fixed fee plus hourly charges. Reading includes original short narrative and informational evidence. Social studies includes bounded inferences from explicitly fictional sources. Science distinguishes population counts from growth/maturation and individual results from group means.
+
+The same reviewed bank now participates in short and topic practice. All 36 entries map to real blueprint topics and are reachable through normal generation. Full forms preserve the existing domain-aware insertion process. Reviewed fingerprints depend on content rather than session seeds; recent reviewed items are skipped, and a reviewed item appears at most once within a session. Answer order is shuffled together with keys and rationales. Numeric items have their own clean metadata. Historical session results are not rewritten; revised content intentionally has a new fingerprint version.
+
+The legacy validator now checks single-choice, multiple-selection, and numeric-entry formats instead of assuming every generated item has four choices. Regression tests reproduce the bad key, disguised repeats, within-session repeats, unreachable topic mapping, and rationale mismatch, and check grading after shuffling.
+
+### Limits and next useful evidence
+
+This was an editorial review of 36 fixed items, not a certification of the entire procedural bank. Internal difficulty labels remain study heuristics. Full forms may omit a reviewed family when recent-question protection excludes it or a compatible replacement slot is unavailable. Earlier non-reviewed insertion layers and the older procedural bank retain their existing repetition policies. Diagram rendering, real matching/order/grid controls, and larger passage sets remain opportunities for a later focused pass. Numeric variation alone must not be described as new conceptual coverage. Prefer the next concrete weak question reported during study over another broad version bump.
+
+### Reproducible verification
+
+From `praxis/`, run every `*test.js` with Node, then `node validate.js` and `node smoke.js`. The focused gate is `node content-research-test.js`. This covers runtime behavior and metadata; it does not replace editorial reading or an authenticated ETS practice test.
+
+The current `runtime-bundle.sha256` is SHA-256 of the raw bytes concatenated in this explicit order: `index.html`, `styles.css`, `blueprint.js`, `questions.js`, `content-expansion.js`, `app.js`. This order is documented here because the legacy checksum file did not specify its recipe.
